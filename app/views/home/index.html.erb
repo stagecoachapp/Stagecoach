@@ -1,16 +1,21 @@
 <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit">
+<style type="text/css">
+  #sign_up{
+    margin-top: 62px;
+  }
+</style>
+<div class="hero-unit">
         <h1>One App to Manage Them All</h1>
         <br>
         <div class="row">
           <div class="span8">
             <p>Stagecoach is a new mobile app project designed to improve and streamline the film and television production process for small-to-mid budget production teams.</p>
+            <p><%= link_to "Sign Up For Our Private Alpha &raquo;".html_safe, signup_path, :class => "btn primary large", :id => "sign_up" %></p>
           </div>
           <div class="span4">
             <%= image_tag "home/landing_page.png", :class => "thumbnail", :height => 190, :width => 333 %>
           </div>
         </div>
-        <p><%= link_to "Sign Up For Our Private Alpha &raquo;".html_safe, signup_path, :class => "btn primary large"%></p>
       </div>
 
       <!-- Example row of columns -->
