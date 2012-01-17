@@ -1,7 +1,7 @@
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <div class="alert-message block-message error">
+      <h2><%= pluralize(@user.errors.count, "error") %>!</h2>
 
       <ul>
       <% @user.errors.full_messages.each do |msg| %>
@@ -14,9 +14,11 @@
   <div class="field">
     <%= f.text_field :name, :placeholder => "Beta Tester" %>
   </div>
+  <br>
   <div class="field">
     <%= f.email_field :email, :placeholder => "ExcitedUser@gmail.com"%>
   </div>
+  <br>
   <div class="actions">
     <%= f.submit %>
   </div>
