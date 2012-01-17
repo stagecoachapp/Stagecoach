@@ -1,0 +1,9 @@
+Mon, 16 Jan 2012 18:15:14 -0600
+app/helpers/application_helper.rb	Sat, 14 Jan 2012 15:54:42 -0600
+app/models/user.rb	Mon, 16 Jan 2012 13:03:24 -0600
+app/helpers/users_helper.rb	Mon, 16 Jan 2012 13:03:24 -0600
+app/controllers/application_controller.rb	Sun, 15 Jan 2012 15:24:42 -0600
+app/controllers/users_controller.rb	Mon, 16 Jan 2012 13:03:24 -0600
+app/controllers/home_controller.rb	Mon, 16 Jan 2012 13:19:47 -0600
+doc/README_FOR_APP	Sat, 14 Jan 2012 15:54:42 -0600
+app/helpers/home_helper.rb	Sat, 14 Jan 2012 16:11:06 -0600
