@@ -13,6 +13,7 @@ FilmProjectRails::Application.routes.draw do
   resources :users, :only => [:new, :create], :pathnames => { :new => 'signup'}
   match '/signup',    :to => 'users#new'
   match '/about', :to => 'home#about'
+  match '/changelog', :to => 'changelogs#index'
  
   #...
   #  # You can have the root of your site routed with "root"

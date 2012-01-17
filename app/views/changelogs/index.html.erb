@@ -1,0 +1,21 @@
+<h1>Changelog</h1>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Developer</th>
+    <th>Description</th>
+  </tr>
+
+<% @changelogs.each do |changelog| %>
+  <tr>
+    <td><%= changelog.created_at %></td>
+    <td><%= changelog.developer %></td>
+    <td><%= changelog.description %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User', new_user_path %>
