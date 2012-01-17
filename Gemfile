@@ -13,11 +13,8 @@ gem 'twitter-bootstrap-rails'
 # in production environments by default.
 
 gem 'sass-rails',   '~> 3.1.5'
-group :assert do 
-  gem 'coffee-rails', '~> 3.1.1'
-  gem 'uglifier', '>= 1.0.3'
-end
-
+gem 'coffee-rails', '~> 3.1.1'
+gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 group :development do
   gem 'rspec-rails'
