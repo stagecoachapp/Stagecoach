@@ -4,6 +4,10 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
+	if(params.has_key?(:notice))
+		@success_text = params[:notice]
+	end
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @users }

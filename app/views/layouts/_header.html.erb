@@ -23,3 +23,11 @@
     </div>
   </div>
 </div>
+<% if(notice) %>
+<div class="span-16 offset-two-thirds">
+	<div class="alert-message success">
+		<a class="close" href="#">x</a>
+		<p><%= notice %></p>
+	</div>
+</div>
+<% end %>
