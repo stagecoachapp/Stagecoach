@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Stagecoach</title>
-  <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag    "application/application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
@@ -10,6 +10,8 @@
   <div class ="container">
     <!-- start container -->
   <%= render 'layouts/header' %>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
   <%= yield %>
   <%= render 'layouts/footer' %>
   </div>

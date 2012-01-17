@@ -1,10 +1,18 @@
 FilmProjectRails::Application.routes.draw do
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   resources :users
 
   get "home/index"
 
 FilmProjectRails::Application.routes.draw do
    
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   resources :users
   match '/signup',    :to => 'users#new'
   match '/about', :to => 'home#about'
