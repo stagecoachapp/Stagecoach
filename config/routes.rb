@@ -10,7 +10,7 @@ FilmProjectRails::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  #resources :users
+  resources :users, :only => [:new, :create], :pathnames => { :new => 'signup'}
   match '/signup',    :to => 'users#new'
   match '/about', :to => 'home#about'
  
