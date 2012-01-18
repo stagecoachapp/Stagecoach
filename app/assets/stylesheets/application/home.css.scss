@@ -1,6 +1,26 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-body {
-  padding-top: 60px;
+
+//
+///
+////
+//this is for the home page
+#home-index-private-alpha-button{
+  margin-top: 62px;
+}
+
+
+
+
+//
+///
+////
+//this is for the about page
+.home-about-rowclass {
+  padding-top: 25px;
+}
+
+.home-about-blockquote {
+  margin-top:25px;
 }
