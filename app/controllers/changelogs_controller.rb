@@ -1,7 +1,7 @@
 class ChangelogsController < ApplicationController
 
 	def index
-		@changelogs = Changelog.all
+		@changelogs = Changelog.find(:all, :order => "created_at DESC")
 
 		respond_to do |format|
 		  format.html # index.html.erb
