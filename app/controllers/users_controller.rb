@@ -48,7 +48,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to root_url, :notice => 'User was successfully created.' }
+        format.html { redirect_to root_url, :notice => 'You have succesfully signed up to be an alpha tester!' }
         format.json { render :json => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }
