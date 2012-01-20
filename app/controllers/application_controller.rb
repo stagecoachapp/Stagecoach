@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_abingo_identity
+  layout :choose_layout
 
   def set_abingo_identity
     if (session[:abingo_identity])
@@ -9,4 +10,13 @@ class ApplicationController < ActionController::Base
       session[:abingo_identity] = Abingo.identity = rand(10 ** 10).to_i
     end
   end
-end
+  protected
+    def choose_layout
+      url = request.path
+      if (url == phone_path)  
+        return 'phone'
+      else
+        return 'application'
+      end
+    end
+  end
