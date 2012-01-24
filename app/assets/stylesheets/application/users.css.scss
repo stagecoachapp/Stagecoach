@@ -1,3 +1,27 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#users-signup-form-submit{
+  position: relative;
+  left: 263px;
+}
+
+#users-signup-form-submitdiv{
+  position: relative;
+  left: -100px;
+}
+
+#users-signup-form-form {
+  left: 14px;
+  position: relative;
+}
+
+#users-signup-form-email-help{
+  display: none;
+}
+
+#users-signup-form-name-help{
+  display: none;
+}

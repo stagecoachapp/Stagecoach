@@ -4,9 +4,9 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
-	if(params.has_key?(:notice))
-		@success_text = params[:notice]
-	end
+    if(params.has_key?(:notice))
+      @success_text = params[:notice]
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -51,8 +51,10 @@ class UsersController < ApplicationController
         format.html { redirect_to root_url, :notice => 'You have succesfully signed up to be an alpha tester!' }
         format.json { render :json => @user, :status => :created, :location => @user }
       else
-        format.html { render :action => "new" }
-        format.json { render :json => @user.errors, :status => :unprocessable_entity }
+        #format.html { render :action => "new" }
+        format.html { redirect_to :back, :notice => 'Uh Oh! Something went wrong!', :email => @user.email, :name => @user.name }
+        format.json { render :json => @user }
+        #format.json { render :json => @user.errors, :status => :unprocessable_entity }
       end
     end
   end
