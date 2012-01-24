@@ -1,6 +1,10 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
-// You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+// You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script
+//= require jquery
+//= require jquery_ujs
+//= require_tree .
+
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-28347085-1']);
 _gaq.push(['_trackPageview']);
