@@ -1,0 +1,32 @@
+<%= form_for(@user, :html => {:id => "users-signup-form-form"} ) do |f| %>
+  <% if @user.errors.any? %>
+    <div class="alert-message block-message error">
+      <h2><%= pluralize(@user.errors.count, "error") %>!</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="clearfix">
+    <label>Name</label>
+    <div class="input">
+      <%= f.text_field :name, :placeholder => "John Smith",  :value => params[:name] %>
+      <span class="help-inline" style="display: block;">Name must be at least 4 characters</span>
+    </div>
+  </div>
+  <br>
+  <div class="clearfix">
+    <label>Email</label>
+    <div class="input">
+      <%= f.text_field :email, :placeholder => "ExcitedUser@gmail.com" %>
+      <span class="help-inline" style="display: block;">Enter a valid email</span>
+    </div>
+  </div>
+  <br>
+  <div class="actions span12">
+    <%= f.submit value="Sign Up" %>
+  </div>
+<% end %>
