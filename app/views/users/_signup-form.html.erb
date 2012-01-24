@@ -11,22 +11,20 @@
     </div>
   <% end %>
   <div class="clearfix">
-    <label>Name</label>
     <div class="input">
       <%= f.text_field :name, :placeholder => "John Smith",  :value => params[:name] %>
-      <span class="help-inline" style="display: block;">Name must be at least 4 characters</span>
+      <span class="help-inline"  id="users-signup-form-name-help">Your name must be greater than 4 characters!</span>
     </div>
   </div>
   <br>
   <div class="clearfix">
-    <label>Email</label>
     <div class="input">
       <%= f.text_field :email, :placeholder => "ExcitedUser@gmail.com" %>
-      <span class="help-inline" style="display: block;">Enter a valid email</span>
+      <span class="help-inline" id="users-signup-form-email-help">Check your email!</span>
     </div>
   </div>
   <br>
-  <div class="actions span12">
-    <%= f.submit value="Sign Up" %>
+  <div class="actions span10" id="users-signup-form-submitdiv">
+    <%= f.submit value="Sign Up", :id => "users-signup-form-submit" %>
   </div>
 <% end %>

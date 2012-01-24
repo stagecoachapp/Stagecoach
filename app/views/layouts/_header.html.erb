@@ -3,31 +3,31 @@
     <div class="container">
       <%= link_to "Stagecoach", root_path, :class => "brand" %>
       <ul class="nav">
-         <% url = request.path%> 
-      <% if url == root_path %>
-        <li class="active"> <%= link_to "Home", root_path %></li>
-      <% else %>
-        <li> <%= link_to "Home", root_path %></li>
-      <% end %>
-      <% if url == about_path %>
-        <li class = "active"><%= link_to "About Us", about_path %></li>
-      <% else %>
-        <li><%= link_to "About Us", about_path %></li>
-      <% end %>
-      <% if url == signup_path %>
-        <li class = "active"><%= link_to "Sign Up", signup_path %></li>
-      <% else %>
-        <li><%= link_to "Sign Up", signup_path %></li>
-      <% end %>
+        <% url = request.path%> 
+        <% if url == root_path %>
+          <li class="active"> <%= link_to "Home", root_path %></li>
+        <% else %>
+          <li> <%= link_to "Home", root_path %></li>
+        <% end %>
+        <% if url == about_path %>
+          <li class = "active"><%= link_to "About Us", about_path %></li>
+        <% else %>
+          <li><%= link_to "About Us", about_path %></li>
+        <% end %>
+        <% if url == signup_path %>
+          <li class = "active"><%= link_to "Sign Up", signup_path %></li>
+        <% else %>
+          <li><%= link_to "Sign Up", signup_path %></li>
+        <% end %>
       </ul>
     </div>
   </div>
 </div>
 <% if(notice) %>
-<div class="span-16 offset-two-thirds">
-	<div class="alert-message success" data-alert="alert">
-		<a class="close" href="#">x</a>
-		<p><%= notice %></p>
-	</div>
-</div>
+  <div class="span-16 offset-two-thirds">
+    <div class="alert-message success" data-alert="alert">
+      <a class="close" href="#">x</a>
+      <p><%= notice %></p>
+    </div>
+  </div>
 <% end %>
