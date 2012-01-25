@@ -15,7 +15,7 @@ $(document).ready(function() {
   });
 
  $("#user_name").change(function() {
-    if ($(this).val().length < 4) {
+    if ($(this).val().length < 3) {
       makeFieldRed($(this));
       $('#users-signup-form-name-help').show();
       $('#users-signup-form-name-help').css('display', 'block !important');
