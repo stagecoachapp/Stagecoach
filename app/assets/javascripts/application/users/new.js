@@ -2,8 +2,9 @@ $(document).ready(function() {
 
   $("#user_email").change(function() {
     var re = /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i;
-    if (re.test($(this).val())) {
+    if (re.test($(this).val()) && $("#user_email").val() != '') {
       makeFieldGreen($(this));
+      $('#users-signup-form-email-help').css('display', '');
       $('#users-signup-form-email-help').hide();
     }
     else {
@@ -20,7 +21,9 @@ $(document).ready(function() {
       $('#users-signup-form-name-help').css('display', 'block !important');
     }
     else {
+      $('#users-signup-form-name-help').css('');
       $('#users-signup-form-name-help').hide();
+
        makeFieldGreen($(this));
     }
   });
