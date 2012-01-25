@@ -21,7 +21,7 @@ $(document).ready(function() {
       $('#users-signup-form-name-help').css('display', 'block !important');
     }
     else {
-      $('#users-signup-form-name-help').css('');
+      $('#users-signup-form-name-help').css('display', '');
       $('#users-signup-form-name-help').hide();
 
        makeFieldGreen($(this));
