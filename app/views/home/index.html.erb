@@ -1,40 +1,41 @@
 <!-- Main hero unit for a primary marketing message or call to action -->
 <div class="hero-unit">
-        <h1>One App to Manage Them All</h1>
-        <br>
-        <div class="row">
-          <div class="span8">
-            <p>Stagecoach is a new mobile app project designed to improve and streamline the film and television production process for small-to-mid budget production teams.</p>
-            <%= ab_test("sign_up_test", [ 'Sign Up For Our Private Alpha &raquo;', 'Sign Up To Be An Alpha Tester &raquo;' ]) do |click| %>
-            <p><%= link_to click.html_safe, signup_path, :class => "btn primary large", :id => "home-index-private-alpha-button" %></p>
-          <% end %>
-          </div>
-          <div class="span4">
-            <%= image_tag "home/landing_page.jpg", :class => "thumbnail", :height => 190, :width => 333 %>
-          </div>
-        </div>
-      </div>
+  <h1>Say goodbye to wasted production time.</h1>
+  <br>
+  <div class="row">
+    <div class="span8">
+      <p>Stagecoach is a multiplatform solution to on- and off-set task management for film productions. Our goal is to provide tools to organize your production efforts: reducing frustration, increasing transparency, and saving time and money.</p>
+        <p><%= link_to "Get Notified When We Launch".html_safe, signup_path, :class => "btn primary large", :id => "home-index-private-alpha-button" %></p>
+    </div>
+    <div class="span4">
+      <%= image_tag "home/landing_page.jpg", :class => "thumbnail", :height => 190, :width => 333 %>
+    </div>
+  </div>
+</div>
 
-      <!-- Example row of columns -->
-      <div class="row">
-            <div class="span8">
-              <h2>What We Aim to Solve</h2>
-              <p>
-              <ul>
-                <li>No centralized scheduling and notification system for production teams</li>
-                <li>No transparency for pending and completed tasks between managers and assistants</li>
-                <li>No real-time capabilities for call sheet updating and distribution</li>
-                <li>Breakdown of communication between on and off-set resources</li>
-                <li>Unnecessary overage costs from shooting locations and equipment rentals due to on set resource mismanagement</li>
-                <li>Frequent mismanagement of petty cash resulted in loss of funds</li>
-              </ul>
-                </p>
-              </div>
-            <div class="span8">
-              <h2>Our Plans</h2>
-              <p>The first version of our modular mobile app will focus on one primary feature: schedule and notification coordination among project teams. Our team has found this to be a common pain point for our interview subject, and we have prioritized the development and testing of this first module. As we approach our initial user testing, we will develop modular “add-on” applications that cater to an increasing array of film and television production team needs.
-              </p>
-              <p>We highly value any user feedback, criticisms and support as we put our heads down and intend to rock the foundation of the media production process. We will be working hard in the next few months and we are super excited for our alpha launch. Sign up to be one of our alpha testers here [one of a few links to email signup page] and find us on twitter here. </p>
-             <p><%= link_to "Learn about the Stagecoach Team", about_path, :class => "btn" %> </p>
-          </div>
-      </div>
+<!-- Example row of columns -->
+<div class="row">
+  <div class="span8">
+    <h2>Our Product</h2>
+    <p>
+    With Stagecoach’s modular mobile app, the “fuel” that drives the set is at the tip of managers’ fingers:
+    <ul>
+      <li>Integrate your task lists</li>
+      <li>Track task progress in real time</li>
+      <li>Sync daily call sheets and contacts across production crew</li>
+      <li>Quickly communicate changes and issues with appropriate team members</li>
+      <li>Built on a secure, open-source platform to enable ongoing customization</li>
+    </ul>
+    </p>
+    <%= ab_test("sign_up_test", [ 'Sign Up For Our Private Alpha &raquo;', 'Sign Up To Be An Alpha Tester &raquo;' ]) do |click| %>
+      <p><%= link_to click.html_safe, signup_path, :class => "btn" %></p>
+    <% end %>
+  </div>
+  <div class="span8">
+    <h2>Our Plan</h2>
+    <p>The first version of our modular mobile app will focus on one primary feature: schedule and notification coordination among project teams. Our team has found this to be a common pain point for our interview subject, and we have prioritized the development and testing of this first module. As we approach our initial user testing, we will develop modular “add-on” applications that cater to an increasing array of film and television production team needs.
+    </p>
+    <p>We highly value any user feedback, criticisms and support as we put our heads down and intend to rock the foundation of the media production process. We will be working hard in the next few months and we are super excited for our alpha launch. Sign up to be one of our alpha testers here [one of a few links to email signup page] and find us on twitter here. </p>
+    <p><%= link_to "Learn about the Stagecoach Team", about_path, :class => "btn" %> </p>
+  </div>
+</div>
