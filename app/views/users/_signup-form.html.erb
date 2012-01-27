@@ -1,18 +1,7 @@
 <%= form_for(@user, :html => {:id => "users-signup-form-form"} ) do |f| %>
-  <% if @user.errors.any? %>
-    <div class="alert-message block-message error">
-      <h2><%= pluralize(@user.errors.count, "error") %>!</h2>
-
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
   <div class="clearfix">
     <div class="input">
-      <%= f.text_field :name, :placeholder => "John Smith",  :value => params[:name] %>
+      <%= f.text_field :name, :placeholder => "John Smith" %>
       <span class="help-inline"  id="users-signup-form-name-help">Your name must be greater than 2 characters!</span>
     </div>
   </div>

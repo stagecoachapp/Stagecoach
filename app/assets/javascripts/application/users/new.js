@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  $("#user_email").change(function() {
+  $("#user_email").bind('change blur', function() {
     var re = /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i;
     if (re.test($(this).val()) && $("#user_email").val() != '') {
       makeFieldGreen($(this));
@@ -14,7 +14,7 @@ $(document).ready(function() {
     }
   });
 
- $("#user_name").change(function() {
+ $("#user_name").bind('change blur', function() {
     if ($(this).val().length < 3) {
       makeFieldRed($(this));
       $('#users-signup-form-name-help').show();
@@ -37,9 +37,23 @@ $(document).ready(function() {
 });
 
 function makeFieldRed(field) {
-  $(field).parent().parent().removeClass().addClass('clearfix error');
+  //If the form validation fails, what was the input object becomes field_with_errors with a child input
+  //This creates an extra parent between the field and the clearfix object
+  if($(field).parent().hasClass('field_with_errors')) {
+    $(field).parent().parent().parent().removeClass().addClass('clearfix error');
+  }
+  else {
+    $(field).parent().parent().removeClass().addClass('clearfix error');
+  }
 }
 
 function makeFieldGreen(field) {
-  $(field).parent().parent().removeClass().addClass('clearfix success');
+  //If the form validation fails, what was the input object becomes field_with_errors with a child input
+  //This creates an extra parent between the field and the clearfix object
+  if($(field).parent().hasClass('field_with_errors')) {
+    $(field).parent().parent().parent().removeClass().addClass('clearfix success');
+  }
+  else {
+    $(field).parent().parent().removeClass().addClass('clearfix success');
+  }
 }
