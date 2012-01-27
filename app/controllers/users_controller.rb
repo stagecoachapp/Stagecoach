@@ -49,11 +49,12 @@ class UsersController < ApplicationController
     
     if @user.save
       respond_to do |format|
-      format.html { redirect_to root_url, :notice => 'You have succesfully signed up to be an alpha tester!' }
-      format.json { render :json => @user, :status => :created, :location => @user }
+        flash[:success] = 'You have succesfully signed up to be an alpha tester!'
+        format.html { redirect_to root_url }
+        format.json { render :json => @user, :status => :created, :location => @user }
       end
     else
-      flash.now[:error] = "You have errors in the form. Please fix them before continuing."
+      flash[:error] = "You have errors in the form. Please fix them before continuing."
       #this causes the url to go to /users!
       render :new
       
