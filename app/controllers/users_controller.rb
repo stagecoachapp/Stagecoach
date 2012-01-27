@@ -53,7 +53,7 @@ class UsersController < ApplicationController
       format.json { render :json => @user, :status => :created, :location => @user }
       end
     else
-      flash.now[:error] = "Form Error"
+      flash.now[:error] = "You have errors in the form. Please fix them before continuing."
       #this causes the url to go to /users!
       render :new
       
