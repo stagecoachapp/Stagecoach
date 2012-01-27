@@ -23,11 +23,35 @@
     </div>
   </div>
 </div>
-<% if(notice) %>
+<% if(flash[:success]) %>
   <div class="span-16 offset-two-thirds">
     <div class="alert-message success" data-alert="alert">
       <a class="close" href="#">x</a>
-      <p><%= notice %></p>
+      <p><%= flash[:success] %></p>
+    </div>
+  </div>
+<% end %>
+<% if( flash[:error] ) %>
+  <div class="span-16 offset-two-thirds">
+    <div class="alert-message error" data-alert="alert">
+      <a class="close" href="#">x</a>
+      <p><%= flash[:error] %></p>
+    </div>
+  </div>
+<% end %>
+<% if( flash[:notice] ) %>
+  <div class="span-16 offset-two-thirds">
+    <div class="alert-message notice" data-alert="alert">
+      <a class="close" href="#">x</a>
+      <p><%= flash[:notice] %></p>
+    </div>
+  </div>
+<% end %>
+<% if( flash[:info] ) %>
+  <div class="span-16 offset-two-thirds">
+    <div class="alert-message info" data-alert="alert">
+      <a class="close" href="#">x</a>
+      <p><%= flash[:info] %></p>
     </div>
   </div>
 <% end %>

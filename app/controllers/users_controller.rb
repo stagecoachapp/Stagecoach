@@ -7,7 +7,6 @@ class UsersController < ApplicationController
     if(params.has_key?(:notice))
       @success_text = params[:notice]
     end
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @users }
@@ -29,6 +28,7 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
+
     bingo!("sign_up_test")
     respond_to do |format|
       format.html # new.html.erb
@@ -46,16 +46,19 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
 
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to root_url, :notice => 'You have succesfully signed up to be an alpha tester!' }
-        format.json { render :json => @user, :status => :created, :location => @user }
-      else
-        #format.html { render :action => "new" }
-        format.html { redirect_to :back, :notice => 'Uh Oh! Something went wrong!', :email => @user.email, :name => @user.name }
-        format.json { render :json => @user }
-        #format.json { render :json => @user.errors, :status => :unprocessable_entity }
+    
+    if @user.save
+      respond_to do |format|
+      format.html { redirect_to root_url, :notice => 'You have succesfully signed up to be an alpha tester!' }
+      format.json { render :json => @user, :status => :created, :location => @user }
       end
+    else
+      flash.now[:error] = "Form Error"
+      #this causes the url to go to /users!
+      render :new
+      
+      #format.html { redirect_to :back, :notice => 'Uh Oh! Something went wrong!' }
+      #format.json { render :json => @user.errors, :status => :unprocessable_entity }
     end
   end
 
