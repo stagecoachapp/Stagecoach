@@ -1,8 +1,8 @@
 $(document).ready(function() {
-
+  
   $("#user_email").bind('change blur', function() {
-    var re = /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i;
-    if (re.test($(this).val()) && $("#user_email").val() != '') {
+    
+    if (validateEmail($(this))) {
       makeFieldGreen($(this));
       $('#users-signup-form-email-help').css('display', '');
       $('#users-signup-form-email-help').hide();
@@ -15,26 +15,31 @@ $(document).ready(function() {
   });
 
  $("#user_name").bind('change blur', function() {
-    if ($(this).val().length < 3) {
-      makeFieldRed($(this));
+    if (validateName($(this))) {
+     $('#users-signup-form-name-help').css('display', '');
+      $('#users-signup-form-name-help').hide();
+       makeFieldGreen($(this));
+    }
+    else {
+       makeFieldRed($(this));
       $('#users-signup-form-name-help').show();
       $('#users-signup-form-name-help').css('display', 'block !important');
     }
-    else {
-      $('#users-signup-form-name-help').css('display', '');
-      $('#users-signup-form-name-help').hide();
-
-       makeFieldGreen($(this));
-    }
   });
 
-  /*$("#users-signup-form-form").submit(function() {
-    alert(numberOfCorrectRequiredFields+" "+numberOfRequiredFields
-    if(numberOfCorrectRequiredFields < numberOfRequiredFields) {
-      return false;
-    }
-  });*/
+  $("#users-signup-form-form").submit(function() {
+      return validateEmail(document.forms["users-signup-form-form"]["user[email]"]) && validateName(document.forms["users-signup-form-form"]["user[name]"]);
+  });
 });
+
+function validateEmail(field) {
+  var re = /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i;
+  return re.test($(field).val()) && $("#user_email").val() != '';
+}
+
+function validateName(field) {
+  return $(field).val().length >= 3;
+}
 
 function makeFieldRed(field) {
   //If the form validation fails, what was the input object becomes field_with_errors with a child input
