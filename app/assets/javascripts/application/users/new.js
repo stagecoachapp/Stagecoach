@@ -1,44 +1,76 @@
-$(document).ready(function() {
+//null means the user hasn't entered anything in that field yet
+var validName = null;
+var validEmail = null;
+
+$(document).ready(function() {  
   
-  $("#user_email").bind('change blur', function() {
-    
-    if (validateEmail($(this))) {
+  $("#user_email").bind('keyup blur input', function() {
+    validEmail = validateEmail();
+    validateButton();
+    if (validEmail) {
       makeFieldGreen($(this));
       $('#users-signup-form-email-help').css('display', '');
       $('#users-signup-form-email-help').hide();
     }
     else {
       $('#users-signup-form-email-help').show();
-      $('#users-signup-form-email-help').css('display', 'block !important');
+      $('#users-signup-form-email-help').css('display', 'inline');
       makeFieldRed($(this));
     }
   });
 
- $("#user_name").bind('change blur', function() {
-    if (validateName($(this))) {
-     $('#users-signup-form-name-help').css('display', '');
+ $("#user_name").bind('keyup blur input', function() {
+    validName = validateName();
+    validateButton();
+    if (validName) {
+      $('#users-signup-form-name-help').css('display', '');
       $('#users-signup-form-name-help').hide();
-       makeFieldGreen($(this));
+      makeFieldGreen($(this));
     }
     else {
        makeFieldRed($(this));
       $('#users-signup-form-name-help').show();
-      $('#users-signup-form-name-help').css('display', 'block !important');
+      $('#users-signup-form-name-help').css('display', 'inline');
     }
   });
 
   $("#users-signup-form-form").submit(function() {
-      return validateEmail(document.forms["users-signup-form-form"]["user[email]"]) && validateName(document.forms["users-signup-form-form"]["user[name]"]);
+      //if the user hasn't entered a field, the button will not be colored
+      //indicate that they are not done yet by making the button red
+      if($(document.forms["users-signup-form-form"]["commit"]).hasClass("btn")) {
+        $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn danger");
+        if(validName == null) {
+          makeFieldRed($(document.forms["users-signup-form-form"]["user[name]"]));
+          $('#users-signup-form-name-help').show();
+          $('#users-signup-form-name-help').css('display', 'block !important');
+        }
+        if(validEmail == null) {
+          $('#users-signup-form-email-help').show();
+          $('#users-signup-form-email-help').css('display', 'block !important');
+          makeFieldRed($(document.forms["users-signup-form-form"]["user[email]"]));
+        }
+      }
+        
+      return $(document.forms["users-signup-form-form"]["commit"]).hasClass("btn success");
   });
 });
 
-function validateEmail(field) {
+function validateEmail() {
   var re = /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i;
-  return re.test($(field).val()) && $("#user_email").val() != '';
+  return re.test($(document.forms["users-signup-form-form"]["user[email]"]).val()) && $(document.forms["users-signup-form-form"]["user[email]"]).val() != '';
 }
 
-function validateName(field) {
-  return $(field).val().length >= 3;
+function validateName() {
+  return $(document.forms["users-signup-form-form"]["user[name]"]).val().length != '';
+}
+
+function validateButton() {
+  if(validateEmail() && validateName() && validName != null && validEmail != null) {
+    $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn success");
+  }
+  else {
+    $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn danger");
+  }
 }
 
 function makeFieldRed(field) {

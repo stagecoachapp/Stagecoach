@@ -2,18 +2,18 @@
   <div class="clearfix">
     <div class="input">
       <%= f.text_field :name, :placeholder => "John Smith" %>
-      <span class="help-inline"  id="users-signup-form-name-help">Your name must be greater than 2 characters!</span>
+      <span class="help-inline"  id="users-signup-form-name-help">Please enter a name!</span>
     </div>
   </div>
   <br>
   <div class="clearfix">
     <div class="input">
       <%= f.text_field :email, :placeholder => "ExcitedUser@gmail.com" %>
-      <span class="help-inline" id="users-signup-form-email-help">Check your email!</span>
+      <span class="help-inline" id="users-signup-form-email-help">Please enter a valid email!</span>
     </div>
   </div>
   <br>
   <div class="actions span10" id="users-signup-form-submitdiv">
-    <%= f.submit value="Sign Up", :id => "users-signup-form-submit" %>
+    <%= f.submit value="Sign Up", :id => "users-signup-form-submit", :class => "btn" %>
   </div>
 <% end %>
