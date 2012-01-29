@@ -38,15 +38,16 @@ $(document).ready(function() {
       //if the user hasn't entered a field, the button will not be colored
       //indicate that they are not done yet by making the button red
       if(!$(document.forms["users-signup-form-form"]["commit"]).hasClass("btn success")) {
-        $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn danger");
         if(validName == null) {
+          $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn danger");
           makeFieldRed($(document.forms["users-signup-form-form"]["user[name]"]));
           $('#users-signup-form-name-help').show();
-          $('#users-signup-form-name-help').css('display', 'block !important');
+          $('#users-signup-form-name-help').css('display', 'inline');
         }
         if(validEmail == null) {
+          $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn danger");
           $('#users-signup-form-email-help').show();
-          $('#users-signup-form-email-help').css('display', 'block !important');
+          $('#users-signup-form-email-help').css('display', 'inline');
           makeFieldRed($(document.forms["users-signup-form-form"]["user[email]"]));
         }
       }
@@ -68,7 +69,7 @@ function validateButton() {
   if(validateEmail() && validateName() && validName != null && validEmail != null) {
     $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn success");
   }
-  else {
+  else if(validName != null && validEmail != null){
     $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn danger");
   }
 }
