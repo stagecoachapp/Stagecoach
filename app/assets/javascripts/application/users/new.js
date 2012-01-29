@@ -37,7 +37,7 @@ $(document).ready(function() {
   $("#users-signup-form-form").submit(function() {
       //if the user hasn't entered a field, the button will not be colored
       //indicate that they are not done yet by making the button red
-      if($(document.forms["users-signup-form-form"]["commit"]).hasClass("btn")) {
+      if(!$(document.forms["users-signup-form-form"]["commit"]).hasClass("btn success")) {
         $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn danger");
         if(validName == null) {
           makeFieldRed($(document.forms["users-signup-form-form"]["user[name]"]));
