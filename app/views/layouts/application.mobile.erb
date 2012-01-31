@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stagecoach</title>
+    <%= stylesheet_link_tag    "phone/phone" %>
+    <%= javascript_include_tag "phone/phone" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div data-role="page">
+      <!-- start container -->
+      <div data-role="header">
+        <%= render 'layouts/header' %>
+      </div>
+      <!--<p class="alert"><%= alert %></p>-->
+      <div data-role="content">
+        <%= yield %>
+      </div>
+      <div data-role="footer">
+        <%= render 'layouts/footer' %>
+      </div>
+    </div>
+    <!-- end container -->
+  </body>
+</html>
