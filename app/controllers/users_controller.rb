@@ -57,9 +57,6 @@ class UsersController < ApplicationController
       flash[:error] = "You have errors in the form. Please fix them before continuing."
       #this causes the url to go to /users!
       redirect_to signup_path
-      
-      #format.html { redirect_to :back, :notice => 'Uh Oh! Something went wrong!' }
-      #format.json { render :json => @user.errors, :status => :unprocessable_entity }
     end
   end
 
