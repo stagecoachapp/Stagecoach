@@ -17,7 +17,6 @@ FilmProjectRails::Application.routes.draw do
   match '/changelog', :to => 'changelogs#index'
   #abingo routing
   match 'experiments(/:action(/:id))', :to => 'abingo_dashboard', :as => :bingo 
-  #match '/phone', :to => 'phone#index'
   #...
   #  # You can have the root of your site routed with "root"
   #    # just remember to delete public/index.html.
