@@ -2,10 +2,10 @@
 <html>
   <head>
     <title>Stagecoach</title>
-    <%= stylesheet_link_tag    *Dir[Rails.root.join("app/assets/stylesheets/mobile/**/*.css")] %>
-    <%= stylesheet_link_tag    *Dir[Rails.root.join("app/assets/stylesheets/shared/**/*.css")] %>
-    <%= javascript_include_tag *Dir[Rails.root.join("app/assets/javascripts/mobile/**/*.js")] %>
-    <%= javascript_include_tag *Dir[Rails.root.join("app/assets/javascripts/shared/**/*.js")] %>
+    <%= stylesheet_link_tag    'mobile/mobile' %>
+    <%= stylesheet_link_tag    'shared/shared' %>
+    <%= javascript_include_tag 'mobile/mobile' %>
+    <%= javascript_include_tag 'shared/shared' %>
     <%= csrf_meta_tags %>
   </head>
   <body>
