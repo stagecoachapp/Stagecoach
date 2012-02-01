@@ -3,7 +3,9 @@
   <head>
     <title>Stagecoach</title>
     <%= stylesheet_link_tag    *Dir[Rails.root.join("app/assets/stylesheets/mobile/**/*.css")] %>
+    <%= stylesheet_link_tag    *Dir[Rails.root.join("app/assets/stylesheets/shared/**/*.css")] %>
     <%= javascript_include_tag *Dir[Rails.root.join("app/assets/javascripts/mobile/**/*.js")] %>
+    <%= javascript_include_tag *Dir[Rails.root.join("app/assets/javascripts/shared/**/*.js")] %>
     <%= csrf_meta_tags %>
   </head>
   <body>
