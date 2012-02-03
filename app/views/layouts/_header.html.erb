@@ -1,5 +1,5 @@
-<div class="topbar">
-  <div class="fill">
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
     <div class="container">
       <%= link_to "Stagecoach", root_path, :class => "brand" %>
       <ul class="nav">
@@ -24,34 +24,26 @@
   </div>
 </div>
 <% if(flash[:success]) %>
-  <div class="span-16 offset-two-thirds">
-    <div class="alert-message success" data-alert="alert">
-      <a class="close" href="#">x</a>
-      <p><%= flash[:success] %></p>
-    </div>
+  <div class="alert alert-success" data-dismiss="alert" href="#">
+    <a class="close">x</a>
+    <%= flash[:success] %>
   </div>
 <% end %>
 <% if( flash[:error] ) %>
-  <div class="span-16 offset-two-thirds">
-    <div class="alert-message error" data-alert="alert">
-      <a class="close" href="#">x</a>
-      <p><%= flash[:error] %></p>
-    </div>
+  <div class="alert alert-error" data-dismiss="alert" href="#">
+    <a class="close">x</a>
+    <%= flash[:error] %>
   </div>
 <% end %>
 <% if( flash[:notice] ) %>
-  <div class="span-16 offset-two-thirds">
-    <div class="alert-message notice" data-alert="alert">
-      <a class="close" href="#">x</a>
-      <p><%= flash[:notice] %></p>
-    </div>
+  <div class="alert alert-notice" data-dismiss="alert" href="#">
+    <a class="close">x</a>
+    <%= flash[:notice] %>
   </div>
 <% end %>
 <% if( flash[:info] ) %>
-  <div class="span-16 offset-two-thirds">
-    <div class="alert-message info" data-alert="alert">
-      <a class="close" href="#">x</a>
-      <p><%= flash[:info] %></p>
-    </div>
+  <div class="alert alert-info" data-dismiss="alert" href="#">
+    <a class="close">x</a>
+    <%= flash[:info] %>
   </div>
 <% end %>

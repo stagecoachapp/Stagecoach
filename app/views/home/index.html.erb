@@ -3,19 +3,20 @@
   <h1>Say goodbye to wasted production time.</h1>
   <br>
   <div class="row">
-    <div class="span8">
+    <div class="span6">
       <p>Stagecoach is a multiplatform solution to on- and off-set task management for film productions. Our goal is to provide tools to organize your production efforts: reducing frustration, increasing transparency, and saving time and money.</p>
-        <p><%= link_to "Get Notified When We Launch".html_safe, signup_path, :class => "btn primary large", :id => "home-index-private-alpha-button" %></p>
+      <p><%= link_to "Get Notified When We Launch".html_safe, signup_path, :class => "btn-primary btn-large", :id => "home-index-private-alpha-button" %></p>
     </div>
-    <div class="span4">
-      <%= image_tag "home/landing_page.jpg", :class => "thumbnail", :height => 190, :width => 333 %>
+    <div>
+      <%= image_tag "home/landing_page.jpg", :height => 190, :width => 333, :style => "padding-left: 25px;" %>
     </div>
+    <br>
   </div>
 </div>
 
 <!-- Example row of columns -->
 <div class="row">
-  <div class="span8">
+  <div class="span6">
     <h2>Our Product</h2>
     <p>
     With Stagecoach’s modular mobile app, the “fuel” that drives the set is at the tip of managers’ fingers:
@@ -31,7 +32,7 @@
       <p><%= link_to click.html_safe, signup_path, :class => "btn" %></p>
     <% end %>
   </div>
-  <div class="span8">
+  <div class="span6">
     <h2>Our Plan</h2>
     <p>The first version of our modular mobile app will focus on one primary feature: schedule and notification coordination among project teams. Our team has found this to be a common pain point for our interview subject, and we have prioritized the development and testing of this first module. As we approach our initial user testing, we will develop modular “add-on” applications that cater to an increasing array of film and television production team needs.
     </p>

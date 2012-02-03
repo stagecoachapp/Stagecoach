@@ -37,22 +37,22 @@ $(document).ready(function() {
   $("#users-signup-form-form").submit(function() {
       //if the user hasn't entered a field, the button will not be colored
       //indicate that they are not done yet by making the button red
-      if(!$(document.forms["users-signup-form-form"]["commit"]).hasClass("btn success")) {
+      if(!$(document.forms["users-signup-form-form"]["commit"]).hasClass("btn btn-success")) {
         if(validName == null) {
-          $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn danger");
+          $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn btn-danger");
           makeFieldRed($(document.forms["users-signup-form-form"]["user[name]"]));
           $('#users-signup-form-name-help').show();
           $('#users-signup-form-name-help').css('display', 'inline');
         }
         if(validEmail == null) {
-          $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn danger");
+          $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn btn-danger");
           $('#users-signup-form-email-help').show();
           $('#users-signup-form-email-help').css('display', 'inline');
           makeFieldRed($(document.forms["users-signup-form-form"]["user[email]"]));
         }
       }
         
-      return $(document.forms["users-signup-form-form"]["commit"]).hasClass("btn success");
+      return $(document.forms["users-signup-form-form"]["commit"]).hasClass("btn btn-success");
   });
 });
 
@@ -67,21 +67,21 @@ function validateName() {
 
 function validateButton() {
   if(validateEmail() && validateName() && validName != null && validEmail != null) {
-    $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn success");
+    $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn btn-success");
   }
   else if(validName != null && validEmail != null){
-    $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn danger");
+    $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn btn-danger");
   }
 }
 
 function makeFieldRed(field) {
   //If the form validation fails, what was the input object becomes field_with_errors with a child input
-  //This creates an extra parent between the field and the clearfix object
+  //This creates an extra parent between the field and the control-group object
   if($(field).parent().hasClass('field_with_errors')) {
-    $(field).parent().parent().parent().removeClass().addClass('clearfix error');
+    $(field).parent().parent().parent().removeClass().addClass('control-group error');
   }
   else {
-    $(field).parent().parent().removeClass().addClass('clearfix error');
+    $(field).parent().parent().removeClass().addClass('control-group error');
   }
 }
 
@@ -89,9 +89,9 @@ function makeFieldGreen(field) {
   //If the form validation fails, what was the input object becomes field_with_errors with a child input
   //This creates an extra parent between the field and the clearfix object
   if($(field).parent().hasClass('field_with_errors')) {
-    $(field).parent().parent().parent().removeClass().addClass('clearfix success');
+    $(field).parent().parent().parent().removeClass().addClass('control-group success');
   }
   else {
-    $(field).parent().parent().removeClass().addClass('clearfix success');
+    $(field).parent().parent().removeClass().addClass('control-group success');
   }
 }
