@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120131085104) do
+ActiveRecord::Schema.define(:version => 20120204233648) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -73,6 +73,21 @@ ActiveRecord::Schema.define(:version => 20120131085104) do
   end
 
   add_index "experiments", ["test_name"], :name => "index_experiments_on_test_name"
+
+  create_table "people", :force => true do |t|
+    t.string   "name"
+    t.integer  "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "signups", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.boolean  "activated"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "tasks", :force => true do |t|
     t.string   "task"
