@@ -37,22 +37,22 @@ $(document).ready(function() {
   $("#users-signup-form-form").submit(function() {
       //if the user hasn't entered a field, the button will not be colored
       //indicate that they are not done yet by making the button red
-      if(!$(document.forms["users-signup-form-form"]["commit"]).hasClass("btn btn-success")) {
+      if(!$(document.forms["users-signup-form-form"]["commit"]).hasClass("btn btn-large btn-success")) {
         if(validName == null) {
-          $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn btn-danger");
+          $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn btn-large btn-danger");
           makeFieldRed($(document.forms["users-signup-form-form"]["user[name]"]));
           $('#users-signup-form-name-help').show();
           $('#users-signup-form-name-help').css('display', 'inline');
         }
         if(validEmail == null) {
-          $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn btn-danger");
+          $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn btn-large btn-danger");
           $('#users-signup-form-email-help').show();
           $('#users-signup-form-email-help').css('display', 'inline');
           makeFieldRed($(document.forms["users-signup-form-form"]["user[email]"]));
         }
       }
         
-      return $(document.forms["users-signup-form-form"]["commit"]).hasClass("btn btn-success");
+      return $(document.forms["users-signup-form-form"]["commit"]).hasClass("btn btn-large btn-success");
   });
 });
 
@@ -67,10 +67,10 @@ function validateName() {
 
 function validateButton() {
   if(validateEmail() && validateName() && validName != null && validEmail != null) {
-    $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn btn-success");
+    $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn btn-large btn-success");
   }
   else if(validName != null && validEmail != null){
-    $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn btn-danger");
+    $(document.forms["users-signup-form-form"]["commit"]).removeClass().addClass("btn btn-large btn-danger");
   }
 }
 
