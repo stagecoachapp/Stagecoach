@@ -1,4 +1,6 @@
 FilmProjectRails::Application.routes.draw do
+  resources :users
+
   resources :user_roles
 
   ActiveAdmin.routes(self)
@@ -8,6 +10,8 @@ FilmProjectRails::Application.routes.draw do
 
 FilmProjectRails::Application.routes.draw do
    
+  resources :users
+
   resources :user_roles
 
   ActiveAdmin.routes(self)
