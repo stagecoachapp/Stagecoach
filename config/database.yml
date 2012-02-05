@@ -21,6 +21,7 @@ test:
   pool: 5
   username: film
   password: northwestern
+  host: localhost
 production:
   adapter: postgresql
   encoding: unicode
