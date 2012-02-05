@@ -37,22 +37,22 @@ $(document).ready(function() {
   $("#signups-signup-form-form").submit(function() {
       //if the user hasn't entered a field, the button will not be colored
       //indicate that they are not done yet by making the button red
-      if(!$(document.forms["signups-signup-form-form"]["commit"]).hasClass("btn btn-success")) {
+      if(!$(document.forms["signups-signup-form-form"]["commit"]).hasClass("btn btn-success btn-large")) {
         if(validName == null) {
-          $(document.forms["signups-signup-form-form"]["commit"]).removeClass().addClass("btn btn-danger");
+          $(document.forms["signups-signup-form-form"]["commit"]).removeClass().addClass("btn btn-danger btn-large");
           makeFieldRed($(document.forms["signups-signup-form-form"]["signup[name]"]));
           $('#signups-signup-form-name-help').show();
           $('#signups-signup-form-name-help').css('display', 'inline');
         }
         if(validEmail == null) {
-          $(document.forms["signups-signup-form-form"]["commit"]).removeClass().addClass("btn btn-danger");
+          $(document.forms["signups-signup-form-form"]["commit"]).removeClass().addClass("btn btn-danger btn-large");
           $('#signups-signup-form-email-help').show();
           $('#signups-signup-form-email-help').css('display', 'inline');
           makeFieldRed($(document.forms["signups-signup-form-form"]["signup[email]"]));
         }
       }
         
-      return $(document.forms["signups-signup-form-form"]["commit"]).hasClass("btn btn-success");
+      return $(document.forms["signups-signup-form-form"]["commit"]).hasClass("btn btn-success btn-large");
   });
 });
 
@@ -67,10 +67,10 @@ function validateName() {
 
 function validateButton() {
   if(validateEmail() && validateName() && validName != null && validEmail != null) {
-    $(document.forms["signups-signup-form-form"]["commit"]).removeClass().addClass("btn btn-success");
+    $(document.forms["signups-signup-form-form"]["commit"]).removeClass().addClass("btn btn-success btn-large");
   }
   else if(validName != null && validEmail != null){
-    $(document.forms["signups-signup-form-form"]["commit"]).removeClass().addClass("btn btn-danger");
+    $(document.forms["signups-signup-form-form"]["commit"]).removeClass().addClass("btn btn-danger btn-large");
   }
 }
 
