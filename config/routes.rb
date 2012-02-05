@@ -3,9 +3,7 @@ FilmProjectRails::Application.routes.draw do
 
   resources :user_roles
 
-  ActiveAdmin.routes(self)
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
   get "home/index"
 
 FilmProjectRails::Application.routes.draw do
@@ -14,9 +12,6 @@ FilmProjectRails::Application.routes.draw do
 
   resources :user_roles
 
-  ActiveAdmin.routes(self)
-
-  devise_for :admin_users, ActiveAdmin::Devise.config
 
   resources :signups, :only => [:new, :create], :pathnames => { :new => 'signup'}
   resources :tasks
