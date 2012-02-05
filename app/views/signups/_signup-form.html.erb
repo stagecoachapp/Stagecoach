@@ -1,0 +1,25 @@
+<%= form_for(@signup, :html => {:id => "signups-signup-form-form"} ) do |f| %>
+  <div class="control-group">
+    <div class="controls span6 signup-form-input">
+      <%= f.text_field :name, :placeholder => "John Smith" %>
+      <span class="help-inline"  id="signups-signup-form-name-help">Please enter a name!</span>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="control-group">
+    <div class="controls span6 signup-form-input">
+      <%= f.text_field :email, :placeholder => "ExcitedUser@gmail.com" %>
+      <span class="help-inline" id="signups-signup-form-email-help">Please enter a valid email!</span>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="control-group" id="signups-signup-form-submitdiv" style="text-align: center;">
+    <div class="controls span6" style="margin-left: 70px">
+      <%= f.submit value="Sign Up", :id => "signups-signup-form-submit", :class => "btn btn-large" %>
+    </div>
+  </div>
+<% end %>

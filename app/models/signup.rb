@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class Signup < ActiveRecord::Base
   #include ActiveModel::Validations
   validates :name, :presence => true, :length => { :minimum => 1 }
   validates :email, :presence => true

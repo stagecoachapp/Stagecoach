@@ -1,0 +1,13 @@
+<p>
+  <b>Name:</b>
+  <%= @signup.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @signup.email %>
+</p>
+
+
+<%= link_to 'Edit', edit_signup_path(@signup) %> |
+<%= link_to 'Back', root_path %>

@@ -14,9 +14,9 @@ FilmProjectRails::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  resources :users, :only => [:new, :create], :pathnames => { :new => 'signup'}
+  resources :signups, :only => [:new, :create], :pathnames => { :new => 'signup'}
   resources :tasks
-  match '/signup', :to => 'users#new'
+  match '/signup', :to => 'signups#new'
   match '/about', :to => 'home#about'
   match '/changelog', :to => 'changelogs#index'
   #abingo routing
