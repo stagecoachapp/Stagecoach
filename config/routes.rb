@@ -1,4 +1,6 @@
 FilmProjectRails::Application.routes.draw do
+  resources :user_roles
+
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -6,6 +8,8 @@ FilmProjectRails::Application.routes.draw do
 
 FilmProjectRails::Application.routes.draw do
    
+  resources :user_roles
+
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
