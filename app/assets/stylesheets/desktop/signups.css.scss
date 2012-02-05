@@ -11,6 +11,7 @@
 #signups-signup-form-submitdiv{
   position: relative;
   left: -100px;
+  text-align: center;
 }
 
 #signups-signup-form-form {
@@ -26,4 +27,11 @@
 #signups-signup-form-name-help{
   display: none;
   font-size: 16px;
+}
+.signup-form-input {
+  margin-left: 287px
+}
+
+#users-signup-control1{
+  margin-left: 70px;
 }
