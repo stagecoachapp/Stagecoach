@@ -4,4 +4,8 @@ class TasksController < InheritedResources::Base
     @task = Task.find(params[:id])
   end
   
+  def update
+    @task = Task.find(params[:id])
+    @task.update_attributes(params[:task])
+  end
 end
