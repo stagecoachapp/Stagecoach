@@ -1,5 +1,8 @@
+<% url = request.path%>
+<% if url != root_path %>
+<%= link_to "Back", "#", :"data-icon" => "back", :"data-rel" => "back", :"data-direction" => "reverse", :"data-iconpos" => "right" %>
+<% end %>
 <h1>Stagecoach</h1>
-<% url = request.path%> 
 <% if url != root_path %>
 <%= link_to "Home", root_url, :"data-icon" => "home", :"data-direction" => "reverse" %>
 <% end %>
