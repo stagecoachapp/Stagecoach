@@ -1,0 +1,17 @@
+<h1>Task Categories</h1>
+
+<%= link_to "Add a New List", "#", :"data-role" => "button" %>
+
+<br />
+
+<ul data-role="listview">
+    <li>
+      <%= link_to "Lighting", tasks_path %>
+    </li>
+    <li>
+      <%= link_to "General", tasks_path %>
+    </li>
+    <li>
+      <%= link_to "Paperwork", tasks_path %>
+    </li>
+</ul>
