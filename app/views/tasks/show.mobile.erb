@@ -1,0 +1,63 @@
+<ul data-role="listview" data-inset="true">
+			<li data-role="fieldcontain">
+	        	<label for="task-new-taskname">Task Name:</label>
+	        	<input type="text" name="task-new-taskname" id="task-new-taskname" value=<%= @task.name %>>
+			</li>
+			<li data-role="fieldcontain">
+	        	<label for="task-new-taskdescription">Description:</label>
+			<textarea cols="40" rows="8" name="task-new-taskdescription" id="task-new-taskdescription"></textarea>
+			</li>
+			
+			<li data-role="fieldcontain">
+			    <fieldset data-role="controlgroup" data-type="horizontal">
+			     	<legend>Priority:</legend>
+
+			         	<input type="radio" name="task-new-priority" id="task-new-priority-low" value="low"
+                <% if @task.priority == 1 %>
+                    <%= checked="checked" %>
+                  <% end%>
+                />
+			         	<label for="task-new-priority-low">Low</label>
+			         	<input type="radio" name="task-new-priority" id="task-new-priority-medium" value="medium"
+                  <% if @task.priority == 2 %>
+                    <%= checked="checked" %>
+                  <% end%>
+                />
+			         	<label for="task-new-priority-medium">Medium</label>
+			         	<input type="radio" name="task-new-priority" id="task-new-priority-High" value="High"
+                <% if @task.priority == 3 %>
+                    <%= checked="checked" %>
+                  <% end%>
+                />
+			         	<label for="task-new-priority-High">High</label>
+			    </fieldset>
+			</li>
+
+			<li data-role="fieldcontain">
+				<label for="task-new-startdate">Start Date</label>
+				<input name="task-new-startdate" id="task-new-startdate" type="date" data-role="datebox"
+   			data-options='{"mode": "calbox", "calTodayButton": true}'
+        value=<%= @task.startdate%>>
+   		</li>
+   		
+   		<li data-role="fieldcontain">
+   				<label for="task-new-starttime">Start Time</label>
+					<input name="task-new-starttime" id="task-new-starttime" type="date" data-role="datebox"
+   				data-options='{"mode": "timebox", "timeFormatOverride": 12}'
+          value=<%= @task.startdate.strftime("%I:%M %p") %>>
+   		</li>
+   		
+   		<li data-role="fieldcontain">
+					<label for="task-new-enddate">End Date</label>
+					<input name="task-new-enddate" id="task-new-enddate" type="date" data-role="datebox"
+   				data-options='{"mode": "calbox", "calTodayButton": true}'
+          value=<%= @task.enddate%>>
+   		</li>
+   		
+   		<li data-role="fieldcontain">
+   				<label for="task-new-endtime">End Time</label>
+					<input name="task-new-endtime" id="task-new-endtime" type="date" data-role="datebox"
+   				data-options='{"mode": "timebox", "timeFormatOverride": 12}'
+          value=<%= @task.enddate.strftime("%I:%M %p") %>>
+   		</li>			
+		</ul>
