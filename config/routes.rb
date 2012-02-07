@@ -1,4 +1,10 @@
 FilmProjectRails::Application.routes.draw do
+  resources :task_categories
+
+  resources :reminders
+
+  resources :projects
+
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -12,6 +18,12 @@ FilmProjectRails::Application.routes.draw do
 
 FilmProjectRails::Application.routes.draw do
    
+  resources :task_categories
+
+  resources :reminders
+
+  resources :projects
+
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
