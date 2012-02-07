@@ -19,6 +19,11 @@
         <% else %>
           <li><%= link_to "Sign Up", signup_path %></li>
         <% end %>
+        <% if signed_in? %>
+          <li><%= link_to current_user.name, signout_path %></li>
+        <% else %>
+          <li><a href="/auth/facebook">Sign In</a></li>
+        <% end %>
       </ul>
     </div>
   </div>
