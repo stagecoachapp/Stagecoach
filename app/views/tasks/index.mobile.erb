@@ -1,33 +1,16 @@
-<h1>Listing tasks</h1>
+<h1>My tasks</h1>
+<%= link_to 'New Task', new_task_path, :"data-role" => "button" %>
+<br>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Startdate</th>
-    <th>Enddate</th>
-    <th>Notes</th>
-    <th>Priority</th>
-    <th>Status</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<ul data-role="listview" data-inset="true">
 <% @tasks.each do |task| %>
-  <tr>
-    <td><%= task.name %></td>
-    <td><%= task.startdate %></td>
-    <td><%= task.enddate %></td>
-    <td><%= task.notes %></td>
-    <td><%= task.priority %></td>
-    <td><%= task.status %></td>
-    <td><%= link_to 'Show', task %></td>
-    <td><%= link_to 'Edit', edit_task_path(task) %></td>
-    <td><%= link_to 'Destroy', task, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+   <li><a href= "<%= "/tasks/#{task.id}" %>">
+                
+                <h3><%= task.name %> - <strong><%= task.status %></strong></h3>
+                <p><%= task.priority %></p>
+                <p><%= task.notes %></p>
+                <p class="ui-li-aside"><strong><%= task.startdate.strftime("%a %b %d %I:%M%p") %> - <%= task.enddate.strftime("%a %b %d %I:%M%p") %></strong></p>
+                
+            </a></li>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Task', new_task_path %>
+</ul>    
