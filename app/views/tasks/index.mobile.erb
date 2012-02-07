@@ -1,7 +1,16 @@
-<ul data-role="listview">
-    <% @tasks.each do |task| %>
-      <li>
-        <%= link_to task.task, task %>
-      </li>
-    <% end %>
-</ul>
+<h1>My tasks</h1>
+<%= link_to 'New Task', new_task_path, :"data-role" => "button" %>
+<br>
+
+<ul data-role="listview" data-inset="true">
+<% @tasks.each do |task| %>
+   <li><a href= "<%= "/tasks/#{task.id}" %>">
+                
+                <h3><%= task.name %> - <strong><%= task.status %></strong></h3>
+                <p><%= task.priority %></p>
+                <p><%= task.notes %></p>
+                <p class="ui-li-aside"><strong><%= task.startdate.strftime("%a %b %d %I:%M%p") %> - <%= task.enddate.strftime("%a %b %d %I:%M%p") %></strong></p>
+                
+            </a></li>
+<% end %>
+</ul>    

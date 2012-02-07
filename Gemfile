@@ -18,23 +18,21 @@ gem 'coffee-rails', '~> 3.1.1'
 gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 gem 'omniauth-facebook'
-gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
-gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
-gem 'ruby-debug19'
+
 gem 'mobile-fu', :git => 'https://github.com/benlangfeld/mobile-fu.git'
 group :development do
-  gem 'rspec'
-  gem 'rspec-rails'
+	gem 'rspec'
+	gem 'rspec-rails'
+	gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
+	gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
+	gem 'ruby-debug19'
 end
 
 group :test do
-  gem 'rspec'
-  gem 'rspec-rails'
+	gem 'rspec'
+	gem 'rspec-rails'
 end
 
-group :development do
-  gem 'ruby-debug19'
-end
 
 
 # To use ActiveModel has_secure_password

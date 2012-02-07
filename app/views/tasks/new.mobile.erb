@@ -1,19 +1,5 @@
-<%= form_for(@task) do |f| %>
+<h1>New task</h1>
 
-  <div class="input">
-    <%= f.text_field :task, :placeholder => "Task" %>
-  </div>
-  
-  <div class="input">
-    <%= f.text_field :assigned_by, :placeholder => "Assigned By" %>
-  </div>
-  
-   <div class="input">
-    <%= f.text_field :assigned_to, :placeholder => "Assigned To" %>
-  </div>
-  
-  <div class="actions">
-    <%= f.submit value="Assign Task" %>
-  </div>
-  
-<% end %>
+<%= render 'new_form' %>
+
+<%= link_to 'Back', tasks_path %>
