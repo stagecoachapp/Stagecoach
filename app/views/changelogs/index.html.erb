@@ -1,32 +1,19 @@
 <h1>Changelog</h1>
-<% recent_website_changes = `git log --abbrev-commit --pretty=format:"%H %cr - %s by %an"` rescue ""  %>
-<br>
-<h5>&nbsp; Total Commits: <%= recent_website_changes.split(/\n/).each.count %> </h5>
-<table class = "table table-striped">
-  <thead style = "text-align: left;">
-    <tr>
-      <th>When</th>
-      <th>Description</th>
-      <th></th>
-    </tr>
-  </thead>
-  <br>
-  <tbody>
-<%   
-recent_website_changes.split(/\n/).each do |ln| 
-  commit_code = ln.split(/ /)[0]     
-  without_commit = ln.gsub("#{commit_code} ", "")     
-  commit_time = without_commit.split(/ - /)[0]     
-  message = without_commit.gsub("#{commit_time} - ", "") 
-  message = message.slice(0,1).capitalize + message.slice(1..-1)
-  %>
 
-  <tr style = "text-align: left;">
-    <td style="width: 110px;"><%= commit_time %></td>
-    <td><%= message %></td>
-    <td><%= link_to('view', "https://github.com/New-Media/nu-new-media-film-project/commit/#{commit_code}") %></td>
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Developer</th>
+    <th>Description</th>
+  </tr>
+
+<% @changelogs.each do |changelog| %>
+  <tr>
+    <td><%= changelog.created_at %></td>
+    <td><%= changelog.developer %></td>
+    <td><%= changelog.description %></td>
   </tr>
 <% end %>
-</tbody>
 </table>
-<br>
+
+<br />
