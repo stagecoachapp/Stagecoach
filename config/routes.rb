@@ -1,23 +1,5 @@
 FilmProjectRails::Application.routes.draw do
-  resources :task_categories
-
-  resources :reminders
-
-  resources :projects
-
-  ActiveAdmin.routes(self)
-
-  devise_for :admin_users, ActiveAdmin::Devise.config
-
-  resources :users
-
-  resources :user_roles
-
-
-  get "home/index"
-
-FilmProjectRails::Application.routes.draw do
-   
+  get "home/index" 
   resources :task_categories
 
   resources :reminders
@@ -101,4 +83,3 @@ end
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
-end
