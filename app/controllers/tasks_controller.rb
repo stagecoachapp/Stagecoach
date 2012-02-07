@@ -8,4 +8,9 @@ class TasksController < InheritedResources::Base
     @task = Task.find(params[:id])
     @task.update_attributes(params[:task])
   end
+  
+  def show
+    @task = Task.find(params[:id])
+  end
+  
 end
