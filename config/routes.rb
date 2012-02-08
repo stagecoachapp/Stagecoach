@@ -1,4 +1,6 @@
 FilmProjectRails::Application.routes.draw do
+  resources :posts
+
   get "home/index" 
   resources :task_categories
 

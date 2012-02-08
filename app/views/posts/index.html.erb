@@ -1,0 +1,16 @@
+<h1>Stagecoach Blog:</h1>
+
+<br />
+
+<% @posts.each do |post| %>
+  
+    <h2><%= link_to post.title, post %></h2>
+    
+    <br />
+    
+    <%= post.content %>
+    
+<% end %>
+
+
+<br />

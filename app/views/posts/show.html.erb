@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h2><%= @post.title %></h2>
+</p>
+
+<p>
+  <%= @post.content %>
+</p>
+
+<p>
+  <b>Post by:</b>
+  <%= @post.name %>
+</p>
+
+<%= link_to 'Back', posts_path %>
