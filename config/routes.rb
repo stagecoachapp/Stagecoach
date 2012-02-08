@@ -1,23 +1,5 @@
 FilmProjectRails::Application.routes.draw do
-  resources :task_categories
-
-  resources :reminders
-
-  resources :projects
-
-  ActiveAdmin.routes(self)
-
-  devise_for :admin_users, ActiveAdmin::Devise.config
-
-  resources :users
-
-  resources :user_roles
-
-
-  get "home/index"
-
-FilmProjectRails::Application.routes.draw do
-   
+  get "home/index" 
   resources :task_categories
 
   resources :reminders
@@ -36,8 +18,12 @@ FilmProjectRails::Application.routes.draw do
   resources :signups, :only => [:new, :create], :pathnames => { :new => 'signup'}
   resources :tasks
   match '/signup', :to => 'signups#new'
+  match '/signout', :to => 'sessions#destroy'
+  match '/sessions/new' => redirect('/auth/facebook')
   match '/about', :to => 'home#about'
   match '/changelog', :to => 'changelogs#index'
+  match '/users/new', :to => 'users#create', :via => :post
+  match '/auth/:provider/callback', :to => 'sessions#create'
   #abingo routing
   match 'experiments(/:action(/:id))', :to => 'abingo_dashboard', :as => :bingo 
   #...
@@ -101,4 +87,3 @@ end
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
-end

@@ -1,0 +1,94 @@
+<%= form_for(@task) do |f| %>
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+      <% @task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <!-- ///////////////////////////////////////////////////////////////////////////////////////// -->
+<!--  
+
+-->  
+
+  
+  <form>
+		<ul data-role="listview" data-inset="true">
+	   <!-- TASK NAME -->
+			<li data-role="fieldcontain">
+				<label for="task-new-taskname"><%= 'Task Name:' %></label>
+				<%= f.text_field :name, :id => "task-new-taskname", :placeholder => "Task Name" %>
+					<!-- HTML <input type="text" name="task-new-taskname" id="task-new-taskname"/> -->
+			</li>
+       <!-- DESCRIPTION -->
+			<li data-role="fieldcontain">
+				<label for="task-new-taskdescription"><%= 'Description:' %></label>
+				<%= f.text_area :notes, :id => "task-new-taskdescription" %>
+				
+					<!-- HTML <textarea cols="40" rows="8" name="task-new-taskdescription" id="task-new-taskdescription"></textarea> -->
+			</li>
+		<!-- PRIOTITY -->
+			<li data-role="fieldcontain">
+				<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Priority:</legend>
+				<input type="radio" name="task-new-priority" id="task-new-priority-low" value="0" />
+						<label for="task-new-priority-low"><%= 'Low' %></label>
+				<input type="radio" name="task-new-priority" id="task-new-priority-medium" value="medium" checked="checked" />
+				<label for="task-new-priority-medium"><%= 'Medium' %></label>
+				<input type="radio" name="task-new-priority" id="task-new-priority-high" value="High" />
+				<label for="task-new-priority-high"><%= 'High' %></label>			
+			    </fieldset>
+				<%# f.number_field :priority %>
+			</li>
+			
+		<!-- START DATE -->
+			<li data-role="fieldcontain">
+				<label for="task-new-startdate"><%= 'Start Date' %></label>
+				<input name="task-new-startdate" id="task-new-startdate" type="date" data-role="datebox"
+			data-options='{"mode": "calbox", "calTodayButton": true}'>
+			<%# f.datetime_select :startdate, :type => "date", "data-role" => "datebox" %>
+			
+			     		
+			</li>	
+			
+		<!-- END DATE -->
+		<li data-role="fieldcontain">
+					<label for="task-new-enddate"><%= 'End Date' %></label>
+					<input name="task-new-enddate" id="task-new-enddate" type="date" data-role="datebox"
+				data-options='{"mode": "calbox", "calTodayButton": true}'>
+			<%# f.datetime_select :enddate %>
+		</li>
+			
+			  
+				
+ 
+  
+
+
+		
+	<!-- CREATE-->
+			<li class="ui-body ui-body-b">
+				<fieldset class="ui-grid-a">
+						<%= f.submit :value => 'Create' %>
+						<!-- <button type="submit" data-theme="a">Create</button> -->
+			    </fieldset>
+			</li>
+			
+		</ul>
+		
+		</form>
+
+  <!-- ///////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+ 
+
+
+
+<% end %>
