@@ -28,5 +28,9 @@ class AddRelationsToDatabase < ActiveRecord::Migration
 		drop_table :tasks_task_categories
 		drop_table :projects_users
 		drop_table :users_user_roles
+		remove_column :tasks, :project_id
+		remove_column :reminders, :task_id
+		remove_column :user_roles, :project_id
+		remove_column :task_categories, :project_id
 	end
 end
