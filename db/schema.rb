@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120207045420) do
+ActiveRecord::Schema.define(:version => 20120208192031) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -94,6 +94,11 @@ ActiveRecord::Schema.define(:version => 20120207045420) do
     t.datetime "updated_at"
   end
 
+  create_table "projects_users", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "user_id"
+  end
+
   create_table "reminders", :force => true do |t|
     t.string   "name"
     t.datetime "time"
@@ -101,6 +106,7 @@ ActiveRecord::Schema.define(:version => 20120207045420) do
     t.boolean  "needs_response"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "task_id"
   end
 
   create_table "signups", :force => true do |t|
@@ -115,6 +121,7 @@ ActiveRecord::Schema.define(:version => 20120207045420) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "project_id"
   end
 
   create_table "tasks", :force => true do |t|
@@ -126,12 +133,24 @@ ActiveRecord::Schema.define(:version => 20120207045420) do
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "project_id"
+  end
+
+  create_table "tasks_task_categories", :id => false, :force => true do |t|
+    t.integer "task_id"
+    t.integer "task_category_id"
+  end
+
+  create_table "tasks_users", :id => false, :force => true do |t|
+    t.integer "task_id"
+    t.integer "user_id"
   end
 
   create_table "user_roles", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "project_id"
   end
 
   create_table "users", :force => true do |t|
@@ -142,6 +161,11 @@ ActiveRecord::Schema.define(:version => 20120207045420) do
     t.boolean  "activated"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "users_user_roles", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "user_role_id"
   end
 
 end
