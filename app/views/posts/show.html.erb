@@ -13,6 +13,23 @@
   <%= @post.name %>
 </p>
 
+<% if @post.comments.present? %>
+  <br />
+  <h4>Comments: </h4>
+  <br />
+  <%= render @post.comments %>
+<% end %>
+ 
+<h4>Add a comment:</h4>
+<%= render "comments/form" %>
+
+<% if @post.tags.present? %>
+  <p>
+    <b>Tags:</b>
+    <%= join_tags(@post) %>
+  </p>
+<% end %>
+
 <%= link_to 'Back', posts_path %>
 
 <br />
