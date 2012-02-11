@@ -22,6 +22,7 @@ FilmProjectRails::Application.routes.draw do
   match '/sessions/new' => redirect('/auth/facebook')
   match '/about', :to => 'home#about'
   match '/changelog', :to => 'changelogs#index'
+  match '/users/new', :to => 'users#create', :via => :post
   match '/auth/:provider/callback', :to => 'sessions#create'
   #abingo routing
   match 'experiments(/:action(/:id))', :to => 'abingo_dashboard', :as => :bingo 
