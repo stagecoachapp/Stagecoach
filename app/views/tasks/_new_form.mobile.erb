@@ -52,19 +52,24 @@
 		<!-- START DATE -->
 			<li data-role="fieldcontain">
 				<label for="task-new-startdate"><%= 'Start Date' %></label>
-				<input name="task-new-startdate" id="task-new-startdate" type="date" data-role="datebox"
-   			data-options='{"mode": "calbox", "calTodayButton": true}'>
-			<%= f.datetime_select :startdate, :type => "date", "data-role" => "datebox" %>
-			
+
+				<%= f.text_field :startdate, :"type" => "date", :"data-role" => "datebox", 
+					:"data-options" => '{"mode": "calbox", "calTodayButton": true}'%>
+					
 					
 			</li>	
 			
 		<!-- END DATE -->
    		<li data-role="fieldcontain">
 					<label for="task-new-enddate"><%= 'End Date' %></label>
-					<input name="task-new-enddate" id="task-new-enddate" type="date" data-role="datebox"
-   				data-options='{"mode": "calbox", "calTodayButton": true}'>
-			<%= f.datetime_select :enddate %>
+					
+					<%= f.text_field :enddate, :"type" => "date", :"data-role" => "datebox", 
+					:"data-options" => '{"mode": "calbox", "calTodayButton": true}'%>
+					
+
+										
+																				
+
    		</li>
 			
 			  
