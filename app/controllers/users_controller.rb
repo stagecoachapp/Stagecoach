@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def new
     @user = current_user
+    @task_categories = TaskCategory.all
   end
 
   def create
