@@ -1,17 +1,13 @@
 <h1>Task Categories</h1>
 
-<%= link_to "Add a New List", "#", :"data-role" => "button" %>
+<%= link_to "Add a New List", new_task_category_url, :"data-role" => "button" %>
 
 <br />
 
 <ul data-role="listview">
+  <% @task_categories.each do |task_category| %>
     <li>
-      <%= link_to "Lighting", tasks_path %>
+      <%= link_to task_category.name, tasks_path, :query => task_category.name %>
     </li>
-    <li>
-      <%= link_to "General", tasks_path %>
-    </li>
-    <li>
-      <%= link_to "Paperwork", tasks_path %>
-    </li>
+  <% end %>
 </ul>
