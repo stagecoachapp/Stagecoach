@@ -1,5 +1,6 @@
-&copy; New Media 2012
-<% if !signed_in? %>
-<a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
-<% end %>
+<h4>&copy; New Media 2012</h4>
+<div class="ui-btn-right">
+  <%= link_to "Sign Out", { :controller=> :sessions, :action => :destroy }, :"id" => "layouts-footer-signout-button", :"data-role" => 'button' %>
+</div>
+
 

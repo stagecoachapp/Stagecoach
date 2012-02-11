@@ -1,4 +1,14 @@
 class SessionsController < ApplicationController
+skip_before_filter :require_login
+
+  def new
+
+    respond_to do |format|
+      format.html
+    end
+
+  end
+
   def create
     auth = request.env['omniauth.auth']
     unless @auth = Authorization.find_from_hash(auth)
@@ -7,15 +17,18 @@ class SessionsController < ApplicationController
       @auth = Authorization.create_from_hash(auth, current_user)
     end
     # Log the authorizing user in.
-    self.current_user = @auth.dummy_user
-    
-    flash[:success] = "Welcome, #{current_user.name}."
-    redirect_to root_url
+    self.current_user = @auth.user
+    if !is_mobile_device?
+      flash[:success] = "Welcome, #{current_user.name}."
+    end
+    redirect_to new_user_url
   end
   
   def destroy
     session[:user_id] = nil
-    flash[:info] = "You have successfully logged out"
+    if !is_mobile_device?
+      flash[:info] = "You have successfully logged out"
+    end
     redirect_to root_url
   end
   
