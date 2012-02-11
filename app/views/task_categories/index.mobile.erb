@@ -7,7 +7,7 @@
 <ul data-role="listview">
   <% @task_categories.each do |task_category| %>
     <li>
-      <%= link_to task_category.name, tasks_path, :query => task_category.name %>
+      <%= link_to task_category.name, tasks_path( :name => task_category.name) %>
     </li>
   <% end %>
 </ul>
