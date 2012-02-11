@@ -1,5 +1,3 @@
-
-
 <%= form_for(@task) do |f| %>
   <% if @task.errors.any? %>
     <div id="error_explanation">
@@ -19,7 +17,6 @@
 
 -->  
 
-  
   <form>
 		<ul data-role="listview" data-inset="true">
 	   <!-- TASK NAME -->
@@ -39,24 +36,25 @@
 			<li data-role="fieldcontain">
 				<fieldset data-role="controlgroup" data-type="horizontal">
 			     	<legend>Priority:</legend>
-			         	<input type="radio" name="task-new-priority" id="task-new-priority-low" value="0" />
+
+						<%= f.radio_button :priority, "0", :id => "task-new-priority-low"%> 
+						<%= f.radio_button :priority, "33", :id => "task-new-priority-medium"%> 
+						<%= f.radio_button :priority, "66", :id => "task-new-priority-high"%> 
+
 						<label for="task-new-priority-low"><%= 'Low' %></label>
-			         	<input type="radio" name="task-new-priority" id="task-new-priority-medium" value="medium" checked="checked" />
-			         	<label for="task-new-priority-medium"><%= 'Medium' %></label>
-			         	<input type="radio" name="task-new-priority" id="task-new-priority-high" value="High" />
-			         	<label for="task-new-priority-high"><%= 'High' %></label>			
+						<label for="task-new-priority-medium"><%= 'Medium' %></label>
+						<label for="task-new-priority-high"><%= 'High' %></label>
+	
 			    </fieldset>
-				<%= f.number_field :priority %>
+				
 			</li>
 			
 		<!-- START DATE -->
 			<li data-role="fieldcontain">
 				<label for="task-new-startdate"><%= 'Start Date' %></label>
-
 				<%= f.text_field :startdate, :"type" => "date", :"data-role" => "datebox", 
 					:"data-options" => '{"mode": "calbox", "calTodayButton": true}'%>
-					
-					
+		
 			</li>	
 			
 		<!-- END DATE -->
@@ -65,20 +63,9 @@
 					
 					<%= f.text_field :enddate, :"type" => "date", :"data-role" => "datebox", 
 					:"data-options" => '{"mode": "calbox", "calTodayButton": true}'%>
-					
-
-										
-																				
-
    		</li>
 			
-			  
-				
- 
-  
 
-
-		
 	<!-- CREATE-->
 			<li class="ui-body ui-body-b">
 				<fieldset class="ui-grid-a">
@@ -92,10 +79,5 @@
 		</form>
 
   <!-- ///////////////////////////////////////////////////////////////////////////////////////// -->
-
-
- 
-
-
 
 <% end %>
