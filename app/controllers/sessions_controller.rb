@@ -11,9 +11,11 @@ skip_before_filter :require_login
 
   def create
     auth = request.env['omniauth.auth']
-    unless @auth = Authorization.find_from_hash(auth)
+    auth_type = 'existing'
+    if !(@auth = Authorization.find_from_hash(auth))
       # Create a new user or add an auth to existing user, depending on
       # whether there is already a user signed in.
+      auth_type = 'new'
       @auth = Authorization.create_from_hash(auth, current_user)
     end
     # Log the authorizing user in.
@@ -21,7 +23,12 @@ skip_before_filter :require_login
     if !is_mobile_device?
       flash[:success] = "Welcome, #{current_user.name}."
     end
-    redirect_to new_user_url
+
+    if auth_type == 'new'
+      redirect_to new_user_url
+    else
+      redirect_to root_url
+    end
   end
   
   def destroy
