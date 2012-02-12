@@ -1,5 +1,23 @@
-class TasksController < InheritedResources::Base
-  
+class TasksController < ApplicationController
+
+
+  def new
+    @task = Task.new
+
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  def create
+    @task = Task.new(params[:task])
+    @task.save
+
+    respond_to do |format|
+      format.html
+    end
+  end
+
   def edit
     @task = Task.find(params[:id])
   end
@@ -10,7 +28,13 @@ class TasksController < InheritedResources::Base
   end
   
   def index
-    @tasks = Task.joins(:task_category).where('task_category.name=?', params[:name])
+    debugger
+    @tasks = Task.all
+
+    respond_to do |format|
+      format.html
+    end
+
   end
 
   def show
