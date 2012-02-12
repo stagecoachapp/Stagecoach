@@ -4,7 +4,7 @@ class AddRelationsToDatabase < ActiveRecord::Migration
 			t.integer :task_id
 			t.integer :user_id
 		end
-		create_table :tasks_task_categories, :id => false do |t|
+		create_table :task_categories_tasks, :id => false do |t|
 			t.integer :task_id
 			t.integer :task_category_id
 		end
@@ -12,7 +12,7 @@ class AddRelationsToDatabase < ActiveRecord::Migration
 			t.integer :project_id
 			t.integer :user_id
 		end
-		create_table :users_user_roles, :id => false do |t|
+		create_table :user_roles_users, :id => false do |t|
 			t.integer :user_id
 			t.integer :user_role_id
 		end
