@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
 
-  before_filter :require_login
+  #before_filter :require_login
   def require_login
     unless signed_in?
       if is_mobile_device?
