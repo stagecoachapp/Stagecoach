@@ -14,7 +14,7 @@ module FilmProjectRails
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-    
+    config.app_generators.scaffold_controller = :scaffold_controller    
     #for active admin and devise
     config.assets.initialize_on_precompile = false
     # Custom directories with classes and modules you want to be autoloadable.
