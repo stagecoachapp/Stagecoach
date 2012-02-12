@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+	skip_before_filter :require_login, :only => [:new]
+
   # GET /users
   # GET /users.json
   def index
@@ -24,7 +27,7 @@ class UsersController < ApplicationController
   # GET /users/new
   # GET /users/new.json
   def new
-    @user = User.new
+    @user = current_user
 
     respond_to do |format|
       format.html # new.html.erb

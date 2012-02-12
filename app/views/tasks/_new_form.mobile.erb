@@ -46,7 +46,10 @@
 			    </fieldset>
 				<%# f.number_field :priority %>
 			</li>
-			
+			<li data-role="fieldcontain">
+        <label for="task-new-form-form-task-category">Task Category</label>
+        <%= collection_select(:task, :task_category, TaskCategory.all, :id, :name, {}, { :id=>"task-new-form-form-task-category" })  %>
+			</li>
 		<!-- START DATE -->
 			<li data-role="fieldcontain">
 				<label for="task-new-startdate"><%= 'Start Date' %></label>

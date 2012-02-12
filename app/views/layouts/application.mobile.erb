@@ -10,19 +10,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0;">
   </head>
   <body>
-    <div data-role="page" id="jquery-page">
-      <!-- start container -->
-      <div data-role="header" data-position="inline">
-        <%= render 'layouts/header' %>
-      </div>
-      <!--<p class="alert"><%= alert %></p>-->
-      <div data-role="content">
-        <%= yield %>
-      </div>
-      <div data-role="footer">
-        <%= render 'layouts/footer' %>
-      </div>
+
+    <div data-role="page" id="layouts-page">
+      <% if signed_in? %>
+        <!-- start container -->
+        <div data-role="header" data-position="inline">
+          <%= render 'layouts/header' %>
+        </div>
+        <!--<p class="alert"><%= alert %></p>-->
+        <div data-role="content">
+          <%= yield %>
+        </div>
+        <div data-role="footer" id="layouts-footer" data-type="horizontal">
+          <%= render 'layouts/footer' %>
+        </div>
+      <% elsif !signed_in? %>
+          <div data-role="content">
+            <%= yield %>
+          </div>
+      <% end %>
     </div>
+
     <!-- end container -->
   </body>
 </html>
