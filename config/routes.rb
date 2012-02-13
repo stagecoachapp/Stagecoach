@@ -20,10 +20,11 @@ FilmProjectRails::Application.routes.draw do
   match '/signup', :to => 'signups#new'
   match '/signout', :to => 'sessions#destroy'
   match '/signin', :to => 'sessions#new'
+  match '/guest', :to => 'sessions#guest'
 
   match '/about', :to => 'home#about'
   match '/changelog', :to => 'changelogs#index'
-  match '/users/new', :to => 'users#create', :via => :post
+  #match '/users/new', :to => 'users#create', :via => :post
   match '/auth/:provider/callback', :to => 'sessions#create'
   #abingo routing
   match 'experiments(/:action(/:id))', :to => 'abingo_dashboard', :as => :bingo 
