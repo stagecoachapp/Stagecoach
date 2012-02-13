@@ -4,4 +4,8 @@ module ApplicationHelper
     "auth/#{provider.to_s}"
   end
 
+  def guest_path
+    "guest/"
+  end
+
 end

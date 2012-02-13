@@ -30,6 +30,15 @@ skip_before_filter :require_login
       redirect_to root_url
     end
   end
+
+  def guest
+    @user = User.new(:name => "Guest", :email => "guest@stagecoach.com" )
+    if @user.save
+      current_user= @user
+    end
+    debugger
+    redirect_to root_url
+  end
   
   def destroy
     session[:user_id] = nil
