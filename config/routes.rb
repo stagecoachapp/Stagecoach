@@ -20,6 +20,7 @@ FilmProjectRails::Application.routes.draw do
   match '/signup', :to => 'signups#new'
   match '/signout', :to => 'sessions#destroy'
   match '/signin', :to => 'sessions#new'
+  match '/guest', :to => 'sessions#guest'
 
   match '/about', :to => 'home#about'
   match '/changelog', :to => 'changelogs#index'
