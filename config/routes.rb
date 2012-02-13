@@ -18,15 +18,17 @@ FilmProjectRails::Application.routes.draw do
 
   resources :user_roles
 
-
+  resources :sessions, :pathnames => { :new => 'signin' }
   resources :signups, :only => [:new, :create], :pathnames => { :new => 'signup'}
   resources :tasks
   match '/signup', :to => 'signups#new'
   match '/signout', :to => 'sessions#destroy'
-  match '/sessions/new' => redirect('/auth/facebook')
+  match '/signin', :to => 'sessions#new'
+  match '/guest', :to => 'sessions#guest'
+
   match '/about', :to => 'home#about'
   match '/changelog', :to => 'changelogs#index'
-  match '/users/new', :to => 'users#create', :via => :post
+  #match '/users/new', :to => 'users#create', :via => :post
   match '/auth/:provider/callback', :to => 'sessions#create'
   #abingo routing
   match 'experiments(/:action(/:id))', :to => 'abingo_dashboard', :as => :bingo 
