@@ -53,10 +53,8 @@
 			
 			
 		<!-- CATEGORIES -->
-			<li data-role="fieldcontain">
-				<%= f.label :name, "Task Category", :"for" => "task-new-form-form-task-category" %>
-				<%= collection_select(:task, :task_category, TaskCategory.all, :id, :name, {}, { :id=>"task-new-form-form-task-category" })  %>
-			</li>
+
+			
 			
 		<!-- START DATE -->
 			<li data-role="fieldcontain">
