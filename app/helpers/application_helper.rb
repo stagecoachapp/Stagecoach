@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def guest_path
-    "guest/"
+    "guest"
   end
 
 end
