@@ -35,20 +35,18 @@
 		<!-- PRIOTITY -->
 			<li data-role="fieldcontain">
 				<fieldset data-role="controlgroup" data-type="horizontal">
-				<legend>Priority</legend>
-				
-				<input type="radio" name="task-new-priority" id="task-new-priority-low" value="0" />
-				<%= f.label :name, "Low", :"for" => "task-new-priority-low" %>
-						
-				<input type="radio" name="task-new-priority" id="task-new-priority-medium" value="1" checked="checked" />
-				<%= f.label :name, "Medium", :"for" => "task-new-priority-medium" %>
+			     	<legend>Priority:</legend>
 
+						<%= f.radio_button :priority, "0", :id => "task-new-priority-low"%> 
+						<%= f.label :name, "Low", :"for" => "task-new-priority-low" %>
+						
+						<%= f.radio_button :priority, "33", :id => "task-new-priority-medium"%>
+						<%= f.label :name, "Medium", :"for" => "task-new-priority-medium" %>
+						
+						<%= f.radio_button :priority, "66", :id => "task-new-priority-high"%>
+						<%= f.label :name, "High", :"for" => "task-new-priority-high" %>
 				
-				<input type="radio" name="task-new-priority" id="task-new-priority-high" value="2" />
-				<%= f.label :name, "High", :"for" => "task-new-priority-high" %>
-					
-			    </fieldset>
-				<%# f.number_field :priority %>
+					</fieldset>
 			</li>
 			
 			
@@ -59,17 +57,17 @@
 		<!-- START DATE -->
 			<li data-role="fieldcontain">
 				<%= f.label :name, "Start Date", :"for" => "task-new-startdate" %>
-				<input name="task-new-startdate" id="task-new-startdate" type="date" data-role="datebox"
-					   data-options='{"mode": "calbox", "calTodayButton": true}'>
-				<%# f.datetime_select :startdate, :type => "date", "data-role" => "datebox" %>  		
+				
+				<%= f.text_field :startdate, :"type" => "date", :"data-role" => "datebox", :id => "task-new-startdate", 
+					:"data-options" => '{"mode": "calbox", "calTodayButton": true}'%>
 			</li>	
 			
 		<!-- END DATE -->
 			<li data-role="fieldcontain">
 				<%= f.label :name, "End Date", :"for" => "task-new-enddate" %>
-				<input name="task-new-enddate" id="task-new-enddate" type="date" data-role="datebox"
-					   data-options='{"mode": "calbox", "calTodayButton": true}'>
-				<%# f.datetime_select :enddate %>
+				
+				<%= f.text_field :enddate, :"type" => "date", :"data-role" => "datebox", :id => "task-new-enddate", 
+					:"data-options" => '{"mode": "calbox", "calTodayButton": true}'%>
 			</li>
 		
 	<!-- CREATE-->
