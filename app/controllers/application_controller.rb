@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :require_login
   def require_login
-    unless signed_in?
+    unless current_user?
       if is_mobile_device?
         redirect_to '/signin'
       end
@@ -31,14 +31,14 @@ class ApplicationController < ActionController::Base
     def current_user
       @current_user ||= User.find_by_id(session[:user_id])
     end
-    def signed_in?
+    def current_user?
       !!current_user
     end
-    def sign_in(user)
+    def current_user=(user)
       @current_user = user
       session[:user_id] = user.id
     end
-    helper_method :current_user, :signed_in?, :sign_in
+    helper_method :current_user, :current_user?, :current_user=
   #End authorization stuff
   
 end

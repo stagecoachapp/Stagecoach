@@ -12,7 +12,7 @@
   <body>
 
     <div data-role="page" id="layouts-page">
-      <% if signed_in? %>
+      <% if current_user? %>
         <!-- start container -->
         <div data-role="header" data-position="inline">
           <%= render 'layouts/header' %>
@@ -24,7 +24,7 @@
         <div data-role="footer" id="layouts-footer" data-type="horizontal">
           <%= render 'layouts/footer' %>
         </div>
-      <% elsif !signed_in? %>
+      <% elsif !current_user? %>
           <div data-role="content">
             <%= yield %>
           </div>
