@@ -28,7 +28,6 @@ class TasksController < ApplicationController
   end
   
   def index
-    debugger
     @tasks = Task.all
 
     respond_to do |format|
