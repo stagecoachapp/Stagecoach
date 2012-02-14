@@ -34,11 +34,11 @@ class ApplicationController < ActionController::Base
     def signed_in?
       !!current_user
     end
-    def sign_in(user)
+    def current_user=(user)
       @current_user = user
       session[:user_id] = user.id
     end
-    helper_method :current_user, :signed_in?, :sign_in
+    helper_method :current_user, :signed_in?, :current_user=
   #End authorization stuff
   
 end

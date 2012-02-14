@@ -19,7 +19,7 @@ skip_before_filter :require_login
       @auth = Authorization.create_from_hash(auth, current_user)
     end
     # Log the authorizing user in.
-    sign_in(@auth.user)
+    self.current_user=(@auth.user)
     if !is_mobile_device?
       flash[:success] = "Welcome, #{current_user.name}."
     end
@@ -34,7 +34,7 @@ skip_before_filter :require_login
   def guest
     @user = User.new(:name => "Guest", :email => "guest@stagecoach.com" )
     if @user.save
-      sign_in(@user)
+     self.current_user=(@user)
     end
     render 'home/index'
   end
