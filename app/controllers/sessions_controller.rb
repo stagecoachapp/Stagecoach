@@ -36,7 +36,7 @@ skip_before_filter :require_login
     if @user.save
      self.current_user=(@user)
     end
-    render 'home/index'
+    redirect_to root_url
   end
   
   def destroy
