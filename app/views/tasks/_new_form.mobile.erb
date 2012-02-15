@@ -29,14 +29,15 @@
        <!-- DESCRIPTION -->
 			<li data-role="fieldcontain">
 				<%= f.label :name, "Description", :"for" => "task-new-taskdescription" %>
-				<%= f.text_area :notes, :id => "task-new-taskdescription", :placeholder => "No Description" %>
+				<%= f.text_area :notes, :width => 10, :id => "task-new-taskdescription", :placeholder => "No Description" %>
 			</li>
 			
 		<!-- PRIOTITY -->
 			<li data-role="fieldcontain">
+			<legend>Priority:</legend>
 				<fieldset data-role="controlgroup" data-type="horizontal">
-			     	<legend>Priority:</legend>
-
+			     	
+						
 						<%= f.radio_button :priority, "0", :id => "task-new-priority-low"%> 
 						<%= f.label :name, "Low", :"for" => "task-new-priority-low" %>
 						
@@ -45,7 +46,7 @@
 						
 						<%= f.radio_button :priority, "66", :id => "task-new-priority-high"%>
 						<%= f.label :name, "High", :"for" => "task-new-priority-high" %>
-				
+						
 					</fieldset>
 			</li>
 			
