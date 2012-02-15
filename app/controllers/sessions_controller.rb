@@ -25,7 +25,7 @@ skip_before_filter :require_login
     end
 
     if auth_type == 'new'
-      redirect_to new_user_url
+      redirect_to edit_user_url(current_user)
     else
       redirect_to root_url
     end
