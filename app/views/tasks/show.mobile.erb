@@ -13,19 +13,14 @@
 			     	<legend>Priority:</legend>
 
 			         	<input type="radio" name="task-new-priority" id="task-new-priority-low" value="low"
-                <% if @task.priority == 1 %>
+                <% if @task.priority == 0 %>
                     <%= checked="checked" %>
                   <% end%>
                 />
 			         	<label for="task-new-priority-low">Low</label>
-			         	<input type="radio" name="task-new-priority" id="task-new-priority-medium" value="medium"
-                  <% if @task.priority == 2 %>
-                    <%= checked="checked" %>
-                  <% end%>
-                />
-			         	<label for="task-new-priority-medium">Medium</label>
+
 			         	<input type="radio" name="task-new-priority" id="task-new-priority-High" value="High"
-                <% if @task.priority == 3 %>
+                <% if @task.priority == 1 %>
                     <%= checked="checked" %>
                   <% end%>
                 />
