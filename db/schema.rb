@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120211051856) do
+ActiveRecord::Schema.define(:version => 20120208192031) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(:version => 20120211051856) do
     t.integer  "author_id"
     t.string   "author_type"
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "namespace"
   end
 
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(:version => 20120211051856) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
@@ -62,54 +62,36 @@ ActiveRecord::Schema.define(:version => 20120211051856) do
     t.string   "provider"
     t.string   "uid"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "changelogs", :force => true do |t|
     t.string   "description"
     t.string   "developer"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
-
-  create_table "comments", :force => true do |t|
-    t.string   "commenter"
-    t.text     "body"
-    t.integer  "post_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
 
   create_table "dummy_users", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "experiments", :force => true do |t|
     t.string   "test_name"
     t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "experiments", ["test_name"], :name => "index_experiments_on_test_name"
 
-  create_table "posts", :force => true do |t|
-    t.string   "name"
-    t.string   "title"
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "projects_users", :id => false, :force => true do |t|
@@ -122,8 +104,8 @@ ActiveRecord::Schema.define(:version => 20120211051856) do
     t.datetime "time"
     t.text     "description"
     t.boolean  "needs_response"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "task_id"
   end
 
@@ -131,23 +113,14 @@ ActiveRecord::Schema.define(:version => 20120211051856) do
     t.string   "name"
     t.string   "email"
     t.boolean  "activated"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
-
-  create_table "tags", :force => true do |t|
-    t.string   "name"
-    t.integer  "post_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "tags", ["post_id"], :name => "index_tags_on_post_id"
 
   create_table "task_categories", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "project_id"
   end
 
@@ -163,8 +136,8 @@ ActiveRecord::Schema.define(:version => 20120211051856) do
     t.text     "notes"
     t.integer  "priority"
     t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "project_id"
   end
 
@@ -175,9 +148,14 @@ ActiveRecord::Schema.define(:version => 20120211051856) do
 
   create_table "user_roles", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "project_id"
+  end
+
+  create_table "user_roles_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "user_role_id"
   end
 
   create_table "users", :force => true do |t|
@@ -186,13 +164,8 @@ ActiveRecord::Schema.define(:version => 20120211051856) do
     t.string   "phonenumber"
     t.string   "smartphone"
     t.boolean  "activated"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "users_user_roles", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "user_role_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
 end
