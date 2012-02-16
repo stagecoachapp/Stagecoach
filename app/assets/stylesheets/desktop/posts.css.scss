@@ -15,6 +15,10 @@
   padding-top: 20px;
 }
 
+.posts-posts-show p {
+  font-size: 14px;
+}
+
 .posts-posts-show-title {
   text-align: center;
 }
@@ -24,5 +28,27 @@
 }
 
 .postcontent {
+  padding-top: 15px;
+}
+
+.posts-posts-comment {
+  padding-top: 10px;
+  border-top: 2px;
+}
+
+.posts-posts-comments {
+  margin-left: 10px;
+  padding-top: 10px;
+}
+
+.posts-posts-commentby {
+  color: gray;
+}
+
+.posts-posts-commentbody {
+  margin-left: 8px;
+}
+
+.posts-posts-addcomment {
   padding-top: 15px;
 }

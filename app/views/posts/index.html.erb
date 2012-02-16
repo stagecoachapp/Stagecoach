@@ -6,7 +6,7 @@
 
 <h3 id="posts-posts-title"><%= link_to post.title, post %></h3>
     
-<p class="postcontent"><%= post.content %></p>
+<p class="postcontent"><%= post.content.html_safe %></p>
     
 <p class="postby"><b>Post by: </b> <%= post.name %></p>
     

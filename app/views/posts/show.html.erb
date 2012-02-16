@@ -10,23 +10,26 @@
 <p>
   <%= @post.content.html_safe %>
 </p>
+</div>
 
 <p>
   <b>Post by:</b>
   <%= @post.name %>
 </p>
-</div>
-
 
 <% if @post.comments.present? %>
-  <br />
+<div class="posts-posts-comment">
   <h4>Comments: </h4>
-  <br />
+</div>
+  <div class="posts-posts-comments">
   <%= render @post.comments %>
+  </div>
 <% end %>
- 
+
+<div class="posts-posts-addcomment">
 <h4>Add a comment:</h4>
 <%= render "comments/form" %>
+</div>
 
 <% if @post.tags.present? %>
   <p>
