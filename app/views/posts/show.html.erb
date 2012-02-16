@@ -1,17 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <h2><%= @post.title %></h2>
-</p>
+<div class="posts-posts-show-title">
+  <p>
+    <h2><%= @post.title %></h2>
+  </p>
+</div>
 
+<div class="posts-posts-show">
 <p>
-  <%= @post.content %>
+  <%= @post.content.html_safe %>
 </p>
 
 <p>
   <b>Post by:</b>
   <%= @post.name %>
 </p>
+</div>
+
 
 <% if @post.comments.present? %>
   <br />
@@ -28,6 +33,7 @@
     <b>Tags:</b>
     <%= join_tags(@post) %>
   </p>
+
 <% end %>
 
 <%= link_to 'Back', posts_path %>

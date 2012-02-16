@@ -18,6 +18,7 @@ gem 'coffee-rails', '~> 3.2.1'
 gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 gem 'omniauth-facebook'
+gem 'ckeditor_rails', :require => 'ckeditor-rails'
 
 
 gem 'mobile-fu', :git => 'https://github.com/benlangfeld/mobile-fu.git'

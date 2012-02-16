@@ -3,18 +3,12 @@
 <br />
 
 <% @posts.each do |post| %>
-<br />
+
 <h3 id="posts-posts-title"><%= link_to post.title, post %></h3>
     
-    <br />
+<p class="postcontent"><%= post.content %></p>
     
-    <%= post.content %>
-    
-    <br />
-    
-    <b>Post by: </b> <%= post.name %>
-    
-    <br />
+<p class="postby"><b>Post by: </b> <%= post.name %></p>
     
 <% end %>
 
