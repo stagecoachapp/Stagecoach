@@ -17,6 +17,13 @@
   <%= @post.name %>
 </p>
 
+<% if @post.tags.present? %>
+  <p>
+    <b>Tags:</b>
+    <%= join_tags(@post) %>
+  </p>
+<% end %>
+
 <% if @post.comments.present? %>
 <div class="posts-posts-comment">
   <h4>Comments: </h4>
@@ -30,14 +37,6 @@
 <h4>Add a comment:</h4>
 <%= render "comments/form" %>
 </div>
-
-<% if @post.tags.present? %>
-  <p>
-    <b>Tags:</b>
-    <%= join_tags(@post) %>
-  </p>
-
-<% end %>
 
 <%= link_to 'Back', posts_path %>
 
