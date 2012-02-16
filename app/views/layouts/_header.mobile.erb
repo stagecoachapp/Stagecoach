@@ -5,8 +5,15 @@
 
 
 	<h1>
+		
 		<% if url == "/tasks/new" %>	
 			Create New Task
+		<% elsif url == "/tasks" %>	
+			My Tasks
+		<% elsif url == "/task_categories" %>	
+			Task Catagories
+		<% elsif url == "/users" %>	
+			Listing Users	
 		<% else %>	
 			StageCoach
 		<% end %>
