@@ -8,5 +8,5 @@ CKEDITOR.editorConfig = function( config )
 	// Define changes to default configuration here. For example:
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
-  config.removePlugins = 'save,font,format,flash,table,about,maximize';
+  config.removePlugins = 'save,flash,table,about,maximize';
 };

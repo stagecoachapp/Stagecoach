@@ -33,7 +33,7 @@
 
 .posts-posts-comment {
   padding-top: 10px;
-  border-top: 2px;
+  border-top: 1px solid black;
 }
 
 .posts-posts-comments {
@@ -42,11 +42,19 @@
 }
 
 .posts-posts-commentby {
-  color: gray;
+  width: 600px;
+  background-color: #DDD;
+  padding: 5px 0 5px 10px;
+}
+
+.posts-posts-commentby p {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 .posts-posts-commentbody {
   margin-left: 8px;
+  padding-top: 2px;
 }
 
 .posts-posts-addcomment {
