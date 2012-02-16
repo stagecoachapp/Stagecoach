@@ -51,20 +51,18 @@
 
 			
 			
-		<!-- START DATE -->
+		<!-- START DATE TIME -->
 			<li data-role="fieldcontain">
-				<%= f.label :name, "Start Date", :"for" => "task-new-startdate" %>
-				
+				<%= f.label :name, "Start Time", :"for" => "task-new-startdate" %>
 				<%= f.text_field :startdate, :"type" => "date", :"data-role" => "datebox", :id => "task-new-startdate", 
-					:"data-options" => '{"mode": "calbox", "calTodayButton": true}'%>
-			</li>	
-			
-		<!-- END DATE -->
+					:"data-options" => '{"mode": "slidebox", "dateFormat":"%Y-%m-%dT%I:%M%p", "timeFormatOverride":12, "fieldsOrderOverride":["d","h","i"]}'%>
+			</li>
+
+		<!-- END DATE TIME -->
 			<li data-role="fieldcontain">
-				<%= f.label :name, "End Date", :"for" => "task-new-enddate" %>
-				
+				<%= f.label :name, "End Time", :"for" => "task-new-enddate" %>
 				<%= f.text_field :enddate, :"type" => "date", :"data-role" => "datebox", :id => "task-new-enddate", 
-					:"data-options" => '{"mode": "calbox", "calTodayButton": true}'%>
+					:"data-options" => '{"mode": "slidebox", "dateFormat":"%Y-%m-%dT%I:%M%p", "timeFormatOverride":12, "fieldsOrderOverride":["d","h","i"]}'%>
 			</li>
 		
 	<!-- CREATE-->
