@@ -34,17 +34,13 @@
 			
 		<!-- PRIOTITY -->
 			<li data-role="fieldcontain">
-			<legend>Priority:</legend>
+			
 				<fieldset data-role="controlgroup" data-type="horizontal">
-			     	
-						
+			     	<legend>Priority:</legend>
 						<%= f.radio_button :priority, "0", :id => "task-new-priority-low"%> 
 						<%= f.label :name, "Low", :"for" => "task-new-priority-low" %>
-						
-						<%= f.radio_button :priority, "33", :id => "task-new-priority-medium", :checked => true%>
-						<%= f.label :name, "Medium", :"for" => "task-new-priority-medium" %>
-						
-						<%= f.radio_button :priority, "66", :id => "task-new-priority-high"%>
+	
+						<%= f.radio_button :priority, "1", :id => "task-new-priority-high", :checked => "checked" %>
 						<%= f.label :name, "High", :"for" => "task-new-priority-high" %>
 						
 					</fieldset>
@@ -55,20 +51,18 @@
 
 			
 			
-		<!-- START DATE -->
+		<!-- START DATE TIME -->
 			<li data-role="fieldcontain">
-				<%= f.label :name, "Start Date", :"for" => "task-new-startdate" %>
-				
+				<%= f.label :name, "Start Time", :"for" => "task-new-startdate" %>
 				<%= f.text_field :startdate, :"type" => "date", :"data-role" => "datebox", :id => "task-new-startdate", 
-					:"data-options" => '{"mode": "calbox", "calTodayButton": true}'%>
-			</li>	
-			
-		<!-- END DATE -->
+					:"data-options" => '{"mode": "slidebox", "dateFormat":"%Y-%m-%dT%I:%M%p", "timeFormatOverride":12, "fieldsOrderOverride":["d","h","i"]}'%>
+			</li>
+
+		<!-- END DATE TIME -->
 			<li data-role="fieldcontain">
-				<%= f.label :name, "End Date", :"for" => "task-new-enddate" %>
-				
+				<%= f.label :name, "End Time", :"for" => "task-new-enddate" %>
 				<%= f.text_field :enddate, :"type" => "date", :"data-role" => "datebox", :id => "task-new-enddate", 
-					:"data-options" => '{"mode": "calbox", "calTodayButton": true}'%>
+					:"data-options" => '{"mode": "slidebox", "dateFormat":"%Y-%m-%dT%I:%M%p", "timeFormatOverride":12, "fieldsOrderOverride":["d","h","i"]}'%>
 			</li>
 		
 	<!-- CREATE-->
