@@ -28,10 +28,11 @@ class ApplicationController < ActionController::Base
 #stuff for choosing the project
   def change_project
     self.current_project= params[:project_id]
+    debugger
     respond_to do |format|
-      format.mobile {redirect_to current_project}
-      format.html {redirect_to current_project}
-      format.json {redirect_to current_project}
+      format.mobile {}
+      format.html { }
+      format.json {}
     end
   end   
   
@@ -44,6 +45,7 @@ class ApplicationController < ActionController::Base
       @current_project  ||= Project.find_by_id(session[:project_id])
     end
     def current_project=(project_id)
+      debugger
       session[:project_id] = project_id
       @current_project = Project.find_by_id(session[:project_id])
     end
@@ -64,7 +66,7 @@ class ApplicationController < ActionController::Base
           end
         end
       else
-      @project_select_options = ["No Projects Yet!", -1]
+      @project_select_options = ["No Projects Yet!"]
       end
       @project_select_options
     end

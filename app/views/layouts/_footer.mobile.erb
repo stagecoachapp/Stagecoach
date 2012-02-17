@@ -3,6 +3,6 @@
 </div>
 <%= form_tag( :method => "post", :controller => "application", :action => "change_project" ) do %>
 	<%= select_tag(:project_id, options_for_select(project_select_options), {:onChange => 'this.form.submit();'}) %>  
-	<%= current_project.name %>
+	<%# current_project.name %>
 <% end %>
 <h4>&copy; New Media 2012</h4>

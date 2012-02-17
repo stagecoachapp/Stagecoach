@@ -41,7 +41,7 @@ class ProjectsController < ApplicationController
     @project = current_user.projects.create(params[:project])
     respond_to do |format|
       if @project.save
-        change_current_project(@project.id)
+        self.current_project=(@project.id)
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.mobile { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
