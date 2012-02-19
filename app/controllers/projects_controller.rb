@@ -73,7 +73,7 @@ class ProjectsController < ApplicationController
   def change_project
 
       self.current_project= params[:project_id]
-      debugger
+      #debugger
       respond_to do |format|
         format.mobile {redirect_to current_project}
         format.html {redirect_to current_project }

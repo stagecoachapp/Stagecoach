@@ -3,6 +3,5 @@
 </div>
 <%= form_tag(projects_path ) do %>
 	<%= select_tag(:project_id, options_for_select(project_select_options), {:onChange => 'this.form.submit();'}) %>  
-	<%# current_project.name %>
 <% end %>
 <h4>&copy; New Media 2012</h4>

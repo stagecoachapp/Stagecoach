@@ -24,7 +24,7 @@ skip_before_filter :require_login
       flash[:success] = "Welcome, #{current_user.name}."
     end
     if session.present?
-      cookies[:project_id] = current_user.projects.find(:all, :order => "created_at DESC", :limit => 1)
+      session[:project_id] = current_user.projects.find(:all, :order => "created_at DESC", :limit => 1).first
     end
 
     if auth_type == 'new'
