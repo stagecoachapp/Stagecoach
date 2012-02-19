@@ -71,8 +71,14 @@ class ProjectsController < ApplicationController
   end
 
   def change_project
-
-      self.current_project= params[:project_id]
+      if params[:project_id] == nil
+        @new_project= Project.new(params[:project])
+        @new_project.save
+        @new_project.users << current_user
+        self.current_project = @new_project
+      else
+        self.current_project= params[:project_id]
+      end
       #debugger
       respond_to do |format|
         format.mobile {redirect_to current_project}
