@@ -24,17 +24,7 @@ class ApplicationController < ActionController::Base
         redirect_to '/signin'
       end
     end
-  end
-#stuff for choosing the project
-  def change_project
-    self.current_project= params[:project_id]
-    debugger
-    respond_to do |format|
-      format.mobile {}
-      format.html { }
-      format.json {}
-    end
-  end   
+  end 
   
   #Authorization stuff
   protected
@@ -42,12 +32,11 @@ class ApplicationController < ActionController::Base
       @current_user ||= User.find_by_id(session[:user_id])
     end
     def current_project
-      @current_project  ||= Project.find_by_id(session[:project_id])
+      @current_project  ||= session[:project_id]
     end
     def current_project=(project_id)
-      debugger
-      session[:project_id] = project_id
-      @current_project = Project.find_by_id(session[:project_id])
+      session[:project_id] = Project.find_by_id(project_id)
+      @current_project = session[:project_id]
     end
     def current_user?
       !!current_user

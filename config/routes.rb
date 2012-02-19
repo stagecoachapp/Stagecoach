@@ -4,7 +4,7 @@ FilmProjectRails::Application.routes.draw do
 
   resources :reminders
 
-  match '/assets', :to => 'application#change_project'
+  match "/projects", :to => "projects#change_project", :via => "post"
 
   resources :projects
 

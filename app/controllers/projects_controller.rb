@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = current_user.projects.all
-      respond_to do |format|
+    respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @projects }
     end
@@ -70,15 +70,27 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
-  def destroy
-    @project = Project.find(params[:id])
-    @project.destroy
+  def change_project
 
-    respond_to do |format|
-      format.html { redirect_to projects_url }
-      format.json { head :no_content }
+      self.current_project= params[:project_id]
+      debugger
+      respond_to do |format|
+        format.mobile {redirect_to current_project}
+        format.html {redirect_to current_project }
+        format.json {redirect_to current_project}
+      end
+    end
+
+
+    # DELETE /projects/1
+    # DELETE /projects/1.json
+    def destroy
+      @project = Project.find(params[:id])
+      @project.destroy
+
+      respond_to do |format|
+        format.html { redirect_to projects_url }
+        format.json { head :no_content }
+      end
     end
   end
-end
