@@ -9,6 +9,8 @@ FilmProjectRails::Application.routes.draw do
 
   resources :reminders
 
+  match "/projects", :to => "projects#change_project", :via => "post"
+
   resources :projects
 
   ActiveAdmin.routes(self)
@@ -22,6 +24,7 @@ FilmProjectRails::Application.routes.draw do
   resources :sessions, :pathnames => { :new => 'signin' }
   resources :signups, :only => [:new, :create], :pathnames => { :new => 'signup'}
   resources :tasks
+
   match '/signup', :to => 'signups#new'
   match '/signout', :to => 'sessions#destroy'
   match '/signin', :to => 'sessions#new'

@@ -23,6 +23,9 @@ skip_before_filter :require_login
     if !is_mobile_device?
       flash[:success] = "Welcome, #{current_user.name}."
     end
+    if session.present?
+      session[:project_id] = current_user.projects.find(:all, :order => "created_at DESC", :limit => 1).first
+    end
 
     if auth_type == 'new'
       redirect_to edit_user_url(current_user)
@@ -41,6 +44,7 @@ skip_before_filter :require_login
   
   def destroy
     session[:user_id] = nil
+    session[:project_id] = nil
     if !is_mobile_device?
       flash[:info] = "You have successfully logged out"
     end

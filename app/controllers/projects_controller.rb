@@ -2,8 +2,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
-
+    @projects = current_user.projects.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @projects }
@@ -14,7 +13,6 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @project }
@@ -40,11 +38,12 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(params[:project])
-
+    @project = current_user.projects.create(params[:project])
     respond_to do |format|
       if @project.save
+        self.current_project=(@project.id)
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.mobile { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
       else
         format.html { render action: "new" }
@@ -62,22 +61,42 @@ class ProjectsController < ApplicationController
       if @project.update_attributes(params[:project])
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
         format.json { head :no_content }
+        format.mobile { redirect_to @project, notice: 'Project was successfully updated.' }
       else
         format.html { render action: "edit" }
         format.json { render json: @project.errors, status: :unprocessable_entity }
+        format.mobile { render action: "edit" }
       end
     end
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
-  def destroy
-    @project = Project.find(params[:id])
-    @project.destroy
+  def change_project
+      if params[:project_id] == nil
+        @new_project= Project.new(params[:project])
+        @new_project.save
+        @new_project.users << current_user
+        self.current_project = @new_project
+      else
+        self.current_project= params[:project_id]
+      end
+      #debugger
+      respond_to do |format|
+        format.mobile {redirect_to current_project}
+        format.html {redirect_to current_project }
+        format.json {redirect_to current_project}
+      end
+    end
 
-    respond_to do |format|
-      format.html { redirect_to projects_url }
-      format.json { head :no_content }
+
+    # DELETE /projects/1
+    # DELETE /projects/1.json
+    def destroy
+      @project = Project.find(params[:id])
+      @project.destroy
+
+      respond_to do |format|
+        format.html { redirect_to projects_url }
+        format.json { head :no_content }
+      end
     end
   end
-end
