@@ -24,6 +24,11 @@
         <% else %>
           <li><a href="/auth/facebook">Sign In</a></li>
         <% end %>
+        <% if url == posts_path %>
+          <li class = "active"><%= link_to "Blog", posts_path %></li>
+        <% else %>
+          <li><%= link_to "Blog", posts_path %></li>
+        <% end %>
       </ul>
     </div>
   </div>

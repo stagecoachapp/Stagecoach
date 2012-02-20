@@ -1,0 +1,18 @@
+<div class="hero-unit">
+	<div class = "row">
+	<div class="hspan6">
+	<h1>Stagecoach Blog</h1>
+</div>
+</div>
+<br>
+
+<% @posts.each do |post| %>
+
+<h3 id="posts-posts-title"><%= link_to post.title, post %></h3>
+<p class="postcontent"><%= post.content.html_safe %></p>
+
+<p class="postby"><b>Post by: </b> <%= post.name %></p>
+<hr> 
+<% end %>
+<br>
+</div>

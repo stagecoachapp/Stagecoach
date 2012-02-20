@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<div class="posts-posts-show-title">
+  <p>
+    <h2><%= @post.title %></h2>
+  </p>
+</div>
+
+<div class="posts-posts-show">
+<p>
+  <%= @post.content.html_safe %>
+</p>
+</div>
+
+<p>
+  <b>Post by:</b>
+  <%= @post.name %>
+</p>
+
+<% if @post.tags.present? %>
+  <p>
+    <b>Tags:</b>
+    <%= join_tags(@post) %>
+  </p>
+<% end %>
+
+<% if @post.comments.present? %>
+<div class="posts-posts-comment">
+  <h4>Comments: </h4>
+</div>
+  <div class="posts-posts-comments">
+  <%= render @post.comments %>
+  </div>
+<% end %>
+
+<div class="posts-posts-addcomment">
+<h4>Add a comment:</h4>
+<%= render "comments/form" %>
+</div>
+
+<%= link_to 'Back', posts_path %>
+
+<br />
