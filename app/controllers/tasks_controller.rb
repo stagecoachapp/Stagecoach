@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
 
 
+
   def new
     @task = Task.new
     
@@ -11,6 +12,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(params[:task])
+    setDefaults @task
     @task.save
 
     respond_to do |format|
@@ -40,4 +42,9 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
   
+  def setDefaults(task)
+    task.status = 0
+    task.project_id = self.current_project
+  end
+
 end
