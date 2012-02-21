@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120211051856) do
+ActiveRecord::Schema.define(:version => 20120219200533) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -73,6 +73,16 @@ ActiveRecord::Schema.define(:version => 20120211051856) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "comments", :force => true do |t|
+    t.string   "commenter"
+    t.text     "body"
+    t.integer  "post_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
+
   create_table "dummy_users", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -87,6 +97,14 @@ ActiveRecord::Schema.define(:version => 20120211051856) do
   end
 
   add_index "experiments", ["test_name"], :name => "index_experiments_on_test_name"
+
+  create_table "posts", :force => true do |t|
+    t.string   "name"
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "projects", :force => true do |t|
     t.string   "name"
@@ -109,6 +127,16 @@ ActiveRecord::Schema.define(:version => 20120211051856) do
     t.integer  "task_id"
   end
 
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
   create_table "signups", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -116,6 +144,15 @@ ActiveRecord::Schema.define(:version => 20120211051856) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.integer  "post_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "tags", ["post_id"], :name => "index_tags_on_post_id"
 
   create_table "task_categories", :force => true do |t|
     t.string   "name"

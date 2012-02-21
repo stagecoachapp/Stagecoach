@@ -19,13 +19,16 @@ skip_before_filter :require_login
       @auth = Authorization.create_from_hash(auth, current_user)
     end
     # Log the authorizing user in.
-    sign_in(@auth.user)
+    self.current_user=(@auth.user)
     if !is_mobile_device?
       flash[:success] = "Welcome, #{current_user.name}."
     end
+    if session.present?
+      session[:project_id] = current_user.projects.find(:all, :order => "created_at DESC", :limit => 1).first
+    end
 
     if auth_type == 'new'
-      redirect_to new_user_url
+      redirect_to edit_user_url(current_user)
     else
       redirect_to root_url
     end
@@ -34,13 +37,14 @@ skip_before_filter :require_login
   def guest
     @user = User.new(:name => "Guest", :email => "guest@stagecoach.com" )
     if @user.save
-      sign_in(@user)
+     self.current_user=(@user)
     end
-    render 'home/index'
+    redirect_to root_url
   end
   
   def destroy
     session[:user_id] = nil
+    session[:project_id] = nil
     if !is_mobile_device?
       flash[:info] = "You have successfully logged out"
     end

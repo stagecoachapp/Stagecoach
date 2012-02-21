@@ -18,6 +18,7 @@ gem 'coffee-rails', '~> 3.2.1'
 gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 gem 'omniauth-facebook'
+gem 'ckeditor_rails', :require => 'ckeditor-rails'
 
 
 gem 'mobile-fu', :git => 'https://github.com/benlangfeld/mobile-fu.git'
@@ -36,7 +37,7 @@ group :test do
 end
 
 group :development do
-  #gem 'rails-dev-tweaks'
+  gem "rails-dev-tweaks", "~> 0.6.1"
   gem 'ruby-debug19'
 end
 
