@@ -79,7 +79,6 @@ class ProjectsController < ApplicationController
       else
         self.current_project= params[:project_id]
       end
-      #debugger
       respond_to do |format|
         format.mobile {redirect_to current_project}
         format.html {redirect_to current_project }

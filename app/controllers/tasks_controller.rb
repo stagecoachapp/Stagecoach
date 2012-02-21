@@ -11,10 +11,6 @@ class TasksController < ApplicationController
   end
 
   def create
-    #debugger
-    #@task_categories = params[:task][:task_categories]
-    #params[:task][:task_categories] = ""
-    debugger
     @task = Task.new(params[:task])
     setDefaults @task
     @task.save

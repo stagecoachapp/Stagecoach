@@ -20,15 +20,13 @@
       
     <!-- CATEGORIES -->
 
-      <li data-role="field-contain">
-          <fieldset data-role="controlgroup">
-            <% for task_category in TaskCategory.find(:all) %>
-              <div>
-                <%= check_box_tag "task[task_categories][]", task_category.id, false %>
-                <%= task_category.name %>
-              </div>
+      <li data-role="fieldcontain">
+        <p>Task Categories</p>
+        <div>
+            <% for task_category in @task.task_categories.each do %>
+                <h3><%= task_category.name %></h3>
             <% end %>
-          </fieldset>
+        </div>
       </li>
       
     <!-- START DATE TIME -->
