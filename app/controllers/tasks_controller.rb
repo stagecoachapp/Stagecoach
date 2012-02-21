@@ -6,7 +6,7 @@ class TasksController < ApplicationController
     @task = Task.new
     
     respond_to do |format|
-      format.html
+      format.mobile
     end
   end
 
@@ -16,22 +16,25 @@ class TasksController < ApplicationController
     @task.save
 
     respond_to do |format|
-      format.html { redirect_to @tasks.index, notice: 'Task Created.' }
+      format.html
+      format.mobile { redirect_to tasks_url, notice: 'Task Created.' }
     end
   end
 
   def edit
     @task = Task.find(params[:id])
     respond_to do |format|
-      format.html
+      format.mobile
     end
   end
   
   def update
     @task = Task.find(params[:id])
     @task.update_attributes(params[:task])
+
     respond_to do |format|
-      format.html { redirect_to @tasks.index, notice: 'Task Updated.' }
+      format.html
+      format.mobile { redirect_to tasks_url, notice: 'Task Updated.' }
     end
   end
   
@@ -39,7 +42,7 @@ class TasksController < ApplicationController
     @tasks = Task.all
 
     respond_to do |format|
-      format.html
+      format.mobile
     end
 
   end
@@ -49,6 +52,15 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       format.html
+    end
+  end
+
+  def destroy
+    @task = Task.find(params[:id])
+    @task.destroy
+
+    respond_to do |format|
+      format.mobile { redirect_to tasks_url, notice: 'Task Deleted.' }
     end
   end
   
