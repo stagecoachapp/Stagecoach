@@ -2,10 +2,22 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = current_user.projects.all
+    @projects = self.current_user.projects.all
     respond_to do |format|
       format.mobile # index.html.erb
       format.json { render json: @projects }
+    end
+  end
+
+  def join
+    @projects = Project.all
+    
+    for project in self.current_user.projects.all do
+      @projects.remove(project)
+    end
+
+    respond_to do |format|
+      format.mobile # index.html.erb
     end
   end
 
