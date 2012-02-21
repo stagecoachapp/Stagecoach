@@ -36,6 +36,7 @@ group :test do
 end
 
 group :development do
+  #gem 'rails-dev-tweaks'
   gem 'ruby-debug19'
 end
 
