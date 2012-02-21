@@ -41,7 +41,11 @@ class TasksController < ApplicationController
   end
   
   def index
-    @tasks = Task.all
+    if(params[:name].nil?)
+      @tasks = Task.find(:all)
+    else
+      @tasks = TaskCategory.find_by_name(params[:name]).tasks
+    end
 
     respond_to do |format|
       format.mobile
