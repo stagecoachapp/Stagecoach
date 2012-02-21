@@ -32,7 +32,7 @@ class TasksController < ApplicationController
   end
   
   def update
-    #params[:task][:task_categories] ||= []
+    params[:task][:task_category_ids] ||= []
     @task = Task.find(params[:id])
     @task.update_attributes(params[:task])
 
