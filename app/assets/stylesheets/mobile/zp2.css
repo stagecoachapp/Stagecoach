@@ -1,0 +1,36 @@
+
+			/*
+* jQuery Mobile Framework 1.0.1
+* http://jquerymobile.com
+*
+* Copyright 2011-2012 (c) jQuery Project
+* Dual licensed under the MIT or GPL Version 2 licenses.
+* http://jquery.org/license
+*
+*/
+/* Swatches */
+
+/* A
+-----------------------------------------------------------------------------------------------------------*/
+/* 
+
+HEADER & FOOTER 
+ALL PAGES
+
+*/
+.ui-bar-a {
+	border: 1px solid  		#B3B3B3  /*{a-bar-border}*/;
+	background: #1c1c1c /*{a-bar-background-color}*/;
+	color: #2F3E46 /*{a-bar-color}*/;
+	font-weight: normal;
+	text-shadow:  0  /*{a-bar-shadow-x}*/ 0px /*{a-bar-shadow-y}*/ 0px /*{a-bar-shadow-radius}*/  	#ffffff  /*{a-bar-shadow-color}*/;
+background:url("bg_main.png");
+}
+
+.ui-dialog.ui-overlay-c {
+
+	background:url("bg_main.png");
+
+}
+
+
