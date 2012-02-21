@@ -16,17 +16,23 @@ class TasksController < ApplicationController
     @task.save
 
     respond_to do |format|
-      format.html
+      format.html { redirect_to @tasks.index, notice: 'Task Created.' }
     end
   end
 
   def edit
     @task = Task.find(params[:id])
+    respond_to do |format|
+      format.html
+    end
   end
   
   def update
     @task = Task.find(params[:id])
     @task.update_attributes(params[:task])
+    respond_to do |format|
+      format.html { redirect_to @tasks.index, notice: 'Task Updated.' }
+    end
   end
   
   def index
@@ -40,6 +46,10 @@ class TasksController < ApplicationController
 
   def show
     @task = Task.find(params[:id])
+
+    respond_to do |format|
+      format.html
+    end
   end
   
   def setDefaults(task)
