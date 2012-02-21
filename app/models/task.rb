@@ -9,7 +9,7 @@ class Task < ActiveRecord::Base
 	validates :startdate, :presence => true
 	validates :enddate, :presence => true
 	validates_numericality_of :priority
-	#validates :status, :presence => true
-	#validates_numericality_of :project_id
+	validates :status, :presence => true
+	validates_numericality_of :project_id
 
 end
