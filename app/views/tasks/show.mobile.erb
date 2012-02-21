@@ -1,58 +1,51 @@
-<ul data-role="listview" data-inset="true">
-			<li data-role="fieldcontain">
-	        	<label for="task-new-taskname">Task Name:</label>
-	        	<input type="text" name="task-new-taskname" id="task-new-taskname" value=<%= @task.name %>>
-			</li>
-			<li data-role="fieldcontain">
-	        	<label for="task-new-taskdescription">Description:</label>
-			<textarea cols="40" rows="8" name="task-new-taskdescription" id="task-new-taskdescription"><%= @task.notes %></textarea>
-			</li>
-			
-			<li data-role="fieldcontain">
-			    <fieldset data-role="controlgroup" data-type="horizontal">
-			     	<legend>Priority:</legend>
+    <ul data-role="listview" data-inset="true">
+     <!-- TASK NAME -->
+      <li data-role="fieldcontain">
+        <p>Task Name</p>
+        <h3><%= @task.name %></h3>
+      </li>
+      
+       <!-- DESCRIPTION -->
+      <li data-role="fieldcontain">
+        <p>Description</p>
+        <h3><%= @task.notes %></h3>
+      </li>
+      
+    <!-- PRIORITY -->
+      <li data-role="fieldcontain">
+        <p>Priority</p>
+        <h3><% if @task.priority == 0 %>Low<% elsif @task.priority == 1 %>High<% end %></h3>
+      </li>
+      
+      
+    <!-- CATEGORIES -->
 
-			         	<input type="radio" name="task-new-priority" id="task-new-priority-low" value="low"
-                <% if @task.priority == 0 %>
-                    <%= checked="checked" %>
-                  <% end%>
-                />
-			         	<label for="task-new-priority-low">Low</label>
+      <li data-role="field-contain">
+          <fieldset data-role="controlgroup">
+            <% for task_category in TaskCategory.find(:all) %>
+              <div>
+                <%= check_box_tag "task[task_categories][]", task_category.id, false %>
+                <%= task_category.name %>
+              </div>
+            <% end %>
+          </fieldset>
+      </li>
+      
+    <!-- START DATE TIME -->
+      <li data-role="fieldcontain">
+        <p>Start Time</p>
+        <h3><%= @task.startdate %></h3>
+      </li>
 
-			         	<input type="radio" name="task-new-priority" id="task-new-priority-High" value="High"
-                <% if @task.priority == 1 %>
-                    <%= checked="checked" %>
-                  <% end%>
-                />
-			         	<label for="task-new-priority-High">High</label>
-			    </fieldset>
-			</li>
-
-			<li data-role="fieldcontain">
-				<label for="task-new-startdate">Start Date</label>
-				<input name="task-new-startdate" id="task-new-startdate" type="date" data-role="datebox"
-   			data-options='{"mode": "calbox", "calTodayButton": true}'
-        value=<%= @task.startdate%>>
-   		</li>
-   		
-   		<li data-role="fieldcontain">
-   				<label for="task-new-starttime">Start Time</label>
-					<input name="task-new-starttime" id="task-new-starttime" type="date" data-role="datebox"
-   				data-options='{"mode": "timebox", "timeFormatOverride": 12}'
-          value=<%= @task.startdate.strftime("%I:%M %p") %>>
-   		</li>
-   		
-   		<li data-role="fieldcontain">
-					<label for="task-new-enddate">End Date</label>
-					<input name="task-new-enddate" id="task-new-enddate" type="date" data-role="datebox"
-   				data-options='{"mode": "calbox", "calTodayButton": true}'
-          value=<%= @task.enddate%>>
-   		</li>
-   		
-   		<li data-role="fieldcontain">
-   				<label for="task-new-endtime">End Time</label>
-					<input name="task-new-endtime" id="task-new-endtime" type="date" data-role="datebox"
-   				data-options='{"mode": "timebox", "timeFormatOverride": 12}'
-          value=<%= @task.enddate.strftime("%I:%M %p") %>>
-   		</li>			
-		</ul>
+    <!-- END DATE TIME -->
+      <li data-role="fieldcontain">
+        <p>End Time</p>
+        <h3><%= @task.enddate %></h3>
+      </li>
+    
+  <!-- EDIT-->
+      <li data-role="fieldcontain">
+            <a href= <%= edit_task_path(@task) %> >Edit</a>
+      </li>
+      
+    </ul>
