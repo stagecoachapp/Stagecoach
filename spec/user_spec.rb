@@ -18,4 +18,15 @@ describe User, "when creating user" do
     User.find(@new_user.id).name.should eq(@new_user.name)
   end
   
+  it "it should be able to update a user" do
+    @new_user.update_attributes(:name => 'Jon', :email => 'jonton@gmail.com')
+    @new_user.save()
+    User.find(@new_user.id).name.should eq('Jon')
+  end
+  
+  it "it should be able to delete a user" do
+    @new_user.destroy()
+    User.should have(0).things
+  end
+  
 end
