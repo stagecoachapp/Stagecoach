@@ -4,9 +4,10 @@ class Task < ActiveRecord::Base
 	has_many :reminders
 	belongs_to :project
 	validates :name, :presence => true
-	validates :startdate, :presence => true
-	validates :enddate, :presence => true
-	validates_numericality_of :priority
+	#validates :startdate, :presence => true
+	#validates :enddate, :presence => true
+	#validates_numericality_of :priority
+	
 	#validates :status, :presence => true
 	#validates_numericality_of :project_id
 end

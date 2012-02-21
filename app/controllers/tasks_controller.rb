@@ -10,7 +10,13 @@ class TasksController < ApplicationController
   end
 
   def create
+    #debugger
+    #@task_categories = params[:task][:task_categories]
+    #params[:task][:task_categories] = ""
+    debugger
     @task = Task.new(params[:task])
+    @task.save
+    (@task_categories || []).each { |task_category| @task.task_categories << task_category}
     @task.save
 
     respond_to do |format|

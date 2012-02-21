@@ -49,15 +49,14 @@
 			
 		<!-- CATEGORIES -->
 
-			<li data-role="field-contain">
+			<li data-role="fieldcontain">
 					<fieldset data-role="controlgroup">
-						<% debugger %>
-						<% for task_category in TaskCategory.find(:all) %>
-							<div>
-								<%= check_box_tag "task[task_categories][]", task_category.id, false %>
-								<%= task_category.name %>
-							</div>
-						<% end %>
+						<div id="ui-controlgroup-controls">
+							<% for task_category in TaskCategory.find(:all) %>
+									<%= check_box_tag "task[task_category_ids][]", task_category.id, @task.task_categories.include?(task_category) %>
+									<!--<label for="task_category.id" task_category.name>-->
+							<% end %>
+						</div>
 					</fieldset>
 			</li>
 			
