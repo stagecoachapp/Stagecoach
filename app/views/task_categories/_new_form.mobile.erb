@@ -1,13 +1,15 @@
 <%= form_for(@task_category) do |f| %>
-  <ul data-role="listview" data-inset="true">
-    <li data-role="fieldcontain">
-      <label for="task-categories-new-form-form-name">Task Category Name: </label>
-      <%= f.text_field :name, :id => "task-categories-new-form-form-name", :placeholder => "Lighting" %>
-    </li>
-    <li class="ui-body ui-body-b">
-				<fieldset class="ui-grid-a">
-						<%= f.submit :value => 'Create Task Category' %>
-			    </fieldset>
-			</li>
-  </ul>
+  <form>
+    <ul data-role="listview" data-inset="true">
+      <li data-role="fieldcontain">
+        <%= f.label :name, "Task Category Name", :"for" => "task-categories-new-form-form-name" %>
+        <%= f.text_field :name, :id => "task-categories-new-form-form-name", :placeholder => "Lighting" %>
+      </li>
+      <li class="ui-body ui-body-b">
+        <fieldset class="ui-grid-a">
+          <%= f.submit :value => 'Create' %>
+        </fieldset>
+      </li>
+    </ul>
+  </form>
 <% end %>

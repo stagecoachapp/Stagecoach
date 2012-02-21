@@ -22,64 +22,63 @@
 		<ul data-role="listview" data-inset="true">
 	   <!-- TASK NAME -->
 			<li data-role="fieldcontain">
-				<label for="task-new-taskname"><%= 'Task Name:' %></label>
+				<%= f.label :name, "Task Name", :"for" => "task-new-taskname" %>
 				<%= f.text_field :name, :id => "task-new-taskname", :placeholder => "Task Name" %>
-					<!-- HTML <input type="text" name="task-new-taskname" id="task-new-taskname"/> -->
 			</li>
+			
        <!-- DESCRIPTION -->
 			<li data-role="fieldcontain">
-				<label for="task-new-taskdescription"><%= 'Description:' %></label>
-				<%= f.text_area :notes, :id => "task-new-taskdescription" %>
-				
-					<!-- HTML <textarea cols="40" rows="8" name="task-new-taskdescription" id="task-new-taskdescription"></textarea> -->
+				<%= f.label :name, "Description", :"for" => "task-new-taskdescription" %>
+				<%= f.text_area :notes, :width => 10, :id => "task-new-taskdescription", :placeholder => "No Description" %>
 			</li>
+			
 		<!-- PRIOTITY -->
 			<li data-role="fieldcontain">
+			
 				<fieldset data-role="controlgroup" data-type="horizontal">
-				<legend>Priority:</legend>
-				<input type="radio" name="task-new-priority" id="task-new-priority-low" value="0" />
-						<label for="task-new-priority-low"><%= 'Low' %></label>
-				<input type="radio" name="task-new-priority" id="task-new-priority-medium" value="1" checked="checked" />
-				<label for="task-new-priority-medium"><%= 'Medium' %></label>
-				<input type="radio" name="task-new-priority" id="task-new-priority-high" value="2" />
-				<label for="task-new-priority-high"><%= 'High' %></label>			
-			    </fieldset>
-				<%# f.number_field :priority %>
+			     	<legend>Priority:</legend>
+						<%= f.radio_button :priority, "0", :id => "task-new-priority-low"%> 
+						<%= f.label :name, "Low", :"for" => "task-new-priority-low" %>
+	
+						<%= f.radio_button :priority, "1", :id => "task-new-priority-high", :checked => "checked" %>
+						<%= f.label :name, "High", :"for" => "task-new-priority-high" %>
+						
+					</fieldset>
 			</li>
-			<li data-role="fieldcontain">
-        <label for="task-new-form-form-task-category">Task Category</label>
-        <%= collection_select(:task, :task_category, TaskCategory.all, :id, :name, {}, { :id=>"task-new-form-form-task-category" })  %>
+			
+			
+		<!-- CATEGORIES -->
+
+			<li data-role="field-contain">
+					<fieldset data-role="controlgroup">
+						<% debugger %>
+						<% for task_category in TaskCategory.find(:all) %>
+							<div>
+								<%= check_box_tag "task[task_categories][]", task_category.id, false %>
+								<%= task_category.name %>
+							</div>
+						<% end %>
+					</fieldset>
 			</li>
-		<!-- START DATE -->
+			
+		<!-- START DATE TIME -->
 			<li data-role="fieldcontain">
-				<label for="task-new-startdate"><%= 'Start Date' %></label>
-				<input name="task-new-startdate" id="task-new-startdate" type="date" data-role="datebox"
-			data-options='{"mode": "calbox", "calTodayButton": true}'>
-			<%# f.datetime_select :startdate, :type => "date", "data-role" => "datebox" %>
-			
-			     		
-			</li>	
-			
-		<!-- END DATE -->
-		<li data-role="fieldcontain">
-					<label for="task-new-enddate"><%= 'End Date' %></label>
-					<input name="task-new-enddate" id="task-new-enddate" type="date" data-role="datebox"
-				data-options='{"mode": "calbox", "calTodayButton": true}'>
-			<%# f.datetime_select :enddate %>
-		</li>
-			
-			  
-				
- 
-  
+				<%= f.label :name, "Start Time", :"for" => "task-new-startdate" %>
+				<%= f.text_field :startdate, :"type" => "date", :"data-role" => "datebox", :id => "task-new-startdate", 
+					:"data-options" => '{"mode": "slidebox", "dateFormat":"%Y-%m-%dT%I:%M%p", "timeFormatOverride":12, "fieldsOrderOverride":["d","h","i"]}'%>
+			</li>
 
-
+		<!-- END DATE TIME -->
+			<li data-role="fieldcontain">
+				<%= f.label :name, "End Time", :"for" => "task-new-enddate" %>
+				<%= f.text_field :enddate, :"type" => "date", :"data-role" => "datebox", :id => "task-new-enddate", 
+					:"data-options" => '{"mode": "slidebox", "dateFormat":"%Y-%m-%dT%I:%M%p", "timeFormatOverride":12, "fieldsOrderOverride":["d","h","i"]}'%>
+			</li>
 		
 	<!-- CREATE-->
 			<li class="ui-body ui-body-b">
 				<fieldset class="ui-grid-a">
 						<%= f.submit :value => 'Create' %>
-						<!-- <button type="submit" data-theme="a">Create</button> -->
 			    </fieldset>
 			</li>
 			
@@ -88,10 +87,5 @@
 		</form>
 
   <!-- ///////////////////////////////////////////////////////////////////////////////////////// -->
-
-
- 
-
-
 
 <% end %>

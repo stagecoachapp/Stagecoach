@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(:version => 20120219200533) do
     t.integer  "author_id"
     t.string   "author_type"
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "namespace"
   end
 
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(:version => 20120219200533) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(:version => 20120219200533) do
   create_table "changelogs", :force => true do |t|
     t.string   "description"
     t.string   "developer"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "comments", :force => true do |t|
@@ -92,8 +92,8 @@ ActiveRecord::Schema.define(:version => 20120219200533) do
   create_table "experiments", :force => true do |t|
     t.string   "test_name"
     t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "experiments", ["test_name"], :name => "index_experiments_on_test_name"
@@ -108,8 +108,8 @@ ActiveRecord::Schema.define(:version => 20120219200533) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "projects_users", :id => false, :force => true do |t|
@@ -122,8 +122,8 @@ ActiveRecord::Schema.define(:version => 20120219200533) do
     t.datetime "time"
     t.text     "description"
     t.boolean  "needs_response"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "task_id"
   end
 
@@ -141,8 +141,8 @@ ActiveRecord::Schema.define(:version => 20120219200533) do
     t.string   "name"
     t.string   "email"
     t.boolean  "activated"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "tags", :force => true do |t|
@@ -156,8 +156,8 @@ ActiveRecord::Schema.define(:version => 20120219200533) do
 
   create_table "task_categories", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "project_id"
   end
 
@@ -173,8 +173,8 @@ ActiveRecord::Schema.define(:version => 20120219200533) do
     t.text     "notes"
     t.integer  "priority"
     t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "project_id"
   end
 
@@ -185,8 +185,8 @@ ActiveRecord::Schema.define(:version => 20120219200533) do
 
   create_table "user_roles", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "project_id"
   end
 
@@ -201,8 +201,8 @@ ActiveRecord::Schema.define(:version => 20120219200533) do
     t.string   "phonenumber"
     t.string   "smartphone"
     t.boolean  "activated"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
 end

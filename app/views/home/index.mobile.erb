@@ -2,13 +2,19 @@
     <li>
       <%= link_to "Create a Task", new_task_path %>
     </li>
+	<li>
+      <%= link_to "View My Tasks", tasks_path %>
+    </li>
     <li>
-      <%= link_to "View All Tasks", task_categories_path %>
+      <%= link_to "View Tasks by Categories", task_categories_path %>
     </li>
     <li>
       <%= link_to "Users", users_path %>
     </li>
     <li>
       <%= link_to "Profile", current_user %>
+    </li>
+	<li>
+      <%= link_to "Create a Project", project_path %>
     </li>
 </ul>

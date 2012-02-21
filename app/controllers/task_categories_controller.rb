@@ -41,15 +41,10 @@ class TaskCategoriesController < ApplicationController
   # POST /task_categories.json
   def create
     @task_category = TaskCategory.new(params[:task_category])
+    @task_category.save
 
     respond_to do |format|
-      if @task_category.save
-        format.html { redirect_to @task_category, notice: 'Task category was successfully created.' }
-        format.json { render json: @task_category, status: :created, location: @task_category }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @task_category.errors, status: :unprocessable_entity }
-      end
+        format.html
     end
   end
 
