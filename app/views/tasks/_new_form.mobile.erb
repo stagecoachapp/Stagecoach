@@ -65,7 +65,7 @@
 				<div data-role="collapsible" id="task-new-task-category-collapsible">
 					<h3>Task Category</h3>
 					<fieldset="controlgroup">
-						<% for task_category in TaskCategory.find(:all) %>
+						<% for task_category in @task_categories %>
 								<%= check_box_tag "task[task_category_ids][]", task_category.id, @task.task_categories.include?(task_category), :id => "task-new-category-#{task_category.id}" %>
 								<label for="task-new-category-<%= task_category.id %>"><%= task_category.name %></label>
 						<% end %>

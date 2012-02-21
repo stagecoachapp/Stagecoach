@@ -2,7 +2,7 @@ class TaskCategoriesController < ApplicationController
   # GET /task_categories
   # GET /task_categories.json
   def index
-    @task_categories = TaskCategory.all
+    @task_categories = self.current_project.task_categories.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,6 +41,7 @@ class TaskCategoriesController < ApplicationController
   # POST /task_categories.json
   def create
     @task_category = TaskCategory.new(params[:task_category])
+    setDefaults @task_category
     @task_category.save
 
     respond_to do |format|
@@ -75,4 +76,10 @@ class TaskCategoriesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def setDefaults(task_category)
+
+    task_category.project_id = self.current_project.id
+  end
+
 end
