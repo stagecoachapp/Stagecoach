@@ -33,4 +33,70 @@ background:url("bg_main.png");
 
 }
 
+.ui-btn-up-b a.ui-link-inherit,.ui-btn-hover-b a.ui-link-inherit,.ui-btn-down-b a.ui-link-inherit {
+color:#445454;
+}
+
+
+/* RED DELETE BUTTON
+/* CLASS NAME: DELETE
+-----------------------------------------------------------------------------------------------------------*/
+
+.ui-btn-up-delete {
+	border: 1px solid  		#ccc  /*{d-bup-border}*/;
+	background: #ae2424 /*{d-bup-background-color}*/;
+	font-weight: bold;
+	color: #ffffff /*{d-bup-color}*/;
+	text-shadow:  0  /*{d-bup-shadow-x}*/ 0px /*{d-bup-shadow-y}*/ 0px /*{d-bup-shadow-radius}*/ #000000 /*{d-bup-shadow-color}*/;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #CD2A2A /*{d-bup-background-start}*/), to( #8E1D1D /*{d-bup-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #CD2A2A /*{d-bup-background-start}*/, #8E1D1D /*{d-bup-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #CD2A2A /*{d-bup-background-start}*/, #8E1D1D /*{d-bup-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #CD2A2A /*{d-bup-background-start}*/, #8E1D1D /*{d-bup-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #CD2A2A /*{d-bup-background-start}*/, #8E1D1D /*{d-bup-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #CD2A2A /*{d-bup-background-start}*/, #8E1D1D /*{d-bup-background-end}*/);
+}
+.ui-btn-up-delete a.ui-link-inherit {
+	color: #ffffff /*{d-bup-color}*/;
+}
+
+.ui-btn-hover-delete {
+	border: 1px solid  		#bbbbbb  /*{d-bhover-border}*/;
+	background: #d77979 /*{d-bhover-background-color}*/;
+	font-weight: bold;
+	color: #ffffff /*{d-bhover-color}*/;
+	text-shadow:  0  /*{d-bhover-shadow-x}*/ 0px /*{d-bhover-shadow-y}*/ 0px /*{d-bhover-shadow-radius}*/  #fff  /*{d-bhover-shadow-color}*/;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #D77979 /*{d-bhover-background-start}*/), to( #D77979 /*{d-bhover-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #D77979 /*{d-bhover-background-start}*/, #D77979 /*{d-bhover-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #D77979 /*{d-bhover-background-start}*/, #D77979 /*{d-bhover-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #D77979 /*{d-bhover-background-start}*/, #D77979 /*{d-bhover-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #D77979 /*{d-bhover-background-start}*/, #D77979 /*{d-bhover-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #D77979 /*{d-bhover-background-start}*/, #D77979 /*{d-bhover-background-end}*/);
+}
+.ui-btn-hover-delete a.ui-link-inherit {
+	color: #ffffff /*{d-bhover-color}*/;
+}
+.ui-btn-down-delete {
+	border: 1px solid  		#808080  /*{d-bdown-border}*/;
+	background: #d77979 /*{d-bdown-background-color}*/;
+	font-weight: bold;
+	color: #ffffff /*{d-bdown-color}*/;
+	text-shadow:  0  /*{d-bdown-shadow-x}*/  1px  /*{d-bdown-shadow-y}*/  1px  /*{d-bdown-shadow-radius}*/  #ffffff  /*{d-bdown-shadow-color}*/;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #D77979 /*{d-bdown-background-start}*/), to( #D77979 /*{d-bdown-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #D77979 /*{d-bdown-background-start}*/, #D77979 /*{d-bdown-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #D77979 /*{d-bdown-background-start}*/, #D77979 /*{d-bdown-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #D77979 /*{d-bdown-background-start}*/, #D77979 /*{d-bdown-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #D77979 /*{d-bdown-background-start}*/, #D77979 /*{d-bdown-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #D77979 /*{d-bdown-background-start}*/, #D77979 /*{d-bdown-background-end}*/);
+}
+.ui-btn-down-delete a.ui-link-inherit {
+	color: #ffffff /*{d-bdown-color}*/;
+}
+.ui-btn-up-delete,
+.ui-btn-hover-delete,
+.ui-btn-down-delete {
+	  font-family: Helvetica, Arial, sans-serif  /*{global-font-family}*/;
+	text-decoration: none;
+}
+
+
 

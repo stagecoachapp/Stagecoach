@@ -5,7 +5,7 @@ class TaskCategoriesController < ApplicationController
     @task_categories = self.current_project.task_categories.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.mobile # index.html.erb
       format.json { render json: @task_categories }
     end
   end
@@ -16,7 +16,7 @@ class TaskCategoriesController < ApplicationController
     @task_category = TaskCategory.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.mobile # show.html.erb
       format.json { render json: @task_category }
     end
   end
@@ -27,7 +27,7 @@ class TaskCategoriesController < ApplicationController
     @task_category = TaskCategory.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.mobile # new.html.erb
       format.json { render json: @task_category }
     end
   end
@@ -45,7 +45,7 @@ class TaskCategoriesController < ApplicationController
     @task_category.save
 
     respond_to do |format|
-        format.html
+        format.mobile { redirect_to task_categories_path, notice: 'Task category was created.' }
     end
   end
 
@@ -56,7 +56,7 @@ class TaskCategoriesController < ApplicationController
 
     respond_to do |format|
       if @task_category.update_attributes(params[:task_category])
-        format.html { redirect_to @task_category, notice: 'Task category was successfully updated.' }
+        format.mobile { redirect_to task_categories_path, notice: 'Task category was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -72,7 +72,7 @@ class TaskCategoriesController < ApplicationController
     @task_category.destroy
 
     respond_to do |format|
-      format.html { redirect_to task_categories_url }
+      format.mobile { redirect_to task_categories_path }
       format.json { head :no_content }
     end
   end
@@ -81,5 +81,4 @@ class TaskCategoriesController < ApplicationController
 
     task_category.project_id = self.current_project.id
   end
-
 end
