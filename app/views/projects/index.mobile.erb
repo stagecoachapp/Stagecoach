@@ -8,9 +8,8 @@
   <% @projects.each do |project| %>
    <li><a href= "<%= "/projects/#{project.id}" %>">
                 <h3><%= project.name %></h3>
-
                 <p><strong><%= project.password %></strong></p>
-       
+                <p><strong><%= project.users.first.name %></strong></p>
  
             </a></li>
   <% end %>

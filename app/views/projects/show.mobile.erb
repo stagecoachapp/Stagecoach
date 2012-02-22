@@ -1,10 +1,18 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @project.name %>
-</p>
-
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+    <ul data-role="listview" data-inset="true">
+     <!-- TASK NAME -->
+	<li data-role="fieldcontain">
+        <h3><%= @project.name %></h3>
+    </li>
+   	<li data-role="fieldcontain">
+        <p>Password:</p>
+        <h3><%= @project.password %></h3>
+    </li>
+	
+    <li data-role="fieldcontain">
+            <fieldset class="ui-grid-a">
+              <div class="ui-block-a"><a href= <%= edit_project_path(@project) %> data-role="button" data-theme="c">Edit</a></div>
+              <div class="ui-block-b"><%= button_to "Delete", @task, :"data-theme" => "delete", confirm: 'Are you sure?', :method => :delete %></div>
+            </fieldset>
+      </li>
+</ul>

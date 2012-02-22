@@ -108,6 +108,16 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to projects_path }
       format.json { head :no_content }
+      format.mobile { redirect_to projects_url, notice: 'Project Deleted.' }
     end
   end
 end
+
+
+
+
+
+
+
+
+
