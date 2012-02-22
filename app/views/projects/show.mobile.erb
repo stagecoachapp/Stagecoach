@@ -2,12 +2,29 @@
     <ul data-role="listview" data-inset="true">
      <!-- TASK NAME -->
 	<li data-role="fieldcontain">
+		<p>Task Name:</p>
         <h3><%= @project.name %></h3>
     </li>
    	<li data-role="fieldcontain">
         <p>Password:</p>
         <h3><%= @project.password %></h3>
     </li>
+     <li data-role="fieldcontain">
+     	<p>Users:</p>
+  		<% @project.users.each do |user| %>
+  		 <div>
+                <h3><%= user.name %>  <%= user.user_roles.first %></h3>
+  		 </div> 
+ 		 <% end %>
+  </li>
+
+
+
+
+
+
+
+
 	
     <li data-role="fieldcontain">
             <fieldset class="ui-grid-a">
@@ -15,4 +32,5 @@
               <div class="ui-block-b"><%= button_to "Delete", @task, :"data-theme" => "delete", confirm: 'Are you sure?', :method => :delete %></div>
             </fieldset>
       </li>
+     
 </ul>
