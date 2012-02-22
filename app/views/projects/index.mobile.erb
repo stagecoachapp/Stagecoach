@@ -1,33 +1,13 @@
-<!--<h1>Listing projects</h1>-->
-<%= link_to 'Create New Project', new_project_path, :"data-role" => "button", :"data-theme" => "a" %>
-
-<table>
-
+<h1>Listing projects</h1>
 
 <ul data-role="listview" data-inset="true">
   <% @projects.each do |project| %>
-   <li><a href= "<%= "/projects/#{project.id}" %>">
-                <h3><%= project.name %></h3>
-                <p><strong><%= project.password %></strong></p>
-                <p><strong><%= project.users.first.name %></strong></p>
- 
-            </a></li>
+   <li><a href= "<%= "/projects/#{project.id}/join" %>">
+          <h3><%= project.name %></h3>
+          <p><strong><%= project.users.first.name %></strong></p> <!--Replace with Project.manager-->
+        </a>
+    </li>
   <% end %>
-</ul>    
+</ul>
 
-
-
-</table>
-
-<br />
-
-
-<!--  <tr>
-<!--    <td> # project.name %></td>
-<!--#     <td># link_to 'Show', project %></td>
-<!--#     <td># link_to 'Edit', edit_project_path(project) %></td>
-<!--#     <td>#< link_to 'Destroy', project, confirm: 'Are you sure?', method: :delete %></td>
-<!--#   </tr>
-
-
-<!--#< end %> -->
+<br/>

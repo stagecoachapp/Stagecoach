@@ -10,7 +10,8 @@ FilmProjectRails::Application.routes.draw do
   resources :reminders
 
   match "/projects", :to => "projects#change_project", :via => "post"
-  match 'projects/join', :to => 'projects#join'
+  match 'projects/index', :to => 'projects#index'
+  match 'projects(/:id)/join', :to => 'projects#join'
   resources :projects
 
   ActiveAdmin.routes(self)
