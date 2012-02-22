@@ -33,31 +33,18 @@
 			</li>
 			
 		<!-- PRIOTITY -->
+	
 			<li data-role="fieldcontain">
 			
-				<fieldset data-role="controlgroup" data-type="horizontal">
-			     	<legend>Priority:</legend>
+			
+				<fieldset data-role="controlgroup" data-type="horizontal" >
+			    <legend>Priority:</legend>
 						<%= f.radio_button :priority, "0", :id => "task-new-priority-low"%> 
-						<%= f.label :name, "Low", :"for" => "task-new-priority-low" %>
+						<%= f.label :name, "Low", :"for" => "task-new-priority-low"%>
 	
 						<%= f.radio_button :priority, "1", :id => "task-new-priority-high", :checked => "checked" %>
 						<%= f.label :name, "High", :"for" => "task-new-priority-high" %>
-						
-					</fieldset>
-			</li>
-			
-			
-		<!-- CATEGORIES -->
-
-			<li data-role="field-contain">
-					<fieldset data-role="controlgroup">
-						<% debugger %>
-						<% for task_category in TaskCategory.find(:all) %>
-							<div>
-								<%= check_box_tag "task[task_categories][]", task_category.id, false %>
-								<%= task_category.name %>
-							</div>
-						<% end %>
+				
 					</fieldset>
 			</li>
 			
@@ -74,15 +61,28 @@
 				<%= f.text_field :enddate, :"type" => "date", :"data-role" => "datebox", :id => "task-new-enddate", 
 					:"data-options" => '{"mode": "slidebox", "dateFormat":"%Y-%m-%dT%I:%M%p", "timeFormatOverride":12, "fieldsOrderOverride":["d","h","i"]}'%>
 			</li>
-		
-	<!-- CREATE-->
-			<li class="ui-body ui-body-b">
-				<fieldset class="ui-grid-a">
-						<%= f.submit :value => 'Create' %>
-			    </fieldset>
+
+		<!-- CATEGORIES -->
+			<li data-role="fieldcontain">
+				<div data-role="collapsible" id="task-new-task-category-collapsible">
+					<h3>Task Category</h3>
+					<fieldset="controlgroup">
+						<% for task_category in @task_categories %>
+								<%= check_box_tag "task[task_category_ids][]", task_category.id, @task.task_categories.include?(task_category), :id => "task-new-category-#{task_category.id}" %>
+								<label for="task-new-category-<%= task_category.id %>"><%= task_category.name %></label>
+						<% end %>
+					</fieldset>
+				</div>
 			</li>
-			
-		</ul>
+
+		<!-- CREATE-->
+				<li class="ui-body ui-body-b">
+					<fieldset class="ui-grid-a">
+							<%= f.submit :value => 'Create' %>
+				    </fieldset>
+				</li>
+				
+			</ul>
 		
 		</form>
 

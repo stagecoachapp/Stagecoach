@@ -2,10 +2,22 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = current_user.projects.all
+    @projects = self.current_user.projects.all
     respond_to do |format|
-      format.html # index.html.erb
+      format.mobile # index.html.erb
       format.json { render json: @projects }
+    end
+  end
+
+  def join
+    @projects = Project.all
+    
+    for project in self.current_user.projects.all do
+      @projects.remove(project)
+    end
+
+    respond_to do |format|
+      format.mobile # index.html.erb
     end
   end
 
@@ -42,9 +54,9 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.save
         self.current_project=(@project.id)
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.mobile { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render json: @project, status: :created, location: @project }
+        format.html { redirect_to projects_path, notice: 'Project was successfully created.' }
+        format.mobile { redirect_to projects_path, notice: 'Project was successfully created.' }
+        format.json { render json: projects_path, status: :created, location: @project }
       else
         format.html { render action: "new" }
         format.json { render json: @project.errors, status: :unprocessable_entity }
@@ -79,11 +91,10 @@ class ProjectsController < ApplicationController
       else
         self.current_project= params[:project_id]
       end
-      #debugger
       respond_to do |format|
-        format.mobile {redirect_to current_project}
-        format.html {redirect_to current_project }
-        format.json {redirect_to current_project}
+        format.mobile {redirect_to projects_path(current_project)}
+        format.html {redirect_to projects_path(current_project) }
+        format.json {redirect_to projects_path(current_project)}
       end
     end
 
@@ -95,7 +106,7 @@ class ProjectsController < ApplicationController
     @project.destroy
 
     respond_to do |format|
-      format.html { redirect_to projects_url }
+      format.html { redirect_to projects_path }
       format.json { head :no_content }
     end
   end
