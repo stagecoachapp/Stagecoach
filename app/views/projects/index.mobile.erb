@@ -1,4 +1,4 @@
-<h1>Listing projects</h1>
+<!--<h1>Listing projects</h1>-->
 
 <table>
   <tr>
@@ -8,6 +8,19 @@
     <th></th>
   </tr>
 
+<ul data-role="listview" data-inset="true">
+  <% @projects.each do |project| %>
+   <li><a href= "<%= "/projects/#{project.id}" %>">
+                <h3><%= project.name %></h3>
+
+                <p><strong><%= project.password %></strong></p>
+       
+ 
+            </a></li>
+<% end %>
+</ul>    
+
+<ul data-role="listview" data-inset="true">
 <% @projects.each do |project| %>
   <tr>
     <td><%= project.name %></td>
@@ -15,7 +28,10 @@
     <td><%= link_to 'Edit', edit_project_path(project) %></td>
     <td><%= link_to 'Destroy', project, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
+
+
 <% end %>
+</ul>
 </table>
 
 <br />
