@@ -16,6 +16,17 @@
       <label for="users-new-form-form-smartphone">Do you have a smartphone?</label>
       <%= f.check_box :smartphone , :id => "users-new-form-form-smartphone" %>
     </li>
+    <li data-role="fieldcontain">
+        <div data-role="collapsible" >
+          <h3>Team</h3>
+          <fieldset="controlgroup">
+            <% for user_role in @user_roles %>
+                <%= check_box_tag "user[user_role_ids][]", user_role.id, @user.user_roles.include?(user_role), :id => "user-edit-user-#{user_role.id}" %>
+                <label for="user-edit-user-<%= user_role.id %>"><%= user_role.name %></label>
+            <% end %>
+          </fieldset>
+        </div>
+      </li>
     <li class="ui-body ui-body-b">
 				<fieldset class="ui-grid-a">
 						<%= f.submit :value => 'Update Profile' %>

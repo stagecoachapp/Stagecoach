@@ -5,7 +5,11 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if params.has_key?(:user_role)
+      @users = UserRole.find(params[:user_role]).users.all
+    else
+      @users = User.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -27,6 +31,11 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = current_user
+    if self.current_project.nil?
+      @user_roles = UserRole.all
+    else   
+      @user_roles = self.current_project.user_roles
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,6 +46,11 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    if self.current_project.nil?
+      @user_roles = UserRole.all
+    else   
+      @user_roles = self.current_project.user_roles
+    end
   end
 
   # POST /users
