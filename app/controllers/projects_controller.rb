@@ -10,11 +10,19 @@ class ProjectsController < ApplicationController
   end
 
   def join
-    @projects = Project.find(params[:id])
-    self.current_user.projects.push(@project)
-    self.current_user.save
-    respond_to do |format|
-      format.mobile { redirect_to projects_path }
+    @project = Project.find(params[:id])
+    if params[:pass] == @project.password
+        self.current_user.projects.push(@project)
+        self.current_user.save
+        self.current_project=(@project.id)
+        respond_to do |format|
+            format.mobile { redirect_to projects_path, notice: 'Joined Project Successfully.' }
+        end
+
+    else
+      respond_to do |format|
+        format.mobile { redirect_to projects_path, notice: 'Incorrect Password.'  }
+      end
     end
   end
 
@@ -23,7 +31,7 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     respond_to do |format|
-      format.html # show.html.erb
+      format.mobile # show.html.erb
       format.json { render json: @project }
     end
   end
@@ -89,9 +97,8 @@ class ProjectsController < ApplicationController
         self.current_project= params[:project_id]
       end
       respond_to do |format|
+        #format.mobile {redirect_to root_url}
         format.mobile {redirect_to projects_path(current_project)}
-        format.html {redirect_to projects_path(current_project) }
-        format.json {redirect_to projects_path(current_project)}
       end
     end
 

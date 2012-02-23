@@ -2,12 +2,35 @@
 
 <ul data-role="listview" data-inset="true">
   <% @projects.each do |project| %>
-   <li><a href= "<%= "/projects/#{project.id}/join" %>">
-          <h3><%= project.name %></h3>
-          <p><strong><%= project.users.first.name %></strong></p> <!--Replace with Project.manager-->
-        </a>
+   <li data-role="fieldcontain">
+
+   		<script type="text/javascript"> 
+				$(document).delegate('#<%= project.name %>', 'click', function() {
+					$('<div>').simpledialog2({
+						mode: 'button',
+						headerText: '<%= project.name %>',
+						headerClose: true,
+						buttonInput: true,
+						buttonPrompt: 'Enter Project Password:',
+						buttons : {
+							'OK': {
+								click: function () {
+									window.location = ("<%= "/projects/#{project.id}/join/" %>" + String($.mobile.sdLastInput))
+								}
+							},
+						}
+					})
+				});
+			</script>
+
+			<a href="#" id= "<%= project.name %>"><h3><%= project.name %></h3>
+			<p><strong><%= project.users.first.name %></strong></p> <!--Replace with Project.manager-->
+			</a>
+    
     </li>
   <% end %>
 </ul>
 
 <br/>
+
+
