@@ -83,20 +83,20 @@ class ProjectsController < ApplicationController
   end
 
   def change_project
-      if params[:project_id] == nil
-        @new_project= Project.new(params[:project])
-        @new_project.save
-        @new_project.users << current_user
-        self.current_project = @new_project
-      else
-        self.current_project= params[:project_id]
-      end
-      respond_to do |format|
-        format.mobile {redirect_to projects_path(current_project)}
-        format.html {redirect_to projects_path(current_project) }
-        format.json {redirect_to projects_path(current_project)}
-      end
+    if params[:project_id] == nil
+      @new_project= Project.new(params[:project])
+      @new_project.save
+      @new_project.users << current_user
+      self.current_project = @new_project
+    else
+      self.current_project= params[:project_id]
     end
+    respond_to do |format|
+      format.mobile {redirect_to projects_path(current_project)}
+      format.html {redirect_to projects_path(current_project) }
+      format.json {redirect_to projects_path(current_project)}
+    end
+  end
 
 
   # DELETE /projects/1

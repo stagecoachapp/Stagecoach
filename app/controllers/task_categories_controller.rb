@@ -25,7 +25,6 @@ class TaskCategoriesController < ApplicationController
   # GET /task_categories/new.json
   def new
     @task_category = TaskCategory.new
-
     respond_to do |format|
       format.mobile # new.html.erb
       format.json { render json: @task_category }
@@ -43,7 +42,6 @@ class TaskCategoriesController < ApplicationController
     @task_category = TaskCategory.new(params[:task_category])
     setDefaults @task_category
     @task_category.save
-
     respond_to do |format|
         format.mobile { redirect_to task_categories_path, notice: 'Task category was created.' }
     end

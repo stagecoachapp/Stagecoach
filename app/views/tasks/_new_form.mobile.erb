@@ -47,7 +47,33 @@
 				
 					</fieldset>
 			</li>
-			
+		
+		<!-- CATEGORIES -->
+			<li data-role="fieldcontain">
+				<div data-role="collapsible" id="task-new-task-category-collapsible">
+					<h3>Task Category</h3>
+					<fieldset="controlgroup">
+						<% for task_category in @task_categories %>
+								<%= check_box_tag "task[task_category_ids][]", task_category.id, @task.task_categories.include?(task_category), :id => "task-new-category-#{task_category.id}" %>
+								<label for="task-new-category-<%= task_category.id %>"><%= task_category.name %></label>
+						<% end %>
+					</fieldset>
+				</div>
+			</li>
+
+		<!-- Assignees -->
+			<li data-role="fieldcontain">
+				<div data-role="collapsible" id="task-new-assignees-collapsible">
+					<h3>Assignees</h3>
+					<fieldset="controlgroup">
+						<% for user in @users %>
+								<%= check_box_tag "task[user_ids][]", user.id, false, :id => "task-new-assignee-#{user.id}" %>
+								<label for="task-new-assignee-<%= user.id %>"><%= user.name %></label>
+						<% end %>
+					</fieldset>
+				</div>
+			</li>
+
 		<!-- START DATE TIME -->
 			<li data-role="fieldcontain">
 				<%= f.label :name, "Start Time", :"for" => "task-new-startdate" %>
@@ -61,19 +87,7 @@
 				<%= f.text_field :enddate, :"type" => "date", :"data-role" => "datebox", :id => "task-new-enddate", 
 					:"data-options" => '{"mode": "slidebox", "dateFormat":"%Y-%m-%dT%I:%M%p", "timeFormatOverride":12, "fieldsOrderOverride":["d","h","i"]}'%>
 			</li>
-
-		<!-- CATEGORIES -->
-			<li data-role="fieldcontain">
-				<div data-role="collapsible" id="task-new-task-category-collapsible">
-					<h3>Task Category</h3>
-					<fieldset="controlgroup">
-						<% for task_category in @task_categories %>
-								<%= check_box_tag "task[task_category_ids][]", task_category.id, @task.task_categories.include?(task_category), :id => "task-new-category-#{task_category.id}" %>
-								<label for="task-new-category-<%= task_category.id %>"><%= task_category.name %></label>
-						<% end %>
-					</fieldset>
-				</div>
-			</li>
+				
 
 		<!-- CREATE-->
 				<li class="ui-body ui-body-b">

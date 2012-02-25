@@ -5,6 +5,7 @@ class TasksController < ApplicationController
   def new
     @task = Task.new
     @task_categories = self.current_project.task_categories.find(:all)
+    @users = self.current_project.users.all
 
     respond_to do |format|
       format.mobile
@@ -26,6 +27,7 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
+    @users = current_project.users.all
     respond_to do |format|
       format.mobile
     end
@@ -33,6 +35,8 @@ class TasksController < ApplicationController
   
   def update
     params[:task][:task_category_ids] ||= []
+    params[:task][:user_ids] ||= []
+
     @task = Task.find(params[:id])
     @task.update_attributes(params[:task])
 
