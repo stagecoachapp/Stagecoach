@@ -297,3 +297,54 @@ color:#445454;
           background-clip: padding-box;
 }
 
+/* FONTS
+-----------------------------------------------------------------------------------------------------------*/
+.ui-bar-a,
+.ui-bar-a input,
+.ui-bar-a select,
+.ui-bar-a textarea,
+.ui-bar-a button,
+.ui-bar-b,
+.ui-bar-b input,
+.ui-bar-b select,
+.ui-bar-b textarea,
+.ui-bar-b button 
+.ui-bar-c,
+.ui-bar-c input,
+.ui-bar-c select,
+.ui-bar-c textarea,
+.ui-bar-c button 
+{
+	 font-family: Gill Sans Light  /*{global-font-family}*/;
+}
+.ui-body-a,
+.ui-body-a input,
+.ui-body-a select,
+.ui-body-a textarea,
+.ui-body-a button,
+.ui-body-b,
+.ui-body-b input,
+.ui-body-b select,
+.ui-body-b textarea,
+.ui-body-b button 
+.ui-body-c,
+.ui-body-c input,
+.ui-body-c select,
+.ui-body-c textarea,
+.ui-body-c button 
+ {
+	 font-family: Gill Sans Light /*{global-font-family}*/;
+}
+.ui-btn-up-a,
+.ui-btn-hover-a,
+.ui-btn-down-a,
+.ui-btn-up-b,
+.ui-btn-hover-b,
+.ui-btn-down-b,
+.ui-btn-up-c,
+.ui-btn-hover-c,
+.ui-btn-down-c {
+	 font-family: Gill Sans Light  /*{global-font-family}*/;
+	text-decoration: none;
+}
+
