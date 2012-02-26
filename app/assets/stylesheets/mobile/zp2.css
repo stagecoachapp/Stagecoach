@@ -98,5 +98,25 @@ color:#445454;
 	text-decoration: none;
 }
 
+/* IMAGE CLASS FOR PROFILE PICTURE
+/* CLASS NAME: IMAGE CLASSES
+-----------------------------------------------------------------------------------------------------------*/
+#profimga
+{
+	z-index: 1;
+	position: relative;
+	float: right;
+			
+}
+
+#profimgb
+{
+	z-index: 2;
+	position: 
+	absolute; 
+	top: 61px; 
+	right: 20px
+		
+}
 
 
