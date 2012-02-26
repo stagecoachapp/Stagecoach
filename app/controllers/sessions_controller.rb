@@ -44,7 +44,6 @@ skip_before_filter :require_login
     self.current_user=(@user)
 
     self.current_project= self.current_user.projects.find(:all, :order => "created_at DESC", :limit => 1).first
-
     redirect_to root_url
   end
   
