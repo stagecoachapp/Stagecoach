@@ -2,22 +2,27 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = self.current_user.projects.all
+@projects = Project.all
+
     respond_to do |format|
       format.mobile # index.html.erb
-      format.json { render json: @projects }
     end
   end
 
   def join
-    @projects = Project.all
-    
-    for project in self.current_user.projects.all do
-      @projects.remove(project)
-    end
+    @project = Project.find(params[:id])
+    if params[:pass] == @project.password
+        self.current_user.projects.push(@project)
+        self.current_user.save
+        self.current_project=(@project.id)
+        respond_to do |format|
+            format.mobile { redirect_to projects_path, notice: 'Joined Project Successfully.' }
+        end
 
-    respond_to do |format|
-      format.mobile # index.html.erb
+    else
+      respond_to do |format|
+        format.mobile { redirect_to projects_path, notice: 'Incorrect Password.'  }
+      end
     end
   end
 
@@ -26,7 +31,7 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     respond_to do |format|
-      format.html # show.html.erb
+      format.mobile # show.html.erb
       format.json { render json: @project }
     end
   end
@@ -83,20 +88,19 @@ class ProjectsController < ApplicationController
   end
 
   def change_project
-    if params[:project_id] == nil
-      @new_project= Project.new(params[:project])
-      @new_project.save
-      @new_project.users << current_user
-      self.current_project = @new_project
-    else
-      self.current_project= params[:project_id]
+      if params[:project_id] == nil
+        @new_project= Project.new(params[:project])
+        @new_project.save
+        @new_project.users << current_user
+        self.current_project = @new_project
+      else
+        self.current_project= params[:project_id]
+      end
+      respond_to do |format|
+        #format.mobile {redirect_to root_url}
+        format.mobile {redirect_to projects_path(current_project)}
+      end
     end
-    respond_to do |format|
-      format.mobile {redirect_to projects_path(current_project)}
-      format.html {redirect_to projects_path(current_project) }
-      format.json {redirect_to projects_path(current_project)}
-    end
-  end
 
 
   # DELETE /projects/1
@@ -108,6 +112,16 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to projects_path }
       format.json { head :no_content }
+      format.mobile { redirect_to projects_url, notice: 'Project Deleted.' }
     end
   end
 end
+
+
+
+
+
+
+
+
+

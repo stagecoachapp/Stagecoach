@@ -3,7 +3,6 @@
 <%= link_to "Back", "#", :"data-icon" => "back", :"id" => "layouts-header-back-button", :"data-rel" => "back", :"data-direction" => "reverse", :"data-iconpos" => "right" %>
 <% end %>
 	<h1>
-		
 		<% if url == "/tasks/new" %>	
 			Create New Task
 		<% elsif url == "/tasks" %>	
@@ -11,7 +10,11 @@
 		<% elsif url == "/task_categories" %>	
 			Task Catagories
 		<% elsif url == "/users" %>	
-			Listing Users	
+			Listing Users
+		<% elsif url == "/projects" %>	
+			Listing Projects	
+		<% elsif url == "/projects/new" %>	
+			New Project	
 		<% else %>	
 			StageCoach
 		<% end %>
