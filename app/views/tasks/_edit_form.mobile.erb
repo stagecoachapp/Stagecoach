@@ -65,7 +65,7 @@
     <h3>Assignees</h3>
     <fieldset="controlgroup">
       <% for user in @users %>
-          <%= check_box_tag "task[user_ids][]", user.id, false, :id => "task-edit-assignee-#{user.id}" %>
+          <%= check_box_tag "task[user_ids][]", user.id, @task.users.include?(user), :id => "task-edit-assignee-#{user.id}" %>
           <label for="task-edit-assignee-<%= user.id %>"><%= user.name %></label>
       <% end %>
     </fieldset>

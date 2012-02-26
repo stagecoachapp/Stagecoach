@@ -41,8 +41,8 @@ class TasksController < ApplicationController
     @task.update_attributes(params[:task])
 
     respond_to do |format|
-      format.html
-      format.mobile { redirect_to tasks_url, notice: 'Task Updated.' }
+      format.html { redirect_to tasks_url }
+      format.mobile { redirect_to @task }
     end
   end
   
