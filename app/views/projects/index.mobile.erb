@@ -5,7 +5,7 @@
    <li data-role="fieldcontain">
 
    		<script type="text/javascript"> 
-				$(document).delegate('#<%= project.name %>', 'tap', function() {
+				$(document).delegate('#<%= project.name %>', 'vclick', function() {
 					$('<div>').simpledialog2({
 						mode: 'button',
 						headerText: '<%= project.name %>',
@@ -14,7 +14,7 @@
 						buttonPrompt: 'Enter Project Password:',
 						buttons : {
 							'OK': {
-								click: function () {
+								vclick: function () {
 									window.location = ("<%= "/projects/#{project.id}/join/" %>" + String($.mobile.sdLastInput))
 								}
 							},
