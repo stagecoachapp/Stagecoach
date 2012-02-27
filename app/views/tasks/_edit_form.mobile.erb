@@ -1,89 +1,101 @@
 <%= form_for(@task) do |f| %>
-  <% if @task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+<% if @task.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
 
-      <ul>
-      <% @task.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% @task.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
 
-  <!-- ///////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ///////////////////////////////////////////////////////////////////////////////////////// -->
 <!--  
 
 -->  
 
-  
-  <form>
-    <ul data-role="listview" data-inset="true">
-     <!-- TASK NAME -->
-      <li data-role="fieldcontain">
-        <%= f.label :name, "Task Name", :"for" => "task-new-taskname" %>
-        <%= f.text_field :name, :id => "task-new-taskname", :placeholder => "Task Name" %>
-      </li>
-      
-       <!-- DESCRIPTION -->
-      <li data-role="fieldcontain">
-        <%= f.label :name, "Description", :"for" => "task-new-taskdescription" %>
-        <%= f.text_area :notes, :width => 10, :id => "task-new-taskdescription", :placeholder => "No Description" %>
-      </li>
-      
-    <!-- PRIORITY -->
-      <li data-role="fieldcontain">
-      
-        <fieldset data-role="controlgroup" data-type="horizontal">
-            <legend>Priority:</legend>
-            <%= f.radio_button :priority, "0", :id => "task-new-priority-low"%> 
-            <%= f.label :name, "Low", :"for" => "task-new-priority-low" %>
-  
-            <%= f.radio_button :priority, "1", :id => "task-new-priority-high"%>
-            <%= f.label :name, "High", :"for" => "task-new-priority-high" %>
-            
-          </fieldset>
-      </li>
-      
-    <!-- START DATE TIME -->
-      <li data-role="fieldcontain">
-        <%= f.label :name, "Start Time", :"for" => "task-new-startdate" %>
-        <%= f.text_field :startdate, :"type" => "date", :"data-role" => "datebox", :id => "task-new-startdate", 
-          :"data-options" => '{"mode": "slidebox", "dateFormat":"%Y-%m-%dT%I:%M%p", "timeFormatOverride":12, "fieldsOrderOverride":["d","h","i"]}'%>
-      </li>
 
-    <!-- END DATE TIME -->
-      <li data-role="fieldcontain">
-        <%= f.label :name, "End Time", :"for" => "task-new-enddate" %>
-        <%= f.text_field :enddate, :"type" => "date", :"data-role" => "datebox", :id => "task-new-enddate", 
-          :"data-options" => '{"mode": "slidebox", "dateFormat":"%Y-%m-%dT%I:%M%p", "timeFormatOverride":12, "fieldsOrderOverride":["d","h","i"]}'%>
-      </li>
+<form>
+  <ul data-role="listview" data-inset="true">
+   <!-- TASK NAME -->
+   <li data-role="fieldcontain">
+    <%= f.label :name, "Task Name", :"for" => "task-new-taskname" %>
+    <%= f.text_field :name, :id => "task-new-taskname", :placeholder => "Task Name" %>
+  </li>
 
-      <!-- CATEGORIES -->
-      <li data-role="fieldcontain">
-        <div data-role="collapsible" id="task-edit-task-category-collapsible">
-          <h3>Task Category</h3>
-          <fieldset="controlgroup">
-            <% for task_category in self.current_project.task_categories.find(:all) %>
-                <%= check_box_tag "task[task_category_ids][]", task_category.id, @task.task_categories.include?(task_category), :id => "task-new-category-#{task_category.id}" %>
-                <label for="task-new-category-<%= task_category.id %>"><%= task_category.name %></label>
-            <% end %>
-          </fieldset>
-        </div>
-      </li>
-    
-  <!-- CREATE-->
-      <li class="ui-body ui-body-b">
-        <fieldset class="ui-grid-a">
-            <%= f.submit :value => 'Update' %>
-          </fieldset>
-      </li>
-      
-    </ul>
-    
-    </form>
+  <!-- DESCRIPTION -->
+  <li data-role="fieldcontain">
+    <%= f.label :name, "Description", :"for" => "task-new-taskdescription" %>
+    <%= f.text_area :notes, :width => 10, :id => "task-new-taskdescription", :placeholder => "No Description" %>
+  </li>
 
-  <!-- ///////////////////////////////////////////////////////////////////////////////////////// -->
+  <!-- PRIORITY -->
+  <li data-role="fieldcontain">
+
+    <fieldset data-role="controlgroup" data-type="horizontal">
+      <legend>Priority:</legend>
+      <%= f.radio_button :priority, "0", :id => "task-new-priority-low"%> 
+      <%= f.label :name, "Low", :"for" => "task-new-priority-low" %>
+
+      <%= f.radio_button :priority, "1", :id => "task-new-priority-high"%>
+      <%= f.label :name, "High", :"for" => "task-new-priority-high" %>
+
+    </fieldset>
+  </li>
+
+  <!-- CATEGORIES -->
+  <li data-role="fieldcontain">
+    <div data-role="collapsible" id="task-edit-task-category-collapsible">
+      <h3>Task Category</h3>
+      <fieldset="controlgroup">
+      <% for task_category in self.current_project.task_categories.find(:all) %>
+      <%= check_box_tag "task[task_category_ids][]", task_category.id, @task.task_categories.include?(task_category), :id => "task-new-category-#{task_category.id}" %>
+      <label for="task-new-category-<%= task_category.id %>"><%= task_category.name %></label>
+      <% end %>
+    </fieldset>
+  </div>
+</li>
+
+<!-- ASSIGNEES -->
+<li data-role="fieldcontain">
+  <div data-role="collapsible" id="task-edit-assignees-collapsible">
+    <h3>Assignees</h3>
+    <fieldset="controlgroup">
+      <% for user in @users %>
+          <%= check_box_tag "task[user_ids][]", user.id, @task.users.include?(user), :id => "task-edit-assignee-#{user.id}" %>
+          <label for="task-edit-assignee-<%= user.id %>"><%= user.name %></label>
+      <% end %>
+    </fieldset>
+  </div>
+</li>
+<!-- START DATE TIME -->
+<li data-role="fieldcontain">
+  <%= f.label :name, "Start Time", :"for" => "task-new-startdate" %>
+  <%= f.text_field :startdate, :"type" => "date", :"data-role" => "datebox", :id => "task-new-startdate", 
+  :"data-options" => '{"mode": "slidebox", "dateFormat":"%Y-%m-%dT%I:%M%p", "timeFormatOverride":12, "fieldsOrderOverride":["d","h","i"]}'%>
+</li>
+
+<!-- END DATE TIME -->
+<li data-role="fieldcontain">
+  <%= f.label :name, "End Time", :"for" => "task-new-enddate" %>
+  <%= f.text_field :enddate, :"type" => "date", :"data-role" => "datebox", :id => "task-new-enddate", 
+  :"data-options" => '{"mode": "slidebox", "dateFormat":"%Y-%m-%dT%I:%M%p", "timeFormatOverride":12, "fieldsOrderOverride":["d","h","i"]}'%>
+</li>
+
+<!-- CREATE-->
+<li class="ui-body ui-body-b">
+  <fieldset class="ui-grid-a">
+    <%= f.submit :value => 'Update' %>
+  </fieldset>
+</li>
+
+</ul>
+
+</form>
+
+<!-- ///////////////////////////////////////////////////////////////////////////////////////// -->
 
 <% end %>

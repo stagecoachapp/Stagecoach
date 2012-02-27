@@ -2,22 +2,27 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = self.current_user.projects.all
+@projects = Project.all
+
     respond_to do |format|
       format.mobile # index.html.erb
-      format.json { render json: @projects }
     end
   end
 
   def join
-    @projects = Project.all
-    
-    for project in self.current_user.projects.all do
-      @projects.remove(project)
-    end
+    @project = Project.find(params[:id])
+    if params[:pass] == @project.password
+        self.current_user.projects.push(@project)
+        self.current_user.save
+        self.current_project=(@project.id)
+        respond_to do |format|
+            format.mobile { redirect_to projects_path, notice: 'Joined Project Successfully.' }
+        end
 
-    respond_to do |format|
-      format.mobile # index.html.erb
+    else
+      respond_to do |format|
+        format.mobile { redirect_to projects_path, notice: 'Incorrect Password.'  }
+      end
     end
   end
 
@@ -27,7 +32,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @people = @project.users.all
     respond_to do |format|
-      format.html # show.html.erb
+      format.mobile # show.html.erb
       format.json { render json: @project }
     end
   end
@@ -115,3 +120,12 @@ class ProjectsController < ApplicationController
     end
   end
 end
+
+
+
+
+
+
+
+
+

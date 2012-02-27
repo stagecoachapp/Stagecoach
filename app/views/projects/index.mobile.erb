@@ -1,23 +1,36 @@
 <h1>Listing projects</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<ul data-role="listview" data-inset="true">
+  <% @projects.each do |project| %>
+   <li data-role="fieldcontain">
 
-<% @projects.each do |project| %>
-  <tr>
-    <td><%= project.name %></td>
-    <td><%= link_to 'Show', project %></td>
-    <td><%= link_to 'Edit', edit_project_path(project) %></td>
-    <td><%= link_to 'Destroy', project, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+   		<script type="text/javascript"> 
+				$(document).delegate('#<%= project.name %>', 'click', function() {
+					$('<div>').simpledialog2({
+						mode: 'button',
+						headerText: '<%= project.name %>',
+						headerClose: true,
+						buttonInput: true,
+						buttonPrompt: 'Enter Project Password:',
+						buttons : {
+							'OK': {
+								click: function () {
+									window.location = ("<%= "/projects/#{project.id}/join/" %>" + String($.mobile.sdLastInput))
+								}
+							},
+						}
+					})
+				});
+			</script>
 
-<br />
+			<a href="#" id= "<%= project.name %>"><h3><%= project.name %></h3>
+			<p><strong><%= project.users.first.name %></strong></p> <!--Replace with Project.manager-->
+			</a>
+    
+    </li>
+  <% end %>
+</ul>
 
-<%= link_to 'New Project', new_project_path %>
+<br/>
+
+
