@@ -77,7 +77,9 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
+        if current_project == @project
         self.current_project=(@project.id)
+        end
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
         format.json { head :no_content }
         format.mobile { redirect_to @project, notice: 'Project was successfully updated.' }
