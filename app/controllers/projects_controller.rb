@@ -72,6 +72,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
+        self.current_project=(@project.id)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
         format.json { head :no_content }
         format.mobile { redirect_to @project, notice: 'Project was successfully updated.' }
@@ -105,10 +106,12 @@ class ProjectsController < ApplicationController
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
+    self.current_project=(current_user.projects.last)
 
     respond_to do |format|
       format.html { redirect_to projects_path }
       format.json { head :no_content }
+      format.mobile { redirect_to projects_path }
     end
   end
 end
