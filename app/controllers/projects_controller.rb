@@ -116,9 +116,7 @@ class ProjectsController < ApplicationController
         self.current_project= params[:project_id]
       end
       respond_to do |format|
-        format.mobile {redirect_to projects_path(current_project)}
-        format.html {redirect_to projects_path(current_project) }
-        format.json {redirect_to projects_path(current_project)}
+        format.mobile {redirect_to projects_path}
       end
     end
 
