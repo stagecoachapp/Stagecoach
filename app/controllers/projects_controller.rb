@@ -16,11 +16,11 @@ class ProjectsController < ApplicationController
   end
 
   def joinaction
-    @project = Project.find(params[:id])
-    # Already in project check
-    if current_user.projects()
-      # Password check
-      if params[:pass] == @project.password
+    @project = Project.find_by_name(params[:projectname])
+    # 'Already in project' check
+    if !(current_user.projects.exists?(:name => params[:projectname]))
+      # 'Password' check
+      if params[:projectpassword] == @project.password
         self.current_user.projects.push(@project)
         self.current_user.save
         self.current_project=(@project.id)
@@ -31,6 +31,7 @@ class ProjectsController < ApplicationController
       else
         respond_to do |format|
           format.mobile { redirect_to projects_path, notice: 'Incorrect Password.'}
+        end
       end
     # Already in project page
     else
