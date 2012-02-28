@@ -2,10 +2,11 @@ class UserRolesController < ApplicationController
   # GET /user_roles
   # GET /user_roles.json
   def index
-    @user_roles = UserRole.all
+    @user_roles = self.current_project.user_roles.all
 
     respond_to do |format|
       format.html # index.html.erb
+      format.mobile
       format.json { render json: @user_roles }
     end
   end
@@ -40,11 +41,14 @@ class UserRolesController < ApplicationController
   # POST /user_roles
   # POST /user_roles.json
   def create
-    @user_role = UserRole.new(params[:user_role])
+    @user_role = UserRole.create(params[:user_role])
+    @user_role.project = self.current_project
+    @user_role.save
 
     respond_to do |format|
       if @user_role.save
         format.html { redirect_to @user_role, notice: 'User role was successfully created.' }
+        format.mobile { redirect_to @user_role }
         format.json { render json: @user_role, status: :created, location: @user_role }
       else
         format.html { render action: "new" }

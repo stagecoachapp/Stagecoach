@@ -1,0 +1,34 @@
+<h1>Join a Project</h1>
+
+<ul data-role="listview" data-inset="true">
+  <% @projects.each do |project| %>
+   <li data-role="fieldcontain">
+
+   		<script type="text/javascript"> 
+				$("#<%= project.name %>").bind("vclick", function() {
+					$('<div>').simpledialog2({
+						mode: 'button',
+						headerText: '<%= project.name %>',
+						headerClose: true,
+						buttonInput: true,
+						buttonPrompt: 'Enter Project Password:',
+						buttons : {
+							'OK': {
+								vclick: function () {
+									window.location = ("<%= "/projects/#{project.id}/join/" %>" + String($.mobile.sdLastInput))
+								}
+							},
+						}
+					})
+				});
+			</script>
+
+			<a href="#" id= "<%= project.name %>"><h3><%= project.name %></h3>
+			<p><strong><%= project.users.first.name %></strong></p> <!--Replace with Project.manager-->
+			</a>
+    
+    </li>
+  <% end %>
+</ul>
+
+<br/>

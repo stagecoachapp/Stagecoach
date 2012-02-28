@@ -1,0 +1,9 @@
+<%= link_to "New Team", new_user_role_path, :"data-role" => "button" %>
+
+<ul data-role="listview" data-inset="true">
+    <% @user_roles.each do |user_role| %>
+        <li>
+            <%= link_to user_role.name, h(users_path + "?" + { :user_role => user_role.id }.to_query) %>
+        </li>
+    <% end %>
+</ul>
