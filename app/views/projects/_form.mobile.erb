@@ -10,12 +10,21 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
+  <form>
+  <ul data-role="listview" data-inset="true">
+    <li>
+      <div class="field">
+        <%= f.text_field :name, :placeholder => "Project Name" %>
+        <br>
+        <%= f.text_field :password, :placeholder => "Project Password" %>
+        <br>
+     </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+
+</li>
+</ul>
+</form>
+
 <% end %>

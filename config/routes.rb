@@ -10,7 +10,8 @@ FilmProjectRails::Application.routes.draw do
   resources :reminders
 
   match "/projects", :to => "projects#change_project", :via => "post"
-
+  match 'projects/index', :to => 'projects#index'
+  match 'projects(/:id)/join/:pass', :to => 'projects#join'
   resources :projects
 
   ActiveAdmin.routes(self)
@@ -35,7 +36,7 @@ FilmProjectRails::Application.routes.draw do
   #match '/users/new', :to => 'users#create', :via => :post
   match '/auth/:provider/callback', :to => 'sessions#create'
   #abingo routing
-  match 'experiments(/:action(/:id))', :to => 'abingo_dashboard', :as => :bingo 
+  match 'experiments(/:action(/:id))', :to => 'abingo_dashboard', :as => :bingo
   #...
   #  # You can have the root of your site routed with "root"
   #    # just remember to delete public/index.html.

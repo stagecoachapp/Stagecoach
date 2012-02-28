@@ -2,10 +2,27 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = current_user.projects.all
+@projects = Project.all
+
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @projects }
+      format.mobile # index.html.erb
+    end
+  end
+
+  def join
+    @project = Project.find(params[:id])
+    if params[:pass] == @project.password
+        self.current_user.projects.push(@project)
+        self.current_user.save
+        self.current_project=(@project.id)
+        respond_to do |format|
+            format.mobile { redirect_to projects_path, notice: 'Joined Project Successfully.' }
+        end
+
+    else
+      respond_to do |format|
+        format.mobile { redirect_to projects_path, notice: 'Incorrect Password.'  }
+      end
     end
   end
 
@@ -13,8 +30,9 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
+    @people = @project.users.all
     respond_to do |format|
-      format.html # show.html.erb
+      format.mobile # show.html.erb
       format.json { render json: @project }
     end
   end
@@ -42,9 +60,9 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.save
         self.current_project=(@project.id)
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.mobile { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render json: @project, status: :created, location: @project }
+        format.html { redirect_to projects_path, notice: 'Project was successfully created.' }
+        format.mobile { redirect_to projects_path, notice: 'Project was successfully created.' }
+        format.json { render json: projects_path, status: :created, location: @project }
       else
         format.html { render action: "new" }
         format.json { render json: @project.errors, status: :unprocessable_entity }
@@ -59,6 +77,9 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
+        if current_project == @project
+        self.current_project=(@project.id)
+        end
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
         format.json { head :no_content }
         format.mobile { redirect_to @project, notice: 'Project was successfully updated.' }
@@ -79,11 +100,10 @@ class ProjectsController < ApplicationController
       else
         self.current_project= params[:project_id]
       end
-      #debugger
       respond_to do |format|
-        format.mobile {redirect_to current_project}
-        format.html {redirect_to current_project }
-        format.json {redirect_to current_project}
+        format.mobile {redirect_to projects_path(current_project)}
+        format.html {redirect_to projects_path(current_project) }
+        format.json {redirect_to projects_path(current_project)}
       end
     end
 
@@ -93,10 +113,21 @@ class ProjectsController < ApplicationController
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
+    self.current_project=(current_user.projects.last)
 
     respond_to do |format|
-      format.html { redirect_to projects_url }
+      format.html { redirect_to projects_path }
       format.json { head :no_content }
+      format.mobile { redirect_to projects_path }
     end
   end
 end
+
+
+
+
+
+
+
+
+

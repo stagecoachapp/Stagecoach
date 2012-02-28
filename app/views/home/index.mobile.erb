@@ -3,18 +3,21 @@
       <%= link_to "Create a Task", new_task_path %>
     </li>
 	<li>
-      <%= link_to "View My Tasks", tasks_path %>
+      <%= link_to "View All Tasks", tasks_path %>
     </li>
     <li>
       <%= link_to "View Tasks by Categories", task_categories_path %>
     </li>
     <li>
-      <%= link_to "Users", users_path %>
+      <%= link_to "Users", user_roles_path %>
     </li>
     <li>
       <%= link_to "Profile", current_user %>
     </li>
 	<li>
-      <%= link_to "Create a Project", project_path %>
+      <%= link_to "Create a Project", new_project_path %>
+    </li>
+    <li>
+      <%= link_to "Join a Project", projects_path %>
     </li>
 </ul>

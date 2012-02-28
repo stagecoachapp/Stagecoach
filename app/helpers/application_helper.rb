@@ -8,4 +8,8 @@ module ApplicationHelper
     "guest"
   end
 
+  def join_project_path
+  	"projects/join"
+  end
+
 end

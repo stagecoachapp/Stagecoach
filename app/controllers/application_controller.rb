@@ -51,7 +51,7 @@ class ApplicationController < ActionController::Base
         @project_select_options << [current_project.name, current_project.id]
         current_user.projects.each do |project| 
           if project.id != current_project.id 
-          @project_select_options << [project.name, project.id]
+            @project_select_options << [project.name, project.id]
           end
         end
       else

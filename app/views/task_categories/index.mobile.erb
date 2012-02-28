@@ -1,11 +1,12 @@
-<%= link_to "Add a New List", new_task_category_url, :"data-role" => "button" %>
+<%= link_to "Add a New Category", new_task_category_url, :"data-role" => "button" %>
 
 <br />
 
 <ul data-role="listview">
-  <% @task_categories.each do |task_category| %>
-    <li>
-      <%= link_to task_category.name, tasks_path( :name => task_category.name) %>
-    </li>
-  <% end %>
+	<li><%= link_to "All", tasks_path %></li>
+	<% @task_categories.each do |task_category| %>
+	<li>
+		<%= link_to task_category.name, tasks_path( :name => task_category.name) %>
+	</li>
+	<% end %>
 </ul>

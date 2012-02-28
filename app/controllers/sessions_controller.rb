@@ -35,10 +35,15 @@ skip_before_filter :require_login
   end
 
   def guest
-    @user = User.new(:name => "Guest", :email => "guest@stagecoach.com" )
-    if @user.save
-     self.current_user=(@user)
+    @user = User.find_by_name("Guest")
+    if(@user.nil?)
+      @user = User.new(:name => "Guest", :email => "guest@stagecoach.com" )
+      @user.save
     end
+
+    self.current_user=(@user)
+
+    self.current_project= self.current_user.projects.find(:all, :order => "created_at DESC", :limit => 1).first
     redirect_to root_url
   end
   

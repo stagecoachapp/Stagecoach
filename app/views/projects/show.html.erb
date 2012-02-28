@@ -4,7 +4,19 @@
   <b>Name:</b>
   <%= @project.name %>
 </p>
+<br>
+<table class="table table-striped">
+  <tr>
+    <th>People</th>
+  </tr>
 
+<% @people.each do |person| %>
+  <tr>
+    <td><%= person.name %></td>
+
+  </tr>
+<% end %>
+</table>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
