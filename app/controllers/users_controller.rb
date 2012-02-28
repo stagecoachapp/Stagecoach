@@ -5,15 +5,14 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    if params.has_key?(:user_role)
-      @users = UserRole.find(params[:user_role]).users.all
+    if(params[:user_role].nil?)
+      @users = self.current_project.users.find(:all)
     else
-      @users = User.all
+      @users = self.current_project.user_roles.find(params[:user_role]).users
     end
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @users }
     end
   end
 
