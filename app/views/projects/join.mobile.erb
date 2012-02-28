@@ -1,0 +1,26 @@
+<h1>Join a Project</h1>
+
+  <form>
+		<ul data-role="listview" data-inset="true">
+	   <!-- TASK NAME -->
+			<li data-role="fieldcontain">
+				<%= label, "Project Name", :"for" => "project-join-projectname" %>
+				<%= text_field, :id => "project-join-projectname", :placeholder => "Project Name" %>
+			</li>
+			
+       <!-- DESCRIPTION -->
+			<li data-role="fieldcontain">
+				<%= label, "Project Password", :"for" => "project-join-projectpassword" %>
+				<%= text_area, :id => "project-join-projectpassword", :placeholder => "Project Password" %>
+			</li>
+		<!-- CREATE-->
+				<li class="ui-body ui-body-b">
+					<fieldset class="ui-grid-a">
+						<%= submit :value => 'Create Project' %>
+				    </fieldset>
+				    <a href= "<%= "/projects/#{project.id}/joinaction/#{project-join-projectpassword.value}/" %>">
+				</li>
+				
+			</ul>
+		
+		</form>
