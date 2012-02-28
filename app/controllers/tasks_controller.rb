@@ -6,7 +6,7 @@ class TasksController < ApplicationController
     @task = Task.new
     @task_categories = self.current_project.task_categories.find(:all)
     @users = self.current_project.users.all
-
+ 
     respond_to do |format|
       format.mobile
     end
