@@ -25,6 +25,7 @@ gem 'mobile-fu', :git => 'https://github.com/benlangfeld/mobile-fu.git'
 group :development do
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'watir-webdriver'
   #comment/uncomment next 3 lines for ruby-debug
   gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
   gem 'ruby-debug-base19x', '~> 0.11.30.pre4'

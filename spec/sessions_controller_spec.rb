@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe SessionsController do
-=begin  
+  
   describe "new session works" do
     
     it "it " do 
@@ -9,5 +9,5 @@ describe SessionsController do
     end
     
   end
-=end  
+
 end
