@@ -11,6 +11,7 @@ class UsersController < ApplicationController
       @users = User.all
     end
 
+    @header = "Users"
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }
