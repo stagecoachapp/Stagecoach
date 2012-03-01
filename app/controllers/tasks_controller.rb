@@ -53,6 +53,7 @@ class TasksController < ApplicationController
       @tasks = self.current_project.task_categories.find_by_name(params[:name]).tasks
     end
 
+    @header = "My Tasks"
     respond_to do |format|
       format.mobile
     end

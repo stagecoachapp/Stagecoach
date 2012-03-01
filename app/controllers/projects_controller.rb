@@ -2,8 +2,9 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-@projects = Project.all
+    @projects = Project.all
 
+    @header = "Projects"
     respond_to do |format|
       format.mobile # index.html.erb
     end
@@ -42,6 +43,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
 
+    @header = "New Project"
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @project }

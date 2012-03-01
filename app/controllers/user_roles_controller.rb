@@ -4,6 +4,7 @@ class UserRolesController < ApplicationController
   def index
     @user_roles = self.current_project.user_roles.all
 
+    @header = "User Roles"
     respond_to do |format|
       format.html # index.html.erb
       format.mobile
