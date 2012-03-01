@@ -2,27 +2,41 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+@projects = self.current_user.projects
 
-    @header = "Projects"
     respond_to do |format|
       format.mobile # index.html.erb
     end
   end
 
   def join
-    @project = Project.find(params[:id])
-    if params[:pass] == @project.password
+    respond_to do |format|
+      format.mobile
+    end
+  end
+
+  def joinaction
+    @project = Project.find_by_name(params[:projectname])
+    # 'Already in project' check
+    if !(current_user.projects.exists?(:name => params[:projectname]))
+      # 'Password' check
+      if params[:projectpassword] == @project.password
         self.current_user.projects.push(@project)
         self.current_user.save
         self.current_project=(@project.id)
         respond_to do |format|
-            format.mobile { redirect_to projects_path, notice: 'Joined Project Successfully.' }
+          format.mobile { redirect_to projects_path, notice: 'Joined Project Successfully.'}
         end
-
+      # Incorrect Password page
+      else
+        respond_to do |format|
+          format.mobile { redirect_to projects_path, notice: 'Incorrect Password.'}
+        end
+      end
+    # Already in project page
     else
       respond_to do |format|
-        format.mobile { redirect_to projects_path, notice: 'Incorrect Password.'  }
+        format.mobile { redirect_to projects_path, notice: 'Already in Project.'}
       end
     end
   end
@@ -43,7 +57,6 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
 
-    @header = "New Project"
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @project }
@@ -103,9 +116,7 @@ class ProjectsController < ApplicationController
         self.current_project= params[:project_id]
       end
       respond_to do |format|
-        format.mobile {redirect_to projects_path(current_project)}
-        format.html {redirect_to projects_path(current_project) }
-        format.json {redirect_to projects_path(current_project)}
+        format.mobile {redirect_to projects_path}
       end
     end
 

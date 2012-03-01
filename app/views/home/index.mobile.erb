@@ -1,23 +1,25 @@
 <ul data-role="listview">
+  <% unless self.current_project.nil? %>
     <li>
       <%= link_to "Create a Task", new_task_path %>
     </li>
-	<li>
-      <%= link_to "View All Tasks", tasks_path %>
+    <li>
+      <%= link_to "View Tasks", task_categories_path %>
     </li>
     <li>
-      <%= link_to "View Tasks by Categories", task_categories_path %>
+      <%= link_to "View Users", user_roles_path %>
     </li>
     <li>
-      <%= link_to "Users", user_roles_path %>
+      <%= link_to "View My Profile", current_user %>
     </li>
     <li>
-      <%= link_to "Profile", current_user %>
+      <%= link_to "View My Projects", projects_path %>
     </li>
-	<li>
+    <% end %>
+	 <li>
       <%= link_to "Create a Project", new_project_path %>
     </li>
     <li>
-      <%= link_to "Join a Project", projects_path %>
+      <%= link_to "Join a Project", join_project_path %>
     </li>
 </ul>

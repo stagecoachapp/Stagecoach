@@ -11,7 +11,8 @@ FilmProjectRails::Application.routes.draw do
 
   match "/projects", :to => "projects#change_project", :via => "post"
   match 'projects/index', :to => 'projects#index'
-  match 'projects(/:id)/join/:pass', :to => 'projects#join'
+  match 'projects/join', :to => 'projects#join'
+  match 'projects/joinaction', :to => 'projects#joinaction', :via => "post"
   resources :projects
 
   ActiveAdmin.routes(self)
