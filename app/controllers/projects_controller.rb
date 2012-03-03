@@ -11,8 +11,12 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = self.current_user.projects
-
+    @projects = [self.current_project]
+    self.current_user.projects.each do |project|
+      if project != self.current_project
+        @projects << project
+      end
+    end
     respond_to do |format|
       format.mobile # index.html.erb
     end
@@ -58,6 +62,19 @@ end
     respond_to do |format|
       format.mobile # show.html.erb
       format.json { render json: @project }
+    end
+  end
+
+  #POST /project/1
+  def switch
+    @project = Project.find_by_id(params[:id])
+    if !@project.nil?
+      self.current_project= @project
+    end
+
+    respond_to do |format|
+      #format.html { redirect_to root_url }
+      format.mobile { redirect_to root_path }
     end
   end
 

@@ -18,6 +18,9 @@
 </li>
 
 <li data-role="fieldcontain">
+  <% if self.current_project != @project %>
+    <%= button_to "Switch To", {:controller => :projects, :action => :switch, :via => :post}, :"data-role" => "button" %>
+  <% end %>
   <fieldset class="ui-grid-a">
     <div class="ui-block-a"><a href= <%= edit_project_path(@project) %> data-role="button" data-theme="c">Edit</a></div>
     <div class="ui-block-b"><%= button_to "Delete", @task, :"data-theme" => "delete", confirm: 'Are you sure?', :method => :delete %></div>

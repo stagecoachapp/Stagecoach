@@ -1,11 +1,4 @@
 <div data-role="footer" data-theme="a" class="ui-bar ui-grid-b ui-footer ui-bar-a" role="contentinfo">
-
-	<!--<div class="ui-block-a" style="text-align: left; ">
-		<%#= form_tag(projects_path ) do %>
-		<%#= select_tag(:project_id, options_for_select(project_select_options), {:onChange => 'this.form.submit();'}) %>  
-		<% #end %>
-	</div>-->
-
 	<div>
 
 		<%= link_to "Sign Out", { :controller=> :sessions, :action => :destroy }, :"id" => "layouts-footer-signout-button", :"data-role" => 'button' %>
