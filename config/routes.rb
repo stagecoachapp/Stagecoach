@@ -37,6 +37,7 @@ FilmProjectRails::Application.routes.draw do
   match '/guest', :to => 'sessions#guest'
 
   match '/about', :to => 'home#about'
+  match '/comingsoon', :to => 'home#comingsoon'
   match '/changelog', :to => 'changelogs#index'
   #match '/users/new', :to => 'users#create', :via => :post
   match '/auth/:provider/callback', :to => 'sessions#create'

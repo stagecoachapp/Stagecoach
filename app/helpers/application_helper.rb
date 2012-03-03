@@ -20,4 +20,8 @@ module ApplicationHelper
     "projects/menu"
   end
 
+  def comingsoon_path
+    "comingsoon"
+  end
+
 end
