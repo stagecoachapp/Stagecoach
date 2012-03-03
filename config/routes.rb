@@ -10,6 +10,7 @@ FilmProjectRails::Application.routes.draw do
   resources :reminders
 
   match "/projects", :to => "projects#change_project", :via => "post"
+  match "/projects/menu", :to => "projects#menu"
   match 'projects/index', :to => 'projects#index'
   match 'projects/join', :to => 'projects#join'
   match 'projects/joinaction', :to => 'projects#joinaction', :via => "post"
@@ -25,7 +26,9 @@ FilmProjectRails::Application.routes.draw do
 
   resources :sessions, :pathnames => { :new => 'signin' }
   resources :signups, :only => [:new, :create], :pathnames => { :new => 'signup'}
+  match 'tasks/menu', :to => 'tasks#menu'
   resources :tasks
+
 
   match '/signup', :to => 'signups#new'
   match '/signout', :to => 'sessions#destroy'
