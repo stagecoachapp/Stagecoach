@@ -38,18 +38,18 @@ class ProjectsController < ApplicationController
         self.current_user.save
         self.current_project=(@project.id)
         respond_to do |format|
-          format.mobile { redirect_to projects_path, notice: 'Joined Project Successfully.'}
+          format.mobile { redirect_to root_path, notice: 'Joined Project Successfully.'}
         end
       # Incorrect Password page
     else
       respond_to do |format|
-        format.mobile { redirect_to projects_path, notice: 'Incorrect Password.'}
+        format.mobile { redirect_to root_path, notice: 'Incorrect Password.'}
       end
     end
     # Already in project page
   else
     respond_to do |format|
-      format.mobile { redirect_to projects_path, notice: 'Already in Project.'}
+      format.mobile { redirect_to root_path, notice: 'Already in Project.'}
     end
   end
 end
@@ -73,8 +73,8 @@ end
     end
 
     respond_to do |format|
-      #format.html { redirect_to root_url }
-      format.mobile { redirect_to root_path }
+      format.html
+      format.mobile
     end
   end
 
