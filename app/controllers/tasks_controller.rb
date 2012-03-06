@@ -55,13 +55,19 @@ def update
 end
 
 def index
+  if (params[:mytasks].nil?)
     if(params[:name].nil?)
       @tasks = self.current_project.tasks.find(:all)
   else
       @tasks = self.current_project.task_categories.find_by_name(params[:name]).tasks
   end
 
+  @header = "All Tasks"
+else
+  @tasks = self.current_user.tasks.all()
   @header = "My Tasks"
+end
+
   respond_to do |format|
       format.mobile
   end
