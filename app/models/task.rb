@@ -13,4 +13,6 @@ class Task < ActiveRecord::Base
 
 	validates :project_id, :presence => true
 
+	attr_accessible :name, :startdate, :enddate, :notes, :priority, :created_at, :updated_at, :project_id, :status, :task_category_ids
+
 end

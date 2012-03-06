@@ -7,4 +7,6 @@ class User < ActiveRecord::Base
   def self.create_from_hash!(auth)
     create(:name => auth['info']['name'], :email => auth['info']['email'])
   end
+
+  attr_accessible :name, :email, :phonenumber, :smartphone, :activated, :created_at, :updated_at
 end
