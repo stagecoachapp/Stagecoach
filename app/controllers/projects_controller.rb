@@ -151,13 +151,31 @@ end
   # DELETE /projects/1.json
   def destroy
     @project = Project.find(params[:id])
-    @project.destroy
-    self.current_project=(current_user.projects.last)
+    if self.current_project == @project
+      @project.destroy
+      self.current_project = self.current_user.projects.last
 
-    respond_to do |format|
-      format.html { redirect_to projects_path }
-      format.json { head :no_content }
-      format.mobile { redirect_to projects_path }
+      if self.current_project.nil?
+        respond_to do |format|
+          format.html { redirect_to root_url }
+          format.json { head :no_content }
+          format.mobile { redirect_to root_url }
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to projects_path }
+          format.json { head :no_content }
+          format.mobile { redirect_to projects_path }
+        end
+      end
+    else
+      @project.destroy
+
+      respond_to do |format|
+        format.html { redirect_to projects_path }
+        format.json { head :no_content }
+        format.mobile { redirect_to projects_path }
+      end
     end
   end
 end
