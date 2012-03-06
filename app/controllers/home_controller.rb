@@ -6,6 +6,14 @@ class HomeController < ApplicationController
       #format.mobile
     end
   end
+
+  def comingsoon
+  	respond_to do |format|
+  		format.html
+  		format.mobile
+  	end
+  end
+
   def about
   end
 end
