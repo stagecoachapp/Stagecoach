@@ -74,7 +74,7 @@ end
 
     respond_to do |format|
       format.html
-      format.mobile
+      format.mobile { redirect_to projects_path }
     end
   end
 

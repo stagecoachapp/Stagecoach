@@ -18,10 +18,11 @@
   </li>
 
   <li data-role="fieldcontain">
+    <fieldset>
         <% if self.current_project != @project %>
-            <%= form_tag("/projects/#{@project.id}", :"data-ajax" => "false") %>
-            <%= submit_tag "Switch To" %>
+            <%= button_to "Switch To", @project, :method => :post %>
         <% end %>
+    </fieldset>
         <fieldset class="ui-grid-a">
             <div class="ui-block-a"><a href= <%= edit_project_path(@project) %> data-role="button" data-theme="c">Edit</a></div>
             <div class="ui-block-b"><%= button_to "Delete", @task, :"data-theme" => "delete", confirm: 'Are you sure?', :method => :delete %></div>
