@@ -43,13 +43,13 @@
     <!-- START DATE TIME -->
     <li data-role="fieldcontain">
       <p>Start Time</p>
-      <h3><%= @task.startdate %></h3>
+      <h3><%= @task.startdate.strftime("%a %b %d %I:%M%p") %></h3>
     </li>
 
     <!-- END DATE TIME -->
     <li data-role="fieldcontain">
       <p>End Time</p>
-      <h3><%= @task.enddate %></h3>
+      <h3><%= @task.enddate.strftime("%a %b %d %I:%M%p") %></h3>
     </li>
     
     <!-- EDIT-->
