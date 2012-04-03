@@ -8,7 +8,7 @@
 
 <% @posts.each do |post| %>
 
-<h2 id="posts-posts-title"><%= link_to post.title, blog_path(post) %></h2>
+<h2 id="posts-posts-title"><%= link_to post.title, '/blog/' + post.id.to_s + '-'+ post.title.parameterize %></h2>
 <p class="postby"><b>Post by: </b> <%= post.name %></p>
 <p class="postcontent"><%= post.content.html_safe %></p>
 

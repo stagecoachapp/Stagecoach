@@ -1,12 +1,12 @@
 FilmProjectRails::Application.routes.draw do
 
-  resources :blog, :controller => :posts do
+  resources :posts do
     resources :comments
   end
 
-  match "/posts", :to => "posts#index"
+  match "/blog/", :to => "posts#index"
 
-  match "/posts/:id", :to => "posts#show"
+  match "/blog/:id", :to => "posts#show"
 
   get "home/index"
   resources :task_categories
