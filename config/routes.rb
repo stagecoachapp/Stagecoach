@@ -1,8 +1,12 @@
 FilmProjectRails::Application.routes.draw do
 
-  resources :posts do
+  resources :blog, :controller => :posts do
     resources :comments
   end
+
+  match "/posts", :to => "posts#index"
+
+  match "/posts/:id", :to => "posts#show"
 
   get "home/index"
   resources :task_categories
@@ -11,7 +15,7 @@ FilmProjectRails::Application.routes.draw do
 
   match "/projects", :to => "projects#change_project", :via => "post"
   match "/projects/menu", :to => "projects#menu"
-  match 'projects/index', :to => 'projects#index'
+  match '/projects/index', :to => 'projects#index'
   match '/projects/join', :to => 'projects#join'
   match '/projects/joinaction', :to => 'projects#joinaction', :via => :post
   match '/projects/:id', :to => 'projects#switch' , :via => :post
