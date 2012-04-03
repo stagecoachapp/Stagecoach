@@ -1,9 +1,22 @@
 class ProjectsController < ApplicationController
+
+  def menu
+
+    respond_to do |format|
+      format.html
+      format.mobile
+    end
+  end
+
   # GET /projects
   # GET /projects.json
   def index
-@projects = self.current_user.projects
-
+    @projects = [self.current_project]
+    self.current_user.projects.each do |project|
+      if project != self.current_project
+        @projects << project
+      end
+    end
     respond_to do |format|
       format.mobile # index.html.erb
     end
@@ -25,21 +38,21 @@ class ProjectsController < ApplicationController
         self.current_user.save
         self.current_project=(@project.id)
         respond_to do |format|
-          format.mobile { redirect_to projects_path, notice: 'Joined Project Successfully.'}
+          format.mobile { redirect_to root_path, notice: 'Joined Project Successfully.'}
         end
       # Incorrect Password page
-      else
-        respond_to do |format|
-          format.mobile { redirect_to projects_path, notice: 'Incorrect Password.'}
-        end
-      end
-    # Already in project page
     else
       respond_to do |format|
-        format.mobile { redirect_to projects_path, notice: 'Already in Project.'}
+        format.mobile { redirect_to root_path, notice: 'Incorrect Password.'}
       end
     end
+    # Already in project page
+  else
+    respond_to do |format|
+      format.mobile { redirect_to root_path, notice: 'Already in Project.'}
+    end
   end
+end
 
   # GET /projects/1
   # GET /projects/1.json
@@ -49,6 +62,19 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.mobile # show.html.erb
       format.json { render json: @project }
+    end
+  end
+
+  #POST /project/1
+  def switch
+    @project = Project.find_by_id(params[:id])
+    if !@project.nil?
+      self.current_project= @project
+    end
+
+    respond_to do |format|
+      format.html
+      format.mobile { redirect_to projects_path }
     end
   end
 
@@ -93,7 +119,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.update_attributes(params[:project])
         if current_project == @project
-        self.current_project=(@project.id)
+          self.current_project=(@project.id)
         end
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
         format.json { head :no_content }
@@ -107,31 +133,49 @@ class ProjectsController < ApplicationController
   end
 
   def change_project
-      if params[:project_id] == nil
-        @new_project= Project.new(params[:project])
-        @new_project.save
-        @new_project.users << current_user
-        self.current_project = @new_project
-      else
-        self.current_project= params[:project_id]
-      end
-      respond_to do |format|
-        format.mobile {redirect_to projects_path}
-      end
+    if params[:project_id] == nil
+      @new_project= Project.new(params[:project])
+      @new_project.save
+      @new_project.users << current_user
+      self.current_project = @new_project
+    else
+      self.current_project= params[:project_id]
     end
+    respond_to do |format|
+      format.mobile {redirect_to projects_path}
+    end
+  end
 
 
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
     @project = Project.find(params[:id])
-    @project.destroy
-    self.current_project=(current_user.projects.last)
+    if self.current_project == @project
+      @project.destroy
+      self.current_project = self.current_user.projects.last
 
-    respond_to do |format|
-      format.html { redirect_to projects_path }
-      format.json { head :no_content }
-      format.mobile { redirect_to projects_path }
+      if self.current_project.nil?
+        respond_to do |format|
+          format.html { redirect_to root_url }
+          format.json { head :no_content }
+          format.mobile { redirect_to root_url }
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to projects_path }
+          format.json { head :no_content }
+          format.mobile { redirect_to projects_path }
+        end
+      end
+    else
+      @project.destroy
+
+      respond_to do |format|
+        format.html { redirect_to projects_path }
+        format.json { head :no_content }
+        format.mobile { redirect_to projects_path }
+      end
     end
   end
 end

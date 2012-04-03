@@ -8,6 +8,7 @@
     <%= javascript_include_tag 'shared/shared' %>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0;">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
   </head>
   <body>
 
@@ -21,7 +22,7 @@
         <div data-role="content">
           <%= yield %>
         </div>
-        <div data-role="footer" id="layouts-footer" data-type="horizontal" data-position="fixed">
+        <div data-role="footer" id="layouts-footer" class="ui-bar" data-type="horizontal" data-position="fixed">
           <%= render 'layouts/footer' %>
         </div>
       <% elsif !current_user? %>

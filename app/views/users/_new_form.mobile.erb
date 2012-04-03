@@ -1,38 +1,33 @@
 <%= form_for(:user ) do |f| %>
 
-  <ul data-role="listview" data-inset="true">
+<ul data-role="listview" data-inset="true">
     <li data-role="fieldcontain">
-      <label for="users-new-form-form-name">Name: </label>
-      <%= f.text_field :name, :id => "users-new-form-form-name", :placeholder => "John Smith" %>
+        <label for="users-new-form-form-name">Name: </label>
+        <%= f.text_field :name, :id => "users-new-form-form-name", :placeholder => "John Smith" %>
     </li>
     <li data-role="fieldcontain">
-      <label for="users-new-form-form-email">Email: </label>
-      <%= f.text_field :email, :id => "users-new-form-form-email", :placeholder => "producer@stagecoach.com" %>
+        <label for="users-new-form-form-email">Email: </label>
+        <%= f.text_field :email, :id => "users-new-form-form-email", :placeholder => "producer@stagecoach.com" %>
     </li>
     <li data-role="fieldcontain">
-      <label for="users-new-form-form-phonenumber">Phone: </label>
-      <%= f.text_field :phonenumber, :id => "users-new-form-form-phonenumber", :placeholder => "(123) 456-7890" %>
-    </li>
-    <li data-role="fieldcontain">
-      <label for="users-new-form-form-smartphone">Do you have a smartphone?</label>
-      <%= f.check_box :smartphone , :id => "users-new-form-form-smartphone" %>
+        <label for="users-new-form-form-phonenumber">Phone: </label>
+        <%= f.text_field :phonenumber, :id => "users-new-form-form-phonenumber", :placeholder => "(123) 456-7890" %>
     </li>
     <li data-role="fieldcontain">
         <div data-role="collapsible" >
-          <h3>Team</h3>
-          <fieldset="controlgroup">
+            <h3>Team</h3>
+            <fieldset="controlgroup">
             <% for user_role in @user_roles %>
-                <%= check_box_tag "user[user_role_ids][]", user_role.id, @user.user_roles.include?(user_role), :id => "user-edit-user-#{user_role.id}", :disabled => "true" %>
-                <label for="user-edit-user-<%= user_role.id %>"><%= user_role.name %></label>
+            <%= check_box_tag "user[user_role_ids][]", user_role.id, @user.user_roles.include?(user_role), :id => "user-edit-user-#{user_role.id}", :disabled => "true" %>
+            <label for="user-edit-user-<%= user_role.id %>"><%= user_role.name %></label>
             <% end %>
-          </fieldset>
-        </div>
-      </li>
-    <li class="ui-body ui-body-b">
-				<fieldset class="ui-grid-a">
-						<%= f.submit :value => 'Create Profile' %>
-			    </fieldset>
-			</li>
-      <li 
-  </ul>
+        </fieldset>
+    </div>
+</li>
+<li class="ui-body ui-body-b">
+    <fieldset class="ui-grid-a">
+        <%= f.submit :value => 'Create Profile' %>
+    </fieldset>
+</li>
+</ul>
 <% end %>

@@ -13,15 +13,5 @@
       <label for="users-new-form-form-phonenumber">Phone: </label>
       <%= f.text_field :phonenumber, :id => "users-new-form-form-phonenumber", :disabled => true %>
     </li>
-    <li data-role="fieldcontain">
-      <fieldset data-role="controlgroup" >
-        <legend>Teams:</legend>
-          <% for user_role in @user.user_roles.each do %>
-            <input value=<%= user_role.name %>  type="text" disabled="true" />
-          <% end %>
-      </fieldset>
-    </li>
   </ul>
 <% end %>
-
-<%= link_to "Edit Profile", edit_user_path(current_user), :"data-role" => "button" %>

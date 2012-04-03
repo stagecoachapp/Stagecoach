@@ -1,18 +1,20 @@
 FilmProjectRails::Application.routes.draw do
-  
-  resources :posts do 
+
+  resources :posts do
     resources :comments
   end
 
-  get "home/index" 
+  get "home/index"
   resources :task_categories
 
   resources :reminders
 
   match "/projects", :to => "projects#change_project", :via => "post"
+  match "/projects/menu", :to => "projects#menu"
   match 'projects/index', :to => 'projects#index'
-  match 'projects/join', :to => 'projects#join'
-  match 'projects/joinaction', :to => 'projects#joinaction', :via => "post"
+  match '/projects/join', :to => 'projects#join'
+  match '/projects/joinaction', :to => 'projects#joinaction', :via => :post
+  match '/projects/:id', :to => 'projects#switch' , :via => :post
   resources :projects
 
   ActiveAdmin.routes(self)
@@ -25,7 +27,9 @@ FilmProjectRails::Application.routes.draw do
 
   resources :sessions, :pathnames => { :new => 'signin' }
   resources :signups, :only => [:new, :create], :pathnames => { :new => 'signup'}
+  match '/tasks/menu', :to => 'tasks#menu'
   resources :tasks
+
 
   match '/signup', :to => 'signups#new'
   match '/signout', :to => 'sessions#destroy'
@@ -33,6 +37,7 @@ FilmProjectRails::Application.routes.draw do
   match '/guest', :to => 'sessions#guest'
 
   match '/about', :to => 'home#about'
+  match '/comingsoon', :to => 'home#comingsoon'
   match '/changelog', :to => 'changelogs#index'
   #match '/users/new', :to => 'users#create', :via => :post
   match '/auth/:provider/callback', :to => 'sessions#create'
