@@ -1,0 +1,23 @@
+<h1>Join a Project</h1>
+
+<%= form_tag("/projects/joinaction", :"data-ajax" => "false") %>
+<ul data-role="listview" data-inset="true">
+	<!-- TASK NAME -->
+	<li data-role="fieldcontain">
+		<%= label_tag "projectname", "Project Name" %>
+		<%= text_field_tag "projectname", nil, :placeholder => "Project Name" %>
+	</li>
+
+	<!-- DESCRIPTION -->
+	<li data-role="fieldcontain">
+		<%= label_tag "projectpassword", "Project Password" %>
+		<%= password_field_tag "projectpassword", nil, :placeholder => "Project Password" %>
+	</li>
+	<!-- CREATE-->
+	<li class="ui-body ui-body-b">
+		<%= submit_tag "Join" %>
+	</li>
+
+</ul>
+
+</form>

@@ -4,6 +4,7 @@ class TaskCategoriesController < ApplicationController
   def index
     @task_categories = self.current_project.task_categories.all
 
+    @header = "Task Categories"
     respond_to do |format|
       format.mobile # index.html.erb
       format.json { render json: @task_categories }

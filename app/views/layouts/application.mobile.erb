@@ -8,20 +8,21 @@
     <%= javascript_include_tag 'shared/shared' %>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0;">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
   </head>
   <body>
 
     <div data-role="page" id="layouts-page">
       <% if current_user? %>
         <!-- start container -->
-        <div data-role="header" data-position="inline">
+        <div data-role="header" data-position="fixed">
           <%= render 'layouts/header' %>
         </div>
         <!--<p class="alert"><%= alert %></p>-->
         <div data-role="content">
           <%= yield %>
         </div>
-        <div data-role="footer" id="layouts-footer"data-type="horizontal">
+        <div data-role="footer" id="layouts-footer" class="ui-bar" data-type="horizontal" data-position="fixed">
           <%= render 'layouts/footer' %>
         </div>
       <% elsif !current_user? %>

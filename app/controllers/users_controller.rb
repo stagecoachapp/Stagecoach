@@ -5,15 +5,15 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    if params.has_key?(:user_role)
-      @users = UserRole.find(params[:user_role]).users.all
+    if(params[:user_role].nil?)
+      @users = self.current_project.users.find(:all)
     else
-      @users = User.all
+      @users = self.current_project.user_roles.find(params[:user_role]).users
     end
 
+    @header = "Users"
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
+      format.mobile # index.html.erb
     end
   end
 
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     respond_to do |format|
-      format.html # show.html.erb
+      format.mobile # show.html.erb
       format.json { render json: @user }
     end
   end
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     end
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.mobile # new.html.erb
       format.json { render json: @user }
     end
   end
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.mobile { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
@@ -72,11 +72,12 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
+    params[:user][:user_role_ids] ||= []
     @user = User.find(params[:id])
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.mobile { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

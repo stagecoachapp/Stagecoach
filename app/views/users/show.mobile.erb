@@ -1,1 +1,5 @@
 <%= render 'show_form' %>
+
+<% if @user == self.current_user %>
+	<%= link_to "Edit Profile", edit_user_path(self.current_user), :"data-role" => "button" %>
+<% end %>

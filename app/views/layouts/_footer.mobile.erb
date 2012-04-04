@@ -1,23 +1,6 @@
-<div data-role="footer" data-theme="a" class="ui-bar ui-grid-b ui-footer ui-bar-a" role="contentinfo">
+<div data-role="controlgroup" data-type="horizontal">
+	<h1><%= self.current_project.name rescue "You are not in a project!"%></h1>
 
-			<div class="ui-block-a" style="text-align: left; ">
-					<%= form_tag(projects_path ) do %>
-					<%= select_tag(:project_id, options_for_select(project_select_options), {:onChange => 'this.form.submit();'}) %>  
-					<% end %>
-				</div>
-				
-				<div class="ui-block-b" style="text-align:center;">
-				<h4 for="value" style="margin:8px 10px 0 0; text-align:center;" class="ui-input-text">&copy; New Media 2012</h4> </div>
-	
-				
-				<div class="ui-block-c">
-					<div style="margin:0px 0 0 10px; text-align: right; padding-right: 25px">
-						
-					<%= link_to "Sign Out", { :controller=> :sessions, :action => :destroy }, :"id" => "layouts-footer-signout-button", :"data-role" => 'button' %>
-				</div>
+	<%= link_to "Sign Out", { :controller=> :sessions, :action => :destroy }, :"id" => "layouts-footer-signout-button", :'data-inline' => "true", :"data-role" => 'button' %>
 
-</div> 
-
-
-
-
+</div>

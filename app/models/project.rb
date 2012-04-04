@@ -3,6 +3,8 @@ class Project < ActiveRecord::Base
 	has_many :tasks
 	has_many :task_categories
 	has_many :user_roles
-	
+
 	validates :name, :presence => true
+
+	attr_accessible :nae, :created_at, :updated_at, :password
 end

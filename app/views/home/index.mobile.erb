@@ -1,23 +1,48 @@
-<ul data-role="listview">
-    <li>
-      <%= link_to "Create a Task", new_task_path %>
-    </li>
-	<li>
-      <%= link_to "View All Tasks", tasks_path %>
-    </li>
-    <li>
-      <%= link_to "View Tasks by Categories", task_categories_path %>
-    </li>
-    <li>
-      <%= link_to "Users", user_roles_path %>
-    </li>
-    <li>
-      <%= link_to "Profile", current_user %>
-    </li>
-	<li>
-      <%= link_to "Create a Project", new_project_path %>
-    </li>
-    <li>
-      <%= link_to "Join a Project", projects_path %>
-    </li>
-</ul>
+<fieldset class="menu-grid-row container_12">
+    <div class="grid_4">
+        <%= link_to image_tag("mobile/home/tasks_small.png", :class => "menu-grid-icon"), task_menu_path %>
+        <div class="menu-grid-icon-text">
+            Tasks
+        </div>  
+    </div>  
+    <div class="grid_4">
+        <%= link_to image_tag("mobile/home/assets_small.png", :class => "menu-grid-icon"), comingsoon_path %>
+        <div class="menu-grid-icon-text">
+            Assets
+        </div> 
+    </div>  
+    <div class="grid_4">
+        <%= link_to image_tag("mobile/home/schedule_small.png", :class => "menu-grid-icon"), comingsoon_path %>
+        <div class="menu-grid-icon-text">
+            Schedule
+        </div> 
+    </div>  
+</fieldset>  
+<fieldset class="container_12 menu-grid-row">
+    <div class="grid_4">
+        <%= link_to image_tag("mobile/home/contacts_small.png", :class => "menu-grid-icon"), users_path %>
+        <div class="menu-grid-icon-text">
+            Contacts
+        </div> 
+    </div>  
+    <div class="grid_4">
+        <%= link_to image_tag("mobile/home/profile_small.png", :class => "menu-grid-icon"), self.current_user %>
+        <div class="menu-grid-icon-text">
+            Profile
+        </div> 
+    </div>  
+    <div class="grid_4">
+        <%= link_to image_tag("mobile/home/projects_small.png", :class => "menu-grid-icon"), project_menu_path %>
+        <div class="menu-grid-icon-text">
+            Projects
+        </div> 
+    </div>  
+</fieldset>  
+<fieldset class="container_12">
+    <div class="grid_4">
+        <%= link_to image_tag("mobile/home/settings_small.png", :class => "menu-grid-icon"), comingsoon_path %>
+        <div class="menu-grid-icon-text">
+            Settings
+        </div> 
+    </div>  
+</fieldset>  

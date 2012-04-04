@@ -1,0 +1,17 @@
+<ul data-role="listview">
+	<li>
+      <%= link_to "Create a Task", new_task_path %>
+    </li>
+    <li>
+      <%= link_to "View My Tasks", tasks_path(:mytasks => 1) %>
+    </li>
+	<li>
+      <%= link_to "View All Tasks", tasks_path %>
+    </li>
+    <li>
+      <%= link_to "View Tasks by Categories", task_categories_path %>
+    </li>
+    <li>
+    	<%= link_to "Add a New Category", new_task_category_url %>
+    </li>
+</ul>

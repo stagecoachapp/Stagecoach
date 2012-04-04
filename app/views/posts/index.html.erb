@@ -8,11 +8,12 @@
 
 <% @posts.each do |post| %>
 
-<h3 id="posts-posts-title"><%= link_to post.title, post %></h3>
+<h2 id="posts-posts-title"><%= link_to post.title, '/blog/' + post.id.to_s + '-'+ post.title.parameterize %></h2>
+<p class="postby"><b>Post by: </b> <%= post.name %></p>
 <p class="postcontent"><%= post.content.html_safe %></p>
 
-<p class="postby"><b>Post by: </b> <%= post.name %></p>
-<hr> 
+
+<hr>
 <% end %>
 <br>
 </div>

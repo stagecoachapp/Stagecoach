@@ -4,6 +4,7 @@ class UserRolesController < ApplicationController
   def index
     @user_roles = self.current_project.user_roles.all
 
+    @header = "User Roles"
     respond_to do |format|
       format.html # index.html.erb
       format.mobile
@@ -47,12 +48,9 @@ class UserRolesController < ApplicationController
 
     respond_to do |format|
       if @user_role.save
-        format.html { redirect_to @user_role, notice: 'User role was successfully created.' }
-        format.mobile { redirect_to @user_role }
-        format.json { render json: @user_role, status: :created, location: @user_role }
+        format.mobile { redirect_to user_roles_url, notice: 'User role was successfully created.' }
       else
         format.html { render action: "new" }
-        format.json { render json: @user_role.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -80,7 +78,7 @@ class UserRolesController < ApplicationController
     @user_role.destroy
 
     respond_to do |format|
-      format.html { redirect_to user_roles_url }
+      format.mobile { redirect_to user_roles_url }
       format.json { head :no_content }
     end
   end
