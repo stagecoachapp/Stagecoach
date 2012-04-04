@@ -3,4 +3,6 @@ class Signup < ActiveRecord::Base
   validates :name, :presence => true, :length => { :minimum => 1 }
   validates :email, :presence => true
   validates_format_of :email, :with => /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
+
+  attr_accessible :name, :email, :activated, :created_at, :updated_at
 end
