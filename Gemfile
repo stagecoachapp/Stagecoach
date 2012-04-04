@@ -27,9 +27,15 @@ group :development do
   gem 'rspec-rails'
   gem 'watir-webdriver'
   #comment/uncomment next 3 lines for ruby-debug
-  gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
-  gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
+  #gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
+  #gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
+  #gem 'ruby-debug19'
+  #
+  ##### run this to get this working: bundle config build.ruby-debug-base19 --with-ruby-include=$rvm_path/src/ruby-1.9.3-p0/
+  #
   gem 'ruby-debug19'
+  gem 'ruby-debug-base19', :git => 'https://github.com/tribune/ruby-debug-base19.git'
+  gem 'linecache19', :git => 'git@github.com:chuckg/linecache19.git', :branch => "0_5_13/dependencies"
 end
 
 group :test do
@@ -39,7 +45,7 @@ end
 
 group :development do
   #gem "rails-dev-tweaks", "~> 0.6.1"
-  gem 'ruby-debug19'
+ # gem 'ruby-debug19'
 end
 
 
