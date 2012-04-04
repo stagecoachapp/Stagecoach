@@ -4,6 +4,23 @@ FilmProjectRails::Application.configure do
   config.assets.precompile += %w( search.js )
   # Settings specified here will take precedence over those in config/application.rb
 
+  #this is for email
+  config.action_mailer.default_url_options = { :host => 'myapp.heroku.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "myapp.heroku.com",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: ENV["GMAIL_USERNAME"],
+    password: ENV["GMAIL_PASSWORD"]
+  }
+
+
   # Code is not reloaded between requests
   config.cache_classes = true
 
@@ -47,7 +64,7 @@ FilmProjectRails::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
    #config.assets.precompile += %w[phone.css application.css phone.js application.js]
-    config.assets.precompile << ['*.js', '/**/*.js', '*.css', '/**/*.css', '/**/*.scss', '*/scss', '*.coffee', '/**/*.coffee']
+   config.assets.precompile << ['*.js', '/**/*.js', '*.css', '/**/*.css', '/**/*.scss', '*/scss', '*.coffee', '/**/*.coffee']
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -57,7 +74,7 @@ FilmProjectRails::Application.configure do
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
-  config.i18n.fallbacks = true
+config.i18n.fallbacks = true
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
