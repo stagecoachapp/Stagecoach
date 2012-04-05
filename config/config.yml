@@ -1,0 +1,18 @@
+defaults: &DEFAULTS
+  google_oauth_scope: "https://www.google.com/m8/feeds https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
+  google_oauth_state: ""
+  google_oauth_response_type: "code"
+  google_oauth_client_id: "280297326255.apps.googleusercontent.com"
+  google_oauth_client_secret: "n5DTcWz4tXnlw5ZblArd8Gxs"
+
+development:
+  <<: *DEFAULTS
+  google_oauth_redirect_uri: "http://localhost:3000/oauth2callback"
+
+test:
+  <<: *DEFAULTS
+  google_oauth_redirect_uri: "http://localhost:3000/oauth2callback"
+
+production:
+  <<: *DEFAULTS
+  google_oauth_redirect_uri: "http://projectstagecoach.com/oauth2callback"
