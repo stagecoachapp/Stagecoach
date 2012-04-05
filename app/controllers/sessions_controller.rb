@@ -47,7 +47,7 @@ class SessionsController < ApplicationController
                     response_hash = JSON.parse(response.body)
                     #the third parameter is the current user which is nil because they are signing in now
 
-                    google_user_information = GoogleUserInformation.find_or_create_by_google_id(response_hash, session[:google_refresh_token], nil)
+                    google_user_information = GoogleUserInformation.find_or_create_by_google_hash(response_hash, session[:google_refresh_token], nil)
                     self.current_user= google_user_information.user
                     flash[:success] = "Welcome, #{self.current_user.name}."
                 else
@@ -65,6 +65,7 @@ class SessionsController < ApplicationController
     #GET /auth/:provider/callback
     def create_facebook
         auth = request.env['omniauth.auth']
+        debugger
         auth_type = 'existing'
         if !(@auth = Authorization.find_from_facebook_hash(auth))
             # Create a new user or add an auth to existing user, depending on
@@ -72,20 +73,20 @@ class SessionsController < ApplicationController
             auth_type = 'new'
             @auth = Authorization.create_from_facebook_hash(auth, current_user)
         end
-            # Log the authorizing user in.
-            self.current_user=(@auth.user)
-            if !is_mobile_device?
-              flash[:success] = "Welcome, #{self.current_user.name}."
-            end
-            if session.present?
-                session[:project_id] = current_user.projects.find(:all, :order => "created_at DESC", :limit => 1).first
-            end
+        # Log the authorizing user in.
+        self.current_user=(@auth.user)
+        if !is_mobile_device?
+          flash[:success] = "Welcome, #{self.current_user.name}."
+        end
+        if session.present?
+            session[:project_id] = current_user.projects.find(:all, :order => "created_at DESC", :limit => 1).first
+        end
 
-            if auth_type == 'new'
-                redirect_to edit_user_url(current_user)
-            else
-                redirect_to root_url
-            end
+        if auth_type == 'new'
+            redirect_to edit_user_url(current_user)
+        else
+            redirect_to root_url
+        end
     end
 
     def guest

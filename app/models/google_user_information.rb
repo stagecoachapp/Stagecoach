@@ -4,7 +4,7 @@ class GoogleUserInformation < ActiveRecord::Base
 
 	validates_presence_of :user
 
-	def self.find_or_create_by_google_id(auth, refresh_token, current_user)
+	def self.find_or_create_by_google_hash(auth, refresh_token, current_user)
 		google_user_information = GoogleUserInformation.find_by_google_id(auth['id'])
 		#user does not exist
 		if google_user_information.nil?
