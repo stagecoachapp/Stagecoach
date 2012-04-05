@@ -33,9 +33,16 @@ class SessionsController < ApplicationController
             response = http.request(request)
             if response.code == "200"
                 token = JSON.parse(response.body)["access_token"]
-
+                uri = URI.parse("https://www.googleapis.com/oauth2/v2/userinfo")
+                http = Net::HTTP.new(uri.host, uri.port)
+                http.use_ssl = true
+                http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+                path = "/oauth2/v2/userinfo"
+                header = { "Authorization" => "OAuth #{token}" }
+                response = http.get(path, header)
+                debugger
             end
-            debugger
+
         end
         redirect_to root_url
     end

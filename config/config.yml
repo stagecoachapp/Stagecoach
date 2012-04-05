@@ -1,5 +1,5 @@
 defaults: &DEFAULTS
-  google_oauth_scope: "https://www.google.com/m8/feeds https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
+  google_oauth_scope: "https://www.google.com/m8/feeds  https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
   google_oauth_state: ""
   google_oauth_response_type: "code"
   google_oauth_client_id: "280297326255.apps.googleusercontent.com"
