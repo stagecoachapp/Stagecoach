@@ -45,6 +45,32 @@ class ApplicationController < ActionController::Base
             session[:user_id] = user.id
         end
 
+        def connected_to_facebook?
+            if !current_user?
+                return false
+            end
+            if current_user.authorization.nil?
+                return false
+            end
+            if !current_user.authorization.uid.nil?
+                return true
+            end
+            return false
+        end
+
+        def connected_to_google?
+            if !current_user?
+                return false
+            end
+            if current_user.authorization.nil?
+                return false
+            end
+            if !current_user.google_user_information.nil?
+                return true
+            end
+            return false
+        end
+
         def google_api(url, params="", security=OpenSSL::SSL::VERIFY_NONE)
             uri = URI.parse(url)
             http = Net::HTTP.new(uri.host, uri.port)
@@ -56,6 +82,6 @@ class ApplicationController < ActionController::Base
             response = http.request(request)
         end
 
-        helper_method :current_user, :current_user?, :current_user=, :current_project, :current_project=, :google_api
+        helper_method :current_user, :current_user?, :current_user=, :current_project, :current_project=, :google_api, :connected_to_google?, :connected_to_facebook?
 
 end

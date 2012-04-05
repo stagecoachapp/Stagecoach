@@ -19,12 +19,12 @@
         <% else %>
           <li><%= link_to "Sign Up", signup_path %></li>
         <% end %>
-        <% if current_user? %>
+        <% if connected_to_facebook? %>
           <li><%= link_to current_user.name, signout_path %></li>
         <% else %>
           <li><a href="/auth/facebook">Sign in with Facebook</a></li>
         <% end %>
-        <% if current_user? %>
+        <% if connected_to_google? %>
           <li><%= link_to current_user.name, signout_path %></li>
         <% else %>
           <li><%= link_to "Sign in with Gmail", signin_path(:google) %></li>

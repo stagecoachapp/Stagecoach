@@ -6,7 +6,12 @@ module ApplicationHelper
         if provider == :facebook
             url = "auth/#{provider.to_s}"
         elsif provider == :google
-            url = "https://accounts.google.com/o/oauth2/auth?scope="+APP_CONFIG['google_oauth_scope']+"&state="+APP_CONFIG['google_oauth_state']+"&redirect_uri="+APP_CONFIG['google_oauth_redirect_uri']+"&response_type="+APP_CONFIG['google_oauth_response_type']+"&client_id="+APP_CONFIG['google_oauth_client_id']
+            url = "https://accounts.google.com/o/oauth2/auth?scope="+APP_CONFIG['google_oauth_scope']+
+                                                            "&state="+APP_CONFIG['google_oauth_state']+
+                                                            "&redirect_uri="+APP_CONFIG['google_oauth_redirect_uri']+
+                                                            "&response_type="+APP_CONFIG['google_oauth_response_type']+
+                                                            "&client_id="+APP_CONFIG['google_oauth_client_id']+
+                                                            "&access_type=offline"
         end
         #return
         url
