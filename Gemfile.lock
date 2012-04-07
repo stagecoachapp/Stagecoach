@@ -1,9 +1,8 @@
 GIT
-  remote: git@github.com:chuckg/linecache19.git
-  revision: 22c91d747e469f751b0df594183f8f124b1e1b53
-  branch: 0_5_13/dependencies
+  remote: git://github.com/mark-moseley/linecache
+  revision: 869c6a65155068415925067e480741bd0a71527e
   specs:
-    linecache19 (0.5.13)
+    linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
 
 GIT
@@ -13,16 +12,6 @@ GIT
     mobile-fu (1.0.0)
       rack-mobile-detect
       rails
-
-GIT
-  remote: https://github.com/tribune/ruby-debug-base19.git
-  revision: fb0c03823944d2165edfc5e4d37c441c003eac5c
-  specs:
-    ruby-debug-base19 (0.11.26)
-      columnize (>= 0.3.1)
-      linecache19 (>= 0.5.11)
-      rake (>= 0.8.1)
-      ruby_core_source (>= 0.1.4)
 
 GEM
   remote: http://rubygems.org/
@@ -198,6 +187,15 @@ GEM
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec (~> 2.9.0)
+    ruby-debug-base19 (0.11.25)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby_core_source (>= 0.1.4)
+    ruby-debug-base19x (0.11.30.pre10)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      rake (>= 0.8.1)
+      ruby_core_source (>= 0.1.4)
     ruby-debug19 (0.11.6)
       columnize (>= 0.3.1)
       linecache19 (>= 0.5.11)
@@ -259,7 +257,7 @@ DEPENDENCIES
   rails (= 3.2.3)
   rspec
   rspec-rails
-  ruby-debug-base19!
+  ruby-debug-base19x (~> 0.11.30.pre4)
   ruby-debug19
   sass-rails (~> 3.2.3)
   thin
