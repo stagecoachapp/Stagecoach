@@ -1,21 +1,28 @@
 <%= form_for(@user) do |f| %>
-  <ul data-role="listview" data-inset="true">
-    <li data-role="fieldcontain">
-      <label for="users-new-form-form-name">Name: </label>
-      <%= f.text_field :name, :id => "users-new-form-form-name" %>
-    </li>
-    <li data-role="fieldcontain">
-      <label for="users-new-form-form-email">Email: </label>
-      <%= f.text_field :email, :id => "users-new-form-form-email" %>
-    </li>
-    <li data-role="fieldcontain">
-      <label for="users-new-form-form-phonenumber">Phone: </label>
-      <%= f.text_field :phonenumber, :id => "users-new-form-form-phonenumber" %>
-    </li>
-    <li class="ui-body ui-body-b">
-				<fieldset class="ui-grid-a">
-						<%= f.submit :value => 'Update Profile' %>
-			    </fieldset>
-			</li>
-  </ul>
+    <ul data-role="listview" data-inset="true">
+        <li data-role="fieldcontain">
+            <label for="users-new-form-form-name">Name: </label>
+            <%= f.text_field :name, :id => "users-new-form-form-name" %>
+        </li>
+        <li data-role="fieldcontain">
+            <label for="users-new-form-form-email">Email: </label>
+            <%= f.text_field :email, :id => "users-new-form-form-email" %>
+        </li>
+        <li data-role="fieldcontain">
+            <label for="users-new-form-form-phonenumber">Phone: </label>
+            <%= f.text_field :phonenumber, :id => "users-new-form-form-phonenumber" %>
+        </li>
+        <li class="ui-body ui-body-b">
+        <fieldset class="ui-grid-a">
+            <%= f.submit :value => 'Update Profile' %>
+        </fieldset>
+        </li>
+    </ul>
+<% end %>
+
+<% if !@user.linked_facebook? %>
+        <%= link_to "Link Facebook account", signin_path(:facebook), :rel => 'external', :"data-role" => 'button' %>
+<% end %>
+<% if !@user.linked_google? %>
+        <%= link_to "Link Google account", signin_path(:google), :rel => 'external', :"data-role" => 'button' %>
 <% end %>

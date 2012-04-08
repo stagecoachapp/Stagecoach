@@ -15,6 +15,18 @@ class User < ActiveRecord::Base
         create(:name => hash['name'], :email => hash['email'])
     end
 
+    def linked_facebook?
+        if self.authorization.nil?
+            false
+            return
+        end
+        !self.authorization.uid.nil?
+    end
+
+    def linked_google?
+        !self.google_user_information.nil?
+    end
+
     private
     	def default_values
     		self.smartphone ||= 1

@@ -7,7 +7,13 @@ class SessionsController < ApplicationController
     skip_before_filter :require_login
 
     def new
+        if self.current_user?
+            redirect_to root_url
+            return
+        end
+
         respond_to do |format|
+            format.mobile
             format.html
         end
     end

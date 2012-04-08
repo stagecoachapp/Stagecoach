@@ -4,7 +4,7 @@ module ApplicationHelper
     def signin_path(provider)
         url = ""
         if provider == :facebook
-            url = "auth/#{provider.to_s}"
+            url = "/auth/facebook"
         elsif provider == :google
             url = "https://accounts.google.com/o/oauth2/auth?scope="+APP_CONFIG['google_oauth_scope']+
                                                             "&state="+APP_CONFIG['google_oauth_state']+
