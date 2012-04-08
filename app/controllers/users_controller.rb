@@ -27,6 +27,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def show_contacts
+    for project in self.current_user.projects
+      for potential_contact in project.users
+        unless potential_contact == self.current_user 
+          unless @contacts.include?(potential_contact)
+            @contacts << potential_contact
+          end
+        end
+      end
+    end
+
+    respond_to do |format|
+      format.mobile # index.html.erb
+    end
+  end
+
   # GET /users/new
   # GET /users/new.json
   def new
