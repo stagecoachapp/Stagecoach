@@ -13,6 +13,15 @@ class SessionsController < ApplicationController
     end
 
     #GET  /oauth2callback
+    #LOGIC
+    #The user is logged in
+    #   The current account has no Google account linked
+    #       Somebody else has linked this Google account, redirect to root
+    #       Nobody has linked the Google account, link it to the current one
+    #       User has linked a different Google account, redirect to root
+    #The user is not logged in
+    #   The Google account has been used before, log them in, redirect to root
+    #   The Google account has not been used before, create an account, redirect to edit profile
     def create_google
 
         #successfully received access code
@@ -46,6 +55,43 @@ class SessionsController < ApplicationController
                 if response.code == "200"
                     hash = JSON.parse(response.body)
 
+                    #user is already logged in. Make sure whichever Facebook they just logged in to isn't attributed to somebody else
+                    if self.current_user?
+                        #user has either not linked this account yet or is trying to link somebody else's
+                        if self.current_user.google_user_information.nil?
+                            potential_google_user_information = GoogleUserInformation.find_by_google_hash(hash)
+                            #somebody else has liked this Google account
+                            unless potential_google_user_information.nil?
+                                if potential_google_user_information.user != self.current_user
+                                    flash[:error] = "This Google account has already been linked with somebody else"
+                                    redirect_to root_url
+                                    return
+                                end
+                            end
+                            #they have not linked a Google account and nobody else has linked this one
+                            #existing because they are an existing user, not an existing Google account
+                            auth_type = 'existing'
+                            authorization = GoogleUserInformation.create_from_google_hash(hash, session[:google_refresh_token], self.current_user).user.authorization
+                        #the user is already logged in and is logging in again. This shouldn't happen
+                        else
+                            auth_type = 'existing'
+                            authorization = self.current_user.authorization
+                            #they are trying to link a second account
+                            if authorization.user.google_user_information.google_id != hash['id']
+                                flash[:error] = "You have linked a different Google account with this one"
+                                redirect_to root_url
+                                return
+                            end
+                        end
+                    #user is not logged in yet. Either retrieve the authorization or create a new one and a new user
+                    else
+                        authorization = GoogleUserInformation.find_by_google_hash(hash)
+                        auth_type = 'existing'
+                        if authorization.nil?
+                            auth_type = 'new'
+                            authorization = GoogleUserInformation.create_from_google_hash(hash, session[:google_refresh_token], self.current_user).user.authorization
+                        end
+                    end
 
                     google_user_information = GoogleUserInformation.find_or_create_by_google_hash(hash, session[:google_refresh_token], self.current_user)
                     self.current_user= google_user_information.user
@@ -62,10 +108,24 @@ class SessionsController < ApplicationController
         else
             flash[:error] = "Error logging into gmail"
         end
+        if auth_type = 'new' && is_mobile_device?
+            redirect_to edit_user_url(self.current_user)
+            return
+        end
         redirect_to root_url
     end
 
     #GET /auth/:provider/callback
+    #LOGIC
+    #The user is logged in
+    #   The Facebook account is not linked to the current account
+    #       There is another account linked to that Facebook account, redirect to root
+    #       There is no Facebook linked to the current account, create an authorization
+    #       There is a different Facebook account linked to this one, ignore new authorization, redirect to root
+    #The user is not logged in
+    #   This Facebook has been used before, log them in
+    #   This Facebook has never been used before, make a new user and log them in
+
     def create_facebook
         hash = request.env['omniauth.auth']
         #user is already logged in. Make sure whichever Facebook they just logged in to isn't attributed to somebody else
@@ -73,19 +133,28 @@ class SessionsController < ApplicationController
             #user has either not linked this account yet or is trying to link somebody else's
             if self.current_user.authorization.uid != hash['uid']
                 potential_authorization = Authorization.find_by_facebook_hash(hash)
-                #somebody else has liked this Facebook
-                if potential_authorization.user != self.current_user
-                    flash[:warning] = "This Facebook account has already been linked with somebody else"
-                    redirect_to root_url
+                #somebody else has liked this Facebook account
+                unless potential_authorization.nil?
+                    if potential_authorization.user != self.current_user
+                        flash[:error] = "This Facebook account has already been linked with somebody else"
+                        redirect_to root_url
+                        return
+                    #this shouldn't happen but there is an authorization with that Facebook linked to the current account
+                    #but the current account isn't linked to that Facebook
+                    else
+                        potential_authorization.update_attribute(:user, user)
+                    end
                 end
                 #user has not linked a Facebook yet
                 if self.current_user.authorization.uid.nil?
+                    #existing because they are an existing user, not an existing Facebook account
                     auth_type = 'existing'
-                    authorization = Authorization.create_from_facebook_hash(hash)
+                    authorization = Authorization.create_from_facebook_hash(hash, self.current_user)
                 #user has linked a difference Facebook
                 else
-                    flash[:warning] = "You have linked a different Facebook to this account"
+                    flash[:error] = "You have linked a different Facebook to this account"
                     redirect_to root_url
+                    return
                 end
             #the user is already logged in and is logging in again. This shouldn't happen
             else
@@ -100,9 +169,10 @@ class SessionsController < ApplicationController
                 auth_type = 'new'
                 authorization = Authorization.create_from_facebook_hash(hash)
             end
+            # Log the authorizing user in.
+            self.current_user= authorization.user
         end
-        # Log the authorizing user in.
-        self.current_user= authorization.user
+
         flash[:success] = "Welcome, #{self.current_user.name}."
         if session.present?
             session[:project_id] = current_user.projects.find(:all, :order => "created_at DESC", :limit => 1).first
@@ -111,9 +181,9 @@ class SessionsController < ApplicationController
         #only edit profile if mobile because this functionality isn't build out on the front end yet
         if auth_type == 'new' && is_mobile_device?
             redirect_to edit_user_url(current_user)
-        else
-            redirect_to root_url
+            return
         end
+        redirect_to root_url
     end
 
     def guest
