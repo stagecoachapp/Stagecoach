@@ -15,4 +15,4 @@ test:
 
 production:
   <<: *DEFAULTS
-  google_oauth_redirect_uri: "http://projectstagecoach.com/oauth2callback"
+  google_oauth_redirect_uri: "http://stagecoachdev.herokuapp.com/oauth2callback"
