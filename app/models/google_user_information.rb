@@ -4,22 +4,31 @@ class GoogleUserInformation < ActiveRecord::Base
 
 	validates_presence_of :user
 
-	def self.find_or_create_by_google_hash(auth, refresh_token, current_user)
-		google_user_information = GoogleUserInformation.find_by_google_id(auth['id'])
-		#user does not exist
-		if google_user_information.nil?
-			current_user ||= User.create(:name => auth['name'])
-			google_user_information = GoogleUserInformation.create(:user => current_user, :google_id => auth['id'], :email => auth['email'], :verified_email => auth['verified_email'],
-										  :name => auth['name'], :given_name => auth['given_name'], :family_name => auth['family_name'],
-										  :profile_picture => auth['picture'], :gender => auth['gender'])
-			if current_user.authorization.nil?
-				Authorization.create(:user => current_user, :google_refresh_token => refresh_token)
+	def self.find_by_google_hash(hash)
+		google_user_information = GoogleUserInformation.find_by_google_id(hash['id'])
+	end
 
-			else
-				if current_user.authorization.google_refresh_token != refresh_token && refresh_token != nil
-					current_user.authorization.update_attribute(:google_refresh_token => refresh_token)
-				end
+	def self.create_from_google_hash(hash, refresh_token, user)
+		user ||= User.create(:name => hash['name'])
+		google_user_information = GoogleUserInformation.create(:user => user, :google_id => hash['id'], :email => hash['email'], :verified_email => hash['verified_email'],
+									  :name => hash['name'], :given_name => hash['given_name'], :family_name => hash['family_name'],
+									  :profile_picture => hash['picture'], :gender => hash['gender'])
+		if user.authorization.nil?
+			authorization = Authorization.create(:user => user, :google_refresh_token => refresh_token)
+		#the user already has an authentication. Only update the refresh token if it is different and not null
+		else
+			if user.authorization.google_refresh_token != refresh_token && refresh_token != nil
+				user.authorization.update_attribute(:google_refresh_token, refresh_token)
 			end
+		end
+		google_user_information
+	end
+
+
+	def self.find_or_create_by_google_hash(hash, refresh_token, user)
+		google_user_information = find_by_google_hash(hash)
+		if google_user_information.nil?
+			google_user_information = create_from_google_hash(hash, refresh_token, user)
 		end
 		google_user_information
     end

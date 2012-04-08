@@ -7,12 +7,12 @@ class User < ActiveRecord::Base
 
     	after_initialize :default_values
 
-    def self.create_from_facebook_hash!(auth)
-        create(:name => auth['info']['name'], :email => auth['info']['email'])
+    def self.create_from_facebook_hash!(hash)
+        create(:name => hash['info']['name'], :email => hash['info']['email'])
     end
 
-    def self.find_or_create_from_google_hash(auth)
-        create(:name => auth['name'], :email => auth['email'])
+    def self.find_or_create_from_google_hash(hash)
+        create(:name => hash['name'], :email => hash['email'])
     end
 
     private

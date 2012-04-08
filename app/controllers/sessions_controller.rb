@@ -44,12 +44,15 @@ class SessionsController < ApplicationController
                 response = http.get(path, header)
                 #successfully received userinfo
                 if response.code == "200"
-                    response_hash = JSON.parse(response.body)
-                    #the third parameter is the current user which is nil because they are signing in now
+                    hash = JSON.parse(response.body)
 
-                    google_user_information = GoogleUserInformation.find_or_create_by_google_hash(response_hash, session[:google_refresh_token], nil)
+
+                    google_user_information = GoogleUserInformation.find_or_create_by_google_hash(hash, session[:google_refresh_token], self.current_user)
                     self.current_user= google_user_information.user
                     flash[:success] = "Welcome, #{self.current_user.name}."
+                    if session.present?
+                        session[:project_id] = current_user.projects.find(:all, :order => "created_at DESC", :limit => 1).first
+                    end
                 else
                     flash[:error] = "Error logging into gmail"
                 end
@@ -64,25 +67,49 @@ class SessionsController < ApplicationController
 
     #GET /auth/:provider/callback
     def create_facebook
-        auth = request.env['omniauth.auth']
-        debugger
-        auth_type = 'existing'
-        if !(@auth = Authorization.find_from_facebook_hash(auth))
-            # Create a new user or add an auth to existing user, depending on
-            # whether there is already a user signed in.
-            auth_type = 'new'
-            @auth = Authorization.create_from_facebook_hash(auth, current_user)
+        hash = request.env['omniauth.auth']
+        #user is already logged in. Make sure whichever Facebook they just logged in to isn't attributed to somebody else
+        if self.current_user?
+            #user has either not linked this account yet or is trying to link somebody else's
+            if self.current_user.authorization.uid != hash['uid']
+                potential_authorization = Authorization.find_by_facebook_hash(hash)
+                #somebody else has liked this Facebook
+                if potential_authorization.user != self.current_user
+                    flash[:warning] = "This Facebook account has already been linked with somebody else"
+                    redirect_to root_url
+                end
+                #user has not linked a Facebook yet
+                if self.current_user.authorization.uid.nil?
+                    auth_type = 'existing'
+                    authorization = Authorization.create_from_facebook_hash(hash)
+                #user has linked a difference Facebook
+                else
+                    flash[:warning] = "You have linked a different Facebook to this account"
+                    redirect_to root_url
+                end
+            #the user is already logged in and is logging in again. This shouldn't happen
+            else
+                auth_type = 'existing'
+                authorization = self.current_user.authorization
+            end
+        #user is not logged in yet. Either retrieve the authorization or create a new one and a new user
+        else
+            authorization = Authorization.find_by_facebook_hash(hash)
+            auth_type = 'existing'
+            if authorization.nil?
+                auth_type = 'new'
+                authorization = Authorization.create_from_facebook_hash(hash)
+            end
         end
         # Log the authorizing user in.
-        self.current_user=(@auth.user)
-        if !is_mobile_device?
-          flash[:success] = "Welcome, #{self.current_user.name}."
-        end
+        self.current_user= authorization.user
+        flash[:success] = "Welcome, #{self.current_user.name}."
         if session.present?
             session[:project_id] = current_user.projects.find(:all, :order => "created_at DESC", :limit => 1).first
         end
 
-        if auth_type == 'new'
+        #only edit profile if mobile because this functionality isn't build out on the front end yet
+        if auth_type == 'new' && is_mobile_device?
             redirect_to edit_user_url(current_user)
         else
             redirect_to root_url
