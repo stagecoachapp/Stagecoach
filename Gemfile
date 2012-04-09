@@ -21,7 +21,7 @@ gem 'omniauth-facebook'
 gem 'ckeditor_rails', :require => 'ckeditor-rails'
 
 
-gem 'mobile-fu', :git => 'https://github.com/benlangfeld/mobile-fu.git'
+gem 'mobile-fu', :git => 'git://github.com/benlangfeld/mobile-fu.git'
 group :development do
   gem 'rspec'
   gem 'rspec-rails'
