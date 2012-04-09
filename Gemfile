@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.3'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -20,8 +20,7 @@ gem 'jquery-rails'
 gem 'omniauth-facebook'
 gem 'ckeditor_rails', :require => 'ckeditor-rails'
 
-
-gem 'mobile-fu', :git => 'https://github.com/benlangfeld/mobile-fu.git'
+gem 'mobile-fu', :git => 'git://github.com/benlangfeld/mobile-fu.git'
 group :development do
   gem 'rspec'
   gem 'rspec-rails'
@@ -30,6 +29,12 @@ group :development do
   gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
   gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
   gem 'ruby-debug19'
+  #
+  ##### run this to get this working: bundle config build.ruby-debug-base19 --with-ruby-include=$rvm_path/src/ruby-1.9.3-p0/
+  #
+  #gem 'ruby-debug19'
+  #gem 'ruby-debug-base19', :git => 'https://github.com/tribune/ruby-debug-base19.git'
+  #gem 'linecache19', :git => 'git@github.com:chuckg/linecache19.git', :branch => "0_5_13/dependencies"
 end
 
 group :test do
@@ -39,7 +44,7 @@ end
 
 group :development do
   #gem "rails-dev-tweaks", "~> 0.6.1"
-  #gem 'ruby-debug19'
+ # gem 'ruby-debug19'
 end
 
 

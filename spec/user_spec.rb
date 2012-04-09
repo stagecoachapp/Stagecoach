@@ -2,22 +2,6 @@ require 'spec_helper'
 
 describe User, "when creating user" do 
   
-  describe "form validations should work:" do
-    
-    it "if the name is empty it should raise an exception" do
-      @new_user = User.new(:name => '', :email => 'mcafeeryan92@gmail.com').should_raise
-    end
-    
-    it "if the email is empty it should raise an exception" do
-      @new_user = User.new(:name => 'Ryan', :email => '').should_raise
-    end
-    
-    it "if both fields are empty it should raise an exception" do
-      @new_user = User.new(:name => '', :email => '').should_raise
-    end
-    
-  end
-  
   before :each do
     @new_user = User.new(:name => 'Ryan', :email => 'mcafeeryan92@gmail.com')
   end
