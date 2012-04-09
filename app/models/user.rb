@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
     create(:name => auth['info']['name'], :email => auth['info']['email'])
   end
 
+  attr_accessible :name, :email
+
   private
   	def default_values
   		self.smartphone ||= 1
