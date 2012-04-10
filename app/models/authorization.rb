@@ -30,6 +30,11 @@ class Authorization < ActiveRecord::Base
 
     def self.find_by_google_hash(hash)
         google_user_information = GoogleUserInformation.find_by_google_id(hash['id'])
+
+        if google_user_information.nil?
+            false
+            return
+        end
         if google_user_information.user.nil?
             false
             return
@@ -38,7 +43,7 @@ class Authorization < ActiveRecord::Base
     end
 
     def self.create_from_google_hash(hash, refresh_token, user)
-        user ||= User.create(:name => hash['name'])
+        user ||= User.create_from_google_hash(hash)
         google_user_information = GoogleUserInformation.create(:user => user, :google_id => hash['id'], :email => hash['email'], :verified_email => hash['verified_email'],
                                       :name => hash['name'], :given_name => hash['given_name'], :family_name => hash['family_name'],
                                       :profile_picture => hash['picture'], :gender => hash['gender'])
@@ -57,7 +62,7 @@ class Authorization < ActiveRecord::Base
 
     def self.find_or_create_by_google_hash(hash, refresh_token, user)
         authorization = find_by_google_hash(hash)
-        if google_user_information.nil?
+        if authorization.nil?
             authorization = create_from_google_hash(hash, refresh_token, user)
         end
         authorization

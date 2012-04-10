@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
         create(:name => hash['info']['name'], :email => hash['info']['email'])
     end
 
-    def self.find_or_create_from_google_hash(hash)
+    def self.create_from_google_hash(hash)
         create(:name => hash['name'], :email => hash['email'])
     end
 

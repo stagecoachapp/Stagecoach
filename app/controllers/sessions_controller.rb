@@ -77,7 +77,7 @@ class SessionsController < ApplicationController
                             #they have not linked a Google account and nobody else has linked this one
                             #existing because they are an existing user, not an existing Google account
                             auth_type = 'existing'
-                            authorization = GoogleUserInformation.create_from_google_hash(hash, session[:google_refresh_token], self.current_user).user.authorization
+                            authorization = Authorization.create_from_google_hash(hash, session[:google_refresh_token], self.current_user)
                         #the user is already logged in and is logging in again. This shouldn't happen
                         else
                             auth_type = 'existing'
@@ -91,16 +91,16 @@ class SessionsController < ApplicationController
                         end
                     #user is not logged in yet. Either retrieve the authorization or create a new one and a new user
                     else
-                        authorization = GoogleUserInformation.find_by_google_hash(hash)
+                        authorization = Authorization.find_by_google_hash(hash)
                         auth_type = 'existing'
                         if authorization.nil?
                             auth_type = 'new'
-                            authorization = GoogleUserInformation.create_from_google_hash(hash, session[:google_refresh_token], self.current_user).user.authorization
+                            authorization = Authorization.create_from_google_hash(hash, session[:google_refresh_token], self.current_user)
                         end
                     end
 
-                    google_user_information = GoogleUserInformation.find_or_create_by_google_hash(hash, session[:google_refresh_token], self.current_user)
-                    self.current_user= google_user_information.user
+                    authorization = Authorization.find_or_create_by_google_hash(hash, session[:google_refresh_token], self.current_user)
+                    self.current_user= authorization.user
                     flash[:success] = "Welcome, #{self.current_user.name}."
                     if session.present?
                         session[:project_id] = current_user.projects.find(:all, :order => "created_at DESC", :limit => 1).first
@@ -114,7 +114,7 @@ class SessionsController < ApplicationController
         else
             flash[:error] = "Error logging into gmail"
         end
-        if auth_type = 'new' && is_mobile_device?
+        if auth_type == 'new' && is_mobile_device?
             redirect_to edit_user_url(self.current_user)
             return
         end
