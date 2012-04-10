@@ -17,4 +17,4 @@ production:
   <<: *DEFAULTS
   google_oauth_redirect_uri: "http://stagecoachdev.herokuapp.com/oauth2callback"
   google_oauth_client_id: "630898205217-muoe9drje602lc21ej2e2muo27dbgjqt@developer.gserviceaccount.com"
-  google_oauth_client_secret: "h5J7p-dk5bBd2QG7KVEJH_23"
+  google_oauth_client_secret: "tDDcJHqRXhRN2xNetgCQ0WuA"
