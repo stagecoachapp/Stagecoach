@@ -2,6 +2,8 @@ class Authorization < ActiveRecord::Base
     belongs_to :user
     validates_presence_of :user_id
     validates_uniqueness_of :uid, :scope => :provider
+    validates_uniqueness_of :google_refresh_token
+    attr_accessible :user_id, :user, :uid, :google_refresh_token
 
     def self.find_by_facebook_hash(hash)
         find_by_provider_and_uid(hash['provider'], hash['uid'])

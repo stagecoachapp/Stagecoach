@@ -1,8 +1,8 @@
 class GoogleUserInformation < ActiveRecord::Base
 
 	belongs_to :user
-
 	validates_presence_of :user
+	attr_accessible :user_id, :user, :google_id, :email, :verified_email, :name, :given_name, :family_name, :profile_picture, :gender
 
 	def self.find_by_google_hash(hash)
 		google_user_information = GoogleUserInformation.find_by_google_id(hash['id'])
