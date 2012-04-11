@@ -4,12 +4,10 @@ class Notification < ActiveRecord::Base
 	belongs_to :notification_object, :polymorphic => true
 	belongs_to :user
 
-	after_initialize :default_values
-
 	validates :notification_type_id, :presence => true
 	validates :notification_object_id, :presence => true
 	validates :notification_object_type, :presence => true
-	validates :read, :inclusion => {:in => [true, false]}
+	validates :read, :inclusion => {:in => [0, 1]}
 
 	def to_s
 		case self.notification_type.name
@@ -19,9 +17,4 @@ class Notification < ActiveRecord::Base
 			"Notification: " + self.notification_type.name
 		end
 	end
-
-	private
-		def default_values
-			self.read = false
-		end
 end

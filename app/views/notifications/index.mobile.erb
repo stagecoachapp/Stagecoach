@@ -1,9 +1,21 @@
 <ul>
-	<% @notifications.each do |notification| %>
+	<% unless @unread_notifications.nil? %>
+	<% @unread_notifications.each do |notification| %>
+
+		<li>
+			<b><%= notification.to_s %></b>
+		</li>
+
+	<% end %>
+	<% end %>
+	<% unless @read_notifications.nil? %>
+	<% @read_notifications.each do |notification| %>
 
 		<li>
 			<p><%= notification.to_s %></p>
 		</li>
 
 	<% end %>
+	<% end %>
 </ul>
+
