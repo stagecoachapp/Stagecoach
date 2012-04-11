@@ -21,6 +21,8 @@ FilmProjectRails::Application.routes.draw do
   match '/projects/:id', :to => 'projects#switch' , :via => :post
   resources :projects
 
+  match '/notifications', :to => 'notifications#index'
+
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
