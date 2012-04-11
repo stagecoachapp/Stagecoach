@@ -20,12 +20,12 @@ class Authorization < ActiveRecord::Base
     end
 
     def self.find_or_create_from_facebook_hash(hash, user = nil)
-        authoriztion = find_by_facebook_hash(hash)
+        authorization = find_by_facebook_hash(hash)
 
-        if authoriztion.nil?
+        if authorization.nil?
             authorization = create_from_facebook_hash(hash, user)
         end
-        authoriztion
+        authorization
     end
 
     def self.find_by_google_hash(hash)
