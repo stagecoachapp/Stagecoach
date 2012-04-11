@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120222032846) do
+ActiveRecord::Schema.define(:version => 20120411050104) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -62,8 +62,9 @@ ActiveRecord::Schema.define(:version => 20120222032846) do
     t.string   "provider"
     t.string   "uid"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "google_refresh_token"
   end
 
   create_table "changelogs", :force => true do |t|
@@ -97,6 +98,36 @@ ActiveRecord::Schema.define(:version => 20120222032846) do
   end
 
   add_index "experiments", ["test_name"], :name => "index_experiments_on_test_name"
+
+  create_table "google_user_informations", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "google_id"
+    t.string   "email"
+    t.boolean  "verified_email"
+    t.string   "name"
+    t.string   "given_name"
+    t.string   "family_name"
+    t.string   "profile_picture"
+    t.string   "gender"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "notification_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "notifications", :force => true do |t|
+    t.integer  "notification_type_id"
+    t.integer  "user_id"
+    t.boolean  "read",                     :default => true
+    t.integer  "notification_object_id"
+    t.string   "notification_object_type"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+  end
 
   create_table "posts", :force => true do |t|
     t.string   "name"

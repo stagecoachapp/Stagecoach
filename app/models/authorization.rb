@@ -1,4 +1,5 @@
 class Authorization < ActiveRecord::Base
+    attr_accessible :provider, :uid, :user_id, :created_at, :updated_at
     belongs_to :user
     validates_presence_of :user_id, :uid, :provider
     validates_uniqueness_of :uid, :scope => :provider
@@ -12,6 +13,5 @@ class Authorization < ActiveRecord::Base
         Authorization.create(:user => user, :uid => auth['uid'], :provider => auth['provider'])
     end
 
-    attr_accessible :provider, :uid, :user_id, :created_at, :updated_at
 
 end

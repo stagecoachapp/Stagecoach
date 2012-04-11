@@ -1,0 +1,9 @@
+<ul>
+	<% @notifications.each do |notification| %>
+
+		<li>
+			<p><%= notification.to_s %></p>
+		</li>
+
+	<% end %>
+</ul>
