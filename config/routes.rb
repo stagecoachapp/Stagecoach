@@ -51,7 +51,9 @@ FilmProjectRails::Application.routes.draw do
   match '/comingsoon', :to => 'home#comingsoon'
   match '/changelog', :to => 'changelogs#index'
   #match '/users/new', :to => 'users#create', :via => :post
-  match '/auth/:provider/callback', :to => 'sessions#create'
+  match '/auth/:provider/callback', :to => 'sessions#create_facebook'
+  match '/auth/failure' => redirect("/")
+  match '/oauth2callback', :to => 'sessions#create_google'
   #abingo routing
   match 'experiments(/:action(/:id))', :to => 'abingo_dashboard', :as => :bingo
   #...

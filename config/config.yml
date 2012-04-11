@@ -1,0 +1,20 @@
+defaults: &DEFAULTS
+  google_oauth_scope: "https://www.google.com/m8/feeds  https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
+  google_oauth_state: ""
+  google_oauth_response_type: "code"
+  google_oauth_client_id: "630898205217-pt1ife1pkrqmt5k644fvodp5o3cb5737.apps.googleusercontent.com"
+  google_oauth_client_secret: "h5J7p-dk5bBd2QG7KVEJH_23"
+
+development:
+  <<: *DEFAULTS
+  google_oauth_redirect_uri: "http://localhost:3000/oauth2callback"
+
+test:
+  <<: *DEFAULTS
+  google_oauth_redirect_uri: "http://localhost:3000/oauth2callback"
+
+production:
+  <<: *DEFAULTS
+  google_oauth_redirect_uri: "http://stagecoachdev.herokuapp.com/oauth2callback"
+  google_oauth_client_id: "630898205217-muoe9drje602lc21ej2e2muo27dbgjqt@developer.gserviceaccount.com"
+  google_oauth_client_secret: "tDDcJHqRXhRN2xNetgCQ0WuA"
