@@ -13,12 +13,17 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email
 
   def contacts
-    contacts = Array.new(10) { iii }
+    contacts = []
     for project in self.projects
-      for user in project
-        if user != 
+      for potential_contact in project.users
+        unless potential_contact == self
+          unless contacts.include?(potential_contact)
+            contacts << potential_contact
+          end
+        end
       end
     end
+    return contacts
   end
 
   private
