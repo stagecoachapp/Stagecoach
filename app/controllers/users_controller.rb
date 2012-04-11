@@ -36,9 +36,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def contacts_by_projects
-    @contacts = self.current_user.contacts
-    @projects = self.current_user.projects
+  def contacts_by_project
+    @projects = self.current_user.projects.sort_by &:created_at
+    @current_user = self.current_user
 
     respond_to do |format|
       format.mobile # index.html.erb
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
   def contacts_by_user_role
     @contacts = self.current_user.contacts
     @user_roles = []
-    for contact in contacts
+    for contact in @contacts
       for user_roles in contact.user_roles
         unless @user_roles.include?(user_role)
           @user_roles << user_role

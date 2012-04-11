@@ -27,7 +27,10 @@ FilmProjectRails::Application.routes.draw do
 
   resources :users
 
-  match '/contacts', :to => 'users#contacts_all'
+  # Viewing your contacts
+  match '/contacts/all', :to => 'users#contacts_all'
+  match '/contacts/projects', :to => 'users#contacts_by_project'
+  match '/contacts/roles', :to => 'users#contacts_by_user_role'
 
   resources :user_roles
 

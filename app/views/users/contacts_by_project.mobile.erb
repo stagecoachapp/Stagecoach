@@ -1,0 +1,16 @@
+<ul>
+	<% for project in @projects %>
+		<% unless project.users.count == 1 %>
+			<li>
+				<p><%= project.name %></p>
+				<ul>
+					<% for contact in project.users %>
+						<% unless contact == @current_user %>
+							<li><%= contact.name %></li>
+						<% end %>
+					<% end %>
+				</ul>
+			</li>
+		<% end %>
+  	<% end %>
+</ul>

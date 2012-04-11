@@ -1,0 +1,12 @@
+<ul>
+	<% for user_role in @user_roles %>
+		<li>
+			<p><%= user_role.name %></p>
+			<ul>
+				<% for contact in @contacts %>
+					<li><%= contact.name %></li>
+				<% end %>
+			</ul>
+		</li>
+	<% end %>
+</ul>
