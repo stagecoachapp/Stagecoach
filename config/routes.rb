@@ -27,6 +27,8 @@ FilmProjectRails::Application.routes.draw do
 
   resources :users
 
+  match '/contacts', :to => 'users#contacts_all'
+
   resources :user_roles
 
   resources :sessions, :pathnames => { :new => 'signin' }

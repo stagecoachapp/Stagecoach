@@ -27,8 +27,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def show_contacts
-    @contacts = self.contacts
+  def contacts_all
+    @contacts = self.current_user.contacts
 
     respond_to do |format|
       format.mobile # index.html.erb
@@ -36,8 +36,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def show_contacts_projects
-    @contacts = self.contacts
+  def contacts_by_projects
+    @contacts = self.current_user.contacts
+    @projects = self.current_user.projects
 
     respond_to do |format|
       format.mobile # index.html.erb
@@ -45,9 +46,17 @@ class UsersController < ApplicationController
     end
   end
 
-  def show_contacts_roles
-    @contacts = self.contacts
-    
+  def contacts_by_user_role
+    @contacts = self.current_user.contacts
+    @user_roles = []
+    for contact in contacts
+      for user_roles in contact.user_roles
+        unless @user_roles.include?(user_role)
+          @user_roles << user_role
+        end
+      end
+    end
+
     respond_to do |format|
       format.mobile # index.html.erb
       format.html
