@@ -10,6 +10,15 @@ class User < ActiveRecord::Base
     create(:name => auth['info']['name'], :email => auth['info']['email'])
   end
 
+  def contacts
+    contacts = Array.new(10) { iii }
+    for project in self.projects
+      for user in project
+        if user != 
+      end
+    end
+  end
+
   private
   	def default_values
   		self.smartphone ||= 1
