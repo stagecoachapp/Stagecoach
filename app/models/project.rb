@@ -6,5 +6,5 @@ class Project < ActiveRecord::Base
 
 	validates :name, :presence => true
 
-	attr_accessible :nae, :created_at, :updated_at, :password
+	attr_accessible :name, :created_at, :updated_at, :password
 end
