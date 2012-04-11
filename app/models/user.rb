@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
     create(:name => auth['info']['name'], :email => auth['info']['email'])
   end
 
+  attr_accessible :name, :email
+
   def contacts
     contacts = Array.new(10) { iii }
     for project in self.projects
