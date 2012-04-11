@@ -1,6 +1,6 @@
 class NotificationsController < ApplicationController
 
-#GET /notifications
+#GET  /notifications
 	def index
 
 		@notifications = self.current_user.notifications
