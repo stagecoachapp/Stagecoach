@@ -13,12 +13,11 @@ gem "twitter-bootstrap-rails", "~> 2.0rc0", :group => :assets
 # in production environments by default.
 gem 'thin'
 
-group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'asset_sync'
-end
+
 
 gem 'jquery-rails'
 gem 'omniauth-facebook'

@@ -70,7 +70,11 @@ FilmProjectRails::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
    #config.assets.precompile += %w[phone.css application.css phone.js application.js]
-   config.assets.precompile << ['*.js', '/**/*.js', '*.css', '/**/*.css', '/**/*.scss', '*/scss', '*.coffee', '/**/*.coffee']
+   #config.assets.precompile += %w['*.js', '/**/*.js', '*.css', '/**/*.css', '/**/*.scss', '*/scss', '*.coffee', '/**/*.coffee']
+   config.assets.precompile += [ Proc.new{ |path| !File.extname(path).in?(['.js', '.css']) }, /mobile.(css|js)$/ ]
+   config.assets.precompile += [ Proc.new{ |path| !File.extname(path).in?(['.js', '.css']) }, /desktop.(css|js)$/ ]
+   config.assets.precompile += [ Proc.new{ |path| !File.extname(path).in?(['.js', '.css']) }, /shared.(css|js)$/ ]
+   #config.assets.precompile += %w['mobile.css' 'desktop.css' 'shared.css']
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
