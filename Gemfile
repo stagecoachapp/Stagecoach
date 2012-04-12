@@ -50,6 +50,7 @@ end
 group :production do
   gem 'paperclip'
   gem 'aws-s3'
+  gem 'asset_sync'
 end
 
 

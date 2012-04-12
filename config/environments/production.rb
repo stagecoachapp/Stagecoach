@@ -1,4 +1,8 @@
 FilmProjectRails::Application.configure do
+
+  #set up s3 assets
+  config.action_controller.asset_host = "https://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
+
   #add active admin
   config.assets.precompile += %w[active_admin.css active_admin.js]
   config.assets.precompile += %w( search.js )
