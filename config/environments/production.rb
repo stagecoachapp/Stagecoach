@@ -6,7 +6,7 @@ FilmProjectRails::Application.configure do
   #add active admin
   config.assets.precompile += %w[active_admin.css active_admin.js]
   config.assets.precompile += %w( search.js )
-  # Settings specified here will take precedence over those in config/application.rb
+  # Settings specified here  will take precedence over those in config/application.rb
 
   #this is for email
   config.action_mailer.default_url_options = { :host => 'myapp.heroku.com' }
