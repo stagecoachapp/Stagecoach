@@ -13,9 +13,13 @@ gem "twitter-bootstrap-rails", "~> 2.0rc0", :group => :assets
 # in production environments by default.
 gem 'thin'
 
-gem 'sass-rails',   '~> 3.2.3'
-gem 'coffee-rails', '~> 3.2.1'
-gem 'uglifier', '>= 1.0.3'
+group :assets do
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'uglifier', '>= 1.0.3'
+  gem 'asset_sync'
+end
+
 gem 'jquery-rails'
 gem 'omniauth-facebook'
 gem 'ckeditor_rails', :require => 'ckeditor-rails'
@@ -50,7 +54,6 @@ end
 group :production do
   gem 'paperclip'
   gem 'aws-s3'
-  gem 'asset_sync'
 end
 
 
