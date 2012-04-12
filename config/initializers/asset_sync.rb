@@ -1,9 +1,9 @@
 AssetSync.configure do |config|
   config.fog_provider = 'AWS'
-  config.aws_access_key_id = ENV['AWS_ACCESS_KEY_ID']
-  config.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
-  config.fog_directory = ENV['FOG_DIRECTORY']
-  
+  config.aws_access_key_id = 'AKIAIB2PQYR2LSGIG4BA'
+  config.aws_secret_access_key = 'RPZ8HU6WUWl5aW8LEn3FPYFeBzr+oz+8Szd+Bwt5'
+  config.fog_directory = 'stagecoachdev-assets'
+
   # Increase upload performance by configuring your region
   # config.fog_region = 'eu-west-1'
   #
@@ -13,7 +13,7 @@ AssetSync.configure do |config|
   # Automatically replace files with their equivalent gzip compressed version
   # config.gzip_compression = true
   #
-  # Use the Rails generated 'manifest.yml' file to produce the list of files to 
+  # Use the Rails generated 'manifest.yml' file to produce the list of files to
   # upload instead of searching the assets directory.
   # config.manifest = true
   #
