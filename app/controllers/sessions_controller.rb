@@ -81,6 +81,10 @@ class SessionsController < ApplicationController
                         #the user is already logged in and is logging in again. This shouldn't happen
                         else
                             auth_type = 'existing'
+                            if self.current_user.authorization.nil?
+                                authorization = Authorization.create()
+                                self.current_user.authorization = authorization
+                            end
                             authorization = self.current_user.authorization
                             #they are trying to link a second account
                             if authorization.user.google_user_information.google_id != hash['id']
@@ -136,6 +140,10 @@ class SessionsController < ApplicationController
         hash = request.env['omniauth.auth']
         #user is already logged in. Make sure whichever Facebook they just logged in to isn't attributed to somebody else
         if self.current_user?
+            if self.current_user.authorization.nil?
+                authorization = Authorization.create()
+                self.current_user.authorization = authorization
+            end
             #user has either not linked this account yet or is trying to link somebody else's
             if self.current_user.authorization.uid != hash['uid']
                 potential_authorization = Authorization.find_by_facebook_hash(hash)
