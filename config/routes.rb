@@ -1,5 +1,11 @@
 FilmProjectRails::Application.routes.draw do
 
+  resources :conversations
+
+  resources :messages
+
+  resources :convorsations
+
   resources :posts do
     resources :comments
   end

@@ -5,6 +5,7 @@ class Task < ActiveRecord::Base
 	has_and_belongs_to_many :task_categories
 	has_many :reminders
 	has_many :notifications, :as => :notification_object
+	has_one :conversation, :as => :conversation_object
 	belongs_to :project
 
 	validates :name, :presence => true
