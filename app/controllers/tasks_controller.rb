@@ -36,7 +36,7 @@ class TasksController < ApplicationController
     end
 
   respond_to do |format|
-      format.html
+      format.html { redirect_to tasks_url, notice: 'Task Created.' }
       format.mobile { redirect_to tasks_url, notice: 'Task Created.' }
   end
 end

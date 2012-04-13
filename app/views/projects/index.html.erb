@@ -10,10 +10,13 @@
 
 <% @projects.each do |project| %>
   <tr>
-    <td><%= project.name %></td>
+    <td><%= project.name %>
+    <% if project == self.current_project %> (current project) <% end %>
+    </td>
     <td><%= link_to 'Show', project %></td>
     <td><%= link_to 'Edit', edit_project_path(project) %></td>
     <td><%= link_to 'Destroy', project, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to "Switch To", project, :method => :post %></td>
   </tr>
 <% end %>
 </table>
