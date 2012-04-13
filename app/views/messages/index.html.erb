@@ -14,8 +14,8 @@
 <% @messages.each do |message| %>
   <tr>
     <td><%= message.text %></td>
-    <td><%= message.from %></td>
-    <td><%= message.type %></td>
+    <td><%=  %></td>
+    <td><%=  %></td>
     <td><%= message.conversation_id %></td>
     <td><%= link_to 'Show', message %></td>
     <td><%= link_to 'Edit', edit_message_path(message) %></td>
