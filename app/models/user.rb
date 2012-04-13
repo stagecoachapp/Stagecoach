@@ -28,6 +28,21 @@ class User < ActiveRecord::Base
         !self.google_user_information.nil?
     end
 
+
+    def contacts
+        contacts = []
+        for project in self.projects
+          for potential_contact in project.users
+            unless potential_contact == self
+              unless contacts.include?(potential_contact)
+                contacts << potential_contact
+              end
+            end
+          end
+        end
+        return contacts
+    end
+
     private
     def default_values
       self.smartphone ||= 1
