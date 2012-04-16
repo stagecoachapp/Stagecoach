@@ -10,7 +10,7 @@
 <% @projects.each do |project| %>
    <li><a href= "<%= "/projects/#{project.id}" %>">
 
-                <h3><%= project.name %></h3>
+                <h3><%= project.capitalized_name %></h3>
                 <p><strong>Users: <%= project.users.count %></strong></p>
                 <p><strong>Tasks: <%= project.tasks.count %></strong></p>
 
