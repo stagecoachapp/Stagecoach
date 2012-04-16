@@ -182,6 +182,12 @@ class SessionsController < ApplicationController
             if authorization.nil?
                 auth_type = 'new'
                 authorization = Authorization.create_from_facebook_hash(hash)
+            else
+                #This Facebook account is linked to a user that doesn't exist
+                if authorization.user.nil?
+                    user = User.create_from_facebook_hash(hash)
+                    authorization.update_attribute(:user, user)
+                end
             end
             # Log the authorizing user in.
             self.current_user= authorization.user

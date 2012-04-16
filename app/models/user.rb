@@ -5,10 +5,10 @@ class User < ActiveRecord::Base
     has_one :authorization
     has_many :notifications
     has_one :google_user_information
-    attr_accessible :name, :email
+    attr_accessible :name, :email, :phonenumber, :user_role_ids
     after_initialize :default_values
 
-    def self.create_from_facebook_hash!(hash)
+    def self.create_from_facebook_hash(hash)
         create(:name => hash['info']['name'], :email => hash['info']['email'])
     end
 
