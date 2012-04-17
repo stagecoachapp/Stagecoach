@@ -21,11 +21,18 @@ FilmProjectRails::Application.routes.draw do
   match '/projects/:id', :to => 'projects#switch' , :via => :post
   resources :projects
 
+  match '/notifications', :to => 'notifications#index'
+
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   resources :users
+
+  # Viewing your contacts
+  match '/contacts/all', :to => 'users#contacts_all'
+  match '/contacts/projects', :to => 'users#contacts_by_project'
+  match '/contacts/roles', :to => 'users#contacts_by_user_role'
 
   resources :user_roles
 
@@ -44,7 +51,9 @@ FilmProjectRails::Application.routes.draw do
   match '/comingsoon', :to => 'home#comingsoon'
   match '/changelog', :to => 'changelogs#index'
   #match '/users/new', :to => 'users#create', :via => :post
-  match '/auth/:provider/callback', :to => 'sessions#create'
+  match '/auth/:provider/callback', :to => 'sessions#create_facebook'
+  match '/auth/failure' => redirect("/")
+  match '/oauth2callback', :to => 'sessions#create_google'
   #abingo routing
   match 'experiments(/:action(/:id))', :to => 'abingo_dashboard', :as => :bingo
   #...

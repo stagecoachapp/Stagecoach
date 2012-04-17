@@ -27,6 +27,42 @@ class UsersController < ApplicationController
     end
   end
 
+  def contacts_all
+    @contacts = self.current_user.contacts
+
+    respond_to do |format|
+      format.mobile # index.html.erb
+      format.html
+    end
+  end
+
+  def contacts_by_project
+    @projects = self.current_user.projects.sort_by &:created_at
+    @current_user = self.current_user
+
+    respond_to do |format|
+      format.mobile # index.html.erb
+      format.html
+    end
+  end
+
+  def contacts_by_user_role
+    @contacts = self.current_user.contacts
+    @user_roles = []
+    for contact in @contacts
+      for user_roles in contact.user_roles
+        unless @user_roles.include?(user_role)
+          @user_roles << user_role
+        end
+      end
+    end
+
+    respond_to do |format|
+      format.mobile # index.html.erb
+      format.html
+    end
+  end
+
   # GET /users/new
   # GET /users/new.json
   def new

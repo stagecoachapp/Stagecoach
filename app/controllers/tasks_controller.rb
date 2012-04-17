@@ -16,19 +16,27 @@ class TasksController < ApplicationController
         @users = self.current_project.users.all
 
         respond_to do |format|
-          format.mobile
-      end
-  end
+            format.mobile
+        end
+    end
 
   def create
     @task = Task.new(params[:task])
     setDefaults @task
     @task.save
-    #(@task_categories || []).each { |task_category| @task.task_categories << task_category}
-    #@task.save
 
-    respond_to do |format|
-      format.html
+    notification_type = NotificationType.find_by_name("New Task")
+    #shouldnt happen
+    if notification_type.nil?
+        notification_type = NotificationType.first
+    end
+    notification = nil
+    @task.users.each do |user|
+      notification = Notification.create(:notification_type_id => notification_type, :user => user, :notification_object => @task)
+    end
+
+  respond_to do |format|
+      format.html { redirect_to tasks_url, notice: 'Task Created.' }
       format.mobile { redirect_to tasks_url, notice: 'Task Created.' }
   end
 end
@@ -68,9 +76,9 @@ else
   @header = "My Tasks"
 end
 
-  respond_to do |format|
-      format.mobile
-  end
+respond_to do |format|
+  format.mobile
+end
 
 end
 

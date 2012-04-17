@@ -1,4 +1,5 @@
 class Project < ActiveRecord::Base
+	attr_accessible :name, :created_at, :updated_at, :password
 	has_and_belongs_to_many :users
 	has_many :tasks
 	has_many :task_categories
@@ -6,5 +7,8 @@ class Project < ActiveRecord::Base
 
 	validates :name, :presence => true
 
-	attr_accessible :nae, :created_at, :updated_at, :password
+	def capitalized_name
+		name.split(' ').map {|w| w.capitalize }.join(' ')
+	end
+
 end
