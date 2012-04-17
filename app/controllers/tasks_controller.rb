@@ -25,14 +25,14 @@ class TasksController < ApplicationController
     setDefaults @task
     @task.save
 
-    notification_type = NotificationType.find_by_name("New Task")
+    notification_type = NotificationType.find_by_name("NewTask")
     #shouldnt happen
     if notification_type.nil?
         notification_type = NotificationType.first
     end
     notification = nil
     @task.users.each do |user|
-      notification = Notification.create(:notification_type_id => notification_type, :user => user, :notification_object => @task)
+      notification = Notification.create(:notification_type => notification_type, :user => user, :notification_object => @task)
     end
 
   respond_to do |format|
