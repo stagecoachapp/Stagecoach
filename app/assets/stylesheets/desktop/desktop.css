@@ -5,11 +5,31 @@
  *= require_self
  *= require_tree .
 */
-body{
+body {
   padding-top: 60px !important;
 }
 
-.jquery_form_error_message{
+.jquery_form_error_message {
   display: block;
   margin-top: 3px;
+}
+
+footer {
+	margin-top: 20px;
+	padding-bottom: 20px;
+}
+
+footer p {
+	margin-left: 176px;
+	position: absolute;
+}
+
+#blog {
+	float: right;
+	margin-right: 180px;
+}
+
+#about {
+	float: right;
+	margin-right: 20px;
 }

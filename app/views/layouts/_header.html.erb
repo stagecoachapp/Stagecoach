@@ -1,4 +1,4 @@
-<div class="navbar navbar-fixed-top">
+<header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
       <%= link_to "Stagecoach", root_path, :class => "brand" %>
@@ -8,11 +8,6 @@
           <li class="active"> <%= link_to "Home", root_path %></li>
         <% else %>
           <li> <%= link_to "Home", root_path %></li>
-        <% end %>
-        <% if url == about_path %>
-          <li class = "active"><%= link_to "About Us", about_path %></li>
-        <% else %>
-          <li><%= link_to "About Us", about_path %></li>
         <% end %>
         <% if url == signup_path %>
           <li class = "active"><%= link_to "Sign Up", signup_path %></li>
@@ -29,15 +24,10 @@
         <% else %>
           <li><%= link_to "Sign in with Gmail", signin_path(:google) %></li>
         <% end %>
-        <% if url == posts_path %>
-          <li class = "active"><%= link_to "Blog", posts_path %></li>
-        <% else %>
-          <li><%= link_to "Blog", posts_path %></li>
-        <% end %>
       </ul>
     </div>
   </div>
-</div>
+</header>
 <% if(flash[:success]) %>
   <div class="alert alert-success" data-dismiss="alert" href="#">
     <a class="close">x</a>

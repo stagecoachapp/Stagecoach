@@ -9,12 +9,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= render 'layouts/header' %>
   <div class ="container">
     <!-- start container -->
-  <%= render 'layouts/header' %>
   <%= yield %>
-  <%= render 'layouts/footer' %>
   </div>
   <!-- end container -->
+  <%= render 'layouts/footer' %>
 </body>
 </html>
