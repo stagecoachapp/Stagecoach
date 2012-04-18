@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
     has_and_belongs_to_many :tasks
     has_and_belongs_to_many :projects
     has_one :authorization
-    has_many :notifications
+    has_many :notifications, :dependent => :destroy
     has_one :google_user_information
     attr_accessible :name, :email, :phonenumber, :user_role_ids
     after_initialize :default_values

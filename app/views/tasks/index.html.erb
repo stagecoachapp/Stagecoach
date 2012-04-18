@@ -16,8 +16,8 @@
 <% @tasks.each do |task| %>
   <tr>
     <td><%= task.name %></td>
-    <td><%= task.startdate %></td>
-    <td><%= task.enddate %></td>
+    <td><%= task.formatted_startdate %></td>
+    <td><%= task.formatted_enddate %></td>
     <td><%= task.notes %></td>
     <td><%= task.priority %></td>
     <td><%= task.status %></td>
