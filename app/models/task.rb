@@ -4,12 +4,10 @@ class Task < ActiveRecord::Base
 	has_and_belongs_to_many :users
 	has_and_belongs_to_many :task_categories
 	has_many :reminders
-	has_many :notifications, :as => :notification_object
+	has_many :notifications, :as => :notification_object, :dependent => :destroy
 	belongs_to :project
 
 	validates :name, :presence => true
-	validates :startdate, :presence => true
-	validates :enddate, :presence => true
 	validates_numericality_of :priority
 	validates :status, :presence => true
 

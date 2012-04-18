@@ -91,15 +91,11 @@ def show
 end
 
 def destroy
-    @task = Task.find(params[:id])
-
-    @task.notifications.each do |notification|
-      notification.destroy
-    end
-
-    @task.destroy
+    task = Task.find(params[:id])
+    task.destroy
 
     respond_to do |format|
+      format.html { redirect_to tasks_url, notice: 'Task Deleted.' }
       format.mobile { redirect_to tasks_url, notice: 'Task Deleted.' }
   end
 end
