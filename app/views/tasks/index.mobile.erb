@@ -8,7 +8,7 @@
                 <h3><%= task.name %></h3>
                 <p><strong><% if task.status == 0 %>Pending<% elsif task.status == 1 %>Completed<% end %></strong></p>
                 <p><% if task.priority == 0 %>Low Priority<% elsif task.priority == 1 %>High Priority<% end %></p>
-                <p><strong><%= task.startdate.strftime("%a %b %d %I:%M%p") %> - <%= task.enddate.strftime("%a %b %d %I:%M%p") %></strong></p>
+                <p><strong><%= task.formatted_startdate %> - <%= task.formatted_enddate %></strong></p>
 
             </a></li>
 <% end %>
