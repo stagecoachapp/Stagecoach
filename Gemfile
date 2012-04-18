@@ -52,7 +52,7 @@ end
 
 #used for attachment uploading
 #group :production do
-  gem 'paperclip'
+  gem 'paperclip', :git => "git://github.com/thoughtbot/paperclip.git"
   #gem "aws-s3", :require => "aws/s3"
   gem 'aws-sdk'
 #end

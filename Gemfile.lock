@@ -13,6 +13,17 @@ GIT
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
 
+GIT
+  remote: git://github.com/thoughtbot/paperclip.git
+  revision: 5eed1dcb785e8b42ea7881b1bd822394df6aa3a0
+  specs:
+    paperclip (3.0.2)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (>= 0.0.2)
+      mime-types
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -170,12 +181,6 @@ GEM
       oauth2 (~> 0.5.0)
       omniauth (~> 1.0)
     orm_adapter (0.0.7)
-    paperclip (3.0.1)
-      activemodel (>= 3.0.0)
-      activerecord (>= 3.0.0)
-      activesupport (>= 3.0.0)
-      cocaine (>= 0.0.2)
-      mime-types
     pg (0.13.2)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
@@ -292,7 +297,7 @@ DEPENDENCIES
   linecache19!
   mobile-fu!
   omniauth-facebook
-  paperclip
+  paperclip!
   pg
   rails (= 3.2.3)
   rspec
