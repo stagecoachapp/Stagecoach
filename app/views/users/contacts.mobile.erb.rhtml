@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+<ul data-role="listview" data-inset="true">
+   
+  <li data-role="fieldcontain">
+      <p>Users:</p>
+      <% @user.projects.each do |project| %>
+      <% @project.users.each do |user| %>
+      <div>
+        <h3><%= user.name %>
+          <% if !user.user_roles.first.nil? %>
+          <%= "(" + user.user_roles.first.name + ")" %>
+          <% end %></h3>
+      </div>
+      <% end %>
+      <% end %>
+  </li>
+
+</ul>
