@@ -9,10 +9,24 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render 'layouts/header' %>
+  <% if self.current_user? %>
+    <%= render 'layouts/header2' %>
+  <% else %>
+    <%= render 'layouts/header' %>
+  <% end %>
+  <% if self.current_user? %>
+      <nav class="sidebar">
+        <div class="sidebar-content">
+          <ul>
+            <li>Thing</li>
+            <li>Another Thing</li>
+          </ul>
+        </div>
+      </nav>
+    <% end %>
   <div class ="container">
     <!-- start container -->
-  <%= yield %>
+    <%= yield %>
   </div>
   <!-- end container -->
   <%= render 'layouts/footer' %>

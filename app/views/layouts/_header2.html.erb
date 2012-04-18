@@ -1,3 +1,33 @@
-<div class="navbar-fixed-top">
-	
-</div>
+<header class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<ul class="nav">
+          		<li class="username"><%= link_to current_user.name, signout_path %></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<% if(flash[:success]) %>
+  <div class="alert alert-success" data-dismiss="alert" href="#">
+    <a class="close">x</a>
+    <%= flash[:success] %>
+  </div>
+<% end %>
+<% if( flash[:error] ) %>
+  <div class="alert alert-error" data-dismiss="alert" href="#">
+    <a class="close">x</a>
+    <%= flash[:error] %>
+  </div>
+<% end %>
+<% if( flash[:notice] ) %>
+  <div class="alert alert-notice" data-dismiss="alert" href="#">
+    <a class="close">x</a>
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<% if( flash[:info] ) %>
+  <div class="alert alert-info" data-dismiss="alert" href="#">
+    <a class="close">x</a>
+    <%= flash[:info] %>
+  </div>
+<% end %>
