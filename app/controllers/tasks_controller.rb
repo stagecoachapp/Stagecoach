@@ -92,6 +92,11 @@ end
 
 def destroy
     @task = Task.find(params[:id])
+
+    @task.notifications.each do |notification|
+      notification.destroy
+    end
+
     @task.destroy
 
     respond_to do |format|
