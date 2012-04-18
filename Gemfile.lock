@@ -60,10 +60,6 @@ GEM
     asset_sync (0.3.1)
       activemodel
       fog
-    aws-s3 (0.6.2)
-      builder
-      mime-types
-      xml-simple
     aws-sdk (1.4.0)
       httparty (~> 0.7)
       json (~> 1.4)
@@ -281,7 +277,6 @@ GEM
       rack (>= 1.0)
     watir-webdriver (0.5.4)
       selenium-webdriver (>= 2.18.0)
-    xml-simple (1.1.1)
 
 PLATFORMS
   ruby
@@ -289,7 +284,6 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   asset_sync
-  aws-s3
   aws-sdk
   ckeditor_rails
   coffee-rails (~> 3.2.1)

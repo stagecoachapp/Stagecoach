@@ -16,6 +16,7 @@ FilmProjectRails::Application.routes.draw do
   match '/assets', :to => 'assets#index', :via => :get
   match '/assets/upload', :to => 'assets#new', :via => :get
   match '/assets', :to => 'assets#create', :via => :post
+  match '/assets/:id', :to => 'assets#show'
 
   match "/projects", :to => "projects#change_project", :via => "post"
   match "/projects/menu", :to => "projects#menu"
