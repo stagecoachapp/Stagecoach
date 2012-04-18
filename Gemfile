@@ -50,10 +50,12 @@ group :development do
  # gem 'ruby-debug19'
 end
 
-group :production do
+#used for attachment uploading
+#group :production do
   gem 'paperclip'
   gem 'aws-s3'
-end
+  gem 'aws-sdk'
+#end
 
 
 # To use ActiveModel has_secure_password

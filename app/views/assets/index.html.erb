@@ -1,0 +1,7 @@
+<ul>
+	<% @assets.each do |asset| %>
+		<li>
+			<a href=<%= asset.file %>><%= asset.file_file_name %></a>
+		</li>
+	<% end %>
+</ul>

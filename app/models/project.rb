@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
 	has_many :tasks
 	has_many :task_categories
 	has_many :user_roles
+	has_many :assets, :as => :asset_object, :dependent => :destroy
 
 	validates :name, :presence => true
 
