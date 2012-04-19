@@ -7,7 +7,8 @@
 */
 
 $sc_blue: #54B8FF;
-$sc_gray: #A2A7AB;
+$sc_gray_unclicked: #333333;
+$sc_gray_clicked: #cccccc;
 
 body {
   padding-top: 60px !important;
@@ -48,8 +49,9 @@ footer p {
 
 .sidebar {
 	height: 100%;
-	background-image: url("<%= image_path "sidebar/sidebar_background.png" %>");
-	width: 100px;
+	background-image: url("<%= image_path "sidebar/bg.png" %>");
+	background-repeat: repeat-y;
+	width: 80px;
 	border-right: 1px solid gray;
 	float: left;
 	position: fixed;
@@ -57,10 +59,8 @@ footer p {
 }
 
 .sidebar-content {
-	padding-top: 20px;
-	padding-bottom: 20px;
 	background-image: none;
-	background-color: $sc_gray;
+	background-color: $sc_gray_unclicked;
 }
 
 .sidebar-content ul {
