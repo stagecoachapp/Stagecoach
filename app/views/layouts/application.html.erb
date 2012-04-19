@@ -11,21 +11,47 @@
 <body>
   <% if self.current_user? %>
     <%= render 'layouts/header2' %>
-  <% else %>
-    <%= render 'layouts/header' %>
-  <% end %>
-  <% if self.current_user? %>
-      <nav class="sidebar">
+    <nav class="sidebar">
         <div class="sidebar-content">
           <ul>
-            <li>Thing</li>
+            <li><a href="#"><img href="" />Text</a></li>
             <li>Another Thing</li>
           </ul>
         </div>
       </nav>
-    <% end %>
+  <% else %>
+    <%= render 'layouts/header' %>
+  <% end %>
   <div class ="container">
     <!-- start container -->
+    <!-- if the user is signed in, put the alerts inside the container so they don't disturb the sidebar -->
+    <% if self.current_user? %>
+      <% if(flash[:success]) %>
+        <div class="alert alert-success" data-dismiss="alert" href="#">
+          <a class="close">x</a>
+          <%= flash[:success] %>
+        </div>
+      <% end %>
+      <% if( flash[:error] ) %>
+        <div class="alert alert-error" data-dismiss="alert" href="#">
+          <a class="close">x</a>
+          <%= flash[:error] %>
+        </div>
+      <% end %>
+      <% if( flash[:notice] ) %>
+        <div class="alert alert-notice" data-dismiss="alert" href="#">
+          <a class="close">x</a>
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+      <% if( flash[:info] ) %>
+        <div class="alert alert-info" data-dismiss="alert" href="#">
+          <a class="close">x</a>
+          <%= flash[:info] %>
+        </div>
+      <% end %>
+    <% end %>
+    <!-- input the page here -->
     <%= yield %>
   </div>
   <!-- end container -->

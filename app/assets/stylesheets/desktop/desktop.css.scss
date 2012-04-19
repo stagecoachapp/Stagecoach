@@ -49,9 +49,16 @@ footer p {
 	border-right: 1px solid gray;
 	float: left;
 	position: fixed;
+	margin-top: -20px;
 }
 
 .sidebar-content {
+	padding-top: 20px;
+	padding-bottom: 20px;
 	background-image: none;
-	background-color: sc_gray;
+	background-color: $sc_gray;
+}
+
+.sidebar-content ul {
+	list-style-type: none;
 }
