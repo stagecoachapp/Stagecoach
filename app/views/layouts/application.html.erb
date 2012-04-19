@@ -10,19 +10,19 @@
 </head>
 <body>
   <% if self.current_user? %>
-    <%= render 'layouts/header2' %>
+    <%= render 'layouts/header_signed_in' %>
     <nav class="sidebar">
         <div class="sidebar-content">
           <ul>
-            <li><a href="#"><img href="" />Text</a></li>
+            <li><a href="#"><img href="" />Tasks</a></li>
             <li>Another Thing</li>
           </ul>
         </div>
       </nav>
   <% else %>
-    <%= render 'layouts/header' %>
+    <%= render 'layouts/header_signed_out' %>
   <% end %>
-  <div class ="container">
+  <div class ="container" id="right-content">
     <!-- start container -->
     <!-- if the user is signed in, put the alerts inside the container so they don't disturb the sidebar -->
     <% if self.current_user? %>
@@ -51,7 +51,7 @@
         </div>
       <% end %>
     <% end %>
-    <!-- input the page here -->
+    <!-- input the page here -->  
     <%= yield %>
   </div>
   <!-- end container -->
