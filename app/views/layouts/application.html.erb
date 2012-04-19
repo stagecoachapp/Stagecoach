@@ -13,11 +13,9 @@
     <%= render 'layouts/header_signed_in' %>
     <nav class="sidebar">
         <div class="sidebar-content">
-          <ul>
-            <li id="application-task-link"><a href="#"><div class="sidebar-item"><%= image_tag "sidebar/tasks.png" %>Tasks</div></a></li>
-            <li id="application-projects-link"><a href="#"><div class="sidebar-item"><%= image_tag "sidebar/projects.png" %>Projects</div></li>
-            <li id="application-crew-link"><a href="#"><div class="sidebar-item"><%= image_tag "sidebar/crew.png" %>Crew</div></li>
-          </ul>
+          <div id="application-task-link"><a href="#"><div class="sidebar-item"><%= image_tag "sidebar/tasks.png" %>Tasks</div></a></div>
+          <div id="application-projects-link"><a href="#"><div class="sidebar-item"><%= image_tag "sidebar/projects.png" %>Projects</div></div>
+          <div id="application-crew-link"><a href="#"><div class="sidebar-item"><%= image_tag "sidebar/crew.png" %>Crew</div></div>
         </div>
       </nav>
   <% else %>
