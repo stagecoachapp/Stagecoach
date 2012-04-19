@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Emanuel', :city => cities.first)
+
+
+# Default user roles
+UserRole.delete_all
+default_user_roles = [ "role_1", "role_2" ]
+for role in default_user_roles
+	UserRole.create!(:name => role)
+end
