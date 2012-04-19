@@ -71,9 +71,8 @@ end
     if !@project.nil?
       self.current_project= @project
     end
-
     respond_to do |format|
-      format.html
+      format.html { redirect_to projects_path }
       format.mobile { redirect_to projects_path }
     end
   end
@@ -115,7 +114,9 @@ end
   # PUT /projects/1.json
   def update
     @project = Project.find(params[:id])
-
+    if params[:project][:password] == ""
+      params[:project].delete :password
+    end
     respond_to do |format|
       if @project.update_attributes(params[:project])
         if current_project == @project
@@ -143,6 +144,7 @@ end
     end
     respond_to do |format|
       format.mobile {redirect_to projects_path}
+      format.html {redirect_to projects_path}
     end
   end
 

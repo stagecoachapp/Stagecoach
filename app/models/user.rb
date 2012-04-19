@@ -3,12 +3,12 @@ class User < ActiveRecord::Base
     has_and_belongs_to_many :tasks
     has_and_belongs_to_many :projects
     has_one :authorization
-    has_many :notifications
+    has_many :notifications, :dependent => :destroy
     has_one :google_user_information
-    attr_accessible :name, :email
+    attr_accessible :name, :email, :phonenumber, :user_role_ids
     after_initialize :default_values
 
-    def self.create_from_facebook_hash!(hash)
+    def self.create_from_facebook_hash(hash)
         create(:name => hash['info']['name'], :email => hash['info']['email'])
     end
 
@@ -26,6 +26,21 @@ class User < ActiveRecord::Base
 
     def linked_google?
         !self.google_user_information.nil?
+    end
+
+
+    def contacts
+        contacts = []
+        for project in self.projects
+          for potential_contact in project.users
+            unless potential_contact == self
+              unless contacts.include?(potential_contact)
+                contacts << potential_contact
+              end
+            end
+          end
+        end
+        return contacts
     end
 
     private

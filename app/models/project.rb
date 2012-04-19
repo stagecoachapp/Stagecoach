@@ -7,4 +7,8 @@ class Project < ActiveRecord::Base
 
 	validates :name, :presence => true
 
+	def capitalized_name
+		name.split(' ').map {|w| w.capitalize }.join(' ')
+	end
+
 end

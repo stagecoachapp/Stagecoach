@@ -5,6 +5,8 @@
  *= require_self
  *= require_tree .
 */
-a {
 
+/*  this is a hack to get the signout button to position correctly... it should be removed eventually */
+#layouts-footer-signout-button {
+margin-right: 2%
 }

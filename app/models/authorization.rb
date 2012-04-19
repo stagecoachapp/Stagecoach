@@ -10,7 +10,7 @@ class Authorization < ActiveRecord::Base
     end
 
     def self.create_from_facebook_hash(hash, user = nil)
-        user ||= User.create_from_facebook_hash!(hash)
+        user ||= User.create_from_facebook_hash(hash)
         if user.authorization.nil?
             authorization = Authorization.create(:user => user, :uid => hash['uid'], :provider => hash['provider'])
         else

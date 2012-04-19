@@ -1,4 +1,4 @@
-<ul>
+<ul data-role="listview" data-inset = "true">
 	<% unless @unread_notifications.nil? %>
 	<% @unread_notifications.each do |notification| %>
 
@@ -12,7 +12,7 @@
 	<% @read_notifications.each do |notification| %>
 
 		<li>
-			<p><%= notification.to_s %></p>
+			<%= link_to  notification.to_s, notification.notification_object %>
 		</li>
 
 	<% end %>
