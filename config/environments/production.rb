@@ -6,7 +6,7 @@ FilmProjectRails::Application.configure do
   end
 
   #add active admin
-  config.assets.precompile += %w[active_admin.css active_admin.js]
+  #config.assets.precompile += %w[active_admin.css active_admin.js]
   config.assets.precompile += %w( search.js )
   # Settings specified here  will take precedence over those in config/application.rb
 
@@ -35,7 +35,7 @@ FilmProjectRails::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
