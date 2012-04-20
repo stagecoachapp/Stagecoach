@@ -11,8 +11,6 @@ FilmProjectRails::Application.routes.draw do
   get "home/index"
   resources :task_categories
 
-  resources :reminders
-
   match "/projects", :to => "projects#change_project", :via => "post"
   match "/projects/menu", :to => "projects#menu"
   match '/projects/index', :to => 'projects#index'

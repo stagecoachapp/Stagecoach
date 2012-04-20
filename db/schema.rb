@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120419002856) do
+ActiveRecord::Schema.define(:version => 20120419055006) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -62,17 +62,6 @@ ActiveRecord::Schema.define(:version => 20120419002856) do
 
   add_index "alternatives", ["experiment_id"], :name => "index_alternatives_on_experiment_id"
   add_index "alternatives", ["lookup"], :name => "index_alternatives_on_lookup"
-
-  create_table "assets", :force => true do |t|
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "file_updated_at"
-    t.integer  "asset_object_id"
-    t.string   "asset_object_type"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-  end
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -166,16 +155,6 @@ ActiveRecord::Schema.define(:version => 20120419002856) do
     t.integer "user_id"
   end
 
-  create_table "reminders", :force => true do |t|
-    t.string   "name"
-    t.datetime "time"
-    t.text     "description"
-    t.boolean  "needs_response"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "task_id"
-  end
-
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
@@ -215,16 +194,30 @@ ActiveRecord::Schema.define(:version => 20120419002856) do
     t.integer "task_category_id"
   end
 
-  create_table "tasks", :force => true do |t|
+  create_table "task_priorities", :force => true do |t|
     t.string   "name"
-    t.datetime "startdate"
-    t.datetime "enddate"
-    t.text     "notes"
-    t.integer  "priority"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "task_statuses", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tasks", :force => true do |t|
+    t.string   "name"
+    t.datetime "time"
+    t.text     "description"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.integer  "project_id"
     t.integer  "status"
+    t.integer  "owner_id"
+    t.integer  "task_status_id"
+    t.integer  "task_priority_id"
+    t.boolean  "active"
   end
 
   create_table "tasks_users", :id => false, :force => true do |t|

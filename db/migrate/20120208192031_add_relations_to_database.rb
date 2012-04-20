@@ -17,7 +17,6 @@ class AddRelationsToDatabase < ActiveRecord::Migration
 			t.integer :user_role_id
 		end
 		add_column :tasks, :project_id, :integer
-		add_column :reminders, :task_id, :integer
 		add_column :user_roles, :project_id, :integer
 		add_column :task_categories, :project_id, :integer
 
@@ -29,7 +28,6 @@ class AddRelationsToDatabase < ActiveRecord::Migration
 		drop_table :projects_users
 		drop_table :users_user_roles
 		remove_column :tasks, :project_id
-		remove_column :reminders, :task_id
 		remove_column :user_roles, :project_id
 		remove_column :task_categories, :project_id
 	end
