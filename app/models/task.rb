@@ -7,10 +7,11 @@ class Task < ActiveRecord::Base
 	belongs_to :project
 	belongs_to :task_status
 	belongs_to :task_priority
+	belongs_to :owner, :class_name => "User", :foreign_key => :owner_id
 
 	validates :name, :presence => true
-	validates_numericality_of :priority
-	validates :status, :presence => true
+	validates :task_priority_id, :presence => true
+	validates :task_status, :presence => true
 
 	validates :project_id, :presence => true
 
@@ -18,19 +19,11 @@ class Task < ActiveRecord::Base
 		self.name
 	end
 
-	def formatted_startdate
-		if self.startdate.nil?
+	def formatted_time
+		if self.time.nil?
 			return "No Start Date"
 		else
-			return self.startdate.strftime("%a %b %d %I:%M%p")
-		end
-	end
-
-	def formatted_enddate
-		if self.enddate.nil?
-			return "No End Date"
-		else
-			return self.enddate.strftime("%a %b %d %I:%M%p")
+			return self.time.strftime("%a %b %d %I:%M%p")
 		end
 	end
 

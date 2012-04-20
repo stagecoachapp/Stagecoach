@@ -1,3 +1,42 @@
-<h1>Editing project</h1>
+<%= form_for(@project) do |f| %>
+    <% if @project.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
 
-<%= render 'form' %>
+            <ul>
+                <% @project.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <form>
+        <ul data-role="listview" data-inset="true">
+            <li>
+                <div class="field">
+                    <%= f.text_field :name, :placeholder => "Project Name" %>
+                    <br>
+                    <%= f.password_field :password, :placeholder => "Project Password" %>
+                    <br>
+                </div>
+            </li>
+            <li data-role="fieldcontain" >
+                <div data-role="collapsible" id="project-edit-project-administrators-collapsible">
+                    <h3>Administrators</h3>
+                    <fieldset="controlgroup">
+                        <% for user in @project.users %>
+                            <%= check_box_tag "project[administrator_ids][]", user.id, @project.administrators.include?(user), :id => "project-edit-project-administrators-#{user.id}" %>
+                            <label for=<%= "project-edit-project-administrators-#{user.id}" %>><%= user.name %></label>
+                        <% end %>
+                    </fieldset>
+                </div>
+            </li>
+            <li>
+                <div class="actions">
+                <%= f.submit %>
+                </div>
+            </li>
+        </ul>
+    </form>
+<% end %>
+
