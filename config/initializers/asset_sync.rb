@@ -1,8 +1,8 @@
 AssetSync.configure do |config|
   config.fog_provider = 'AWS'
-  config.aws_access_key_id = ENV['AWS_ACCESS_KEY_ID']
-  config.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
-  config.fog_directory = ENV['FOG_DIRECTORY']
+  config.aws_access_key_id = ENV['AWS_ACCESS_KEY_ID'] || "AKIAIB2PQYR2LSGIG4BA"
+  config.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY'] || "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"
+  config.fog_directory = ENV['FOG_DIRECTORY'] || "stagecoachlocal-assets"
 
   # Increase upload performance by configuring your region
   # config.fog_region = 'eu-west-1'

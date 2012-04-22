@@ -1,0 +1,23 @@
+  <nav class="sidebar">
+    <div class="sidebar-content">
+      <div class="sidebar-item" id="application-task-link">
+        <%= link_to(tasks_path, :remote => false) do %>
+        <div class="sidebar-link">
+          <%= image_tag("sidebar/Icon-Tasks.png") %>
+          Tasks
+        </div>
+        <% end %>
+      </div>
+
+      <div class="sidebar-item" id="application-projects-link">
+        <a href="/projects/index">
+          <div class="sidebar-link"><%= image_tag "sidebar/Icon-Folder.png" %>Projects</div>
+        </a>
+      </div>
+      <div class="sidebar-item" id="application-crew-link">
+        <a href="/contacts/all">
+          <div class="sidebar-link"><%= image_tag "sidebar/Icon-People.png" %>People</div>
+        </a>
+      </div>
+    </div>
+  </nav>

@@ -1,0 +1,12 @@
+<h1>Changelog</h1>
+
+<ul data-role="listview" data-inset="true">
+
+<% @changelogs.each do |changelog| %>
+  <li>
+  	<p>Created at: <%= changelog.created_at %></p>
+    <p>By: <%= changelog.developer %></p>
+    <p>Description: <%= changelog.description %></p>
+  </li>
+<% end %>
+</ul>

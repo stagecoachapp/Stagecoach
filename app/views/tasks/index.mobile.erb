@@ -3,13 +3,15 @@
 
 <ul data-role="listview" data-inset="true">
 <% @tasks.each do |task| %>
-   <li><a href= "<%= "/tasks/#{task.id}" %>">
+	<% if task.active %>
+	   <li><a href= "<%= "/tasks/#{task.id}" %>">
 
-                <h3><%= task.name %></h3>
-                <p><strong><% if task.status == 0 %>Pending<% elsif task.status == 1 %>Completed<% end %></strong></p>
-                <p><% if task.priority == 0 %>Low Priority<% elsif task.priority == 1 %>High Priority<% end %></p>
-                <p><strong><%= task.startdate.strftime("%a %b %d %I:%M%p") %> - <%= task.enddate.strftime("%a %b %d %I:%M%p") %></strong></p>
+	                <h3><%= task.name %></h3>
+	                <p>Status: <%= task.task_status.name %></p>
+	                <p>Priority: <%= task.task_priority.name %></p>
+	                <p><%= task.formatted_time %></p>
 
-            </a></li>
+	            </a></li>
+    <% end %>
 <% end %>
 </ul>
