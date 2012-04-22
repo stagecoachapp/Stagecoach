@@ -27,5 +27,5 @@ default_user_roles = [
 	"Other",
 ]
 for role in default_user_roles
-	UserRole.create!(:name => role)
+	UserRole.create(:name => role)
 end
