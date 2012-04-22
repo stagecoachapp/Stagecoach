@@ -63,6 +63,17 @@ ActiveRecord::Schema.define(:version => 20120420075812) do
   add_index "alternatives", ["experiment_id"], :name => "index_alternatives_on_experiment_id"
   add_index "alternatives", ["lookup"], :name => "index_alternatives_on_lookup"
 
+  create_table "assets", :force => true do |t|
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.integer  "asset_object_id"
+    t.string   "asset_object_type"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
     t.string   "uid"
