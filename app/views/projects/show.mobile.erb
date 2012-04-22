@@ -6,6 +6,18 @@
       <h3><%= @project.name %></h3>
   </li>
   <li data-role="fieldcontain">
+      <p>Owner:</p>
+      <h3><%= @project.owner.name %></h3>
+  </li>
+  <li data-role="fieldcontain">
+      <p>Administrators:</p>
+      <% @project.administrators.each do |administrator| %>
+      <div>
+        <h3><%= administrator.name %></h3>
+      </div>
+      <% end %>
+  </li>
+  <li data-role="fieldcontain">
       <p>Users:</p>
       <% @project.users.each do |user| %>
       <div>

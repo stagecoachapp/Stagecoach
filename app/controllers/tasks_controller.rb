@@ -22,7 +22,7 @@ class TasksController < ApplicationController
 
     def create
         @task = Task.new(params[:task])
-        setDefaults @task
+        setDefaults! @task
         @task.save
 
         notification_type = NotificationType.find_by_name("NewTask")
@@ -115,9 +115,11 @@ class TasksController < ApplicationController
         end
     end
 
-    def setDefaults(task)
-        task.status = 0
-        task.project_id = self.current_project.id
+    def setDefaults!(task)
+        task.task_status = TaskStatus.first
+        task.owner ||= self.current_user
+        task.project_id ||= self.current_project.id
+        task.active = true
     end
 
 end
