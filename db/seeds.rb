@@ -9,7 +9,23 @@
 
 # Default user roles
 UserRole.delete_all
-default_user_roles = [ "role_1", "role_2" ]
+default_user_roles = [
+	"Directing Team",
+	"Producing Team",
+	"Camera",
+	"Lighting",
+	"Art Department",
+	"Documentation Team",
+	"Sound/Audio",
+	"Talent",
+	"Vendors",
+	"Music Dept",
+	"Visual/Special Effects",
+	"Stunts",
+	"Editorial",
+	"Transportation",
+	"Other",
+]
 for role in default_user_roles
 	UserRole.create!(:name => role)
 end
