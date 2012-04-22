@@ -15,8 +15,10 @@
     <div class="sidebar-content">
       <div class="sidebar-item" id="application-task-link">
         <%= link_to(tasks_path, :remote => true) do %>
-        <%= image_tag("sidebar/Icon-Tasks.png") %>
-        Tasks
+        <div class="sidebar-link">
+          <%= image_tag("sidebar/Icon-Tasks.png") %>
+          Tasks
+        </div>
         <% end %>
       </div>
 
@@ -35,7 +37,10 @@
   <% else %>
   <%= render 'layouts/header_signed_out' %>
   <% end %>
-  <div id="container-shifting-div">
+  
+  <% if self.current_user? %>
+    <div id="container-shifting-div">
+  <% end %>
     <div class ="container" id="right-content">
       <!-- start container -->
       <!-- if the user is signed in, put the alerts inside the container so they don't disturb the sidebar -->
@@ -68,7 +73,9 @@
       <!-- input the page here -->
       <%= yield %>
     </div>
-  </div>
+  <% if self.current_user? %>
+    </div>
+  <% end %>
   <!-- end container -->
   <%= render 'layouts/footer' %>
 </body>
