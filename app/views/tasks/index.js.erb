@@ -1,0 +1,3 @@
+$("#right-content").html('<%= escape_javascript(render :partial => "index") %>');
+window.history.pushState(stateObj, "Project Stagecoach", "<%= escape_javascript(tasks_path)%>");
+

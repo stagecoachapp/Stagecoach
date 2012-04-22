@@ -75,9 +75,9 @@ class TasksController < ApplicationController
                         @tasks << task
                     end
                 end
-        end
+            end
 
-        @header = "All Tasks"
+            @header = "All Tasks"
         else
             @tasks = []
             self.current_project.tasks.all.each do |task|
@@ -92,7 +92,8 @@ class TasksController < ApplicationController
 
         respond_to do |format|
             format.html
-          format.mobile
+            format.mobile
+            format.js
         end
 
     end

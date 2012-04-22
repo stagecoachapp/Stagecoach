@@ -10,48 +10,62 @@
 </head>
 <body>
   <% if self.current_user? %>
-    <%= render 'layouts/header_signed_in' %>
-    <nav class="sidebar">
-        <div class="sidebar-content">
-          <div class="sidebar-item" id="application-task-link"><a href="/tasks"><div class="sidebar-link"><%= image_tag "sidebar/Icon-Tasks.png" %>Tasks</div></a></div>
-          <div class="sidebar-item" id="application-projects-link"><a href="/projects/index"><div class="sidebar-link"><%= image_tag "sidebar/Icon-Folder.png" %>Projects</div></div>
-          <div class="sidebar-item" id="application-crew-link"><a href="#"><div class="sidebar-link"><%= image_tag "sidebar/Icon-People.png" %>Crew</div></div>
-        </div>
-      </nav>
+  <%= render 'layouts/header_signed_in' %>
+  <nav class="sidebar">
+    <div class="sidebar-content">
+      <div class="sidebar-item" id="application-task-link">
+        <%= link_to(tasks_path, :remote => true) do %>
+        <%= image_tag("sidebar/Icon-Tasks.png") %>
+        Tasks
+        <% end %>
+      </div>
+
+      <div class="sidebar-item" id="application-projects-link">
+        <a href="/projects/index">
+          <div class="sidebar-link"><%= image_tag "sidebar/Icon-Folder.png" %>Projects</div>
+        </a>
+      </div>
+      <div class="sidebar-item" id="application-crew-link">
+        <a href="#">
+          <div class="sidebar-link"><%= image_tag "sidebar/Icon-People.png" %>Crew</div>
+        </a>
+      </div>
+    </div>
+  </nav>
   <% else %>
-    <%= render 'layouts/header_signed_out' %>
+  <%= render 'layouts/header_signed_out' %>
   <% end %>
   <div id="container-shifting-div">
     <div class ="container" id="right-content">
       <!-- start container -->
       <!-- if the user is signed in, put the alerts inside the container so they don't disturb the sidebar -->
       <% if self.current_user? %>
-        <% if(flash[:success]) %>
-          <div class="alert alert-success" data-dismiss="alert" href="#">
-            <a class="close">x</a>
-            <%= flash[:success] %>
-          </div>
-        <% end %>
-        <% if( flash[:error] ) %>
-          <div class="alert alert-error" data-dismiss="alert" href="#">
-            <a class="close">x</a>
-            <%= flash[:error] %>
-          </div>
-        <% end %>
-        <% if( flash[:notice] ) %>
-          <div class="alert alert-notice" data-dismiss="alert" href="#">
-            <a class="close">x</a>
-            <%= flash[:notice] %>
-          </div>
-        <% end %>
-        <% if( flash[:info] ) %>
-          <div class="alert alert-info" data-dismiss="alert" href="#">
-            <a class="close">x</a>
-            <%= flash[:info] %>
-          </div>
-        <% end %>
+      <% if(flash[:success]) %>
+      <div class="alert alert-success" data-dismiss="alert" href="#">
+        <a class="close">x</a>
+        <%= flash[:success] %>
+      </div>
       <% end %>
-      <!-- input the page here -->  
+      <% if( flash[:error] ) %>
+      <div class="alert alert-error" data-dismiss="alert" href="#">
+        <a class="close">x</a>
+        <%= flash[:error] %>
+      </div>
+      <% end %>
+      <% if( flash[:notice] ) %>
+      <div class="alert alert-notice" data-dismiss="alert" href="#">
+        <a class="close">x</a>
+        <%= flash[:notice] %>
+      </div>
+      <% end %>
+      <% if( flash[:info] ) %>
+      <div class="alert alert-info" data-dismiss="alert" href="#">
+        <a class="close">x</a>
+        <%= flash[:info] %>
+      </div>
+      <% end %>
+      <% end %>
+      <!-- input the page here -->
       <%= yield %>
     </div>
   </div>
