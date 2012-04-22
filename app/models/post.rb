@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-    attr_accessible :name, :title, :content, :created_at, :updated_at
+    attr_accessible :name, :title, :content, :created_at, :updated_at, :tags_attributes
     validates :name, :presence => true
     validates :title, :presence => true,
     :length => { :minimum => 5 }
