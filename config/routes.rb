@@ -13,6 +13,11 @@ FilmProjectRails::Application.routes.draw do
 
   resources :reminders
 
+  match '/assets', :to => 'assets#index', :via => :get
+  match '/assets/upload', :to => 'assets#new', :via => :get
+  match '/assets', :to => 'assets#create', :via => :post
+  match '/assets/:id', :to => 'assets#show'
+
   match "/projects", :to => "projects#change_project", :via => "post"
   match "/projects/menu", :to => "projects#menu"
   match '/projects/index', :to => 'projects#index'
@@ -56,6 +61,10 @@ FilmProjectRails::Application.routes.draw do
   match '/oauth2callback', :to => 'sessions#create_google'
   #abingo routing
   match 'experiments(/:action(/:id))', :to => 'abingo_dashboard', :as => :bingo
+
+
+
+
   #...
   #  # You can have the root of your site routed with "root"
   #    # just remember to delete public/index.html.

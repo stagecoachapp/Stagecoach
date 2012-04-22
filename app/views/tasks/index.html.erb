@@ -3,9 +3,8 @@
 <table class="table table-striped">
   <tr>
     <th>Name</th>
-    <th>Startdate</th>
-    <th>Enddate</th>
-    <th>Notes</th>
+    <th>Time</th>
+    <th>Description</th>
     <th>Priority</th>
     <th>Status</th>
     <th></th>
@@ -16,11 +15,10 @@
 <% @tasks.each do |task| %>
   <tr>
     <td><%= task.name %></td>
-    <td><%= task.formatted_startdate %></td>
-    <td><%= task.formatted_enddate %></td>
-    <td><%= task.notes %></td>
-    <td><%= task.priority %></td>
-    <td><%= task.status %></td>
+    <td><%= task.formatted_time %></td>
+    <td><%= task.description %></td>
+    <td><%= task.task_priority.name %></td>
+    <td><%= task.task_status.name %></td>
     <td><%= link_to 'Show', task %></td>
     <td><%= link_to 'Edit', edit_task_path(task) %></td>
     <td><%= link_to 'Destroy', task, confirm: 'Are you sure?', method: :delete %></td>
