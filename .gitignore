@@ -16,3 +16,4 @@
 /.redcar/*
 /.idea/*
 /pg/*
+/config/s3.yml

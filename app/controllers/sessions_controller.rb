@@ -34,9 +34,9 @@ class SessionsController < ApplicationController
         if !params["code"].nil?
             #send a post request with the temporary authorization code to get the long term access token
             post_params = {"code" => params["code"],
-                            "client_id" => APP_CONFIG['google_oauth_client_id'],
-                            "client_secret" => APP_CONFIG['google_oauth_client_secret'],
-                            "redirect_uri" => APP_CONFIG['google_oauth_redirect_uri'],
+                            "client_id" => ENV['GOOGLE_OAUTH_CLIENT_ID'],
+                            "client_secret" => ENV['GOOGLE_OAUTH_CLIENT_SECRET'],
+                            "redirect_uri" => ENV['GOOGLE_OAUTH_REDIRECT_URI'],
                             "grant_type" => "authorization_code"}
             uri = URI.parse("https://accounts.google.com/o/oauth2/token")
             http = Net::HTTP.new(uri.host, uri.port)
