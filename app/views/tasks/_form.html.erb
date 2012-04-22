@@ -29,12 +29,8 @@
       <label for=<%= "task-new-assignee-#{user.id}" %>><%= user.name %></label>
   <% end %>
   <div class="field">
-    <%= f.label :task_priority %><br />
-    <%= f.number_field :task_priority %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br />
-    <%= f.text_field :status %>
+    <%= f.label :task_priority_id %><br />
+    <%= f.number_field :task_priority_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

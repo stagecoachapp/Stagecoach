@@ -12,6 +12,8 @@ class TasksController < ApplicationController
 
     def new
         @task = Task.new
+        #set the priority to the first priority to make sure there is a default value
+        @task.task_priority = TaskPriority.first
         @task_categories = self.current_project.task_categories.find(:all)
         @users = self.current_project.users.all
 
@@ -53,7 +55,6 @@ class TasksController < ApplicationController
     def update
         params[:task][:task_category_ids] ||= []
         params[:task][:user_ids] ||= []
-
         @task = Task.find(params[:id])
         @task.update_attributes(params[:task])
 
@@ -119,6 +120,7 @@ class TasksController < ApplicationController
         task.task_status = TaskStatus.first
         task.owner ||= self.current_user
         task.project_id ||= self.current_project.id
+        task.task_status = TaskStatus.find_by_name("Pending")
         task.active = true
     end
 

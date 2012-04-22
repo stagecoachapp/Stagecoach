@@ -39,13 +39,13 @@
 
 				<fieldset data-role="controlgroup" data-type="horizontal" >
 			    <legend>Priority:</legend>
-						<%= f.radio_button :task_priority_id, "0", :id => "task-new-priority-low"%>
-						<%= f.label :task_priority_id, "Low", :"for" => "task-new-priority-low"%>
+						<% TaskPriority.all.each do |task_priority| %>
+					        <%= f.label :task_priority_id, task_priority.to_s, :for => "task-new-priority-#{task_priority.to_s}" %>
+					        <%= f.radio_button :task_priority_id, task_priority.id, :id => "task-new-priority-#{task_priority.to_s}" %>
+					     <% end %>
 
-						<%= f.radio_button :task_priority_id, "1", :id => "task-new-priority-high", :checked => "checked" %>
-						<%= f.label :task_priority_id, "High", :"for" => "task-new-priority-high" %>
 
-					</fieldset>
+				</fieldset>
 			</li>
 
 		<!-- CATEGORIES -->

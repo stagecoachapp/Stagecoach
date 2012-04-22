@@ -8,13 +8,13 @@
     <!-- DESCRIPTION -->
     <li data-role="fieldcontain">
       <p>Description</p>
-      <h3><%= @task.notes %></h3>
+      <h3><%= @task.description %></h3>
     </li>
 
     <!-- PRIORITY -->
     <li data-role="fieldcontain">
       <p>Priority</p>
-      <h3><% if @task.priority == 0 %>Low<% elsif @task.priority == 1 %>High<% end %></h3>
+      <h3><%= @task.task_priority %></h3>
     </li>
 
 
