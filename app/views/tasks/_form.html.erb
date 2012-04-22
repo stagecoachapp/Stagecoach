@@ -16,28 +16,21 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :startdate %><br />
-    <%= f.datetime_select :startdate %>
+    <%= f.label :time %><br />
+    <%= f.datetime_select :time %>
   </div>
   <div class="field">
-    <%= f.label :enddate %><br />
-    <%= f.datetime_select :enddate %>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
   </div>
-  <div class="field">
-    <%= f.label :notes %><br />
-    <%= f.text_area :notes %>
-  </div>
+  <label>Users</label>
   <% for user in @users %>
       <%= check_box_tag "task[user_ids][]", user.id, false, :id => "task-new-assignee-#{user.id}" %>
-      <label for="task-new-assignee-<%= user.id %>"><%= user.name %></label>
+      <label for=<%= "task-new-assignee-#{user.id}" %>><%= user.name %></label>
   <% end %>
   <div class="field">
-    <%= f.label :priority %><br />
-    <%= f.number_field :priority %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br />
-    <%= f.text_field :status %>
+    <%= f.label :task_priority_id %><br />
+    <%= f.number_field :task_priority_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -4,7 +4,24 @@
   <b>Name:</b>
   <%= @project.name %>
 </p>
+<p>
+  <b>Owner:</b>
+  <%= @project.owner.name %>
+</p>
 <br>
+<table class="table table-striped">
+  <tr>
+    <th>Administrators</th>
+  </tr>
+
+<% @administrators.each do |administrator| %>
+  <tr>
+    <td><%= administrator.name %></td>
+
+  </tr>
+<% end %>
+</table>
+
 <table class="table table-striped">
   <tr>
     <th>People</th>
