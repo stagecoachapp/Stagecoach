@@ -10,6 +10,7 @@ $sc_blue: #54B8FF;
 $sc_gray_unclicked: #333333;
 $sc_gray_clicked: #cccccc;
 
+/* This is the CSS for the main body */
 body {
   padding-top: 60px !important;
 }
@@ -19,6 +20,11 @@ body {
   margin-top: 3px;
 }
 
+#container-shifting-div {
+	margin-left: 100px;
+}
+
+/* This is the footer CSS */
 footer {
 	margin-top: 20px;
 	padding-bottom: 20px;
@@ -39,14 +45,37 @@ footer p {
 	margin-right: 20px;
 }
 
-.username li {
+/* This is the CSS for the header */
+header {
+	height: 40px;
+}
+
+.navbar-inner {
+	height: 40px;
+}
+
+.navbar-inner.container {
+	height: 40px;
+}
+
+#username {
 	float: right;
+	margin-top: 10px;
 }
 
-#container-shifting-div {
-	margin-left: 100px;
+#username a {
+	color: white;
 }
 
+#logo {
+	height: 40px;
+	width: 80px;
+	position: absolute;
+	margin-left: -178px;
+	text-align: center;
+}
+
+/* This is the CSS for the sidebar */
 .sidebar {
 	height: 100%;
 	background-image: url("<%= image_path "sidebar/bg.png" %>");
