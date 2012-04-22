@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Emanuel', :city => cities.first)
+
+# Development seed data
+development_users = ["Test User 1", "Test User 2", "Test User 3"]
+development_projects = ["Test Project 1", "Test Project 2"]
+
+for project_name in development_projects do
+	Project.create(:name => project_name, :password => "password")
+end
