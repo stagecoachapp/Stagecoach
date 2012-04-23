@@ -11,6 +11,22 @@ end
 
 module FilmProjectRails
   class Application < Rails::Application
+
+    #the 0 guarantees that it is loaded first
+    ENV['AWS_ACCESS_KEY_ID'] ||= "AKIAIB2PQYR2LSGIG4BA"
+    ENV['AWS_SECRET_ACCESS_KEY'] ||= "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"
+    ENV['FOG_DIRECTORY'] ||= "stagecoachlocal-assets"
+    ENV['FOG_PROVIDER'] ||= "AWS"
+    ENV['S3_BUCKET_NAME'] ||= "stagecoachlocal-assets"
+    ENV['GMAIL_PASSWORD'] ||= "northwestern2013"
+    ENV['GMAIL_USERNAME'] ||= "projectstagecoach@gmail.com"
+    ENV['GOOGLE_OAUTH_SCOPE'] ||= "https://www.google.com/m8/feeds  https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
+    ENV['GOOGLE_OAUTH_STATE'] ||= ""
+    ENV['GOOGLE_OAUTH_RESPONSE_TYPE'] ||= "code"
+    ENV['GOOGLE_OAUTH_CLIENT_ID'] ||= "630898205217-pt1ife1pkrqmt5k644fvodp5o3cb5737.apps.googleusercontent.com"
+    ENV['GOOGLE_OAUTH_CLIENT_SECRET'] ||= "h5J7p-dk5bBd2QG7KVEJH_23"
+    ENV['GOOGLE_OAUTH_REDIRECT_URI'] ||= "http://localhost:3000/oauth2callback"
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
