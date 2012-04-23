@@ -166,6 +166,16 @@ ActiveRecord::Schema.define(:version => 20120423013921) do
     t.integer "user_id"
   end
 
+  create_table "reminders", :force => true do |t|
+    t.string   "name"
+    t.datetime "time"
+    t.text     "description"
+    t.boolean  "needs_response"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "task_id"
+  end
+
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
