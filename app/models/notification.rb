@@ -12,11 +12,11 @@ class Notification < ActiveRecord::Base
 	def to_s
 		case self.notification_type.name
 		when "NewTask"
-			"You have been assigned to the following task: " + self.notification_object
+			"You have been assigned to the following task: " + self.notification_object.to_s
 		when "NewInvitation"
-			"You have been invited to join " + self.notification_object_type
+			"You have been invited to join " + self.notification_object.to_s
 		else
-			"Notification: " + self.notification_object
+			"Notification: " + self.notification_object.to_s
 		end
 	end
 end
