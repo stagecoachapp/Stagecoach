@@ -7,6 +7,7 @@ class AddInvitations < ActiveRecord::Migration
       t.integer :from_user_id
       t.datetime :start_date
       t.datetime :end_date
+      t.integer :project_id
 
   		t.timestamps
   	end

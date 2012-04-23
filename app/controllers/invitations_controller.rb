@@ -43,20 +43,21 @@ class InvitationsController < ApplicationController
     # POST /invitations
     # POST /invitations.json
     def create
-    params[:invitation][:to_user] = User.find_by_name(params[:invitation][:to_user])
-    params[:invitation][:from_user] = User.find_by_name(params[:invitation][:from_user])
-    @invitation = Invitation.new(params[:invitation])
-    conversation = Conversation.create
-    @invitation.update_attribute(:conversation, conversation)
-    Notification.create(:user => @invitation.to_user, :notification_type => NotificationType.find_by_name("NewInvitation"))
+        params[:invitation][:to_user] = User.find_by_name(params[:invitation][:to_user])
+        params[:invitation][:from_user] = User.find_by_name(params[:invitation][:from_user])
+        @invitation = Invitation.new(params[:invitation])
+        conversation = Conversation.create
+        @invitation.update_attribute(:conversation, conversation)
+        notification = Notification.create!(:user => @invitation.to_user, :notification_type => NotificationType.find_by_name("NewInvitation"), :notification_object => @invitation)
+
         respond_to do |format|
-        if @invitation.save
-            format.html { redirect_to @invitation, success: 'Invitation was successfully created.' }
-            format.json { render json: @invitation, status: :created, location: @invitation }
-        else
-            format.html { render action: "new" }
-            format.json { render json: @invitation.errors, status: :unprocessable_entity }
-        end
+            if @invitation.save
+                format.html { redirect_to @invitation, success: 'Invitation was successfully created.' }
+                format.json { render json: @invitation, status: :created, location: @invitation }
+            else
+                format.html { render action: "new" }
+                format.json { render json: @invitation.errors, status: :unprocessable_entity }
+            end
         end
     end
 

@@ -148,9 +148,9 @@ ActiveRecord::Schema.define(:version => 20120423070909) do
     t.integer  "from_user_id"
     t.datetime "start_date"
     t.datetime "end_date"
-    t.integer  "conversation_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.integer  "project_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "messages", :force => true do |t|
@@ -197,16 +197,6 @@ ActiveRecord::Schema.define(:version => 20120423070909) do
   create_table "projects_users", :id => false, :force => true do |t|
     t.integer "project_id"
     t.integer "user_id"
-  end
-
-  create_table "reminders", :force => true do |t|
-    t.string   "name"
-    t.datetime "time"
-    t.text     "description"
-    t.boolean  "needs_response"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "task_id"
   end
 
   create_table "sessions", :force => true do |t|

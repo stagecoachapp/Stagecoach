@@ -44,7 +44,6 @@ class MessagesController < ApplicationController
     respond_to do |format|
       if @message.save
         redirect_object = @message
-        debugger
         if @message.conversation.conversation_object.class.name == "Invitation"
           redirect_object = @message.conversation.conversation_object
         end

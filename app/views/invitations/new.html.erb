@@ -29,6 +29,8 @@
 	<div class="actions">
 		<%= f.submit %>
 	</div>
+
+	<%= f.hidden_field :project_id, :value => self.current_project.id %>
 <% end %>
 
 
