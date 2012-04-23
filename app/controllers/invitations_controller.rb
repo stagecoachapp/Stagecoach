@@ -25,9 +25,9 @@ class InvitationsController < ApplicationController
     # GET /invitations/new.json
     def new
         @invitation = Invitation.new
-        @invitation.from = self.current_user
+        @invitation.from_user = self.current_user
         unless params[:user].nil?
-            @invitation.to = User.find_by_id(params[:user])
+            @invitation.to_user = User.find_by_id(params[:user])
         end
         respond_to do |format|
             format.html # new.html.erb
@@ -43,10 +43,11 @@ class InvitationsController < ApplicationController
     # POST /invitations
     # POST /invitations.json
     def create
+    params[:invitation][:to_user] = User.find_by_name(params[:invitation][:to_user])
+    params[:invitation][:from_user] = User.find_by_name(params[:invitation][:from_user])
     @invitation = Invitation.new(params[:invitation])
     conversation = Conversation.create
     @invitation.update_attribute(:conversation, conversation)
-    debugger
         respond_to do |format|
         if @invitation.save
             format.html { redirect_to @invitation, success: 'Invitation was successfully created.' }

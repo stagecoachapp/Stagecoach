@@ -2,12 +2,12 @@
 
 <%= form_for(@invitation) do |f| %>
 	<div class="field">
-		<%= f.label :from %>
-		<%= f.text_field :from, @invitation.to %>
+		<%= f.label :from_user %>
+		<%= f.text_field :from_user, :value => @invitation.from_user %>
 	</div>
 	<div class="field">
-		<%= f.label :to %>
-		<%= f.text_field :to, :value => @invitation.to %>
+		<%= f.label :to_user %>
+		<%= f.text_field :to_user, :value => @invitation.to_user %>
 	</div>
 	<div class="field">
 		<%= f.label :start_date %>
