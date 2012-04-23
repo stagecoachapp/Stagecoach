@@ -1,7 +1,7 @@
 module AssetsHelper
 	
-	def assets_path
-		"/assets"
-	end
+	#def assets_path
+	#	"/assets"
+	#end
 
 end
