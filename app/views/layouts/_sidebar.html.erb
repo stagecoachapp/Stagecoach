@@ -5,6 +5,19 @@
             <%= image_tag "header/logo.png" %>
       </div>
 
+      <div class="sidebar_item" >
+        <a class="sidebar_item_link" href="<%= url_for(:controller => :notifications, :action => :index) %>">
+          <%= image_tag("sidebar/Icon-Notifications.png") %>
+          Notifications
+        </a>
+      </div>
+
+      <div class="sidebar_item" >
+        <a class="sidebar_item_link" href=<%= invitations_path %>>
+          <%= image_tag("sidebar/Icon-Invitations.png") %>
+          Invitations
+        </a>
+      </div>
 
       <div class="sidebar_item" >
         <a class="sidebar_item_link" href=<%= tasks_path %>>
@@ -23,6 +36,13 @@
         <a class= "sidebar_item_link" href="/contacts/all">
           <%= image_tag "sidebar/Icon-People.png" %>
           People
+        </a>
+      </div>
+
+      <div class="sidebar_item" id="application-crew-link">
+        <a class= "sidebar_item_link" href="<%= assets_path %>" >
+          <%= image_tag "sidebar/Icon-Assets.png" %>
+          Assets
         </a>
       </div>
   </nav>
