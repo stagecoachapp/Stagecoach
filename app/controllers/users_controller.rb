@@ -69,7 +69,7 @@ class UsersController < ApplicationController
     @user = current_user
     if self.current_project.nil?
       @user_roles = UserRole.all
-    else   
+    else
       @user_roles = self.current_project.user_roles
     end
 
@@ -84,7 +84,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if self.current_project.nil?
       @user_roles = UserRole.all
-    else   
+    else
       @user_roles = self.current_project.user_roles
     end
   end
@@ -113,6 +113,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
+        format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.mobile { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
