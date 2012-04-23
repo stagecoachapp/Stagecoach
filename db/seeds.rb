@@ -8,7 +8,6 @@
 
 
 # Default user roles
-UserRole.delete_all
 default_user_roles = [
 	"Directing Team",
 	"Producing Team",
@@ -26,6 +25,43 @@ default_user_roles = [
 	"Transportation",
 	"Other",
 ]
+
+UserRole.delete_all
 for role in default_user_roles
 	UserRole.create(:name => role)
+end
+
+# Default notification types
+default_notification_types = [
+	"Default",
+	"NewTask",
+]
+
+NotificationType.delete_all
+for type in default_notification_types
+	NotificationType.create(:name => type)
+end
+
+# Default task status
+default_task_statuses = [
+	"Pending",
+	"Late",
+	"Complete",
+	"LateComplete",
+]
+
+TaskStatus.delete_all
+for status in default_task_statuses
+	TaskStatus.create(:name => status)
+end
+
+# Default task priorities
+default_task_priorities = [
+	"Low",
+	"High",
+]
+
+TaskPriority.delete_all
+for priority in default_task_priorities
+	TaskPriority.create(:name => priority)
 end
