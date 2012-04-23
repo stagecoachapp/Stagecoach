@@ -1,5 +1,15 @@
   <nav class="sidebar">
     <div class="sidebar-content">
+
+      <div class="sidebar-item">
+        <a href="/">
+        <div class="sidebar-link">
+            <%= image_tag "header/logo.png" %>
+          Home
+        </div>
+      </div>
+
+
       <div class="sidebar-item" id="application-task-link">
         <%= link_to(tasks_path, :remote => false) do %>
         <div class="sidebar-link">
