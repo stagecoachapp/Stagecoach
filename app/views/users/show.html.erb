@@ -26,5 +26,6 @@
 </p>
 
 
+<%= link_to "Invite to #{self.current_project}", h(new_invitation_path + "?" + {:user => @user.id}.to_query) %> |
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

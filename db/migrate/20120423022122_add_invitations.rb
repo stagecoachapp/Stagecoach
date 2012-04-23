@@ -1,12 +1,12 @@
 class AddInvitations < ActiveRecord::Migration
   def change
   	create_table :invitations do |t|
-  		t.string :header
-  		t.datetime :start_date
-  		t.datetime :end_date
+  		t.string :subject
   		t.text :body
-  		t.integer :from_user_id
   		t.integer :to_user_id
+      t.integer :from_user_id
+      t.datetime :start_date
+      t.datetime :end_date
 
   		t.timestamps
   	end

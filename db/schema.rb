@@ -140,12 +140,12 @@ ActiveRecord::Schema.define(:version => 20120423022122) do
   end
 
   create_table "invitations", :force => true do |t|
-    t.string   "header"
+    t.string   "subject"
+    t.text     "body"
+    t.integer  "to_user_id"
+    t.integer  "from_user_id"
     t.datetime "start_date"
     t.datetime "end_date"
-    t.text     "body"
-    t.integer  "from_user_id"
-    t.integer  "to_user_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end

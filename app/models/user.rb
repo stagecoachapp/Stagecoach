@@ -43,6 +43,10 @@ class User < ActiveRecord::Base
         return contacts
     end
 
+    def to_s
+        self.name
+    end
+
     private
     def default_values
       self.smartphone ||= 1
