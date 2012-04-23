@@ -1,5 +1,16 @@
-<ul>
-	<% for contact in @contacts %>
+<div class="contacts-top">
+	<h1>Contacts</h1>
+	<div class="contacts-buttons">
+		<button>All Contacts</button>
+		<button>Current Project</button>
+		<button>All Projects</button>
+	</div>
+</div>
+
+<div class="contacts-list">
+	<ul>
+		<% for contact in @contacts %>
 		<li><%= contact.name %></li>
-	<% end %>
-</ul>
+		<% end %>
+	</ul>
+</div>
