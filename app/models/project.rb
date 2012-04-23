@@ -22,7 +22,7 @@ class Project < ActiveRecord::Base
 
     def password=(new_password)
       password = Password.create(new_password)
-      self.password_hash = @password
+      self.password_hash = password
     end
 
 	def capitalized_name
