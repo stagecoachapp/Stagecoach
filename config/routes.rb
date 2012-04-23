@@ -1,5 +1,7 @@
 FilmProjectRails::Application.routes.draw do
 
+  resources :invitations
+
   resources :conversations
 
   resources :messages
