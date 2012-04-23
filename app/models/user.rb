@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
             end
           end
         end
+        contacts.sort_by! {|c| c.name}
         return contacts
     end
 
