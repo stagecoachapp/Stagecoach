@@ -1,16 +1,27 @@
-<ul>
-	<% for project in @projects %>
-		<% unless project.users.count == 1 %>
-			<li>
-				<p><%= link_to project.name, project %></p>
-				<ul>
-					<% for contact in project.users %>
-						<% unless contact == @current_user %>
-							<%= link_to contact.name, contact %>
+<div class="contacts-top">
+	<h1>Contacts by Project</h1>
+	<div class="contacts-buttons">
+		<button><a href="/contacts/all">All Contacts</a></button>
+		<button><a href="/contacts/roles">Current Project</a></button>
+		<button disabled="true"><a href="/contacts/projects">All Projects</a></button>
+	</div>
+</div>
+
+<div class="contacts-list">
+	<ul>
+		<% for project in @projects %>
+			<% unless project.users.count == 1 %>
+				<li>
+					<p><%= project.name %></p>
+					<ul>
+						<% for contact in project.users %>
+							<% unless contact == @current_user %>
+								<li><%= contact.name %></li>
+							<% end %>
 						<% end %>
-					<% end %>
-				</ul>
-			</li>
-		<% end %>
-  	<% end %>
-</ul>
+					</ul>
+				</li>
+			<% end %>
+	  	<% end %>
+	</ul>
+</div>

@@ -1,5 +1,16 @@
-<ul>
-	<% for contact in @contacts %>
-		<%= link_to contact.name, contact %>
-  	<% end %>
-</ul>
+<div class="contacts-top">
+	<h1>All Contacts</h1>
+	<div class="contacts-buttons">
+		<button disabled="true"><a href="/contacts/all">All Contacts</a></button>
+		<button><a href="/contacts/roles">Current Project</a></button>
+		<button><a href="/contacts/projects">All Projects</a></button>
+	</div>
+</div>
+
+<div class="contacts-list">
+	<ul>
+		<% for contact in @contacts %>
+		<li><%= contact.name %></li>
+		<% end %>
+	</ul>
+</div>
