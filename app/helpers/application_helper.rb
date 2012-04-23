@@ -41,4 +41,8 @@ module ApplicationHelper
         "notifications"
     end
 
+    def upload_assets_path
+        "/assets/upload"
+    end
+
 end
