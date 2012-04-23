@@ -22,7 +22,7 @@ module ApplicationHelper
     end
 
     def join_project_path
-     "projects/join"
+     "/projects/join"
     end
 
     def task_menu_path
@@ -39,6 +39,10 @@ module ApplicationHelper
 
     def notifications_path
         "notifications"
+    end
+
+    def upload_assets_path
+        "/assets/upload"
     end
 
 end
