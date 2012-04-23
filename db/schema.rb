@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120423022122) do
+ActiveRecord::Schema.define(:version => 20120423070909) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -101,8 +101,10 @@ ActiveRecord::Schema.define(:version => 20120423022122) do
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
 
   create_table "conversations", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.integer  "conversation_object_id"
+    t.string   "conversation_object_type"
   end
 
   create_table "conversations_users", :id => false, :force => true do |t|
@@ -146,8 +148,9 @@ ActiveRecord::Schema.define(:version => 20120423022122) do
     t.integer  "from_user_id"
     t.datetime "start_date"
     t.datetime "end_date"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.integer  "conversation_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "messages", :force => true do |t|
@@ -185,9 +188,9 @@ ActiveRecord::Schema.define(:version => 20120423022122) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.string   "password"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "password_hash"
     t.integer  "owner_id"
   end
 

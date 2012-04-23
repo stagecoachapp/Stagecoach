@@ -41,10 +41,14 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(params[:message])
-
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
+        redirect_object = @message
+        debugger
+        if @message.conversation.conversation_object.class.name == "Invitation"
+          redirect_object = @message.conversation.conversation_object
+        end
+        format.html { redirect_to redirect_object, notice: 'Message was successfully created.' }
         format.json { render json: @message, status: :created, location: @message }
       else
         format.html { render action: "new" }

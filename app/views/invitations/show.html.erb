@@ -27,5 +27,16 @@
 	</div>
 <% end %>
 
+<h1>Conversation</h1>
+<% @invitation.conversation.messages.each do |message| %>
+	<p><%= "#{message.user}: #{message.text}" %></p>
+<% end %>
+<%= form_for @message, :url => { :controller => :messages, :action => :create } do |f| %>
+	<%= f.text_field :text %>
+	<%= f.hidden_field :conversation_id, :value => @invitation.conversation.id %>
+	<%= f.hidden_field :user_id, :value => self.current_user.id %>
+	<%= f.submit %>
+<% end %>
+
 <%= link_to 'Edit', edit_invitation_path(@invitation) %>
 <%= link_to 'Back', invitations_path %>

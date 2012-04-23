@@ -13,8 +13,8 @@ class InvitationsController < ApplicationController
     # GET /invitations/1
     # GET /invitations/1.json
     def show
-    @invitation = Invitation.find(params[:id])
-
+        @invitation = Invitation.find(params[:id])
+        @message = Message.new(:conversation => @invitation.conversation)
         respond_to do |format|
             format.html # show.html.erb
             format.json { render json: @invitation }
