@@ -34,4 +34,8 @@ class Project < ActiveRecord::Base
 		!owner.nil?
 	end
 
+	def to_s
+		self.capitalized_name
+	end
+
 end

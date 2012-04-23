@@ -3,7 +3,7 @@
 	<% @unread_notifications.each do |notification| %>
 
 		<li>
-			<b><%= notification.to_s %></b>
+			<p class="unread_notification"><%= link_to  notification.to_s, notification.notification_object %></p>
 		</li>
 
 	<% end %>
@@ -12,7 +12,7 @@
 	<% @read_notifications.each do |notification| %>
 
 		<li>
-			<p><%= notification.to_s %></p>
+			<p class="read_notification">%= link_to  notification.to_s, notification.notification_object %></p>
 		</li>
 
 	<% end %>

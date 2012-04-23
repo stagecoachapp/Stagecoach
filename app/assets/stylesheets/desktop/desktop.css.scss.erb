@@ -68,10 +68,8 @@ header {
 }
 
 #logo {
-	height: 40px;
+	height: 60px;
 	width: 80px;
-	position: absolute;
-	margin-left: -178px;
 	text-align: center;
 }
 
@@ -94,38 +92,37 @@ header {
 	background-image: url("<%= image_path "sidebar/bg.png" %>");
 	background-repeat: repeat-y;
 	width: 80px;
-	border-right: 1px solid gray;
+	border-right: 4px solid black;
+	box-shadow: 0px 0px 15px black;
 	float: left;
 	position: fixed;
-	margin-top: -20px;
+	margin-top: -60px;
+	z-index: 1040;
 }
 
-.sidebar-content {
-	background-image: none;
-	background-color: $sc_gray_unclicked;
-}
-
-.sidebar-content li {
-	margin-bottom: 5px;
-	border-bottom: 1px solid gray;
-}
-
-.sidebar-content a {
-	color: white;
-}
-
-.sidebar-content a:hover {
-	color: white;
-}
-
-.sidebar-content a:active {
-	background-color: $sc_gray_clicked;
-}
-
-.sidebar-item {
-	border-bottom: 1px solid gray;
-}
-
-.sidebar-link {
+.sidebar_item {
+	height: 80px;
+	width: 80px;
 	text-align: center;
+}
+
+.sidebar_item:hover {
+	background-color: gray;
+}
+
+.sidebar_item_link {
+	text-align: center;
+	color: white;
+}
+
+.sidebar_item_link:hover {
+	text-align: center;
+	text-decoration: none;
+	color: white;
+}
+
+.sidebar_item_link:visited {
+	text-align: center;
+	text-decoration: none;
+	color: white;
 }

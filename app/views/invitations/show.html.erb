@@ -1,0 +1,42 @@
+<h1>Show invitation</h1>
+
+<%= form_for(@invitation) do |f| %>
+	<div class="field">
+		<%= f.label :from_user %>
+		<%= f.text_field :from_user, :value => @invitation.from_user, :disabled => true %>
+	</div>
+	<div class="field">
+		<%= f.label :to_user %>
+		<%= f.text_field :to_user, :value => @invitation.to_user, :disabled => true %>
+	</div>
+	<div class="field">
+		<%= f.label :start_date %>
+		<%= f.date_select :start_date, :value => @invitation.start_date, :disabled => true %>
+	</div>
+	<div class="field">
+		<%= f.label :end_date %>
+		<%= f.date_select :end_date, :value => @invitation.end_date, :disabled => true %>
+	</div>
+	<div class="field">
+		<%= f.label :subject %>
+		<%= f.text_field :subject, :value => @invitation.subject, :disabled => true %>
+	</div>
+	<div class="field">
+		<%= f.label :body %>
+		<%= f.text_area :body, :value => @invitation.body, :disabled => true %>
+	</div>
+<% end %>
+
+<h1>Conversation</h1>
+<% @invitation.conversation.messages.each do |message| %>
+	<p><%= "#{message.user}: #{message.text}" %></p>
+<% end %>
+<%= form_for @message, :url => { :controller => :messages, :action => :create } do |f| %>
+	<%= f.text_field :text %>
+	<%= f.hidden_field :conversation_id, :value => @invitation.conversation.id %>
+	<%= f.hidden_field :user_id, :value => self.current_user.id %>
+	<%= f.submit %>
+<% end %>
+
+<%= link_to 'Edit', edit_invitation_path(@invitation) %>
+<%= link_to 'Back', invitations_path %>

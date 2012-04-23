@@ -1,0 +1,35 @@
+<h1>New invitation</h1>
+
+<%= form_for(@invitation) do |f| %>
+	<div class="field">
+		<%= f.label :from_user %>
+		<%= f.text_field :from_user, :value => @invitation.from_user, :disabled => true %>
+	</div>
+	<div class="field">
+		<%= f.label :to_user %>
+		<%= f.text_field :to_user, :value => @invitation.to_user, :disabled => true %>
+	</div>
+	<div class="field">
+		<%= f.label :start_date %>
+		<%= f.date_select :start_date %>
+	</div>
+	<div class="field">
+		<%= f.label :end_date %>
+		<%= f.date_select :end_date %>
+	</div>
+	<div class="field">
+		<%= f.label :subject %>
+		<%= f.text_field :subject %>
+	</div>
+	<div class="field">
+		<%= f.label :body %>
+		<%= f.text_area :body %>
+	</div>
+
+	<div class="actions">
+		<%= f.submit %>
+	</div>
+<% end %>
+
+
+<%= link_to 'Back', invitations_path %>
