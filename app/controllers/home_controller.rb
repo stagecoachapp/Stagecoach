@@ -2,7 +2,7 @@ class HomeController < ApplicationController
 
   def index
     if self.current_user? && !is_mobile_device?
-      url_for :action => :index_signed_in
+      render :action => :index_signed_in
       return
     end
       respond_to do |format|
