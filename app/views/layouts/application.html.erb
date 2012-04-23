@@ -9,12 +9,52 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class ="container">
-    <!-- start container -->
-  <%= render 'layouts/header' %>
-  <%= yield %>
-  <%= render 'layouts/footer' %>
-  </div>
+  <% if self.current_user? %>
+  <%= render 'layouts/header_signed_in' %>
+  <%= render 'layouts/sidebar' %>
+  <% else %>
+  <%= render 'layouts/header_signed_out' %>
+  <% end %>
+
+  <% if self.current_user? %>
+    <div id="container-shifting-div">
+  <% end %>
+    <div class ="container" id="right-content">
+      <!-- start container -->
+      <!-- if the user is signed in, put the alerts inside the container so they don't disturb the sidebar -->
+      <% if self.current_user? %>
+      <% if(flash[:success]) %>
+      <div class="alert alert-success" data-dismiss="alert" href="#">
+        <a class="close">x</a>
+        <%= flash[:success] %>
+      </div>
+      <% end %>
+      <% if( flash[:error] ) %>
+      <div class="alert alert-error" data-dismiss="alert" href="#">
+        <a class="close">x</a>
+        <%= flash[:error] %>
+      </div>
+      <% end %>
+      <% if( flash[:notice] ) %>
+      <div class="alert alert-notice" data-dismiss="alert" href="#">
+        <a class="close">x</a>
+        <%= flash[:notice] %>
+      </div>
+      <% end %>
+      <% if( flash[:info] ) %>
+      <div class="alert alert-info" data-dismiss="alert" href="#">
+        <a class="close">x</a>
+        <%= flash[:info] %>
+      </div>
+      <% end %>
+      <% end %>
+      <!-- input the page here -->
+      <%= yield %>
+    </div>
+  <% if self.current_user? %>
+    </div>
+  <% end %>
   <!-- end container -->
+  <%= render 'layouts/footer' %>
 </body>
 </html>

@@ -1,0 +1,118 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree .
+*/
+
+$sc_blue: #54B8FF;
+$sc_gray_unclicked: #333333;
+$sc_gray_clicked: #cccccc;
+
+/* This is the CSS for the main body */
+body {
+  padding-top: 60px !important;
+}
+
+.jquery_form_error_message {
+  display: block;
+  margin-top: 3px;
+}
+
+#container-shifting-div {
+	margin-left: 100px;
+}
+
+/* This is the footer CSS */
+footer {
+	margin-top: 20px;
+	padding-bottom: 20px;
+}
+
+footer p {
+	margin-left: 176px;
+	position: absolute;
+}
+
+#blog {
+	float: right;
+	margin-right: 180px;
+}
+
+#about {
+	float: right;
+	margin-right: 20px;
+}
+
+/* This is the CSS for the header */
+header {
+	height: 40px;
+}
+
+.navbar-inner {
+	height: 40px;
+}
+
+.navbar-inner.container {
+	height: 40px;
+}
+
+#username {
+	float: right;
+	margin-top: 10px;
+}
+
+#username a {
+	color: white;
+}
+
+#logo {
+	height: 40px;
+	width: 80px;
+	position: absolute;
+	margin-left: -178px;
+	text-align: center;
+}
+
+/* This is the CSS for the sidebar */
+.sidebar {
+	height: 100%;
+	background-image: url("<%= image_path "sidebar/bg.png" %>");
+	background-repeat: repeat-y;
+	width: 80px;
+	border-right: 1px solid gray;
+	float: left;
+	position: fixed;
+	margin-top: -20px;
+}
+
+.sidebar-content {
+	background-image: none;
+	background-color: $sc_gray_unclicked;
+}
+
+.sidebar-content li {
+	margin-bottom: 5px;
+	border-bottom: 1px solid gray;
+}
+
+.sidebar-content a {
+	color: white;
+}
+
+.sidebar-content a:hover {
+	color: white;
+}
+
+.sidebar-content a:active {
+	background-color: $sc_gray_clicked;
+}
+
+.sidebar-item {
+	border-bottom: 1px solid gray;
+}
+
+.sidebar-link {
+	text-align: center;
+}
