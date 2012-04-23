@@ -290,6 +290,7 @@ DEPENDENCIES
   activeadmin
   asset_sync
   aws-sdk
+  bcrypt-ruby
   ckeditor_rails
   coffee-rails (~> 3.2.1)
   jquery-rails
