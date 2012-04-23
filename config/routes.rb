@@ -4,8 +4,6 @@ FilmProjectRails::Application.routes.draw do
 
   resources :messages
 
-  resources :convorsations
-
   resources :posts do
     resources :comments
   end
