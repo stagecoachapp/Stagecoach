@@ -48,6 +48,7 @@ class InvitationsController < ApplicationController
     @invitation = Invitation.new(params[:invitation])
     conversation = Conversation.create
     @invitation.update_attribute(:conversation, conversation)
+    Notification.create(:user => @invitation.to_user, :notification_type => NotificationType.find_by_name("NewInvitation"))
         respond_to do |format|
         if @invitation.save
             format.html { redirect_to @invitation, success: 'Invitation was successfully created.' }
