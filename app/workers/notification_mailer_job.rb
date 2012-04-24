@@ -4,7 +4,9 @@ class NotificationMailerJob
 	def self.perform(notification_id)
 		notification = Notification.find_by_id(notification_id)
 		if notification.notification_type == "NewTask"
-			NotificationMailer.new_task(notification).deliver
+			NotificationMailer.new_task(notification_id).deliver
+		else
+			NotificationMailer.default(notification_id).deliver
 		end
 	end
 

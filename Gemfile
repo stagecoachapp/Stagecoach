@@ -29,6 +29,8 @@ gem 'ckeditor_rails', :require => 'ckeditor-rails'
 gem 'mobile-fu', :git => 'git://github.com/benlangfeld/mobile-fu.git'
 
 gem 'resque', :require => "resque/server"
+gem 'resque_mailer'
+
 group :development do
   gem 'rspec'
   gem 'rspec-rails'

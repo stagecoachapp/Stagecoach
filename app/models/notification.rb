@@ -24,6 +24,7 @@ class Notification < ActiveRecord::Base
 
 	private
 		def send_notification_email
-			Resque.enqueue(NotificationMailerJob, self.id)
+			#Resque.enqueue(NotificationMailerJob, self.id)
+			NotificationMailer.new_task(self.id).deliver
 		end
 end
