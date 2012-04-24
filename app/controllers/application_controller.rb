@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
 
     has_mobile_fu
+
     before_filter :set_request_format
     def set_request_format
         request.format = :mobile if is_mobile_device?
@@ -20,6 +21,7 @@ class ApplicationController < ActionController::Base
 
     before_filter :require_login
     def require_login
+        session[:after_login_redirect_url] = request.url
         unless current_user?
             if is_mobile_device?
                 redirect_to '/signin'
