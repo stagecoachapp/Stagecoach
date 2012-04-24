@@ -27,6 +27,22 @@ module FilmProjectRails
     ENV['GOOGLE_OAUTH_CLIENT_SECRET'] ||= "h5J7p-dk5bBd2QG7KVEJH_23"
     ENV['GOOGLE_OAUTH_REDIRECT_URI'] ||= "http://localhost:3000/oauth2callback"
 
+
+      #this is for email
+      config.action_mailer.delivery_method = :smtp
+      config.action_mailer.perform_deliveries = true
+      config.action_mailer.raise_delivery_errors = true
+      config.action_mailer.default :charset => "utf-8"
+      config.action_mailer.smtp_settings = {
+        address: "smtp.gmail.com",
+        port: 587,
+        domain: "projectstagecoach.com",
+        authentication: "plain",
+        enable_starttls_auto: true,
+        user_name: ENV["GMAIL_USERNAME"],
+        password: ENV["GMAIL_PASSWORD"]
+      }
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

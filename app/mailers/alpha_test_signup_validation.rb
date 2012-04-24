@@ -1,5 +1,5 @@
 class AlphaTestSignupValidation < ActionMailer::Base
-	default :from => "notifications@projectstagecoach.com"
+	default :from => "#{ENV['GMAIL_USERNAME']}"
 
 	def welcome_email(user)
 		@user = user
