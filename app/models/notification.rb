@@ -24,9 +24,6 @@ class Notification < ActiveRecord::Base
 
 	private
 		def send_notification_email
-			case self.notification_type.name
-			when "NewTask"
-				NotificationMailer.new_task(self).deliver
-			end
+			Resque.enqueue(NotificationMailerJob, self.id)
 		end
 end

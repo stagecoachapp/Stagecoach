@@ -14,18 +14,21 @@ gem "twitter-bootstrap-rails", "~> 2.0rc0", :group => :assets
 gem 'thin'
 
 gem 'bcrypt-ruby'
-
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
-  gem 'asset_sync'
-
-
 gem 'jquery-rails'
+gem 'sass-rails',   '~> 3.2.3'
+gem 'coffee-rails', '~> 3.2.1'
+gem 'uglifier', '>= 1.0.3'
+
+#assets
+gem 'asset_sync'
+gem 'aws-sdk'
+gem 'paperclip', :git => "git://github.com/thoughtbot/paperclip.git"
+
 gem 'omniauth-facebook'
 gem 'ckeditor_rails', :require => 'ckeditor-rails'
-
 gem 'mobile-fu', :git => 'git://github.com/benlangfeld/mobile-fu.git'
+
+gem 'resque', :require => "resque/server"
 group :development do
   gem 'rspec'
   gem 'rspec-rails'
@@ -46,19 +49,6 @@ group :test do
   gem 'rspec'
   gem 'rspec-rails'
 end
-
-group :development do
-  #gem "rails-dev-tweaks", "~> 0.6.1"
- # gem 'ruby-debug19'
-end
-
-#used for attachment uploading
-#group :production do
-  gem 'paperclip', :git => "git://github.com/thoughtbot/paperclip.git"
-  #gem "aws-s3", :require => "aws/s3"
-  gem 'aws-sdk'
-#end
-
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
