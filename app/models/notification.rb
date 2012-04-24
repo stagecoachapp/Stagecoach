@@ -9,6 +9,8 @@ class Notification < ActiveRecord::Base
 	validates :notification_object_type, :presence => true
 	validates :read, :inclusion => {:in => [0, 1]}
 
+	after_create :send_notification_email
+
 	def to_s
 		case self.notification_type.name
 		when "NewTask"
@@ -19,4 +21,12 @@ class Notification < ActiveRecord::Base
 			"Notification: " + self.notification_object.to_s
 		end
 	end
+
+	private
+		def send_notification_email
+			case self.notification_type.name
+			when "NewTask"
+				NotificationMailer.new_task(self).deliver
+			end
+		end
 end
