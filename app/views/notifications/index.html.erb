@@ -1,18 +1,20 @@
 <ul>
 	<% unless @unread_notifications.nil? %>
+	<h4>New</h4>
 	<% @unread_notifications.each do |notification| %>
 
 		<li>
-			<b><%= notification.to_s %></b>
+			<p class="unread_notification"><%= link_to  notification.to_s, notification.notification_object %></p>
 		</li>
 
 	<% end %>
 	<% end %>
 	<% unless @read_notifications.nil? %>
+	<h4>Archive</h4>
 	<% @read_notifications.each do |notification| %>
 
 		<li>
-			<p><%= notification.to_s %></p>
+			<p class="read_notification"><%= link_to  notification.to_s, notification.notification_object %></p>
 		</li>
 
 	<% end %>

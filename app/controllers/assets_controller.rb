@@ -3,7 +3,10 @@ class AssetsController < ApplicationController
 	#GET /assets
 	def index
 
-		@assets = self.current_project.assets
+		@assets = Asset.all()
+
+		# Fix This
+		#@assets = self.current_project.assets
 
 		respond_to do |format|
 			format.html

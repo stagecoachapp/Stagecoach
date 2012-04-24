@@ -1,12 +1,33 @@
+<div class="contacts-top">
+	<h1>Contacts in <%= self.current_project.name %></h1>
+	<div class="contacts-buttons">
+		<button><a href="/contacts/all">All Contacts</a></button>
+		<button disabled="true"><a href="/contacts/roles">Current Project</a></button>
+		<button><a href="/contacts/projects">All Projects</a></button>
+	</div>
+</div>
+
+<div class="contacts-list">
+	<ul>
+		<% for contact in self.current_project.users %>
+			<% unless contact == @current_user %>
+				<li><%= contact.name %></li>
+			<% end %>
+		<% end %>
+	</ul>
+</div>
+
+<% if !self.current_user? %>
 <ul>
 	<% for user_role in @user_roles %>
 		<li>
 			<p><%= user_role.name %></p>
 			<ul>
 				<% for contact in @contacts %>
-					<li><%= contact.name %></li>
+					<%= link_to contact.name, contact %>
 				<% end %>
 			</ul>
 		</li>
 	<% end %>
 </ul>
+<% end %>

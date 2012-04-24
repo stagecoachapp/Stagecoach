@@ -9,7 +9,7 @@ class NotificationsController < ApplicationController
 		#so read status cannot be checked in the view
 		@read_notifications = []
 		@unread_notifications = []
-		notifications.find(:all, :order => 'created_at DESC').each do |notification|
+		Notification.all(:conditions => {:user_id => self.current_user.id}, :order => "created_at DESC").each do |notification|
 			if notification.read?
 				@read_notifications << notification
 
