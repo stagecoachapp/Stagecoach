@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
     has_one :authorization
     has_many :notifications, :dependent => :destroy
     has_one :google_user_information
+    has_one :email_setting
     after_initialize :default_values
 
     def self.create_from_facebook_hash(hash)
