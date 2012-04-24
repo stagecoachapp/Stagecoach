@@ -33,7 +33,9 @@ class ProjectsController < ApplicationController
     end
 
     def joinaction
-        @project = Project.find_by_name(params[:projectname])
+        project_name = params[:projectname]
+        project_name.downcase!
+        @project = Project.find_by_name(project_name)
         # 'Already in project' check
         if !(current_user.projects.include?(@project))
             # 'Password' check
@@ -111,6 +113,7 @@ class ProjectsController < ApplicationController
             end
             respond_to do |format|
                 project_name = params[:project][:name]
+                project_name.downcase!
                 project_password = params[:project][:password]
                 @project.name = project_name
                 @project.password = project_password
@@ -133,6 +136,7 @@ class ProjectsController < ApplicationController
         if params[:project_id] == nil
             project_name = params[:project][:name]
             project_password = params[:project][:password]
+            project_name.downcase!
             @new_project= Project.new()
             @new_project.name = project_name
             @new_project.password = project_password
