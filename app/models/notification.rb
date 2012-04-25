@@ -12,13 +12,23 @@ class Notification < ActiveRecord::Base
 	after_create :send_notification_email
 
 	def to_s
-		case self.notification_type.name
+		case self.notification_type.to_s
 		when "NewTask"
 			"You have been assigned to the following task: " + self.notification_object.to_s
 		when "NewInvitation"
 			"You have been invited to join " + self.notification_object.to_s
+		when "NewInvitationMessage"
+			"You have a new message in your invitation to join " + self.notification_object.conversation.conversation_object.project.to_s
 		else
 			"Notification: " + self.notification_object.to_s
+		end
+	end
+
+	def path
+		if self.notification_type.to_s == "NewInvitationMessage"
+			return self.notification_object.conversation.conversation_object
+		else
+			return self.notification_object
 		end
 	end
 
@@ -30,9 +40,13 @@ class Notification < ActiveRecord::Base
 					NotificationMailer.new_task(self.id).deliver
 				end
 			elsif self.notification_type.to_s == "NewInvitation"
-				NotificationMailer.new_invitation(self.id).deliver
+				if self.user.email_setting.new_invitation == 1
+					NotificationMailer.new_invitation(self.id).deliver
+				end
 			elsif self.notification_type.to_s == "NewInvitationMessage"
-				NotificationMailer.new_invitation_message(self.id).deliver
+				if self.user.email_setting.new_invitation_message == 1
+					NotificationMailer.new_invitation_message(self.id).deliver
+				end
 			end
 		end
 end
