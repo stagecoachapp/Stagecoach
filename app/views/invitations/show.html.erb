@@ -34,7 +34,7 @@
 <%= form_for @message, :url => { :controller => :messages, :action => :create } do |f| %>
 	<%= f.text_field :text %>
 	<%= f.hidden_field :conversation_id, :value => @invitation.conversation.id %>
-	<%= f.hidden_field :user_id, :value => self.current_user.id %>
+	<%= f.hidden_field :user_id, :value => @message.user.id %>
 	<%= f.submit %>
 <% end %>
 

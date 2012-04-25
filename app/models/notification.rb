@@ -24,6 +24,15 @@ class Notification < ActiveRecord::Base
 
 	private
 		def send_notification_email
-			NotificationMailer.new_task(self.id).deliver
+
+			if self.notification_type.to_s == "NewTask"
+				if self.user.email_setting.new_task == 1
+					NotificationMailer.new_task(self.id).deliver
+				end
+			elsif self.notification_type.to_s == "NewInvitation"
+				NotificationMailer.new_invitation(self.id).deliver
+			elsif self.notification_type.to_s == "NewInvitationMessage"
+				NotificationMailer.new_invitation_message(self.id).deliver
+			end
 		end
 end

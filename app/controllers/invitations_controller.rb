@@ -14,7 +14,7 @@ class InvitationsController < ApplicationController
     # GET /invitations/1.json
     def show
         @invitation = Invitation.find(params[:id])
-        @message = Message.new(:conversation => @invitation.conversation)
+        @message = Message.new(:conversation => @invitation.conversation, :user => self.current_user)
         respond_to do |format|
             format.html # show.html.erb
             format.json { render json: @invitation }
@@ -47,6 +47,7 @@ class InvitationsController < ApplicationController
         params[:invitation][:from_user] = User.find_by_name(params[:invitation][:from_user])
         @invitation = Invitation.new(params[:invitation])
         conversation = Conversation.create
+        conversation.users = [@invitation.to_user, @invitation.from_user]
         @invitation.update_attribute(:conversation, conversation)
         notification = Notification.create!(:user => @invitation.to_user, :notification_type => NotificationType.find_by_name("NewInvitation"), :notification_object => @invitation)
 
