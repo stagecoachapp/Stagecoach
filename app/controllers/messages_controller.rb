@@ -48,7 +48,6 @@ class MessagesController < ApplicationController
                     @message.conversation.users.each do |user|
                         if user != @message.user
                             notification = Notification.create(user: user, notification_object: @message, notification_type: NotificationType.find_by_name("NewInvitationMessage"))
-                            #debugger
                         end
                     end
                     redirect_object = @message.conversation.conversation_object
