@@ -1,0 +1,9 @@
+Hi <%= @notification.user.name %>,
+
+You have been assigned the following task:
+
+Project: <%= @task.project.to_s %>
+By: <%= @task.owner.to_s %>
+Title: <%= @task.name %>
+
+Please visit http://projectstagecoach.com to login

@@ -14,7 +14,7 @@
 	<% @read_notifications.each do |notification| %>
 
 		<li>
-			<p class="read_notification"><%= link_to  notification.to_s, notification.notification_object %></p>
+			<p class="read_notification"><%= link_to  notification.to_s, notification.path %></p>
 		</li>
 
 	<% end %>

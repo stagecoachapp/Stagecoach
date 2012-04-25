@@ -50,7 +50,7 @@ class SignupsController < ApplicationController
     if @signup.save
       respond_to do |format|
         flash[:success] = 'You have succesfully signed up to be an alpha tester!'
-        AlphaTestSignupValidation.welcome_email(@signup).deliver
+        AlphaTestSignupValidation.welcome_email(@signup.id).deliver
         format.html { redirect_to root_url }
         format.json { render :json => @signup, :status => :created, :location => @signup }
       end
