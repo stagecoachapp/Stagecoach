@@ -18,8 +18,8 @@ module FilmProjectRails
     ENV['FOG_DIRECTORY'] ||= "stagecoachlocal-assets"
     ENV['FOG_PROVIDER'] ||= "AWS"
     ENV['S3_BUCKET_NAME'] ||= "stagecoachlocal-assets"
-    ENV['GMAIL_PASSWORD'] ||= "northwestern"
-    ENV['GMAIL_USERNAME'] ||= "webmaster@projectstagecoach.com"
+    ENV['GMAIL_PASSWORD'] ||= "northwestern2013"
+    ENV['GMAIL_USERNAME'] ||= "admin@projectstagecoach.com"
     ENV['GOOGLE_OAUTH_SCOPE'] ||= "https://www.google.com/m8/feeds  https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
     ENV['GOOGLE_OAUTH_STATE'] ||= ""
     ENV['GOOGLE_OAUTH_RESPONSE_TYPE'] ||= "code"
@@ -27,21 +27,6 @@ module FilmProjectRails
     ENV['GOOGLE_OAUTH_CLIENT_SECRET'] ||= "h5J7p-dk5bBd2QG7KVEJH_23"
     ENV['GOOGLE_OAUTH_REDIRECT_URI'] ||= "http://localhost:3000/oauth2callback"
     ENV['REDISTOGO_URL'] ||= "redis://projectstagecoach:bace5e5f2538a03e261356a364f3cdab@herring.redistogo.com:9865"
-
-      #this is for email
-      config.action_mailer.delivery_method = :smtp
-      config.action_mailer.perform_deliveries = true
-      config.action_mailer.raise_delivery_errors = true
-      config.action_mailer.default :charset => "utf-8"
-      config.action_mailer.smtp_settings = {
-        address: "smtp.gmail.com",
-        port: 587,
-        domain: "projectstagecoach.com",
-        authentication: "plain",
-        enable_starttls_auto: true,
-        user_name: ENV["GMAIL_USERNAME"],
-        password: ENV["GMAIL_PASSWORD"]
-      }
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
