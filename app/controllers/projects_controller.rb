@@ -139,9 +139,9 @@ class ProjectsController < ApplicationController
 
     def create
         project_name = params[:project][:name]
+        project_name.downcase!
         if not Project.all.map{|p| p.name}.include?(project_name)
             project_password = params[:project][:password]
-            project_name.downcase!
             @new_project= Project.new()
             @new_project.name = project_name
             @new_project.password = project_password
