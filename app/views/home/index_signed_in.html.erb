@@ -1,5 +1,12 @@
-<%= link_to "Notifications", notifications_path %>
+<h2>Welcome <%= self.current_user.name %></h2>
 <br>
-<%= link_to "Assets", "/assets" %>
-<br>
-<%= link_to "Invitations", invitations_path %>
+<% if self.current_project.nil? %>
+	<p>You are not currently in a project! Choose one of the options below:</p>
+
+	<p><%= link_to "Create a Project".html_safe, url_for(:controller => :projects, :action => :new), :class => "btn btn-primary btn-large"%>
+
+	<%= link_to "Join a Project".html_safe, url_for(:controller => :projects, :action => :join), :class => "btn btn-secondary btn-large"%></p>
+<% else %>
+
+<p></p>
+<% end %>
