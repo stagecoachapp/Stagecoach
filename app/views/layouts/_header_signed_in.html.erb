@@ -4,7 +4,7 @@
 			<ul class="nav">
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						<%= self.current_project.nil? ? "No Project" : self.current_project.name %>
+						<%= self.current_project.nil? ? "No Project" : self.current_project.capitalized_name %>
 						<% if self.current_user.projects.count > 1 %>
 								<b class="caret"></b>
 				   				</a>
@@ -12,13 +12,25 @@
 								<ul class="dropdown-menu">
 									<% self.current_user.projects.each do |project| %>
 										<% if project != self.current_project %>
-											<li><%= link_to project.name, project, :method => :post %></li>
+											<li><%= link_to project.capitalized_name, project, :method => :post %></li>
 										<% end %>
 									<% end %>
 								</ul>
 						<% else %>
 							</a>
 						<% end %>
+					</ul>
+				</li>
+			</ul>
+			<ul class="nav pull-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<%= self.current_user.to_s %>
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="/settings">Settings</a></li>
+						<li><a href="/signout">Log Out</a></li>
 					</ul>
 				</li>
 			</ul>
