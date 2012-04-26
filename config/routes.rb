@@ -58,6 +58,7 @@ FilmProjectRails::Application.routes.draw do
   match '/signout', :to => 'sessions#destroy'
   match '/signin', :to => 'sessions#new'
   match '/guest', :to => 'sessions#guest'
+  match '/invite', :to => 'invitations#invite'
 
   match '/about', :to => 'home#about'
   match '/comingsoon', :to => 'home#comingsoon'
