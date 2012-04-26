@@ -24,7 +24,7 @@ FilmProjectRails::Application.routes.draw do
   match '/assets', :to => 'assets#create', :via => :post
   match '/assets/:id', :to => 'assets#show'
 
-  match "/projects", :to => "projects#change_project", :via => "post"
+  match "/projects", :to => "projects#create", :via => "post"
   match "/projects/menu", :to => "projects#menu"
   match '/projects/index', :to => 'projects#index'
   match '/projects/join', :to => 'projects#join'

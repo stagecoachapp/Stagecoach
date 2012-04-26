@@ -28,6 +28,7 @@ class ProjectsController < ApplicationController
 
     def join
         respond_to do |format|
+            format.html
             format.mobile
         end
     end
@@ -36,7 +37,8 @@ class ProjectsController < ApplicationController
         project_name = params[:projectname]
         project_name.downcase!
         @project = Project.find_by_name(project_name)
-        unless @project == nil
+        # Project does not exist check
+        if not @project == nil
             # 'Already in project' check
             if !(current_user.projects.include?(@project))
                  # 'Password' check
@@ -44,28 +46,25 @@ class ProjectsController < ApplicationController
                     self.current_user.projects.push(@project)
                     self.current_user.save
                     self.current_project=(@project.id)
-                    respond_to do |format|
-                        format.html { redirect_to root_path, notice: 'Joined Project Successfully.'}
-                        format.mobile { redirect_to root_path, notice: 'Joined Project Successfully.'}
-                    end
+                    go_to = root_path
+                    flash[:success] = 'Joined Project Successfully.'
                 # Incorrect Password page
                 else
-                    respond_to do |format|
-                        format.html { redirect_to root_path, notice: 'Incorrect Password.'}
-                        format.mobile { redirect_to root_path, notice: 'Incorrect Password.'}
-                    end
+                    go_to = projects_path
+                    flash[:success] = 'Incorrect Password.'
                 end
             # Already in project page
             else
-                respond_to do |format|
-                    format.html { redirect_to root_path, notice: 'Already in Project.'}
-                    format.mobile { redirect_to root_path, notice: 'Already in Project.'}
-                end
+                go_to = projects_path
+                flash[:success] = 'Already in Project.'
             end
+        else
+            go_to = projects_path
+            flash[:success] = 'Project does not exist.'
         end
         respond_to do |format|
-            format.html { redirect_to root_path, notice: 'Project does not exist.'}
-            format.mobile { redirect_to root_path, notice: 'Project does not exist.'}
+            format.html { redirect_to go_to}
+            format.mobile { redirect_to go_to}
         end
     end
 
@@ -138,9 +137,9 @@ class ProjectsController < ApplicationController
         end
     end
 
-    def change_project
-        if params[:project_id] == nil
-            project_name = params[:project][:name]
+    def create
+        project_name = params[:project][:name]
+        if not Project.all.map{|p| p.name}.include?(project_name)
             project_password = params[:project][:password]
             project_name.downcase!
             @new_project= Project.new()
@@ -155,12 +154,14 @@ class ProjectsController < ApplicationController
                 flash[:error] = "Error creating project"
             end
             self.current_project = @new_project
+            go_to = root_path
         else
-            self.current_project= params[:project_id]
+            flash[:error] = "Sorry, there is already a project with that name"
+            go_to = projects_path
         end
         respond_to do |format|
-            format.mobile {redirect_to projects_path}
-            format.html {redirect_to projects_path}
+            format.mobile {redirect_to go_to}
+            format.html {redirect_to go_to}
         end
     end
 
