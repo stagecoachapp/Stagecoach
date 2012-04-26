@@ -1,12 +1,7 @@
 <div class="contacts-top">
-	<h1>All Contacts</h1>
-	<div class="contacts-buttons">
-		<button disabled="true"><a href="/contacts/all">All Contacts</a></button>
-		<button><a href="/contacts/roles">Current Project</a></button>
-		<button><a href="/contacts/projects">All Projects</a></button>
-	</div>
+	<%= render 'contacts_page_controls' %>
 </div>
-
+<h4>Unsorted</h4>
 <div class="contacts-list">
 	<ul>
 		<% for contact in @contacts %>
