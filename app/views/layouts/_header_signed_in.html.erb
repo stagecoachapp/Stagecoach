@@ -1,4 +1,35 @@
-<header class="navbar navbar-fixed-top">
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container" id="navbar-container">
+			<ul class="nav">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<%= self.current_project.nil? ? "No Project" : self.current_project.name %>
+						<% if self.current_user.projects.count > 1 %>
+								<b class="caret"></b>
+				   				</a>
+
+								<ul class="dropdown-menu">
+									<% self.current_user.projects.each do |project| %>
+										<% if project != self.current_project %>
+											<li><%= link_to project.name, project, :method => :post %></li>
+										<% end %>
+									<% end %>
+								</ul>
+						<% else %>
+							</a>
+						<% end %>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+
+
+<!--<header class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
 			<div id="signout">
@@ -15,7 +46,7 @@
 				</div>
 				<% end %>
 			</div>
-			
+
 		</div>
 	</div>
-</header>
+</header>-->
