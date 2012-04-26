@@ -32,6 +32,14 @@ class Notification < ActiveRecord::Base
 		end
 	end
 
+	def mark_read
+		self.update_attribute("read", 1)
+	end
+
+	def mark_unread
+		self.update_attribute("read", 0)
+	end
+
 	private
 		def send_notification_email
 
