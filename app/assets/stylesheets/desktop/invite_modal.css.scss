@@ -1,7 +1,14 @@
 #invite-modal {
 	display: none;
-	#Personalized_Message {
-		width: 500px;
-		height: 150px;
+
+	.modal-body {
+		padding-bottom: 0px;
+		form {
+			margin-bottom: 12px;
+			#Personalized_Message {
+				width: 500px;
+				height: 150px;
+			}
+		}
 	}
 }
