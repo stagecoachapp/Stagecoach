@@ -17,7 +17,6 @@ class TasksController < ApplicationController
         @task_categories = self.current_project.task_categories.find(:all)
         @users = self.current_project.users.all
         @time = Time.now.in_time_zone + 2000
-        debugger
         respond_to do |format|
             format.mobile
         end
@@ -27,7 +26,6 @@ class TasksController < ApplicationController
         #debugger
         date = Date.strptime(params[:date],"%m-%d-%Y").to_time
         date = date.change(:hour => Time.parse(params[:time]).hour, :min => Time.parse(params[:time]).min)
-        debugger
         params[:task][:time] = date
         params[:task][:task_priority] = TaskPriority.find_by_name("Low")
         params[:task][:task_status] = TaskPriority.find_by_name("Pending")
