@@ -16,14 +16,16 @@ class TasksController < ApplicationController
         @task.task_priority = TaskPriority.first
         @task_categories = self.current_project.task_categories.find(:all)
         @users = self.current_project.users.all
-
+        @time = Time.now.in_time_zone + 2000
+        debugger
         respond_to do |format|
             format.mobile
         end
     end
 
     def create
-        date = Time.parse(params[:date])
+        #debugger
+        date = Date.strptime(params[:date],"%m-%d-%Y").to_time
         date = date.change(:hour => Time.parse(params[:time]).hour, :min => Time.parse(params[:time]).min)
         debugger
         params[:task][:time] = date

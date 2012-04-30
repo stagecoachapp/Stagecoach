@@ -15,19 +15,18 @@
         <%= f.label :name %><br />
         <%= f.text_field :name %>
     </div>
-    <% time = Time.new %>
 
     <div class="field">
-        <%= f.label :time %><br />
-        <div class="input-append date" id="tasks-tasks-new" data-date="<%= time.strftime("%m-%d-%Y") %>" data-date-format="mm-dd-yyyy">
-            <%= text_field_tag(:date, time.strftime("%m-%d-%Y"), :class => "span2", :size => "16", :readonly => true) %>
+        <%= f.label :date, "Time" %><br />
+        <div class="input-append date" id="tasks-tasks-new" data-date="<%= @time.strftime("%m-%d-%Y") %>" data-date-format="mm-dd-yyyy">
+            <%= text_field_tag(:date, @time.strftime("%m-%d-%Y"), :class => "span2", :size => "16", :readonly => true) %>
             <span class="add-on">
                 <i class="icon-th"></i>
             </span>
         </div>
-        Time
         <br>
-        <input type="time" id="tasks-tasks-time" name="time">
+        <%= label_tag :time2, "Date" %>
+        <%= text_field_tag :time2, nil, :type => "time", :id => "tasks-tasks-time", :text => "test" %>
     </div>
     <div class="field">
         <%= f.label :description %><br />
