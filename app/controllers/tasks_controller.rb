@@ -53,6 +53,7 @@ class TasksController < ApplicationController
     def edit
         @task = Task.find(params[:id])
         @users = current_project.users.all
+        @time = @task.time
         respond_to do |format|
             format.html
             format.mobile
