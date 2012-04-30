@@ -213,7 +213,7 @@ end
     end
 
     def guest
-        @user = User.find_by_name("Guest")
+        @user = User.find_by_name("guest")
         if(@user.nil?)
             @user = User.new(:name => "Guest", :email => "guest@stagecoach.com" )
             @user.save
