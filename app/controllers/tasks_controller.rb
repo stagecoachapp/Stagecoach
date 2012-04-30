@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-
+    require 'time'
     def menu
 
         respond_to do |format|
@@ -16,13 +16,19 @@ class TasksController < ApplicationController
         @task.task_priority = TaskPriority.first
         @task_categories = self.current_project.task_categories.find(:all)
         @users = self.current_project.users.all
-
+        @time = Time.now.in_time_zone + 2000
         respond_to do |format|
             format.mobile
         end
     end
 
     def create
+        #debugger
+        date = Date.strptime(params[:date],"%m-%d-%Y").to_time
+        date = date.change(:hour => Time.parse(params[:time]).hour, :min => Time.parse(params[:time]).min)
+        params[:task][:time] = date
+        params[:task][:task_priority] = TaskPriority.find_by_name("Low")
+        params[:task][:task_status] = TaskPriority.find_by_name("Pending")
         @task = Task.new(params[:task])
         setDefaults! @task
         @task.save
@@ -36,6 +42,8 @@ class TasksController < ApplicationController
         @task.users.each do |user|
             notification = Notification.create(:notification_type => notification_type, :user => user, :notification_object => @task)
         end
+
+
 
         respond_to do |format|
             format.html { redirect_to tasks_url, notice: 'Task Created.' }
