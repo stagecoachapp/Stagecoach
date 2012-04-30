@@ -19,11 +19,13 @@ class ApplicationController < ActionController::Base
     end
 
 
+
     before_filter :require_login
     def require_login
+        url = request.path
         session[:after_login_redirect_url] = request.url
         unless current_user?
-            if is_mobile_device?
+            if url != '/blog' && url != '/about' && url != '/' && url != '/signup'
                 redirect_to '/signin'
             end
         end
