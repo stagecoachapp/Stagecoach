@@ -64,10 +64,63 @@ class TasksController < ApplicationController
         end
     end
 
+    def mark_complete
+        task = Task.find(params[:id])
+        if task.mark_complete
+            flash[:success] = 'Task marked complete.'
+            Notification.create(user: task.owner, notification_type: NotificationType.find_by_name("TaskComplete"))
+            task.users.each do |user|
+                if user != self.current_user
+                    Notification.create(user: user, notification_type: NotificationType.find_by_name("TaskComplete"))
+                end
+            end
+        else
+            flash[:notice] = 'Task is already marked complete.'
+        end
+        respond_to do |format|
+            format.html { redirect_to tasks_path }
+            format.mobile { redirect_to tasks_path}
+        end
+    end
+
     def index
         if (params[:mytasks].nil?)
             if(params[:name].nil?)
-                @tasks = self.current_project.tasks.all
+                @tasks = self.current_project.tasks.find(:all, :conditions => { :task_status_id => TaskStatus.find_by_name("Pending").id})
+            else
+                @tasks = []
+                self.current_project.task_categories.find_by_name(params[:name]).tasks.each do |task|
+                    if task.project == self.current_project
+                        @tasks << task
+                    end
+                end
+            end
+
+            @header = "All Tasks"
+        else
+            @tasks = []
+            self.current_project.tasks.all.each do |task|
+                task.users.each do |user|
+                    if user == self.current_user
+                        @tasks << task
+                    end
+                end
+            end
+            @header = "My Tasks"
+        end
+
+        respond_to do |format|
+            format.html
+            format.mobile
+            format.js
+        end
+
+    end
+
+    def index_completed
+        if (params[:mytasks].nil?)
+            if(params[:name].nil?)
+                @tasks = self.current_project.tasks.find(:all, :conditions => { :task_status_id => TaskStatus.find_by_name("Complete").id})
             else
                 @tasks = []
                 self.current_project.task_categories.find_by_name(params[:name]).tasks.each do |task|
@@ -124,5 +177,4 @@ class TasksController < ApplicationController
         task.task_status = TaskStatus.find_by_name("Pending")
         task.active = true
     end
-
 end

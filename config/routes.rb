@@ -51,6 +51,9 @@ FilmProjectRails::Application.routes.draw do
   resources :sessions, :pathnames => { :new => 'signin' }
   resources :signups, :only => [:new, :create], :pathnames => { :new => 'signup'}
   match '/tasks/menu', :to => 'tasks#menu'
+  match '/tasks/:id/mark_complete', :to => 'tasks#mark_complete'
+  match '/tasks/:id/mark_pending', :to => 'tasks#mark_pending'
+  match '/tasks/index_completed', :to => 'tasks#index_completed'
   resources :tasks
 
 

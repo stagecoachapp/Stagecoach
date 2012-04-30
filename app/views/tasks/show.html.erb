@@ -5,12 +5,12 @@
 </p>
 
 <p>
-  <b>Startdate:</b>
+  <b>Time:</b>
   <%= @task.formatted_time %>
 </p>
 
 <p>
-  <b>Notes:</b>
+  <b>Description:</b>
   <%= @task.description %>
 </p>
 
@@ -24,6 +24,9 @@
   <%= @task.task_status %>
 </p>
 
+<%= link_to 'Mark Complete', mark_task_complete_path(@task.id) %> |
 
+<% if self.current_project.administrators.include?(self.current_user) %>
 <%= link_to 'Edit', edit_task_path(@task) %> |
+<% end %>
 <%= link_to 'Back', tasks_path %>
