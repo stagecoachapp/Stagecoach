@@ -10,5 +10,10 @@
 	<% if @empty_project %>
 		<p>Your project is currently empty! Start building your team by inviting people.</p>
 		<%= link_to "Invite People".html_safe, url_for(:controller => :invitations, :action => :new), :class => "btn btn-primary btn-large"%>
+	<% else %>
+		<% if @no_tasks %>
+			<p>Create some tasks and assign them to people.<p>
+				<%= link_to "Create Tasks".html_safe, url_for(:controller => :tasks, :action => :new), :class => "btn btn-primary btn-large"%>
+		<% end %>
 	<% end %>
 <% end %>

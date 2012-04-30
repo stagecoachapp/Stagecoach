@@ -18,6 +18,10 @@ class HomeController < ApplicationController
     else
       if self.current_project.users.count == 1
         @empty_project = true
+      else
+        if self.current_project.tasks.count == 0
+          @no_tasks = true
+        end
       end
     end
   end
