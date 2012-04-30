@@ -20,8 +20,10 @@
     <td><%= task.task_priority.name %></td>
     <td><%= task.task_status.name %></td>
     <td><%= link_to 'Show', task %></td>
+    <% if self.current_project.administrators.include?(self.current_user) %>
     <td><%= link_to 'Edit', edit_task_path(task) %></td>
     <td><%= link_to 'Destroy', task, confirm: 'Are you sure?', method: :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
