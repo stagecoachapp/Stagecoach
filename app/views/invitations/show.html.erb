@@ -1,29 +1,13 @@
-<h1>Show invitation</h1>
+<h1>Invitation</h1>
 
 <%= form_for(@invitation) do |f| %>
 	<div class="field">
-		<%= f.label :from_user %>
-		<%= f.text_field :from_user, :value => @invitation.from_user, :disabled => true %>
+		<%= f.label :to_user, "To" %>
+		<%= f.text_field :to_user, :value => @invitation.to_user.name, :disabled => true %>
 	</div>
 	<div class="field">
-		<%= f.label :to_user %>
-		<%= f.text_field :to_user, :value => @invitation.to_user, :disabled => true %>
-	</div>
-	<div class="field">
-		<%= f.label :start_date %>
-		<%= f.date_select :start_date, :value => @invitation.start_date, :disabled => true %>
-	</div>
-	<div class="field">
-		<%= f.label :end_date %>
-		<%= f.date_select :end_date, :value => @invitation.end_date, :disabled => true %>
-	</div>
-	<div class="field">
-		<%= f.label :subject %>
-		<%= f.text_field :subject, :value => @invitation.subject, :disabled => true %>
-	</div>
-	<div class="field">
-		<%= f.label :body %>
-		<%= f.text_area :body, :value => @invitation.body, :disabled => true %>
+		<%= f.label :body, "Message" %>
+		<%= f.text_area :body, :value => @invitation.body, :disabled => true, :id => "invitations-show-body" %>
 	</div>
 <% end %>
 
@@ -35,8 +19,5 @@
 	<%= f.text_field :text %>
 	<%= f.hidden_field :conversation_id, :value => @invitation.conversation.id %>
 	<%= f.hidden_field :user_id, :value => @message.user.id %>
-	<%= f.submit %>
+	<%= f.submit "Send Message", :class => "btn", :id => "invitations-show-send-message-button" %>
 <% end %>
-
-<%= link_to 'Edit', edit_invitation_path(@invitation) %>
-<%= link_to 'Back', invitations_path %>

@@ -36,6 +36,7 @@ class InvitationsController < ApplicationController
     def new
         @invitation = Invitation.new
         @invitation.from_user = self.current_user
+        @invitation.project = self.current_project
         unless params[:user].nil?
             @invitation.to_user = User.find_by_id(params[:user])
         end
@@ -53,8 +54,9 @@ class InvitationsController < ApplicationController
     # POST /invitations
     # POST /invitations.json
     def create
-        params[:invitation][:to_user] = User.find_by_name(params[:invitation][:to_user])
-        params[:invitation][:from_user] = User.find_by_name(params[:invitation][:from_user])
+        #unfortunately you have to use a case insensitive find users function because postgres is stupid
+        params[:invitation][:to_user] = User.find(:all, :order => "LOWER('#{params[:invitation][:to_user]}')").first
+        params[:invitation][:from_user] = User.find(:all, :order => "LOWER('#{params[:invitation][:from_user]}')").first
         @invitation = Invitation.new(params[:invitation])
         conversation = Conversation.create
         conversation.users = [@invitation.to_user, @invitation.from_user]
