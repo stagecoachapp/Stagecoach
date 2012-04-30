@@ -1,38 +1,45 @@
 <%= form_for(@task) do |f| %>
-  <% if @task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+<% if @task.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
 
-      <ul>
-      <% @task.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% @task.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :time %><br />
-    <%= f.datetime_select :time %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <label>Users</label>
-  <% for user in @users %>
-      <%= check_box_tag "task[user_ids][]", user.id, false, :id => "task-new-assignee-#{user.id}" %>
-      <label for=<%= "task-new-assignee-#{user.id}" %>><%= user.name %></label>
-  <% end %>
-  <div class="field">
-    <%= f.label :task_priority_id %><br />
-    <%= f.number_field :task_priority_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<div class="field">
+  <%= f.label :name %><br />
+  <%= f.text_field :name %>
+</div>
+<% time = Time.new %>
+
+<div class="field">
+  <%= f.label :time %><br />
+  <div class="input-append date" id="tasks-tasks-new" data-date="<%= time.strftime("%d-%m-%Y") %>" data-date-format="dd-mm-yyyy">
+    <%= text_field_tag(:date, time.strftime("%d-%m-%Y"), :class => "span2", :size => "16", :readonly => true) %>
+  <span class="add-on">
+    <i class="icon-th"></i>
+  </span>
+</div>
+Time
+<br>
+<input type="time" id="tasks-tasks-time" name="time">
+</div>
+<div class="field">
+  <%= f.label :description %><br />
+  <%= f.text_area :description %>
+</div>
+<label>Users</label>
+<% for user in @users %>
+<%= check_box_tag "task[user_ids][]", user.id, false, :id => "task-new-assignee-#{user.id}" %>
+<label for=<%= "task-new-assignee-#{user.id}" %>><%= user.name %></label>
+<% end %>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div>
 <% end %>

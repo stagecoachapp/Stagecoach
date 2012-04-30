@@ -23,6 +23,11 @@ class TasksController < ApplicationController
     end
 
     def create
+        debugger
+        date = DateTime.new(params[:date].to_date ,params[:time])
+        params[:task][:datetime] = date
+        params[:task][:priority] = 1
+        params[:task][:task_status] = 1
         @task = Task.new(params[:task])
         setDefaults! @task
         @task.save
@@ -36,6 +41,8 @@ class TasksController < ApplicationController
         @task.users.each do |user|
             notification = Notification.create(:notification_type => notification_type, :user => user, :notification_object => @task)
         end
+
+
 
         respond_to do |format|
             format.html { redirect_to tasks_url, notice: 'Task Created.' }
