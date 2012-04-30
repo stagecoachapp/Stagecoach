@@ -1,0 +1,14 @@
+$(document).ready(function() {
+	$("#invitations-new-add-user-button").click(function() {
+		$("#invitations-new-add-user-modal").modal('show');
+	});
+	$("#invitations-new-add-user-modal-select-button").click(function() {
+		var checkedUser = $('input[name=contacts-group]:checked');
+		$("#invitations-new-to-user-id").val(checkedUser.val());
+		$("#invitations-new-to-user-name").val(checkedUser.next().text());
+		$("#invitations-new-add-user-modal").modal('hide');
+	});
+	$("#invitations-new-form").submit(function() {
+		$.param("to-user-id", $("#invitations-new-to-user").data('user-id'));
+	});
+});

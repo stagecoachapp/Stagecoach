@@ -1,36 +1,24 @@
+<%= render "add_user_modal" %>
 <h1>New invitation</h1>
 
-<%= form_for(@invitation) do |f| %>
+<%= form_for(@invitation, :html => { :id => "invitations-new-form" }) do |f| %>
+	<%= f.hidden_field :from_user, :value => @invitation.from_user, :data => { :"user-id" => (@invitation.from_user.id rescue 0) } %>
 	<div class="field">
-		<%= f.label :from_user %>
-		<%= f.text_field :from_user, :value => @invitation.from_user %>
-	</div>
-	<div class="field">
-		<%= f.label :to_user %>
-		<%= f.text_field :to_user, :value => @invitation.to_user %>
-	</div>
-	<div class="field">
-		<%= f.label :start_date %>
-		<%= f.date_select :start_date %>
+		<%= f.hidden_field :to_user, :id => "invitations-new-to-user-id" %>
+		<%= label_tag :to_user_name, "To" %>
+		<%= text_field_tag :to_user_name, nil, :id => "invitations-new-to-user-name", :disabled => true %>
+		<button class="btn" id="invitations-new-add-user-button" type="button">
+			<i class="icon-plus icon-white"></i>
+		</button>
 	</div>
 	<div class="field">
-		<%= f.label :end_date %>
-		<%= f.date_select :end_date %>
+		<%= f.label :body, "Message" %>
+		<%= f.text_area :body, :id => "invitations-new-body" %>
 	</div>
-	<div class="field">
-		<%= f.label :subject %>
-		<%= f.text_field :subject %>
-	</div>
-	<div class="field">
-		<%= f.label :body %>
-		<%= f.text_area :body %>
-	</div>
-
-	<div class="actions">
-		<%= f.submit %>
-	</div>
-
 	<%= f.hidden_field :project_id, :value => self.current_project.id %>
+	<div class="actions">
+		<%= f.submit "Send Invitation", :class => "btn" %>
+	</div>
 <% end %>
 
 

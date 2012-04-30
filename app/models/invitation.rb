@@ -7,6 +7,6 @@ class Invitation < ActiveRecord::Base
  	has_one :conversation, :as => :conversation_object
 
  	def to_s
- 		self.project.to_s
+ 		"Invited "+self.to_user.to_s+" to "+self.project.to_s
  	end
 end
