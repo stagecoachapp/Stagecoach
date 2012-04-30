@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
     has_one :google_user_information
     has_one :email_setting
     after_initialize :default_values
+    before_save :lowercase_name
 
     def self.create_from_facebook_hash(hash)
         create(:name => hash['info']['name'], :email => hash['info']['email'], :email_setting => EmailSetting.create)
@@ -49,8 +50,16 @@ class User < ActiveRecord::Base
         self.name
     end
 
+    def name
+    	read_attribute(:name).split(' ').map {|w| w.capitalize }.join(' ')
+    end
+
     private
-    def default_values
-      self.smartphone ||= 1
-  end
+		def default_values
+			self.smartphone ||= 1
+		end
+
+		def lowercase_name
+			self.name  = self.name.downcase
+		end
 end

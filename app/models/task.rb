@@ -27,4 +27,14 @@ class Task < ActiveRecord::Base
 		end
 	end
 
+	def mark_complete
+		
+		if self.task_status != TaskStatus.find_by_name("Complete")
+			self.task_status = TaskStatus.find_by_name("Complete")
+			self.save
+			return true
+		else
+			return false
+		end
+	end
 end

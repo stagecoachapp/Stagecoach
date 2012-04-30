@@ -9,6 +9,6 @@
 <% else %>
 	<% if @empty_project %>
 		<p>Your project is currently empty! Start building your team by inviting people.</p>
-		<%= link_to "Invite People".html_safe, url_for(:controller => :projects, :action => :new), :class => "btn btn-primary btn-large"%>
+		<%= link_to "Invite People".html_safe, url_for(:controller => :invitations, :action => :new), :class => "btn btn-primary btn-large"%>
 	<% end %>
 <% end %>

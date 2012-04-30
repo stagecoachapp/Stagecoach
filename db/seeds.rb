@@ -47,9 +47,7 @@ end
 # Default task status
 default_task_statuses = [
 	"Pending",
-	"Late",
 	"Complete",
-	"LateComplete",
 ]
 
 TaskStatus.delete_all
