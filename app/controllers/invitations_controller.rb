@@ -1,4 +1,14 @@
 class InvitationsController < ApplicationController
+
+    #POST /invite
+    def invite
+        InvitationMailer.invite(self.current_user.name, params[:Name], params[:Email], params[:"Personalized Message"]).deliver
+
+        respond_to do |format|
+            format.js
+        end
+    end
+
     # GET /invitations
     # GET /invitations.json
     def index
