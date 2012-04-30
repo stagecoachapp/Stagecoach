@@ -14,6 +14,8 @@
 		<% if @no_tasks %>
 			<p>Create some tasks and assign them to people.<p>
 				<%= link_to "Create Tasks".html_safe, url_for(:controller => :tasks, :action => :new), :class => "btn btn-primary btn-large"%>
+		<% else %>
+			<p><%= self.current_project.capitalized_name %> has been set up. Enjoy using Stagecoach and feel free to leave us some feedback!</p>
 		<% end %>
 	<% end %>
 <% end %>

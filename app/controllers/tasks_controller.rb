@@ -25,7 +25,7 @@ class TasksController < ApplicationController
     def create
         #debugger
         date = Date.strptime(params[:date],"%m-%d-%Y").to_time
-        date = date.change(:hour => Time.parse(params[:time]).hour, :min => Time.parse(params[:time]).min)
+        date = date.change(:hour => Time.parse(params[:time2]).hour, :min => Time.parse(params[:time2]).min)
         params[:task][:time] = date
         params[:task][:task_priority] = TaskPriority.find_by_name("Low")
         params[:task][:task_status] = TaskPriority.find_by_name("Pending")
