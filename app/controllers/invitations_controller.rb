@@ -1,4 +1,10 @@
 class InvitationsController < ApplicationController
+
+    #POST /invite
+    def invite
+        debugger
+    end
+
     # GET /invitations
     # GET /invitations.json
     def index
