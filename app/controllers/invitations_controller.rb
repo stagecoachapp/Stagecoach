@@ -54,7 +54,6 @@ class InvitationsController < ApplicationController
     # POST /invitations
     # POST /invitations.json
     def create
-        debugger
         #unfortunately you have to use a case insensitive find users function because postgres is stupid
         params[:invitation][:to_user] = User.find(params[:invitation][:to_user])
         params[:invitation][:from_user] = User.find(params[:invitation][:from_user])

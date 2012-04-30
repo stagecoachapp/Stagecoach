@@ -23,7 +23,6 @@ class TasksController < ApplicationController
     end
 
     def create
-        #debugger
         date = Date.strptime(params[:date],"%m-%d-%Y").to_time
         date = date.change(:hour => Time.parse(params[:time2]).hour, :min => Time.parse(params[:time2]).min)
         params[:task][:time] = date
