@@ -14,21 +14,13 @@ class Notification < ActiveRecord::Base
 	def to_s
 		case self.notification_type.to_s
 		when "NewTask"
-			"You have been assigned to the following task: " + self.notification_object.to_s
+			"You have been assigned to the following task: " + self.notification_object.to_s + " on " + self.notification_object.project.to_s
 		when "NewInvitation"
 			"You have been invited to join " + self.notification_object.project.to_s + " by " + self.notification_object.to_user.to_s
 		when "NewInvitationMessage"
 			"You have a new message in your invitation to join " + self.notification_object.conversation.conversation_object.project.to_s
 		else
-			"Notification: " + self.notification_object.to_s
-		end
-	end
-
-	def path
-		if self.notification_type.to_s == "NewInvitationMessage"
-			return self.notification_object.conversation.conversation_object
-		else
-			return self.notification_object
+			"Notification: " + self.notification_object.to_s + " on " + self.notification_object.project.to_s
 		end
 	end
 
