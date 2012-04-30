@@ -54,9 +54,10 @@ class InvitationsController < ApplicationController
     # POST /invitations
     # POST /invitations.json
     def create
+        debugger
         #unfortunately you have to use a case insensitive find users function because postgres is stupid
-        params[:invitation][:to_user] = User.find(:all, :order => "LOWER('#{params[:invitation][:to_user]}')").first
-        params[:invitation][:from_user] = User.find(:all, :order => "LOWER('#{params[:invitation][:from_user]}')").first
+        params[:invitation][:to_user] = User.find(params[:invitation][:to_user])
+        params[:invitation][:from_user] = User.find(params[:invitation][:from_user])
         @invitation = Invitation.new(params[:invitation])
         conversation = Conversation.create
         conversation.users = [@invitation.to_user, @invitation.from_user]

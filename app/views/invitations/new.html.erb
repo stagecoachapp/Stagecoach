@@ -2,7 +2,7 @@
 <h1>New invitation</h1>
 
 <%= form_for(@invitation, :html => { :id => "invitations-new-form" }) do |f| %>
-	<%= f.hidden_field :from_user, :value => @invitation.from_user, :data => { :"user-id" => (@invitation.from_user.id rescue 0) } %>
+	<%= f.hidden_field :from_user, :value => @invitation.from_user.id %>
 	<div class="field">
 		<%= f.hidden_field :to_user, :id => "invitations-new-to-user-id" %>
 		<%= label_tag :to_user_name, "To" %>
