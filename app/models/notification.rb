@@ -16,7 +16,7 @@ class Notification < ActiveRecord::Base
 		when "NewTask"
 			"You have been assigned to the following task: " + self.notification_object.to_s
 		when "NewInvitation"
-			"You have been invited to join " + self.notification_object.to_s
+			"You have been invited to join " + self.notification_object.project.to_s + " by " + self.notification_object.to_user.to_s
 		when "NewInvitationMessage"
 			"You have a new message in your invitation to join " + self.notification_object.conversation.conversation_object.project.to_s
 		else
