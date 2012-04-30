@@ -1,5 +1,5 @@
 <ul>
-	<% @assets.each do |asset| %>
+	<% self.current_project.assets.each do |asset| %>
 		<li>
 			<a href=<%= "assets/#{asset.id}" %>><%= asset.file_file_name %></a>
 		</li>
