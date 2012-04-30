@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
     protect_from_forgery
 
+
     has_mobile_fu
+
     before_filter :set_request_format
     def set_request_format
         request.format = :mobile if is_mobile_device?
@@ -17,10 +19,13 @@ class ApplicationController < ActionController::Base
     end
 
 
+
     before_filter :require_login
     def require_login
+        url = request.path
+        session[:after_login_redirect_url] = request.url
         unless current_user?
-            if is_mobile_device?
+            if url != '/blog' && url != '/about' && url != '/' && url != '/signup'
                 redirect_to '/signin'
             end
         end

@@ -11,6 +11,23 @@ end
 
 module FilmProjectRails
   class Application < Rails::Application
+
+    #the 0 guarantees that it is loaded first
+    ENV['AWS_ACCESS_KEY_ID'] ||= "AKIAIB2PQYR2LSGIG4BA"
+    ENV['AWS_SECRET_ACCESS_KEY'] ||= "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"
+    ENV['FOG_DIRECTORY'] ||= "stagecoachlocal-assets"
+    ENV['FOG_PROVIDER'] ||= "AWS"
+    ENV['S3_BUCKET_NAME'] ||= "stagecoachlocal-assets"
+    ENV['GMAIL_PASSWORD'] ||= "northwestern2013"
+    ENV['GMAIL_USERNAME'] ||= "admin@projectstagecoach.com"
+    ENV['GOOGLE_OAUTH_SCOPE'] ||= "https://www.google.com/m8/feeds  https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
+    ENV['GOOGLE_OAUTH_STATE'] ||= ""
+    ENV['GOOGLE_OAUTH_RESPONSE_TYPE'] ||= "code"
+    ENV['GOOGLE_OAUTH_CLIENT_ID'] ||= "630898205217-pt1ife1pkrqmt5k644fvodp5o3cb5737.apps.googleusercontent.com"
+    ENV['GOOGLE_OAUTH_CLIENT_SECRET'] ||= "h5J7p-dk5bBd2QG7KVEJH_23"
+    ENV['GOOGLE_OAUTH_REDIRECT_URI'] ||= "http://localhost:3000/oauth2callback"
+    ENV['REDISTOGO_URL'] ||= "redis://projectstagecoach:bace5e5f2538a03e261356a364f3cdab@herring.redistogo.com:9865"
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -32,7 +49,7 @@ module FilmProjectRails
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    # config.time_zone = 'Central Time (US & Canada)'
+     config.time_zone = 'Central Time (US & Canada)'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]

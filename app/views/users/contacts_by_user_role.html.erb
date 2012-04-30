@@ -1,12 +1,20 @@
+<div>
+	<%= render 'contacts_page_controls' %>
+</div>
+<h4>Roles</h4>
+<div>
 <ul>
 	<% for user_role in @user_roles %>
 		<li>
-			<p><%= user_role.name %></p>
+			<b><p><%= user_role.name %></p></b>
 			<ul>
 				<% for contact in @contacts %>
-					<li><%= contact.name %></li>
+					<% if contact.user_roles.include?(user_role) %>
+						<p><%= link_to contact.name, contact %></p>
+					<% end %>
 				<% end %>
 			</ul>
 		</li>
 	<% end %>
 </ul>
+</div>

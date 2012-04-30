@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Hi <%= @invitation_message.user.name %>,</h1>
+    <p>
+      You have a new message in your invitation to join <%= @invitation.project.to_s %>
+    </p>
+    <p>
+      Please visit http://projectstagecoach.com to login
+    </p>
+  </body>
+</html>

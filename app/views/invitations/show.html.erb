@@ -1,0 +1,23 @@
+<h1>Invitation</h1>
+
+<%= form_for(@invitation) do |f| %>
+	<div class="field">
+		<%= f.label :to_user, "To" %>
+		<%= f.text_field :to_user, :value => @invitation.to_user.name, :disabled => true %>
+	</div>
+	<div class="field">
+		<%= f.label :body, "Message" %>
+		<%= f.text_area :body, :value => @invitation.body, :disabled => true, :id => "invitations-show-body" %>
+	</div>
+<% end %>
+
+<h1>Conversation</h1>
+<% @invitation.conversation.messages.each do |message| %>
+	<p><%= "#{message.user}: #{message.text}" %></p>
+<% end %>
+<%= form_for @message, :url => { :controller => :messages, :action => :create } do |f| %>
+	<%= f.text_field :text %>
+	<%= f.hidden_field :conversation_id, :value => @invitation.conversation.id %>
+	<%= f.hidden_field :user_id, :value => @message.user.id %>
+	<%= f.submit "Send Message", :class => "btn", :id => "invitations-show-send-message-button" %>
+<% end %>

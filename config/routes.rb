@@ -1,5 +1,11 @@
 FilmProjectRails::Application.routes.draw do
 
+  resources :invitations
+
+  resources :conversations
+
+  resources :messages
+
   resources :posts do
     resources :comments
   end
@@ -13,7 +19,12 @@ FilmProjectRails::Application.routes.draw do
 
   resources :reminders
 
-  match "/projects", :to => "projects#change_project", :via => "post"
+  match '/assets', :to => 'assets#index', :via => :get
+  match '/assets/upload', :to => 'assets#new', :via => :get
+  match '/assets', :to => 'assets#create', :via => :post
+  match '/assets/:id', :to => 'assets#show'
+
+  match "/projects", :to => "projects#create", :via => "post"
   match "/projects/menu", :to => "projects#menu"
   match '/projects/index', :to => 'projects#index'
   match '/projects/join', :to => 'projects#join'
@@ -26,6 +37,7 @@ FilmProjectRails::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
+  mount Resque::Server, :at => "admin/resque"
 
   resources :users
 
@@ -39,6 +51,9 @@ FilmProjectRails::Application.routes.draw do
   resources :sessions, :pathnames => { :new => 'signin' }
   resources :signups, :only => [:new, :create], :pathnames => { :new => 'signup'}
   match '/tasks/menu', :to => 'tasks#menu'
+  match '/tasks/:id/mark_complete', :to => 'tasks#mark_complete'
+  match '/tasks/:id/mark_pending', :to => 'tasks#mark_pending'
+  match '/tasks/index_completed', :to => 'tasks#index_completed'
   resources :tasks
 
 
@@ -46,6 +61,7 @@ FilmProjectRails::Application.routes.draw do
   match '/signout', :to => 'sessions#destroy'
   match '/signin', :to => 'sessions#new'
   match '/guest', :to => 'sessions#guest'
+  match '/invite', :to => 'invitations#invite'
 
   match '/about', :to => 'home#about'
   match '/comingsoon', :to => 'home#comingsoon'
@@ -56,6 +72,10 @@ FilmProjectRails::Application.routes.draw do
   match '/oauth2callback', :to => 'sessions#create_google'
   #abingo routing
   match 'experiments(/:action(/:id))', :to => 'abingo_dashboard', :as => :bingo
+
+
+
+
   #...
   #  # You can have the root of your site routed with "root"
   #    # just remember to delete public/index.html.

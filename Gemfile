@@ -13,17 +13,25 @@ gem "twitter-bootstrap-rails", "~> 2.0rc0", :group => :assets
 # in production environments by default.
 gem 'thin'
 
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
-  gem 'asset_sync'
-
-
+gem 'bcrypt-ruby'
 gem 'jquery-rails'
+gem 'sass-rails',   '~> 3.2.3'
+gem 'coffee-rails', '~> 3.2.1'
+gem 'uglifier', '>= 1.0.3'
+gem 'therubyracer'
+
+#assets
+gem 'asset_sync'
+gem 'aws-sdk'
+gem 'paperclip', :git => "git://github.com/thoughtbot/paperclip.git"
+
 gem 'omniauth-facebook'
 gem 'ckeditor_rails', :require => 'ckeditor-rails'
-
 gem 'mobile-fu', :git => 'git://github.com/benlangfeld/mobile-fu.git'
+
+gem 'resque', :require => "resque/server"
+gem 'resque_mailer'
+
 group :development do
   gem 'rspec'
   gem 'rspec-rails'
@@ -44,17 +52,6 @@ group :test do
   gem 'rspec'
   gem 'rspec-rails'
 end
-
-group :development do
-  #gem "rails-dev-tweaks", "~> 0.6.1"
- # gem 'ruby-debug19'
-end
-
-group :production do
-  gem 'paperclip'
-  gem 'aws-s3'
-end
-
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

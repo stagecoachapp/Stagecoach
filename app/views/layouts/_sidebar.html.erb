@@ -1,0 +1,68 @@
+  <nav id="sidebar">
+
+      <div id="logo">
+        <a href="/">
+            <%= image_tag "header/logo.png" %>
+          </a>
+      </div>
+
+      <div class="sidebar_item" >
+        <a class="sidebar_item_link" href="<%= url_for(:controller => :notifications, :action => :index) %>">
+          <%= image_tag("sidebar/Icon-Notifications.png") %>
+          Notifications
+        </a>
+      </div>
+
+      <div class="sidebar_item" >
+        <a class="sidebar_item_link" href=<%= invitations_path %>>
+          <%= image_tag("sidebar/Icon-Invitations.png") %>
+          Invitations
+        </a>
+      </div>
+      <!-- Disable button if not in a project -->
+      <% if self.current_project.nil? %>
+      <div class="sidebar_item_disabled" >
+          <%= image_tag("sidebar/Icon-Tasks.png") %>
+          Tasks
+        </a>
+      </div>
+
+      <% else %>
+      <div class="sidebar_item" >
+        <a class="sidebar_item_link" href=<%= tasks_path %>>
+          <%= image_tag("sidebar/Icon-Tasks.png") %>
+          Tasks
+        </a>
+      </div>
+      <% end %>
+
+      <div class="sidebar_item" >
+        <a class="sidebar_item_link" href=<%= projects_path %>>
+          <%= image_tag "sidebar/Icon-Folder.png" %>
+          Projects
+        </a>
+      </div>
+      <div class="sidebar_item">
+        <a class= "sidebar_item_link" href="/contacts/all">
+          <%= image_tag "sidebar/Icon-People.png" %>
+          People
+        </a>
+      </div>
+
+      <!-- Disable button if not in a project -->
+      <% if self.current_project.nil? %>
+      <div class="sidebar_item_disabled" >
+          <%= image_tag("sidebar/Icon-Assets.png") %>
+          Assets
+        </a>
+      </div>
+
+      <% else %>
+      <div class="sidebar_item">
+        <a class= "sidebar_item_link" href="<%= assets_path %>" >
+          <%= image_tag "sidebar/Icon-Assets.png" %>
+          Assets
+        </a>
+      </div>
+      <% end %>
+  </nav>

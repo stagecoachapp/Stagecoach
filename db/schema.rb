@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411050104) do
+ActiveRecord::Schema.define(:version => 20120424062401) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -46,6 +46,11 @@ ActiveRecord::Schema.define(:version => 20120411050104) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
+  create_table "administrators", :force => true do |t|
+    t.integer "user_id"
+    t.integer "project_id"
+  end
+
   create_table "alternatives", :force => true do |t|
     t.integer "experiment_id"
     t.string  "content"
@@ -57,6 +62,17 @@ ActiveRecord::Schema.define(:version => 20120411050104) do
 
   add_index "alternatives", ["experiment_id"], :name => "index_alternatives_on_experiment_id"
   add_index "alternatives", ["lookup"], :name => "index_alternatives_on_lookup"
+
+  create_table "assets", :force => true do |t|
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.integer  "asset_object_id"
+    t.string   "asset_object_type"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -84,10 +100,31 @@ ActiveRecord::Schema.define(:version => 20120411050104) do
 
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
 
+  create_table "conversations", :force => true do |t|
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.integer  "conversation_object_id"
+    t.string   "conversation_object_type"
+  end
+
+  create_table "conversations_users", :id => false, :force => true do |t|
+    t.integer "conversation_id"
+    t.integer "user_id"
+  end
+
   create_table "dummy_users", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "email_settings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "new_task",               :default => 1
+    t.integer  "new_invitation",         :default => 1
+    t.integer  "new_invitation_message", :default => 1
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
   end
 
   create_table "experiments", :force => true do |t|
@@ -109,6 +146,27 @@ ActiveRecord::Schema.define(:version => 20120411050104) do
     t.string   "family_name"
     t.string   "profile_picture"
     t.string   "gender"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "invitations", :force => true do |t|
+    t.string   "subject"
+    t.text     "body"
+    t.integer  "to_user_id"
+    t.integer  "from_user_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "project_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "messages", :force => true do |t|
+    t.text     "text"
+    t.integer  "user_id"
+    t.string   "message_type"
+    t.integer  "conversation_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
@@ -139,24 +197,15 @@ ActiveRecord::Schema.define(:version => 20120411050104) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.string   "password"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "password_hash"
+    t.integer  "owner_id"
   end
 
   create_table "projects_users", :id => false, :force => true do |t|
     t.integer "project_id"
     t.integer "user_id"
-  end
-
-  create_table "reminders", :force => true do |t|
-    t.string   "name"
-    t.datetime "time"
-    t.text     "description"
-    t.boolean  "needs_response"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "task_id"
   end
 
   create_table "sessions", :force => true do |t|
@@ -198,16 +247,29 @@ ActiveRecord::Schema.define(:version => 20120411050104) do
     t.integer "task_category_id"
   end
 
-  create_table "tasks", :force => true do |t|
+  create_table "task_priorities", :force => true do |t|
     t.string   "name"
-    t.datetime "startdate"
-    t.datetime "enddate"
-    t.text     "notes"
-    t.integer  "priority"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "task_statuses", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tasks", :force => true do |t|
+    t.string   "name"
+    t.datetime "time"
+    t.text     "description"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.integer  "project_id"
-    t.integer  "status"
+    t.integer  "owner_id"
+    t.integer  "task_status_id"
+    t.integer  "task_priority_id"
+    t.boolean  "active"
   end
 
   create_table "tasks_users", :id => false, :force => true do |t|

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stagecoach</title>
+  <%= stylesheet_link_tag    'desktop/desktop' %>
+  <%= stylesheet_link_tag    'shared/shared' %>
+  <%= javascript_include_tag 'desktop/desktop' %>
+  <%= javascript_include_tag 'shared/shared' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <% if self.current_user? %>
+  <%= render 'layouts/header_signed_in' %>
+  <nav class="sidebar">
+    <div class="sidebar-content">
+      <div class="sidebar-item" id="application-task-link">
+<<<<<<< HEAD
+        <%= link_to(tasks_path, :remote => false) do %>
+        <%= image_tag("sidebar/Icon-Tasks.png") %>
+        Tasks
+=======
+        <%= link_to(tasks_path, :remote => true) do %>
+        <div class="sidebar-link">
+          <%= image_tag("sidebar/Icon-Tasks.png") %>
+          Tasks
+        </div>
+>>>>>>> 6365e1696f185cb0d0b27342025efe4d181d2cb2
+        <% end %>
+      </div>
+
+      <div class="sidebar-item" id="application-projects-link">
+        <a href="/projects/index">
+          <div class="sidebar-link"><%= image_tag "sidebar/Icon-Folder.png" %>Projects</div>
+        </a>
+      </div>
+      <div class="sidebar-item" id="application-crew-link">
+        <a href="#">
+          <div class="sidebar-link"><%= image_tag "sidebar/Icon-People.png" %>Crew</div>
+        </a>
+      </div>
+    </div>
+  </nav>
+  <% else %>
+  <%= render 'layouts/header_signed_out' %>
+  <% end %>
+  
+  <% if self.current_user? %>
+    <div id="container-shifting-div">
+  <% end %>
+    <div class ="container" id="right-content">
+      <!-- start container -->
+      <!-- if the user is signed in, put the alerts inside the container so they don't disturb the sidebar -->
+      <% if self.current_user? %>
+      <% if(flash[:success]) %>
+      <div class="alert alert-success" data-dismiss="alert" href="#">
+        <a class="close">x</a>
+        <%= flash[:success] %>
+      </div>
+      <% end %>
+      <% if( flash[:error] ) %>
+      <div class="alert alert-error" data-dismiss="alert" href="#">
+        <a class="close">x</a>
+        <%= flash[:error] %>
+      </div>
+      <% end %>
+      <% if( flash[:notice] ) %>
+      <div class="alert alert-notice" data-dismiss="alert" href="#">
+        <a class="close">x</a>
+        <%= flash[:notice] %>
+      </div>
+      <% end %>
+      <% if( flash[:info] ) %>
+      <div class="alert alert-info" data-dismiss="alert" href="#">
+        <a class="close">x</a>
+        <%= flash[:info] %>
+      </div>
+      <% end %>
+      <% end %>
+      <!-- input the page here -->
+      <%= yield %>
+    </div>
+  <% if self.current_user? %>
+    </div>
+  <% end %>
+  <!-- end container -->
+  <%= render 'layouts/footer' %>
+</body>
+</html>

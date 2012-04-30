@@ -1,0 +1,10 @@
+<h1>Invitations</h1>
+
+<%= link_to 'New Invitation', new_invitation_path, :class => "btn" %>
+<br />
+
+<% @invitations.each do |invitation| %>
+    <td><%= link_to invitation.to_s, invitation %></td>
+  <br />
+<% end %>
+

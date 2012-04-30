@@ -1,30 +1,12 @@
 FilmProjectRails::Application.configure do
 
   #set up s3 assets
-  config.action_controller.asset_host = Proc.new do |source, request|
-      request.ssl? ? "https://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com" : "http://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
-  end
+  config.action_controller.asset_host = "https://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
 
   #add active admin
   config.assets.precompile += %w[active_admin.css active_admin.js]
   config.assets.precompile += %w( search.js )
   # Settings specified here  will take precedence over those in config/application.rb
-
-  #this is for email
-  config.action_mailer.default_url_options = { :host => 'myapp.heroku.com' }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default :charset => "utf-8"
-  config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "myapp.heroku.com",
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: ENV["GMAIL_USERNAME"],
-    password: ENV["GMAIL_PASSWORD"]
-  }
 
 
   # Code is not reloaded between requests
@@ -35,13 +17,13 @@ FilmProjectRails::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = true
+  config.assets.compile = false
 
   # Generate digests for assets URLs
   config.assets.digest = true
