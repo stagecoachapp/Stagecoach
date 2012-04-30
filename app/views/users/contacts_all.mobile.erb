@@ -1,5 +1,5 @@
 <ul>
 	<% for contact in @contacts %>
-		<li><%= contact.name %></li>
+		<%= link_to contact.name, contact %>
   	<% end %>
 </ul>

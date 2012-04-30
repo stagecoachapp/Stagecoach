@@ -1,0 +1,21 @@
+<h2>Welcome <%= self.current_user.name %></h2>
+<br>
+<% if @no_project %>
+	<p>You are not currently in a project! Choose one of the options below:</p>
+
+	<p><%= link_to "Create a Project".html_safe, url_for(:controller => :projects, :action => :new), :class => "btn btn-primary btn-large"%>
+
+	<%= link_to "Join a Project".html_safe, url_for(:controller => :projects, :action => :join), :class => "btn btn-secondary btn-large"%></p>
+<% else %>
+	<% if @empty_project %>
+		<p>Your project is currently empty! Start building your team by inviting people.</p>
+		<%= link_to "Invite People".html_safe, url_for(:controller => :invitations, :action => :new), :class => "btn btn-primary btn-large"%>
+	<% else %>
+		<% if @no_tasks %>
+			<p>Create some tasks and assign them to people.<p>
+				<%= link_to "Create Tasks".html_safe, url_for(:controller => :tasks, :action => :new), :class => "btn btn-primary btn-large"%>
+		<% else %>
+			<p><%= self.current_project.capitalized_name %> has been set up. Enjoy using Stagecoach and feel free to leave us some feedback!</p>
+		<% end %>
+	<% end %>
+<% end %>

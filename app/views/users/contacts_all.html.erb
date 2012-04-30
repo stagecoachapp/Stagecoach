@@ -1,5 +1,11 @@
-<ul>
-	<% for contact in @contacts %>
-		<li><%= contact.name %></li>
-  	<% end %>
-</ul>
+<div>
+	<%= render 'contacts_page_controls' %>
+</div>
+<h4>Unsorted</h4>
+<div>
+	<ul>
+		<% for contact in @contacts %>
+		<%= link_to contact.name, contact %>
+		<% end %>
+	</ul>
+</div>

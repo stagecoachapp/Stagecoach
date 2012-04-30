@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Hi <%= @notification.user.name %>,</h1>
+    <p>
+      You have been assigned the following task:<br/>
+      <b>Project: </b><%= @task.project.to_s %><br/>
+      <b>By: </b><%= @task.owner.to_s %><br/>
+      <b>Title: </b><%= @task.name %><br/>
+    </p>
+    <p>
+      Please visit http://projectstagecoach.com to login
+    </p>
+  </body>
+</html>

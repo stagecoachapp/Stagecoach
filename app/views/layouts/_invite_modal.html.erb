@@ -1,0 +1,17 @@
+<div class="modal" id="invite-modal">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">×</button>
+		<h3>Invite</h3>
+	</div>
+	<div class="modal-body">
+		<%= form_tag '/invite', :remote => true do %>
+			<%= label_tag 'Name' %>
+			<%= text_field_tag 'Name' %>
+			<%= label_tag 'Email' %>
+			<%= text_field_tag 'Email' %>
+			<%= label_tag 'Personalized Message' %>
+			<%= text_area_tag 'Personalized Message' %>
+			<%= submit_tag 'Send', :class => 'btn btn-success' %>
+		<% end %>
+	</div>
+</div>

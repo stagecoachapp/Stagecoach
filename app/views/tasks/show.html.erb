@@ -1,35 +1,32 @@
 <p id="notice"><%= notice %></p>
-
 <p>
   <b>Name:</b>
   <%= @task.name %>
 </p>
 
 <p>
-  <b>Startdate:</b>
-  <%= @task.formatted_startdate %>
+  <b>Time:</b>
+  <%= @task.formatted_time %>
 </p>
 
 <p>
-  <b>Enddate:</b>
-  <%= @task.formatted_enddate %>
-</p>
-
-<p>
-  <b>Notes:</b>
-  <%= @task.notes %>
+  <b>Description:</b>
+  <%= @task.description %>
 </p>
 
 <p>
   <b>Priority:</b>
-  <%= @task.priority %>
+  <%= @task.task_priority %>
 </p>
 
 <p>
   <b>Status:</b>
-  <%= @task.status %>
+  <%= @task.task_status %>
 </p>
 
+<%= link_to 'Mark Complete', mark_task_complete_path(@task.id) %> |
 
+<% if self.current_project.administrators.include?(self.current_user) %>
 <%= link_to 'Edit', edit_task_path(@task) %> |
+<% end %>
 <%= link_to 'Back', tasks_path %>
