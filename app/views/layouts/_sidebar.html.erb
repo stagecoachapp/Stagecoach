@@ -19,13 +19,22 @@
           Invitations
         </a>
       </div>
+      <!-- Disable button if not in a project -->
+      <% if self.current_project.nil? %>
+      <div class="sidebar_item_disabled" >
+          <%= image_tag("sidebar/Icon-Tasks.png") %>
+          Tasks
+        </a>
+      </div>
 
+      <% else %>
       <div class="sidebar_item" >
         <a class="sidebar_item_link" href=<%= tasks_path %>>
           <%= image_tag("sidebar/Icon-Tasks.png") %>
           Tasks
         </a>
       </div>
+      <% end %>
 
       <div class="sidebar_item" >
         <a class="sidebar_item_link" href=<%= projects_path %>>
@@ -40,10 +49,20 @@
         </a>
       </div>
 
+      <!-- Disable button if not in a project -->
+      <% if self.current_project.nil? %>
+      <div class="sidebar_item_disabled" >
+          <%= image_tag("sidebar/Icon-Assets.png") %>
+          Assets
+        </a>
+      </div>
+
+      <% else %>
       <div class="sidebar_item">
         <a class= "sidebar_item_link" href="<%= assets_path %>" >
           <%= image_tag "sidebar/Icon-Assets.png" %>
           Assets
         </a>
       </div>
+      <% end %>
   </nav>
