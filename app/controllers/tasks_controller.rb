@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-
+    require 'time'
     def menu
 
         respond_to do |format|
@@ -23,11 +23,12 @@ class TasksController < ApplicationController
     end
 
     def create
+        date = Time.parse(params[:date])
+        date = date.change(:hour => Time.parse(params[:time]).hour, :min => Time.parse(params[:time]).min)
         debugger
-        date = DateTime.new(params[:date].to_date ,params[:time])
-        params[:task][:datetime] = date
-        params[:task][:priority] = 1
-        params[:task][:task_status] = 1
+        params[:task][:time] = date
+        params[:task][:task_priority] = TaskPriority.find_by_name("Low")
+        params[:task][:task_status] = TaskPriority.find_by_name("Pending")
         @task = Task.new(params[:task])
         setDefaults! @task
         @task.save
