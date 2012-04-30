@@ -6,6 +6,7 @@ $(document).ready(function() {
 		var checkedUser = $('input[name=contacts-group]:checked');
 		$("#invitations-new-to-user-id").val(checkedUser.val());
 		$("#invitations-new-to-user-name").val(checkedUser.next().text());
+		$("#invitations-new-add-user-button i").removeClass().addClass("icon-refresh")
 		$("#invitations-new-add-user-modal").modal('hide');
 	});
 	$("#invitations-new-form").submit(function() {
