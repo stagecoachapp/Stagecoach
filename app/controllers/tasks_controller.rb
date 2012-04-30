@@ -159,16 +159,23 @@ class TasksController < ApplicationController
     end
 
     def show
-        @task = Task.find(params[:id])
-
-        respond_to do |format|
-            format.html
-            format.mobile
+        @task = self.current_project.tasks.find_by_id(params[:id])
+        if @task.nil?
+            flash[:success] =  'Task not found. Maybe it is on a different project'
+            respond_to do |format|
+                format.html { redirect_to tasks_path }
+                format.mobile { redirect_to tasks_path }
+            end
+        else
+            respond_to do |format|
+                format.html
+                format.mobile
+            end
         end
     end
 
     def destroy
-        task = Task.find(params[:id])
+        task = self.current_project.tasks.find_by_id(params[:id])
         task.destroy
 
         respond_to do |format|
