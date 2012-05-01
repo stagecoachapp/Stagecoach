@@ -3,7 +3,8 @@
 		<div class="container" id="navbar-container">
 			<ul class="nav">
 				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="<%= self.current_project.nil? ? "/projects/new" : "/projects/" + self.current_project.id.to_s %>">
+
 						<%= self.current_project.nil? ? "No Project" : self.current_project.capitalized_name %>
 						<% if self.current_user.projects.count > 1 %>
 								<b class="caret"></b>
