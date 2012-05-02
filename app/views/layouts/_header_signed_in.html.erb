@@ -27,11 +27,11 @@
 				<li>
 					<% if self.unread_notification_count == 0 %>
 						<a id="notifications" href="<%= url_for(:controller => :notifications, :action => :index) %>">
-							<%= image_tag("header/Exclamation_mark2.png") %>
+							<span class="badge"><%= self.unread_notification_count %></span>
 						</a>
 					<% else %>
 						<a id="notifications" href="<%= url_for(:controller => :notifications, :action => :index) %>">
-							<%= image_tag("header/Exclamation_mark.png") %>
+							<span class="badge badge-important"><%= self.unread_notification_count %></span>
 						</a>
 					<% end %>
 				</li>
