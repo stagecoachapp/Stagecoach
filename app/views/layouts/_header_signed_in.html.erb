@@ -27,11 +27,11 @@
 				<li>
 					<% if self.unread_notification_count == 0 %>
 						<a id="notifications" href="<%= url_for(:controller => :notifications, :action => :index) %>">
-							<span class="badge"><%= self.unread_notification_count %></span>
+							<span class="badge"><i class="icon-exclamation-sign"></i>0</span>
 						</a>
 					<% else %>
 						<a id="notifications" href="<%= url_for(:controller => :notifications, :action => :index) %>">
-							<span class="badge badge-important"><%= self.unread_notification_count %></span>
+							<span class="badge badge-important"><i class="icon-exclamation-sign"></i><%= self.unread_notification_count %></span>
 						</a>
 					<% end %>
 				</li>
