@@ -25,6 +25,11 @@
 			</ul>
 			<ul class="nav pull-right">
 				<li>
+					<a id="notifications" href="<%= url_for(:controller => :notifications, :action => :index) %>">
+						<%= image_tag("header/Exclamation_mark2.png") %>
+					</a>
+				</li>
+				<li>
 					<button class="btn btn-success" id="invite-button">
 						Invite
 						<i class="icon-plus icon-white"></i>
