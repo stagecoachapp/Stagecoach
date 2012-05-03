@@ -21,21 +21,18 @@
 				</li>
 				<li class="divider-vertical"></li>
 				<li>
-					<%= image_tag "header/Icon-Notifications.png", :id => "header-notifications-icon" %>
+					<%= link_to(notifications_path, :id => "header-notifications") do %>
+						<span class="badge <%= extra_header_notification_badge_classes %>" id="header-notification-badge"
+							<i class="icon-exclamation-sign"></i>
+							<text>
+								<%= self.unread_notification_count %>
+							</text>
+						</span>
+						<%= image_tag("header/Icon-Notifications.png", :id => "header-notifications-icon") %>
+					<% end %>
 				</li>
 			</ul>
 			<ul class="nav pull-right">
-				<li>
-					<% if self.unread_notification_count == 0 %>
-						<a id="notifications" href="<%= url_for(:controller => :notifications, :action => :index) %>">
-							<span class="badge"><i class="icon-exclamation-sign"></i>0</span>
-						</a>
-					<% else %>
-						<a id="notifications" href="<%= url_for(:controller => :notifications, :action => :index) %>">
-							<span class="badge badge-error"><i class="icon-exclamation-sign"></i><%= self.unread_notification_count %></span>
-						</a>
-					<% end %>
-				</li>
 				<li>
 					<button class="btn btn-success" id="invite-button">
 						Invite

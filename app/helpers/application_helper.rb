@@ -49,4 +49,10 @@ module ApplicationHelper
         return Array(Array(self.current_user.projects.all).select { |project| project != self.current_project })
     end
 
+    def extra_header_notification_badge_classes
+        if self.current_user.notifications.count > 0
+            return "badge-error"
+        end
+    end
+
 end
