@@ -45,4 +45,8 @@ module ApplicationHelper
         "/assets/upload"
     end
 
+    def other_projects
+        return Array(Array(self.current_user.projects.all).select { |project| project != self.current_project })
+    end
+
 end

@@ -3,24 +3,25 @@
 		<div class="container" id="navbar-container">
 			<ul class="nav">
 				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="<%= self.current_project.nil? ? "/projects/new" : "/projects/" + self.current_project.id.to_s %>">
-
-						<%= self.current_project.nil? ? "No Project" : self.current_project.capitalized_name %>
-						<% if self.current_user.projects.count > 1 %>
+					<% if other_projects == [] %>
+						<a class="dropdown-toggle" data-toggle="dropdown" id="header-current-project-name" href="<%= self.current_project.nil? ? new_project_path : "#" %>">
+							<%= self.current_project.nil? ? "No Project" : self.current_project.capitalized_name %>
+		   				</a>
+					<% else %>
+							<a class="dropdown-toggle" data-toggle="dropdown" id="header-current-project-name" href="#">
+								<%= self.current_project.nil? ? "No Project" : self.current_project.capitalized_name %>
 								<b class="caret"></b>
-				   				</a>
-
-								<ul class="dropdown-menu">
-									<% self.current_user.projects.each do |project| %>
-										<% if project != self.current_project %>
-											<li><%= link_to project.capitalized_name, project, :method => :post %></li>
-										<% end %>
-									<% end %>
-								</ul>
-						<% else %>
-							</a>
-						<% end %>
-					</ul>
+			   				</a>
+			   				<ul class="dropdown-menu">
+			   					<% other_projects.each do |project| %>
+			   						<%= link_to project.capitalized_name, project, :method => :post %>
+			   					<% end %>
+			   				</ul>
+					<% end %>
+				</li>
+				<li class="divider-vertical"></li>
+				<li>
+					<%= image_tag "header/Icon-Notifications.png", :id => "header-notifications-icon" %>
 				</li>
 			</ul>
 			<ul class="nav pull-right">
@@ -31,7 +32,7 @@
 						</a>
 					<% else %>
 						<a id="notifications" href="<%= url_for(:controller => :notifications, :action => :index) %>">
-							<span class="badge badge-important"><i class="icon-exclamation-sign"></i><%= self.unread_notification_count %></span>
+							<span class="badge badge-error"><i class="icon-exclamation-sign"></i><%= self.unread_notification_count %></span>
 						</a>
 					<% end %>
 				</li>
