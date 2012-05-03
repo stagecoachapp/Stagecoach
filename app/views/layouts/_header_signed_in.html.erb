@@ -25,6 +25,17 @@
 			</ul>
 			<ul class="nav pull-right">
 				<li>
+					<% if self.unread_notification_count == 0 %>
+						<a id="notifications" href="<%= url_for(:controller => :notifications, :action => :index) %>">
+							<span class="badge"><i class="icon-exclamation-sign"></i>0</span>
+						</a>
+					<% else %>
+						<a id="notifications" href="<%= url_for(:controller => :notifications, :action => :index) %>">
+							<span class="badge badge-important"><i class="icon-exclamation-sign"></i><%= self.unread_notification_count %></span>
+						</a>
+					<% end %>
+				</li>
+				<li>
 					<button class="btn btn-success" id="invite-button">
 						Invite
 						<i class="icon-plus icon-white"></i>
@@ -43,6 +54,7 @@
 						<b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
+						<li><%= link_to "My Profile", self.current_user %></li>
 						<li><a href="/#">Settings</a></li>
 						<li><a href="/signout">Log Out</a></li>
 					</ul>

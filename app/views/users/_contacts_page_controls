@@ -1,7 +1,7 @@
 <h1>Contacts</h1>
 <div class="contacts-buttons">
 	<h4>Sort by</h4>
-		<a href="/contacts/all"><button>Unsorted</button></a>
-		<a href="/contacts/roles"><button>Roles</button></a>
-		<a href="/contacts/projects"><button>Projects</button></a>
-	</div>
+		<a href="/contacts/all"><button>All Contacts</button></a>
+		<a href="/contacts/roles"><button>All Projects</button></a>
+		<a href="/contacts/projects"><button>This Project</button></a>
+</div>

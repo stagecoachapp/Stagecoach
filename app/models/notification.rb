@@ -18,7 +18,7 @@ class Notification < ActiveRecord::Base
 		when "NewInvitation"
 			"You have been invited to join " + self.notification_object.project.to_s + " by " + self.notification_object.from_user.to_s
 		when "NewInvitationMessage"
-			"You have a new message in your invitation to join " + self.notification_object.conversation.conversation_object.project.to_s + " from " + self.notification_object.from_user.to_s
+			"You have a new message in your invitation to join " + self.notification_object.conversation.conversation_object.project.to_s + " from " + self.notification_object.user.to_s
 		else
 			"Notification: " + self.notification_object.to_s + " on " + self.notification_object.project.to_s
 		end

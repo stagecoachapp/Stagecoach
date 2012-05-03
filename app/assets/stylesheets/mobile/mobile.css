@@ -10,3 +10,7 @@
 #layouts-footer-signout-button {
 margin-right: 2%
 }
+
+#layouts-footer {
+	bottom: 0;
+}
