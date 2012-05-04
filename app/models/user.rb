@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
         !self.google_user_information.nil?
     end
 
+    def number_of_projects
+        self.projects.count
+    end
+
 
     def contacts
         contacts = []
