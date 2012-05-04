@@ -87,6 +87,16 @@ class ApplicationController < ActionController::Base
             response = http.request(request)
         end
 
-        helper_method :current_user, :current_user?, :current_user=, :current_project, :current_project=, :google_api, :connected_to_google?, :connected_to_facebook?
+        def unread_notification_count
+            unread_notifications = []
+            Notification.all(:conditions => {:user_id => self.current_user.id}, :order => "created_at DESC").each do |notification|
+            if not notification.read?
+                unread_notifications << notification
+            end
+            end
+            @unread_notification_count = unread_notifications.count
+        end
+
+        helper_method :current_user, :current_user?, :current_user=, :current_project, :current_project=, :google_api, :connected_to_google?, :connected_to_facebook?, :unread_notification_count
 
 end
