@@ -41,6 +41,10 @@ module ApplicationHelper
         "notifications"
     end
 
+    def assets_path(asset="")
+        "/assets/#{asset.id rescue ''}"
+    end
+
     def upload_assets_path
         "/assets/upload"
     end
