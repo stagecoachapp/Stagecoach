@@ -7,7 +7,7 @@ class CreateFacebookUserInformations < ActiveRecord::Migration
 			t.string :name
 			t.string :profile_picture
 			t.string :location
-			t.integer :location_id
+			t.string :location_id
 			t.string :token
 			t.datetime :expires_at
 			t.integer :expires

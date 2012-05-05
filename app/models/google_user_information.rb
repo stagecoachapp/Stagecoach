@@ -11,10 +11,17 @@ class GoogleUserInformation < ActiveRecord::Base
 
 	def self.create_from_hash(hash, refresh_token, user=nil)
 		user ||= User.create(:name => hash['name'])
-		google_user_information = GoogleUserInformation.create(:user => user, :google_id => hash['id'], :email => hash['email'], :verified_email => hash['verified_email'],
-									  :name => hash['name'], :given_name => hash['given_name'], :family_name => hash['family_name'],
-									  :profile_picture => hash['picture'], :gender => hash['gender'])
-		google_user_information
+		google_id =  hash['id'] rescue 0
+		email = hash['email'] rescue ""
+		verified_email = hash['verified_email'] rescue true
+		name = hash['name'] rescue ""
+		given_name =  hash['given_name'] rescue ""
+		family_name = hash['family_name'] rescue ""
+		profile_picture = hash['picture'] rescue ""
+		gender = hash['gender'] rescue ""
+		google_user_information = GoogleUserInformation.create(:user => user, :google_id => google_id, :email => email, :verified_email => verified_email,
+															   :name => name, :given_name => given_name, :family_name =>  family_name,
+															   :profile_picture => profile_picture, :gender => gender)
 	end
 
 

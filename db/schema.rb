@@ -128,12 +128,13 @@ ActiveRecord::Schema.define(:version => 20120429224400) do
   add_index "experiments", ["test_name"], :name => "index_experiments_on_test_name"
 
   create_table "facebook_user_informations", :force => true do |t|
+    t.integer  "user_id"
     t.integer  "uid"
     t.string   "email"
     t.string   "name"
     t.string   "profile_picture"
     t.string   "location"
-    t.integer  "location_id"
+    t.string   "location_id"
     t.string   "token"
     t.datetime "expires_at"
     t.integer  "expires"
