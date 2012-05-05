@@ -1,0 +1,12 @@
+<h1>Documents</h1>
+<ul>
+	<% if not self.current_project.assets.exists? %>
+				<p>You have no documents yet!</p>
+				<p>Upload assets from our desktop client.</p>
+	<% end %>
+	<% self.current_project.assets.each do |asset| %>
+		<li>
+			<a data-role="button" rel="external" href=<%= "/assets/#{asset.id}" %>><%= asset.file_file_name %></a>
+		</li>
+	<% end %>
+</ul>
