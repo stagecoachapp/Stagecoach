@@ -12,7 +12,7 @@ class InvitationsController < ApplicationController
     # GET /invitations
     # GET /invitations.json
     def index
-        @invitations = Invitation.all
+        @invitations = Invitation.where("to_user_id = #{self.current_user.id} OR from_user_id = #{self.current_user.id}")
 
         respond_to do |format|
             format.html # index.html.erb
@@ -24,6 +24,11 @@ class InvitationsController < ApplicationController
     # GET /invitations/1.json
     def show
         @invitation = Invitation.find(params[:id])
+        if self.current_user != @invitation.to_user && self.current_user != @invitation.from_user
+            flash[:error] = "You are not authorized to see that invitation"
+            redirect_to root_url
+            return
+        end
         @message = Message.new(:conversation => @invitation.conversation, :user => self.current_user)
         respond_to do |format|
             format.html # show.html.erb
