@@ -1,29 +1,47 @@
+
 <p id="notice"><%= notice %></p>
-<p>
-  <b>Name:</b>
-  <%= @task.name %>
-</p>
+<div class="offset3">
+  <p>
+    <h1><%= @task.name %></h1>
+  </p>
+  <p>
+    <b>Owner:</b>
+    <%= @task.owner %>
+  </p>
+  <p>
+    <b>Due:</b>
+    <%= @task.formatted_time %>
+  </p>
 
-<p>
-  <b>Startdate:</b>
-  <%= @task.formatted_time %>
-</p>
+  <p>
+    <b>Description:</b>
+    <%= @task.description %>
+  </p>
 
-<p>
-  <b>Notes:</b>
-  <%= @task.description %>
-</p>
+  <p>
+    <b>Priority:</b>
+    <%= @task.task_priority %>
+  </p>
 
-<p>
-  <b>Priority:</b>
-  <%= @task.task_priority %>
-</p>
+  <p>
+    <b>Status:</b>
+    <%= @task.task_status %>
+  </p>
 
-<p>
-  <b>Status:</b>
-  <%= @task.task_status %>
-</p>
+  <p>
+    <b>Participants:</b>
+    <ul>
+      <% @task.users.all.each do |user| %>
+      <% if @task.owner != user %>
+      <li> <%= user.name %> </li>
+      <% end %>
+      <% end %>
+    </ul>
+  </p>
 
+  <%= link_to 'Mark Complete', mark_task_complete_path(@task.id), :class => "btn btn-primary"%>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+  <% if self.current_project.administrators.include?(self.current_user) %>
+  <%= link_to 'Edit', edit_task_path(@task), :class => "btn" %>
+  <% end %>
+</div>

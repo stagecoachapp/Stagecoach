@@ -6,6 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require_tree .
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-30912442-1']);
@@ -18,3 +19,11 @@ _gaq.push(['_trackPageview']);
 })();
 
 $(".alert-message").alert('close');
+
+$(document).ready(function() {
+
+	$("#invite-modal").ajaxSuccess(function(e, xhr, settings) {
+		$("#invite-button").text('Invite Sent');
+		$("#invite-button > i").removeClass('icon-plus');
+	});
+});

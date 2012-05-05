@@ -19,11 +19,13 @@ class ApplicationController < ActionController::Base
     end
 
 
+
     before_filter :require_login
     def require_login
+        url = request.path
         session[:after_login_redirect_url] = request.url
         unless current_user?
-            if is_mobile_device?
+            if url != '/blog' && url != '/about' && url != '/' && url != '/signup'
                 redirect_to '/signin'
             end
         end
@@ -85,6 +87,16 @@ class ApplicationController < ActionController::Base
             response = http.request(request)
         end
 
-        helper_method :current_user, :current_user?, :current_user=, :current_project, :current_project=, :google_api, :connected_to_google?, :connected_to_facebook?
+        def unread_notification_count
+            unread_notifications = []
+            Notification.all(:conditions => {:user_id => self.current_user.id}, :order => "created_at DESC").each do |notification|
+            if not notification.read?
+                unread_notifications << notification
+            end
+            end
+            @unread_notification_count = unread_notifications.count
+        end
+
+        helper_method :current_user, :current_user?, :current_user=, :current_project, :current_project=, :google_api, :connected_to_google?, :connected_to_facebook?, :unread_notification_count
 
 end

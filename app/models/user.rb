@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
     has_one :facebook_user_information
     has_one :email_setting
     after_initialize :default_values
+    before_save :lowercase_name
 
     def self.create_from_facebook_hash(hash)
         #new_user is necessary because this is called as an instance method and link_facebook is a class method
@@ -45,6 +46,10 @@ class User < ActiveRecord::Base
         !self.google_user_information.nil?
     end
 
+    def number_of_projects
+        self.projects.count
+    end
+
 
     def contacts
         contacts = []
@@ -65,8 +70,16 @@ class User < ActiveRecord::Base
         self.name
     end
 
+    def name
+    	read_attribute(:name).split(' ').map {|w| w.capitalize }.join(' ')
+    end
+
     private
-    def default_values
-      self.smartphone ||= 1
-  end
+		def default_values
+			self.smartphone ||= 1
+		end
+
+		def lowercase_name
+			self.name  = self.name.downcase
+		end
 end

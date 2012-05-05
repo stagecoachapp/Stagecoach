@@ -1,22 +1,17 @@
-<div class="contacts-top">
-	<h1>Contacts by Project</h1>
-	<div class="contacts-buttons">
-		<button><a href="/contacts/all">All Contacts</a></button>
-		<button><a href="/contacts/roles">Current Project</a></button>
-		<button disabled="true"><a href="/contacts/projects">All Projects</a></button>
-	</div>
+<div>
+	<%= render 'contacts_page_controls' %>
 </div>
-
-<div class="contacts-list">
+<h4>Projects</h4>
+<div>
 	<ul>
 		<% for project in @projects %>
 			<% unless project.users.count == 1 %>
 				<li>
-					<p><%= project.name %></p>
+					<b><p><%= project.name %></p></b>
 					<ul>
 						<% for contact in project.users %>
 							<% unless contact == @current_user %>
-								<li><%= contact.name %></li>
+								<li><%= link_to contact.name, contact %></li>
 							<% end %>
 						<% end %>
 					</ul>
