@@ -1,6 +1,7 @@
 class CreateFacebookUserInformations < ActiveRecord::Migration
 	def change
 		create_table :facebook_user_informations do |t|
+			t.integer :user_id
 			t.integer :uid
 			t.string :email
 			t.string :name

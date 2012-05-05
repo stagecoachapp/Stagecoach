@@ -83,53 +83,55 @@ class SessionsController < ApplicationController
                             #they have not linked a Google account and nobody else has linked this one
                             #existing because they are an existing user, not an existing Google account
                             auth_type = 'existing'
-                            authorization = Authorization.create_from_google_hash(hash, session[:google_refresh_token], self.current_user)
+                            self.current_user.link_google(hash, session[:google_refresh_token])
+                            GoogleUserInformation.create_from_google_hash(hash, session[:google_refresh_token], self.current_user)
                         #the user is already logged in and is logging in again. This shouldn't happen
-                    else
-                        auth_type = 'existing'
-                        if self.current_user.authorization.nil?
-                            authorization = Authorization.create()
-                            self.current_user.authorization = authorization
-                        end
-                        authorization = self.current_user.authorization
+                        else
+                            auth_type = 'existing'
+                            if self.current_user.google_user_information.nil?
+                                self.current_user.link_google(hash, session[:google_refresh_token])
+                            end
                             #they are trying to link a second account
-                            if authorization.user.google_user_information.google_id != hash['id']
+                            if self.current_user.google_user_information.google_id != hash['id']
                                 flash[:error] = "You have linked a different Google account with this one"
                                 redirect_after_login
                                 return
                             end
                         end
-                    #user is not logged in yet. Either retrieve the authorization or create a new one and a new user
-                else
-                    authorization = Authorization.find_by_google_hash(hash)
-                    auth_type = 'existing'
-                    if authorization.nil?
-                        auth_type = 'new'
-                        authorization = Authorization.create_from_google_hash(hash, session[:google_refresh_token], self.current_user)
+                    #user is not logged in yet. Either retrieve the user or create a new user
+                    else
+                        google_user_information = GoogleUserInformation.find_by_hash(hash)
+                        auth_type = 'existing'
+                        if google_user_information.nil?
+                            auth_type = 'new'
+                            user = User.create_from_google_hash(hash, session[:google_refresh_token])
+                        end
                     end
-                end
 
-                authorization = Authorization.find_or_create_by_google_hash(hash, session[:google_refresh_token], self.current_user)
-                self.current_user= authorization.user
-                flash[:success] = "Welcome, #{self.current_user.name}."
-                if session.present?
-                    session[:project_id] = current_user.projects.find(:all, :order => "created_at DESC", :limit => 1).first
+                    google_user_information = GoogleUserInformation.find_or_create_by_hash(hash, session[:google_refresh_token], self.current_user)
+                    self.current_user= google_user_information.user
+                    flash[:success] = "Welcome, #{self.current_user.name}."
+                    if session.present?
+                        session[:project_id] = current_user.projects.find(:all, :order => "created_at DESC", :limit => 1).first
+                    end
+                else
+                    #error in 2nd google callback
+                    flash[:error] = "Error logging into gmail"
                 end
             else
+                #error in 1st google callback
                 flash[:error] = "Error logging into gmail"
             end
         else
+            #error receiving access code
             flash[:error] = "Error logging into gmail"
         end
-    else
-        flash[:error] = "Error logging into gmail"
+        if auth_type == 'new' && is_mobile_device?
+            redirect_to edit_user_url(self.current_user)
+            return
+        end
+        redirect_after_login
     end
-    if auth_type == 'new' && is_mobile_device?
-        redirect_to edit_user_url(self.current_user)
-        return
-    end
-    redirect_after_login
-end
 
     #GET /auth/:provider/callback
     #LOGIC

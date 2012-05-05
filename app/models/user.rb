@@ -6,15 +6,25 @@ class User < ActiveRecord::Base
     has_one :authorization
     has_many :notifications, :dependent => :destroy
     has_one :google_user_information
+    has_one :facebook_user_information
     has_one :email_setting
     after_initialize :default_values
 
     def self.create_from_facebook_hash(hash)
-        create(:name => hash['info']['name'], :email => hash['info']['email'], :email_setting => EmailSetting.create)
+        #new_user is necessary because this is called as an instance method and link_facebook is a class method
+        new_user = create(:name => hash['info']['name'], :email => hash['info']['email'], :email_setting => EmailSetting.create)
+        new_user.link_facebook(hash)
     end
 
-    def self.create_from_google_hash(hash)
-        create(:name => hash['name'], :email => hash['email'], :email_setting => EmailSetting.create)
+    def self.create_from_google_hash(hash, refresh_token)
+        new_user = create(:name => hash['name'], :email => hash['email'], :email_setting => EmailSetting.create)
+        new_user.link_google(hash, refresh_token)
+    end
+
+    def link_faecbook(hash)
+        if self.facebook_user_information.nil?
+            FacebookUserInformation.create_from_hash(hash, self)
+        end
     end
 
     def linked_facebook?
@@ -23,6 +33,12 @@ class User < ActiveRecord::Base
             return
         end
         !self.authorization.uid.nil?
+    end
+
+    def link_google(hash, refresh_token)
+        if self.google_user_information.nil?
+            GoogleUserInformation.create_from_hash(hash, refresh_token, self)
+        end
     end
 
     def linked_google?
