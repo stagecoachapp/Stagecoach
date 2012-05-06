@@ -23,7 +23,12 @@ class InvitationsController < ApplicationController
     # GET /invitations/1
     # GET /invitations/1.json
     def show
-        @invitation = Invitation.find(params[:id])
+        @invitation = Invitation.find(params[:id]) rescue nil
+        if @invitation.nil?
+            flash[:error] = "You are not authorized to see that invitation"
+            redirect_to root_url
+            return
+        end
         if self.current_user != @invitation.to_user && self.current_user != @invitation.from_user
             flash[:error] = "You are not authorized to see that invitation"
             redirect_to root_url

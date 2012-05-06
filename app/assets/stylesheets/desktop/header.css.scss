@@ -25,15 +25,17 @@
 
 #header-notifications {
 	padding: 0px;
+	.badge-error {
+		&:hover {
+			background-color: #B94A48;
+		}
+	}
 	span {
 		position: absolute;
 		z-index: 1;
 		margin-left: 19px;
 		padding: 0px 6px;
 		border-radius: 7px;
-		&:hover {
-			background-color: #B94A48;
-		}
 		text {
 			font-size: 12px;
 		}

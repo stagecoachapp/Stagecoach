@@ -54,7 +54,7 @@ module ApplicationHelper
     end
 
     def extra_header_notification_badge_classes
-        if self.current_user.notifications.count > 0
+        if self.unread_notification_count > 0
             return "badge-error"
         end
     end
