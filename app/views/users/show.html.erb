@@ -1,31 +1,20 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
-  <%= @user.name %>
+  <h1><%= @user.name %> </h1>
+  <% unless @user.google_user_information.profile_picture.nil? %>
+  <%= image_tag @user.google_user_information.profile_picture %>
+  <% end %>
 </p>
-
 <p>
   <b>Email:</b>
   <%= @user.email %>
 </p>
 
 <p>
-  <b>Phonenumber:</b>
+  <b>Phone:</b>
   <%= @user.phonenumber %>
 </p>
 
-<p>
-  <b>Smartphone:</b>
-  <%= @user.smartphone %>
-</p>
 
-<p>
-  <b>Activated:</b>
-  <%= @user.activated %>
-</p>
-
-
-<%= link_to "Invite to #{self.current_project}", h(new_invitation_path + "?" + {:user => @user.id}.to_query) %> |
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to "Invite to #{self.current_project}", h(new_invitation_path + "?" + {:user => @user.id}.to_query) %>
