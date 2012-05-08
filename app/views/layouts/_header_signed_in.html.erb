@@ -8,7 +8,7 @@
 							<%= self.current_project.nil? ? "No Project" : self.current_project.capitalized_name %>
 		   				</a>
 					<% else %>
-							<a class="dropdown-toggle" data-toggle="dropdown" id="header-current-project-name" href="#">
+							<a class="dropdown-toggle" data-toggle="dropdown"  <% if self.current_project.nil? %> style="color: #DA4F49 !important"<% end %> id="header-current-project-name" href="#">
 								<%= self.current_project.nil? ? "No Project" : self.current_project.capitalized_name %>
 								<b class="caret"></b>
 			   				</a>
