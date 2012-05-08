@@ -2,6 +2,12 @@
 	<div class="navbar-inner">
 		<div class="container" id="navbar-container">
 			<ul class="nav">
+				<li>
+					<%= link_to root_url, :id => "header-logo" do %>
+						<%= image_tag "global/logo.png" %>
+					<% end %>
+				</li>
+				<li class="divider-vertical"></li>
 				<li class="dropdown">
 					<% if other_projects == [] %>
 						<a class="dropdown-toggle" data-toggle="dropdown" id="header-current-project-name" href="<%= self.current_project.nil? ? new_project_path : "#" %>">
