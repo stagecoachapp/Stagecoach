@@ -28,7 +28,7 @@ class GoogleUserInformation < ActiveRecord::Base
 	def self.find_or_create_by_hash(hash, refresh_token, user)
 		google_user_information = GoogleUserInformation.find_by_hash(hash)
 		if google_user_information.nil?
-			google_user_information = GoogleUserInformaion.create_fromhash(hash, refresh_token, user)
+			google_user_information = GoogleUserInformaion.create_from_hash(hash, refresh_token, user)
 		end
 		google_user_information
     end

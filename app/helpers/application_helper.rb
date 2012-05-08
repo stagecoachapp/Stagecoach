@@ -57,6 +57,7 @@ module ApplicationHelper
         if self.current_user.notifications.count > 0
             return "badge-error"
         end
+        ""
     end
 
     def profile_picture_url

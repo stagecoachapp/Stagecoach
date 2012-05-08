@@ -25,13 +25,4 @@ class FacebookUserInformation < ActiveRecord::Base
 																   :profile_picture => profile_picture, :location => location, :token => token, :location_id => location_id,
 																   :expires => expires, :gender => gender)
 	end
-
-
-	def self.find_or_create_by_hash(hash, user=nil)
-		facebook_user_information = FacebookUserInformation.find_by_hash(hash)
-		if facebook_user_information.nil?
-			facebook_user_information = FacebookUserInformaion.create_from_hash(hash, user)
-		end
-		google_user_information
-    end
 end
