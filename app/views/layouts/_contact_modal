@@ -1,0 +1,7 @@
+<div class="modal" id="contact-modal">
+	<div class="modal-body">
+		<button class="close" data-dismiss="modal">×</button>
+		<div class="contact-body">
+		</div>
+	</div>
+</div>

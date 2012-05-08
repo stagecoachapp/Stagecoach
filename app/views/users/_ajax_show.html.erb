@@ -1,0 +1,21 @@
+<div class="important-stuff">
+  <!-- <img id="profile-picture" src="< profile_picture_url >"></img> -->
+  <h2 id="name"><%= @user.name %></h2>
+  <h3 id="email"><%= @user.email %></h3>
+  <h3 id="phone"><%= @user.phonenumber %></h3>
+</div>
+<div class="profile-information">
+  <!-- eventually display this like IMDB does, temporary fix since we don't have a good way of addressing user roles as related to projects -->
+  <h2 id="positions">Positions:</h2>
+  <ul class="role-list">
+    <% for user_role in @user.user_roles %>
+      <li><b><%= user_role.name %></b></li>
+    <% end %>
+  </ul>
+  <h2 id="films">Films:</h2>
+  <ul class="project-list">
+    <% for project in @user.projects %>
+      <li><b><%= project.name %></b></li>
+    <% end %>
+  </ul>
+</div>

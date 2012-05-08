@@ -24,6 +24,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.mobile # show.html.erb
       format.json { render json: @user }
+      format.js
     end
   end
 
@@ -32,7 +33,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.mobile # index.html.erb
-      format.html
+      format.js
     end
   end
 
