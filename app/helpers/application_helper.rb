@@ -57,6 +57,18 @@ module ApplicationHelper
         if self.unread_notification_count > 0
             return "badge-error"
         end
+        ""
+    end
+
+    def profile_picture_url
+        if self.current_user.linked_facebook? && !self.current_user.facebook_user_information.profile_picture.nil?
+            url = self.current_user.facebook_user_information.profile_picture
+        elsif self.current_user.linked_google? && !self.current_user.google_user_information.profile_picture.nil?
+            url = self.current_user.google_user_information.profile_picture
+        else
+            url = "/assets/header/default_profile_picture.png"
+        end
+        url
     end
 
 end

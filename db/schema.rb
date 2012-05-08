@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120424062401) do
+ActiveRecord::Schema.define(:version => 20120429224400) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -74,15 +74,6 @@ ActiveRecord::Schema.define(:version => 20120424062401) do
     t.datetime "updated_at",        :null => false
   end
 
-  create_table "authorizations", :force => true do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.integer  "user_id"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
-    t.string   "google_refresh_token"
-  end
-
   create_table "changelogs", :force => true do |t|
     t.string   "description"
     t.string   "developer"
@@ -136,6 +127,22 @@ ActiveRecord::Schema.define(:version => 20120424062401) do
 
   add_index "experiments", ["test_name"], :name => "index_experiments_on_test_name"
 
+  create_table "facebook_user_informations", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "uid"
+    t.string   "email"
+    t.string   "name"
+    t.string   "profile_picture"
+    t.string   "location"
+    t.string   "location_id"
+    t.string   "token"
+    t.datetime "expires_at"
+    t.integer  "expires"
+    t.string   "gender"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "google_user_informations", :force => true do |t|
     t.integer  "user_id"
     t.string   "google_id"
@@ -148,6 +155,7 @@ ActiveRecord::Schema.define(:version => 20120424062401) do
     t.string   "gender"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "refresh_token"
   end
 
   create_table "invitations", :force => true do |t|
