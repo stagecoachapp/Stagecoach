@@ -1,5 +1,4 @@
 #navbar-container {
-	margin-left: 100px;
 	margin-right: 0px;
 	width: auto;
 	font-size: 23px;
@@ -22,6 +21,17 @@
 	color: white !important;
 }
 
+#header-logo {
+	padding: 0px 16px 0px 0px;
+	img {
+		padding: 4px 0px 0px 14px;
+		width: 200px;
+	}
+}
+
+#header-current-project-name {
+	padding-left: 6px;
+}
 
 #header-notifications {
 	padding: 0px;
