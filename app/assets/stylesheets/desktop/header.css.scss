@@ -33,6 +33,15 @@
 	padding-left: 6px;
 }
 
+#header-projects-dropdown {
+	text-align: center;
+	#header-project-buttons {
+		margin-left: auto;
+		margin-right: auto;
+		width: 112px;
+	}
+}
+
 #header-notifications {
 	padding: 0px;
 	.badge-error {

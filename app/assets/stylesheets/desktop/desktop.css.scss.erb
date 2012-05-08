@@ -5,12 +5,39 @@
  *= require_self
  *= require_tree .
 */
+
 .jquery_form_error_message {
   display: block;
   margin-top: 3px;
 }
 
-#content {
-	padding-left: 120px;
-	padding-top: 16px;
+
+html, body {
+/* to get background image to cover entire height of screen */
+	#sidebar-and-content {
+		padding-top: 30px;
+		position: fixed;
+		top: 58px;
+		bottom: 00px;
+		width: 100%;
+		background-image: url("/assets/global/tasky_pattern.png");
+	}
+	#content {
+		margin-left: 80px;
+		padding-left: 24px;
+	    width: 66%;
+	    top: 78px;
+	    bottom: 20px;
+	    overflow-y: auto;
+	    position: fixed;
+	    background-color: #F3F3F3;
+	    border-top-right-radius: 30px;
+	    box-shadow: 2px 2px 11px 4px #2B2B2B;
+	}
+}
+
+
+
+.btn-success, .btn-primary {
+	color: white !important;
 }
