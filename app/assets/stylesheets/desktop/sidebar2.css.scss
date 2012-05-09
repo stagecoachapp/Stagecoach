@@ -1,26 +1,29 @@
 /* This is the CSS for the sidebar */
-#sidebar {
-	height: 100%;
-	background-image: url("<%= image_path "sidebar/bg.png" %>");
-	background-repeat: repeat-y;
+
+#sidebar, #sidebar-no-project {
+	top: 78px;
+	bottom: 20px;
+	background-color: #222222;
 	width: 80px;
-	border-right: 4px solid black;
-	box-shadow: 0px 0px 15px black;
 	float: left;
 	position: fixed;
-	margin-top: -60px;
-	z-index: 1040;
+	padding-top: 33px;
+	overflow: hidden;
+	border-top: 1px solid #F3F3F3;
+	border-bottom: 1px solid #F3F3F3;
+	z-index: 1;
 }
 
 .sidebar_item {
 	height: 80px;
 	width: 80px;
 	text-align: center;
+	margin-bottom: 30px;
 }
 
 .sidebar_item:hover {
 	background-color: rgb(150,150,150);
-	box-shadow: 0px 0px 50px 10px black;
+	box-shadow: 5px 0px 30px -4px black;
 }
 
 .sidebar_item_link {
