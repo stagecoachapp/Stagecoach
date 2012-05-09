@@ -1,5 +1,4 @@
 #navbar-container {
-	margin-left: 100px;
 	margin-right: 0px;
 	width: auto;
 	font-size: 23px;
@@ -22,18 +21,40 @@
 	color: white !important;
 }
 
+#header-logo {
+	padding: 0px 16px 0px 0px;
+	img {
+		padding: 4px 0px 0px 14px;
+		width: 200px;
+	}
+}
+
+#header-current-project-name {
+	padding-left: 6px;
+}
+
+#header-projects-dropdown {
+	text-align: center;
+	#header-project-buttons {
+		margin-left: auto;
+		margin-right: auto;
+		width: 112px;
+	}
+}
 
 #header-notifications {
 	padding: 0px;
+	.badge-error {
+		&:hover {
+			background-color: #B94A48;
+		}
+	}
 	span {
 		position: absolute;
 		z-index: 1;
 		margin-left: 19px;
 		padding: 0px 6px;
 		border-radius: 7px;
-		&:hover {
-			background-color: #B94A48;
-		}
 		text {
 			font-size: 12px;
 		}

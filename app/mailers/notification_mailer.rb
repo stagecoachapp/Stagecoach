@@ -32,6 +32,14 @@ class NotificationMailer < AsyncMailer
         message.delivery_method.settings.merge!({:user_name => "notifications@projectstagecoach.com"})
     end
 
+    def new_project_asset(notification_id)
+        @notification = Notification.find_by_id(notification_id)
+        @asset = @notification.notification_object
+        message = mail(:to => @notification.user.email, :subject => "A new asset has been uploaded for #{@asset.asset_object.to_s}")
+        #required because the from field actually requires different smtp settings to
+        message.delivery_method.settings.merge!({:user_name => "notifications@projectstagecoach.com"})
+    end
+
 end
 
 

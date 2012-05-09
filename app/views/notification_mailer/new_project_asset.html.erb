@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <p>
+  		Hi <%= @notification.user %>,
+    </p>
+    <p>
+  		A new asset has been uploaded for <%= @asset.asset_object.to_s %>
+
+  		Please visit http://projectstagecoach.com to login
+    </p>
+  </body>
+</html>
