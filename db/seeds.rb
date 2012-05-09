@@ -36,7 +36,8 @@ default_notification_types = [
 	"Default",
 	"NewTask",
 	"NewInvitation",
-	"NewInvitationMessage"
+	"NewInvitationMessage",
+	"NewProjectAsset"
 ]
 
 NotificationType.delete_all

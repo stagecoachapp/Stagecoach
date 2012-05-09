@@ -29,6 +29,11 @@ class AssetsController < ApplicationController
 		@asset.asset_object = self.current_project
 
 		if @asset.save
+			if @asset.asset_object.class.name == "Project"
+				self.current_project.users.each do |user|
+					Notification.create(notification_type: NotificationType.find_by_name("NewProjectAsset"), user: user, notification_object: @asset);
+				end
+			end
 			flash[:success] = 'File successfully uploaded'
 		else
 			flash[:error] = 'File upload error'
