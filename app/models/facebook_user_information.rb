@@ -8,7 +8,7 @@ class FacebookUserInformation < ActiveRecord::Base
 	end
 
 	def self.create_from_hash(hash, user=nil)
-		user ||= User.create(:name => hash['info']['name'])
+		user ||= User.create(:name => hash['info']['name'], :email_setting => EmailSetting.create)
 		#necessary in case we don't get the right data or Facebook changes their format
 		uid = hash['uid'] rescue 0
 		email = hash['info']['email'] rescue ""
