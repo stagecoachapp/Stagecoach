@@ -19,6 +19,8 @@ class Notification < ActiveRecord::Base
 			"You have been invited to join " + self.notification_object.project.to_s + " by " + self.notification_object.from_user.to_s
 		when "NewInvitationMessage"
 			"You have a new message in your invitation to join " + self.notification_object.conversation.conversation_object.project.to_s + " from " + self.notification_object.user.to_s
+		when "NewProjectAsset"
+			"A new asset has been uploaded for " + self.notification_object.asset_object.to_s
 		else
 			"Notification: " + self.notification_object.to_s + " on " + self.notification_object.project.to_s
 		end
@@ -46,6 +48,12 @@ class Notification < ActiveRecord::Base
 			elsif self.notification_type.to_s == "NewInvitationMessage"
 				if self.user.email_setting.new_invitation_message == 1
 					NotificationMailer.new_invitation_message(self.id).deliver
+				end
+			elsif self.notification_type.to_s == "NewProjectAsset"
+				if self.user.email_setting.new_asset == 1
+					if self.notification_object.asset_object.class.name == "Project"
+						NotificationMailer.new_project_asset(self.id).deliver
+					end
 				end
 			end
 		end
