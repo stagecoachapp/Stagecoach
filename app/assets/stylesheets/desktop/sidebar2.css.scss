@@ -1,12 +1,17 @@
 /* This is the CSS for the sidebar */
-#sidebar {
-	height: 100%;
+
+#sidebar, #sidebar-no-project {
+	top: 78px;
+	bottom: 20px;
 	background-color: #222222;
 	width: 80px;
 	float: left;
 	position: fixed;
-	margin-top: -5px;
 	padding-top: 33px;
+	overflow: hidden;
+	border-top: 1px solid #F3F3F3;
+	border-bottom: 1px solid #F3F3F3;
+	z-index: 1;
 }
 
 .sidebar_item {

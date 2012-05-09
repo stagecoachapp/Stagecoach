@@ -1,5 +1,5 @@
+  <% if not self.current_project.nil? %>
   <nav id="sidebar">
-
       <div class="sidebar_item" >
         <a class="sidebar_item_link" href=<%= invitations_path %>>
           <%= image_tag("sidebar/Icon-Invitations.png") %>
@@ -22,16 +22,10 @@
       </div>
       <% end %>
 
-      <div class="sidebar_item" >
-        <a class="sidebar_item_link" href=<%= projects_path %>>
-          <%= image_tag "sidebar/Icon-Folder.png" %>
-          Projects
-        </a>
-      </div>
       <div class="sidebar_item">
         <a class= "sidebar_item_link" href="/contacts/all">
           <%= image_tag "sidebar/Icon-People.png" %>
-          People
+          Crew
         </a>
       </div>
 
@@ -51,3 +45,6 @@
       </div>
       <% end %>
   </nav>
+  <% else %>
+    <div id="sidebar-no-project"></div>
+  <% end %>
