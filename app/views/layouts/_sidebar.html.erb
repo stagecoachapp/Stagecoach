@@ -1,50 +1,34 @@
   <% if not self.current_project.nil? %>
-  <nav id="sidebar">
-      <div class="sidebar_item" >
-        <a class="sidebar_item_link" href=<%= invitations_path %>>
-          <%= image_tag("sidebar/Icon-Invitations.png") %>
-          Invitations
-        </a>
+      <nav id="sidebar">
+          <div class="sidebar_item" >
+            <a class="sidebar_item_link" href=<%= tasks_path %>>
+              <%= image_tag("sidebar/icon_tasks.png") %>
+              Tasks
+          </a>
       </div>
-      <!-- Disable button if not in a project -->
-      <% if self.current_project.nil? %>
-      <div class="sidebar_item_disabled" >
-          <%= image_tag("sidebar/Icon-Tasks.png") %>
-          Tasks
-      </div>
-
-      <% else %>
-      <div class="sidebar_item" >
-        <a class="sidebar_item_link" href=<%= tasks_path %>>
-          <%= image_tag("sidebar/Icon-Tasks.png") %>
-          Tasks
-        </a>
-      </div>
-      <% end %>
 
       <div class="sidebar_item">
         <a class= "sidebar_item_link" href="/contacts/all">
-          <%= image_tag "sidebar/Icon-People.png" %>
+          <%= image_tag "sidebar/icon_crew.png" %>
           Crew
-        </a>
-      </div>
+      </a>
+    </div>
 
-      <!-- Disable button if not in a project -->
-      <% if self.current_project.nil? %>
-      <div class="sidebar_item_disabled" >
-          <%= image_tag("sidebar/Icon-Assets.png") %>
-          Assets
-      </div>
+    <div class="sidebar_item" >
+        <a class="sidebar_item_link" href=<%= invitations_path %>>
+          <%= image_tag("sidebar/icon_invitations.png") %>
+          Invitations
+      </a>
+    </div>
 
-      <% else %>
-      <div class="sidebar_item">
+
+    <div class="sidebar_item">
         <a class= "sidebar_item_link" href="<%= assets_path %>" >
-          <%= image_tag "sidebar/Icon-Assets.png" %>
+          <%= image_tag "sidebar/icon_assets.png" %>
           Assets
-        </a>
-      </div>
-      <% end %>
-  </nav>
-  <% else %>
+      </a>
+    </div>
+    </nav>
+<% else %>
     <div id="sidebar-no-project"></div>
-  <% end %>
+<% end %>
