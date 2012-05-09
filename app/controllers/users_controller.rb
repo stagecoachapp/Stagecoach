@@ -34,6 +34,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.mobile # index.html.erb
       format.js
+      format.html
     end
   end
 

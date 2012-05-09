@@ -1,2 +1,1 @@
-$("#contact-modal").modal('show');
-$('.contact-body').append('<%= render "users/ajax_show" %>');
+$('<%= escape_javascript(render "layouts/contact_modal") %>').insertAfter("invite-modal");
