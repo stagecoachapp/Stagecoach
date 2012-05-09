@@ -5,7 +5,7 @@ class CreateEmailSettings < ActiveRecord::Migration
 			t.integer :new_task, :default => 1
 			t.integer :new_invitation, :default => 1
 			t.integer :new_invitation_message, :default => 1
-
+			t.integer :new_asset, :default => 1
 
 			t.timestamps
 		end
