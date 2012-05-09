@@ -9,25 +9,19 @@
 				</li>
 				<li class="divider-vertical"></li>
 				<li class="dropdown">
-					<% if other_projects == [] %>
-						<a class="dropdown-toggle" <% if self.current_project.nil? %> style="color: #DA4F49 !important"<% end %> data-toggle="dropdown" id="header-current-project-name" href="<%= self.current_project.nil? ? new_project_path : "#" %>">
-							<%= self.current_project.nil? ? "No Project" : self.current_project.capitalized_name %>
-		   				</a>
-					<% else %>
-							<a class="dropdown-toggle" data-toggle="dropdown"  <% if self.current_project.nil? %> style="color: #DA4F49 !important"<% end %> id="header-current-project-name" href="#">
-								<%= self.current_project.nil? ? "No Project" : self.current_project.capitalized_name %>
-								<b class="caret"></b>
-			   				</a>
-			   				<ul class="dropdown-menu" id="header-projects-dropdown">
-			   					<% other_projects.each do |project| %>
-			   						<%= link_to project.capitalized_name, project, :method => :post %>
-			   					<% end %>
-			   					<div id="header-project-buttons">
-			   						<a class="btn btn-primary">Join</a>
-			   						<a class="btn btn-success">Create</a>
-			   					</div>
-			   				</ul>
-					<% end %>
+					<a class="dropdown-toggle" data-toggle="dropdown"  <% if self.current_project.nil? %> style="color: #DA4F49 !important"<% end %> id="header-current-project-name" href="#">
+						<%= self.current_project.nil? ? "No Project" : self.current_project.capitalized_name %>
+						<b class="caret"></b>
+	   				</a>
+	   				<ul class="dropdown-menu" id="header-projects-dropdown">
+	   					<% other_projects.each do |project| %>
+	   						<%= link_to project.capitalized_name, project, :method => :post %>
+	   					<% end %>
+	   					<div id="header-project-buttons">
+	   						<%= link_to "Join", join_project_path, :class => "btn btn-primary" %>
+	   						<%= link_to "Create", new_project_path, :class => "btn btn-success" %>
+	   					</div>
+	   				</ul>
 				</li>
 				<li class="divider-vertical"></li>
 				<li>
