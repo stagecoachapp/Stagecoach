@@ -10,7 +10,7 @@ class GoogleUserInformation < ActiveRecord::Base
 	end
 
 	def self.create_from_hash(hash, refresh_token, user=nil)
-		user ||= User.create(:name => hash['name'])
+		user ||= User.create(:name => hash['name'], :email_setting => EmailSetting.create)
 		google_id =  hash['id'] rescue 0
 		email = hash['email'] rescue ""
 		verified_email = hash['verified_email'] rescue true
