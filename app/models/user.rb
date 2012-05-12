@@ -64,9 +64,9 @@ class User < ActiveRecord::Base
         self.name
     end
 
-    def name
-    	read_attribute(:name).split(' ').map {|w| w.capitalize }.join(' ')
-    end
+    #def name
+    #	read_attribute(:name).split(' ').map {|w| w.capitalize }.join(' ')
+    #end
 
     private
 		def default_values
