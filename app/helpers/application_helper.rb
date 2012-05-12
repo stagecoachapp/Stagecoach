@@ -26,19 +26,19 @@ module ApplicationHelper
     end
 
     def task_menu_path
-     "tasks/menu"
+        "/tasks/menu"
     end
 
     def project_menu_path
-        "projects/menu"
+        "/projects/menu"
     end
 
     def comingsoon_path
-        "comingsoon"
+        "/comingsoon"
     end
 
     def notifications_path
-        "notifications"
+        "/notifications"
     end
 
     def assets_path(asset="")
