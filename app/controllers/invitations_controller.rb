@@ -12,7 +12,8 @@ class InvitationsController < ApplicationController
     # GET /invitations
     # GET /invitations.json
     def index
-        @invitations = Invitation.where("to_user_id = #{self.current_user.id} OR from_user_id = #{self.current_user.id}")
+        @outgoing_invitations = Invitation.where("from_user_id = #{self.current_user.id} AND project_id = #{self.current_project.id}")
+        @incoming_invitations = Invitation.where("to_user_id = #{self.current_user.id} AND project_id = #{self.current_project.id}")
 
         respond_to do |format|
             format.html # index.html.erb
@@ -75,8 +76,7 @@ class InvitationsController < ApplicationController
 
         respond_to do |format|
             if @invitation.save
-                format.html { redirect_to @invitation, success: 'Invitation was successfully created.' }
-                format.json { render json: @invitation, status: :created, location: @invitation }
+                format.html { redirect_to invitations_path, success: 'Invitation was successfully created.' }
             else
                 format.html { render action: "new" }
                 format.json { render json: @invitation.errors, status: :unprocessable_entity }

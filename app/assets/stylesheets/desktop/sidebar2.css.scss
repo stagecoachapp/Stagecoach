@@ -1,4 +1,5 @@
 /* This is the CSS for the sidebar */
+/* It is called sidebar2 because there was a weird nasty bug that broke everything when it was just called sidebar */
 
 #sidebar, #sidebar-no-project {
 	top: 78px;
@@ -7,10 +8,10 @@
 	width: 80px;
 	float: left;
 	position: fixed;
-	padding-top: 33px;
+	padding-top: 20px;
 	overflow: hidden;
-	border-top: 1px solid #F3F3F3;
-	border-bottom: 1px solid #F3F3F3;
+	border-top: 5px solid #F3F3F3;
+	border-bottom: 5px solid #F3F3F3;
 	z-index: 1;
 }
 
