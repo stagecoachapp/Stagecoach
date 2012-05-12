@@ -12,8 +12,8 @@ class InvitationsController < ApplicationController
     # GET /invitations
     # GET /invitations.json
     def index
-        @outgoing_invitations = Invitation.where("from_user_id = #{self.current_user.id} AND project_id = #{self.current_project.id}")
-        @incoming_invitations = Invitation.where("to_user_id = #{self.current_user.id} AND project_id = #{self.current_project.id}")
+        @outgoing_invitations = Invitation.where("from_user_id = #{self.current_user.id}")
+        @incoming_invitations = Invitation.where("to_user_id = #{self.current_user.id}")
 
         respond_to do |format|
             format.html # index.html.erb

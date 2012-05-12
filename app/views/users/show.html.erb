@@ -2,9 +2,7 @@
 
 <p>
   <h1><%= @user.name %> </h1>
-  <% unless @user.google_user_information.profile_picture.nil? %>
-  <%= image_tag @user.google_user_information.profile_picture %>
-  <% end %>
+  	<%= image_tag profile_picture_url, :id => "user-show-profile-picture" %>
 </p>
 <p>
   <b>Email:</b>
@@ -16,5 +14,9 @@
   <%= @user.phonenumber %>
 </p>
 
-
-<%= link_to "Invite to #{self.current_project}", h(new_invitation_path + "?" + {:user => @user.id}.to_query) %>
+<% unless @user.projects.include?(self.current_project) %>
+	<%= link_to "Invite to #{self.current_project}", h(new_invitation_path + "?" + {:user => @user.id}.to_query) %>
+<% end %>
+<% if @user == self.current_user %>
+	<%= link_to "Edit Profile", edit_user_path(self.current_user) %>
+<% end %>

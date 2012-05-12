@@ -12,12 +12,26 @@
 <% end %>
 
 <h1>Conversation</h1>
-<% @invitation.conversation.messages.each do |message| %>
-	<p><%= "#{message.user}: #{message.text}" %></p>
-<% end %>
-<%= form_for @message, :url => { :controller => :messages, :action => :create } do |f| %>
-	<%= f.text_field :text %>
-	<%= f.hidden_field :conversation_id, :value => @invitation.conversation.id %>
-	<%= f.hidden_field :user_id, :value => @message.user.id %>
-	<%= f.submit "Send Message", :class => "btn", :id => "invitations-show-send-message-button" %>
-<% end %>
+<div id="invitation-conversation">
+	<% @invitation.conversation.messages.each do |message| %>
+		<% if message.user == self.current_user %>
+			<%= image_tag profile_picture_url, :size => "50x50" %>
+			<div class="text-left">
+				<p class="white-shadow"><%= message.text %></p>
+			</div>
+			<br />
+		<% else %>
+			<div class="text-right">
+				<p class="white-shadow"><%= message.text %></p>
+			</div>
+			<%= image_tag profile_picture_url, :size => "50x50" %>
+			<br />
+		<% end %>
+	<% end %>
+	<%= form_for @message, :url => { :controller => :messages, :action => :create } do |f| %>
+		<%= f.text_field :text %>
+		<%= f.hidden_field :conversation_id, :value => @invitation.conversation.id %>
+		<%= f.hidden_field :user_id, :value => @message.user.id %>
+		<%= f.submit "Send Message", :class => "btn", :id => "invitations-show-send-message-button" %>
+	<% end %>
+</div>
