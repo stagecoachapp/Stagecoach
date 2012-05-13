@@ -2,9 +2,10 @@
 
 <p>
   <h1><%= @user.name %> </h1>
-  <% unless @user.google_user_information.profile_picture.nil? %>
-  <%= image_tag @user.google_user_information.profile_picture %>
-  <% end %>
+
+</p>
+<p>
+   <%= image_tag profile_picture_url, :class => "thumbnail span2"%>
 </p>
 <p>
   <b>Email:</b>
