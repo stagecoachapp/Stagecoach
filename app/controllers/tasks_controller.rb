@@ -23,14 +23,22 @@ class TasksController < ApplicationController
     end
 
     def create
-        date = Date.strptime(params[:date],"%m-%d-%Y").to_time
-        date = date.change(:hour => Time.parse(params[:time2]).hour, :min => Time.parse(params[:time2]).min)
-        params[:task][:time] = date
-        params[:task][:task_priority] = TaskPriority.find_by_name("Low")
-        params[:task][:task_status] = TaskPriority.find_by_name("Pending")
-        @task = Task.new(params[:task])
-        setDefaults! @task
+        if not is_mobile_device?
+            date = Date.strptime(params[:date],"%m-%d-%Y").to_time
+            date = date.change(:hour => Time.parse(params[:time2]).hour, :min => Time.parse(params[:time2]).min)
+            params[:task][:time] = date
+            params[:task][:task_priority] = TaskPriority.find_by_name("Low")
+            params[:task][:task_status] = TaskPriority.find_by_name("Pending")
+            @task = Task.new(params[:task])
+            setDefaults! @task
+        else
+            @task = Task.new(params[:task])
+            setDefaults! @task
+            debugger
+        end
+
         @task.save
+
 
         notification_type = NotificationType.find_by_name("NewTask")
         #shouldnt happen
@@ -39,6 +47,7 @@ class TasksController < ApplicationController
         end
         notification = nil
         @task.users.each do |user|
+            debugger
             notification = Notification.create(:notification_type => notification_type, :user => user, :notification_object => @task)
         end
 

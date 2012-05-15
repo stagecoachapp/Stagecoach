@@ -1,37 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Stagecoach</title>
-    <%= stylesheet_link_tag    'mobile/mobile' %>
-    <%= stylesheet_link_tag    'shared/shared' %>
-    <%= javascript_include_tag 'mobile/mobile' %>
-    <%= javascript_include_tag 'shared/shared' %>
-    <%= csrf_meta_tags %>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0," />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-  </head>
-  <body>
+<head>
+  <title>Stagecoach</title>
+  <%= stylesheet_link_tag    'mobile/mobile' %>
+  <%= stylesheet_link_tag    'shared/shared' %>
+  <%= javascript_include_tag 'mobile/mobile' %>
+  <%= javascript_include_tag 'shared/shared' %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0," />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+</head>
+<body>
 
-    <div data-role="page" id="layouts-page">
-      <% if current_user? %>
-        <!-- start container -->
-        <div data-role="header" data-position="fixed">
-          <%= render 'layouts/header' %>
+  <div data-role="page" id="layouts-page">
+    <% if current_user? %>
+    <!-- start container -->
+    <div data-role="header" data-position="fixed">
+      <%= render 'layouts/header' %>
+    </div>
+    <!--<p class="alert"><%= alert %></p>-->
+    <div data-role="content">
+     <% if flash[:notice] %>
+     <div data-role="navbar">
+      <ul>
+        <li>
+          <a href="" ><%= flash[:notice] %></a>
+        </li>
+      </ul>
+    </div>
+    <% end %>
+    <% if flash[:error] %>
+    <div data-role="navbar">
+      <ul>
+        <li>
+          <a href="" ><%= flash[:error] %></a>
+        </li>
+        <ul>
         </div>
-        <!--<p class="alert"><%= alert %></p>-->
-        <div data-role="content">
-          <%= yield %>
-        </div>
-        <div data-role="footer" id="layouts-footer" class="ui-bar" data-type="horizontal">
-          <%= render 'layouts/footer' %>
-        </div>
+        <% end %>
+        <%= yield %>
+      </div>
+      <div data-role="footer" id="layouts-footer" class="ui-bar" data-type="horizontal">
+        <%= render 'layouts/footer' %>
+      </div>
       <% elsif !current_user? %>
-          <div data-role="content">
-            <%= yield %>
-          </div>
+      <div data-role="content">
+        <%= yield %>
+      </div>
       <% end %>
     </div>
 
     <!-- end container -->
   </body>
-</html>
+  </html>
