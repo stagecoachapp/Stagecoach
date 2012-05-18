@@ -114,7 +114,6 @@ ActiveRecord::Schema.define(:version => 20120429224400) do
     t.integer  "new_task",               :default => 1
     t.integer  "new_invitation",         :default => 1
     t.integer  "new_invitation_message", :default => 1
-    t.integer  "new_asset",              :default => 1
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
   end
