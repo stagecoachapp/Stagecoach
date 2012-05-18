@@ -71,7 +71,7 @@ class SessionsController < ApplicationController
                     if self.current_user?
                         #user has either not linked this account yet or is trying to link somebody else's
                         if self.current_user.google_user_information.nil?
-                            potential_google_user_information = GoogleUserInformation.find_by_google_hash(hash)
+                            potential_google_user_information = GoogleUserInformation.find_by_hash(hash)
                             #somebody else has liked this Google account
                             unless potential_google_user_information.nil?
                                 if potential_google_user_information.user != self.current_user
@@ -83,53 +83,55 @@ class SessionsController < ApplicationController
                             #they have not linked a Google account and nobody else has linked this one
                             #existing because they are an existing user, not an existing Google account
                             auth_type = 'existing'
-                            authorization = Authorization.create_from_google_hash(hash, session[:google_refresh_token], self.current_user)
+                            self.current_user.link_google(hash, session[:google_refresh_token])
+                            GoogleUserInformation.create_from_hash(hash, session[:google_refresh_token], self.current_user)
                         #the user is already logged in and is logging in again. This shouldn't happen
-                    else
-                        auth_type = 'existing'
-                        if self.current_user.authorization.nil?
-                            authorization = Authorization.create()
-                            self.current_user.authorization = authorization
-                        end
-                        authorization = self.current_user.authorization
+                        else
+                            auth_type = 'existing'
+                            if self.current_user.google_user_information.nil?
+                                self.current_user.link_google(hash, session[:google_refresh_token])
+                            end
                             #they are trying to link a second account
-                            if authorization.user.google_user_information.google_id != hash['id']
+                            if self.current_user.google_user_information.google_id != hash['id']
                                 flash[:error] = "You have linked a different Google account with this one"
                                 redirect_after_login
                                 return
                             end
                         end
-                    #user is not logged in yet. Either retrieve the authorization or create a new one and a new user
-                else
-                    authorization = Authorization.find_by_google_hash(hash)
-                    auth_type = 'existing'
-                    if authorization.nil?
-                        auth_type = 'new'
-                        authorization = Authorization.create_from_google_hash(hash, session[:google_refresh_token], self.current_user)
+                    #user is not logged in yet. Either retrieve the user or create a new user
+                    else
+                        google_user_information = GoogleUserInformation.find_by_hash(hash)
+                        auth_type = 'existing'
+                        if google_user_information.nil?
+                            auth_type = 'new'
+                            user = User.create_from_google_hash(hash, session[:google_refresh_token])
+                        end
                     end
-                end
 
-                authorization = Authorization.find_or_create_by_google_hash(hash, session[:google_refresh_token], self.current_user)
-                self.current_user= authorization.user
-                flash[:success] = "Welcome, #{self.current_user.name}."
-                if session.present?
-                    session[:project_id] = current_user.projects.find(:all, :order => "created_at DESC", :limit => 1).first
+                    google_user_information = GoogleUserInformation.find_or_create_by_hash(hash, session[:google_refresh_token], self.current_user)
+                    self.current_user= google_user_information.user
+                    flash[:success] = "Welcome, #{self.current_user.name}."
+                    if session.present?
+                        session[:project_id] = current_user.projects.find(:all, :order => "created_at DESC", :limit => 1).first
+                    end
+                else
+                    #error in 2nd google callback
+                    flash[:error] = "Error logging into gmail"
                 end
             else
+                #error in 1st google callback
                 flash[:error] = "Error logging into gmail"
             end
         else
+            #error receiving access code
             flash[:error] = "Error logging into gmail"
         end
-    else
-        flash[:error] = "Error logging into gmail"
+        if auth_type == 'new' && is_mobile_device?
+            redirect_to edit_user_url(self.current_user)
+            return
+        end
+        redirect_after_login
     end
-    if auth_type == 'new' && is_mobile_device?
-        redirect_to edit_user_url(self.current_user)
-        return
-    end
-    redirect_after_login
-end
 
     #GET /auth/:provider/callback
     #LOGIC
@@ -146,57 +148,40 @@ end
         hash = request.env['omniauth.auth']
         #user is already logged in. Make sure whichever Facebook they just logged in to isn't attributed to somebody else
         if self.current_user?
-            if self.current_user.authorization.nil?
-                authorization = Authorization.create()
-                self.current_user.authorization = authorization
-            end
-            #user has either not linked this account yet or is trying to link somebody else's
-            if self.current_user.authorization.uid != hash['uid']
-                potential_authorization = Authorization.find_by_facebook_hash(hash)
-                #somebody else has liked this Facebook account
-                unless potential_authorization.nil?
-                    if potential_authorization.user != self.current_user
-                        flash[:error] = "This Facebook account has already been linked with somebody else"
-                        redirect_after_login
-                        return
-                    #this shouldn't happen but there is an authorization with that Facebook linked to the current account
-                    #but the current account isn't linked to that Facebook
-                else
-                    potential_authorization.update_attribute(:user, user)
-                end
-            end
-                #user has not linked a Facebook yet
-                if self.current_user.authorization.uid.nil?
-                    #existing because they are an existing user, not an existing Facebook account
-                    auth_type = 'existing'
-                    authorization = Authorization.create_from_facebook_hash(hash, self.current_user)
-                #user has linked a difference Facebook
-            else
-                flash[:error] = "You have linked a different Facebook to this account"
+
+             if self.current_user.linked_facebook?
+                #already linked to facebook?
+                flash[:error] = "Your account is already linked to Facebook"
                 redirect_to root_url
                 return
+            else
+                 potential_facebook_user_information = FacebookUserInformation.find_by_hash(hash)
+                 #nobody has linked this facebook yet
+                 if potential_facebook_user_information.nil?
+                     self.current_user.link_facebook(hash)
+                     facebook_user_information = self.current_user.facebook_user_information
+                 else
+                    flash[:error] = "Somebody else has linked this Facebook"
+                    redirect_to root_url
+                    return
+                end
             end
-            #the user is already logged in and is logging in again. This shouldn't happen
-        else
-            auth_type = 'existing'
-            authorization = self.current_user.authorization
-        end
         #user is not logged in yet. Either retrieve the authorization or create a new one and a new user
-    else
-        authorization = Authorization.find_by_facebook_hash(hash)
-        auth_type = 'existing'
-        if authorization.nil?
-            auth_type = 'new'
-            authorization = Authorization.create_from_facebook_hash(hash)
         else
+            facebook_user_information = FacebookUserInformation.find_by_hash(hash)
+            auth_type = 'existing'
+            if facebook_user_information.nil?
+                auth_type = 'new'
+                facebook_user_information = FacebookUserInformation.create_from_hash(hash)
+            else
                 #This Facebook account is linked to a user that doesn't exist
-                if authorization.user.nil?
+                if facebook_user_information.user.nil?
                     user = User.create_from_facebook_hash(hash)
-                    authorization.update_attribute(:user, user)
+                    facebook_user_information.update_attribute(:user, user)
                 end
             end
             # Log the authorizing user in.
-            self.current_user= authorization.user
+            self.current_user= facebook_user_information.user
         end
 
         flash[:success] = "Welcome, #{self.current_user.name}."

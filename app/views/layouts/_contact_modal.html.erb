@@ -1,28 +1,30 @@
 <div class="modal" id="contact-modal">
+	<div class="modal-header">
+		<button id="contact-modal-close"class="close" data-dismiss="modal">×</button>
+		<h2 id="name"><%= @user.name.split.each { |x| print x.capitalize!, " "}.join(" ") %></h2>
+
+	</div>
 	<div class="modal-body">
-		<button class="close" data-dismiss="modal">×</button>
+
 		<div class="contact-body">
-			<div class="important-stuff">
-				<img id="profile-picture" src="<%= profile_picture_url %>"></img>
-				<h2 id="name"><%= @user.name %></h2>
-				<h3 id="email"><%= @user.email %></h3>
-				<h3 id="phone"><%= @user.phonenumber %></h3>
-			</div>
-			<div class="profile-information">
-				<!-- eventually display this like IMDB does, temporary fix since we don't have a good way of addressing user roles as related to projects -->
-				<h2 id="positions">Positions:</h2>
-				<ul class="role-list">
-					<% for user_role in @user.user_roles %>
-						<li><b><%= user_role.name %></b></li>
-					<% end %>
-				</ul>
-				<h2 id="films">Films:</h2>
-				<ul class="project-list">
-					<% for project in @user.projects %>
-						<li><b><%= project.name %></b></li>
-					<% end %>
-				</ul>
-			</div>`
+			<%= image_tag profile_picture_url(@user), :class => "thumbnail span2"%>
+			<h3><%= @user.email %></h3>
+			<h3><%= @user.phonenumber %></h3>
+		</div>
+		<div class="profile-information">
+			<!-- eventually display this like IMDB does, temporary fix since we don't have a good way of addressing user roles as related to projects -->
+			<h2>Positions:</h2>
+			<ul>
+				<% for user_role in @user.user_roles %>
+				<li><b><%= user_role.name %></b></li>
+				<% end %>
+			</ul>
+			<h2>Films:</h2>
+			<ul>
+				<% for project in @user.projects %>
+				<li><b><%= project.name %></b></li>
+				<% end %>
+			</ul>
 		</div>
 	</div>
 </div>

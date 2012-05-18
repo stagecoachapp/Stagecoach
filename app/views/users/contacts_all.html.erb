@@ -5,7 +5,7 @@
 <div>
 	<ul>
 		<% @contacts.each do |contact|%>
-			<li class="stagecoach-list-item"><%= link_to contact.name, contact, :remote => true %></li>
+			<li class="stagecoach-list-item"><%= link_to contact.name.split.each { |x| print x.capitalize!, " "}.join(" "), contact, :remote => true %></li>
 		<% end %>
 	</ul>
 </div>
