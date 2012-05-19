@@ -1,15 +1,14 @@
 <div class="modal" id="contact-modal">
-	<div class="modal-header">
-		<button id="contact-modal-close"class="close" data-dismiss="modal">×</button>
-		<h2 id="name"><%= @user.name.split.each { |x| print x.capitalize!, " "}.join(" ") %></h2>
-
-	</div>
+	<button id="contact-modal-close"class="close" data-dismiss="modal">×</button>
 	<div class="modal-body">
 
 		<div class="contact-body">
-			<%= image_tag profile_picture_url(@user), :class => "thumbnail span2"%>
-			<h3><%= @user.email %></h3>
-			<h3><%= @user.phonenumber %></h3>
+			<%= image_tag profile_picture_url(@user), :class => "thumbnail span2", :id => "contact-modal-prof-pic" %>
+			<div class="main-info">
+				<h2 id="name"><%= @user.name.split.each { |x| print x.capitalize!, " "}.join(" ") %></h2>
+				<h3>Email:<a href="mailto:<%= @user.email %>"><%= @user.email %></a></h3>
+				<h3>Phone: <%= @user.phonenumber %></h3>
+			</div>
 		</div>
 		<div class="profile-information">
 			<!-- eventually display this like IMDB does, temporary fix since we don't have a good way of addressing user roles as related to projects -->
