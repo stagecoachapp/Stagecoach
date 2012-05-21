@@ -1,10 +1,16 @@
 <h1>Invitation</h1>
 
 <%= form_for(@invitation) do |f| %>
+	<%= f.label :from_user, "From" %>
 	<div class="field">
-		<%= f.label :to_user, "To" %>
-		<%= f.text_field :to_user, :value => @invitation.to_user.name, :disabled => true %>
+		<%= f.text_field :from_user, :value => @invitation.from_user.name, :disabled => true %>
 	</div>
+	<%= f.label :to_user, "To" %>
+	<% @invitation.to_users.each do |to_user| %>
+		<div class="field">
+			<%= f.text_field :to_user, :value => to_user, :disabled => true %>
+		</div>
+	<% end %>
 	<div class="field">
 		<%= f.label :body, "Message" %>
 		<%= f.text_area :body, :value => @invitation.body, :disabled => true, :id => "invitations-show-body" %>

@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
     has_one :email_setting
     after_initialize :default_values
     before_save :lowercase_name
+    has_many :invitation_to_users
+    has_many :invitations, :through => :invitation_to_users
 
     def self.create_from_facebook_hash(hash)
         #new_user is necessary because this is called as an instance method and link_facebook is a class method

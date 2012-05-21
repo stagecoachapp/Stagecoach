@@ -29,7 +29,7 @@ class InvitationsController < ApplicationController
             redirect_to root_url
             return
         end
-        if self.current_user != @invitation.to_user && self.current_user != @invitation.from_user
+        if (not @invitation.to_users.include?(self.current_user)) and  not (@invitation.from_user == self.current_user)
             flash[:error] = "You are not authorized to see that invitation"
             redirect_to root_url
             return
@@ -64,14 +64,16 @@ class InvitationsController < ApplicationController
     # POST /invitations
     # POST /invitations.json
     def create
-        #unfortunately you have to use a case insensitive find users function because postgres is stupid
-        params[:invitation][:to_user] = User.find(params[:invitation][:to_user])
+        #to_users = params[:invitation][:to_user_ids].map {|user_id| User.find(user_id)}
         params[:invitation][:from_user] = User.find(params[:invitation][:from_user])
         @invitation = Invitation.new(params[:invitation])
         conversation = Conversation.create
-        conversation.users = [@invitation.to_user, @invitation.from_user]
+        #debugger
+        conversation.users << [@invitation.to_users, @invitation.from_user]
         @invitation.update_attribute(:conversation, conversation)
-        notification = Notification.create!(:user => @invitation.to_user, :notification_type => NotificationType.find_by_name("NewInvitation"), :notification_object => @invitation)
+        @invitation.to_users.each do |user|
+            notification = Notification.create!(:user => user, :notification_type => NotificationType.find_by_name("NewInvitation"), :notification_object => @invitation)
+        end
 
         respond_to do |format|
             if @invitation.save
