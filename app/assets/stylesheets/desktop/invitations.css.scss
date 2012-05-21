@@ -1,3 +1,28 @@
+#invitation-show-content
+{
+	display: inline-block;
+	width: 37%
+}
+
+
+#invitation-show-conversation
+{
+	float: right;
+	margin-right: 24px;
+	margin-top: 10px;
+	width: 52%
+}
+
+#invitations-show-new-message
+{
+	width: 98%;
+}
+
+#invitations-show-send-message-button
+{
+	float: right;
+}
+
 #invitations-new-add-user-button {
 	margin-bottom: 9px;
 }
@@ -7,7 +32,7 @@
 }
 
 #invitations-show-body {
-	width: 90%
+	width: 100%
 }
 
 #invitation-conversation {

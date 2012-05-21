@@ -1,24 +1,25 @@
-<h1>Invitation</h1>
-
-<%= form_for(@invitation) do |f| %>
-	<%= f.label :from_user, "From" %>
-	<div class="field">
-		<%= f.text_field :from_user, :value => @invitation.from_user.name, :disabled => true %>
-	</div>
-	<%= f.label :to_user, "To" %>
-	<% @invitation.to_users.each do |to_user| %>
+<div id="invitation-show-content">
+	<h1>Invitation</h1>
+	<%= form_for(@invitation) do |f| %>
+		<%= f.label :from_user, "From" %>
 		<div class="field">
-			<%= f.text_field :to_user, :value => to_user, :disabled => true %>
+			<%= f.text_field :from_user, :value => @invitation.from_user.name, :disabled => true %>
+		</div>
+		<%= f.label :to_user, "To" %>
+		<% @invitation.to_users.each do |to_user| %>
+			<div class="field">
+				<%= f.text_field :to_user, :value => to_user, :disabled => true %>
+			</div>
+		<% end %>
+		<div class="field">
+			<%= f.label :body, "Message" %>
+			<%= f.text_area :body, :value => @invitation.body, :disabled => true, :id => "invitations-show-body" %>
 		</div>
 	<% end %>
-	<div class="field">
-		<%= f.label :body, "Message" %>
-		<%= f.text_area :body, :value => @invitation.body, :disabled => true, :id => "invitations-show-body" %>
-	</div>
-<% end %>
+</div>
 
-<h1>Conversation</h1>
-<div id="invitation-conversation">
+<div id="invitation-show-conversation">
+	<h1>Conversation</h1>
 	<% @invitation.conversation.messages.each do |message| %>
 		<% if message.user == self.current_user %>
 			<%= image_tag profile_picture_url, :size => "50x50" %>
@@ -35,7 +36,7 @@
 		<% end %>
 	<% end %>
 	<%= form_for @message, :url => { :controller => :messages, :action => :create } do |f| %>
-		<%= f.text_field :text %>
+		<%= f.text_field :text, :id => "invitations-show-new-message" %>
 		<%= f.hidden_field :conversation_id, :value => @invitation.conversation.id %>
 		<%= f.hidden_field :user_id, :value => @message.user.id %>
 		<%= f.submit "Send Message", :class => "btn", :id => "invitations-show-send-message-button" %>
