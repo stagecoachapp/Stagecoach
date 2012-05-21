@@ -23,12 +23,12 @@
 		<% if message.user == self.current_user %>
 			<%= image_tag profile_picture_url, :size => "50x50" %>
 			<div class="text-left">
-				<p class="white-shadow"><%= message.text %></p>
+				<p class="bubble"><%= message.text %></p>
 			</div>
 			<br />
 		<% else %>
 			<div class="text-right">
-				<p class="white-shadow"><%= message.text %></p>
+				<p class="bubble"><%= message.text %></p>
 			</div>
 			<%= image_tag profile_picture_url, :size => "50x50" %>
 			<br />
