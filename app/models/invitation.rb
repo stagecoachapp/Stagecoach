@@ -7,16 +7,15 @@ class Invitation < ActiveRecord::Base
  	has_many :assets, :as => :asset_object, :dependent => :destroy
  	has_one :conversation, :as => :conversation_object
 
- 	validates :to_user, :presence => true
+ 	validates :to_users, :presence => true
 
  	def to_s(user=nil)
- 		case user
- 		when self.to_user
- 			self.from_user.to_s +"invited you to join "+self.project.to_s
- 		when self.from_user
- 			"Invited "+self.to_user.to_s+" to join "+self.project.to_s
+ 		if(self.to_users.include?(user))
+ 			self.from_user.from_user +"invited you to join "+self.project.to_s
+ 		elsif(self.from_user == user)
+ 			"Invited "+join(self.to_users.map {|to_user| to_user.name})+" to join "+self.project.to_s
  		else
- 			self.from_user.to_s +" invited "+self.to_user.to_s+" to join"+self.project.to_s
+ 			self.from_user.to_s +" invited "+join(self.to_users.map {|to_user| to_user.name})+" to join"+self.project.to_s
  		end
  	end
 
@@ -25,6 +24,18 @@ class Invitation < ActiveRecord::Base
  	end
 
  	def outgoing_to_s
- 		"Invited "+self.to_user.to_s+" to "+self.project.to_s
+ 		"Invited "+join(self.to_users.map {|to_user| to_user.name})+" to "+self.project.to_s
  	end
+
+
+ 	private
+	 	def join(arr)
+		    return '' if not arr
+		    case arr.size
+		        when 0 then ''
+		        when 1 then arr[0]
+		        when 2 then arr.join(' and ')
+		        else arr[0..-2].join(', ') + ', and ' + arr[-1]
+		    end
+		end
 end

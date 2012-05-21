@@ -13,7 +13,8 @@ class InvitationsController < ApplicationController
     # GET /invitations.json
     def index
         @outgoing_invitations = Invitation.where("from_user_id = #{self.current_user.id}")
-        @incoming_invitations = Invitation.where("to_user_id = #{self.current_user.id}")
+        @incoming_invitations = InvitationToUser.where("to_user_id = #{self.current_user.id}").all.map {|invitation_to_user| invitation_to_user.invitation}
+
 
         respond_to do |format|
             format.html # index.html.erb
@@ -49,7 +50,7 @@ class InvitationsController < ApplicationController
         @invitation.from_user = self.current_user
         @invitation.project = self.current_project
         unless params[:user].nil?
-            @invitation.to_user = User.find_by_id(params[:user])
+            @invitation.to_users = [User.find_by_id(params[:user])]
         end
         respond_to do |format|
             format.html # new.html.erb
@@ -69,7 +70,6 @@ class InvitationsController < ApplicationController
         params[:invitation][:from_user] = User.find(params[:invitation][:from_user])
         @invitation = Invitation.new(params[:invitation])
         conversation = Conversation.create
-        #debugger
         conversation.users << [@invitation.to_users, @invitation.from_user]
         @invitation.update_attribute(:conversation, conversation)
         @invitation.to_users.each do |user|
