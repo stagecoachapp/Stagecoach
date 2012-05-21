@@ -9,7 +9,22 @@ class Invitation < ActiveRecord::Base
 
  	validates :to_user, :presence => true
 
- 	def to_s
+ 	def to_s(user=nil)
+ 		case user
+ 		when self.to_user
+ 			self.from_user.to_s +"invited you to join "+self.project.to_s
+ 		when self.from_user
+ 			"Invited "+self.to_user.to_s+" to join "+self.project.to_s
+ 		else
+ 			self.from_user.to_s +" invited "+self.to_user.to_s+" to join"+self.project.to_s
+ 		end
+ 	end
+
+ 	def incoming_to_s
+ 		self.from_user.to_s+" invited you to join "+self.project.to_s
+ 	end
+
+ 	def outgoing_to_s
  		"Invited "+self.to_user.to_s+" to "+self.project.to_s
  	end
 end
