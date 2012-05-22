@@ -13,7 +13,8 @@ class InvitationsController < ApplicationController
     # GET /invitations.json
     def index
         @outgoing_invitations = Invitation.where("from_user_id = #{self.current_user.id}")
-        @incoming_invitations = InvitationToUser.where("to_user_id = #{self.current_user.id}").all.map {|invitation_to_user| invitation_to_user.invitation}
+        @outgoing_invitations_other = Invitation.where("from_user_id != #{self.current_user.id}")
+        #@incoming_invitations = InvitationToUser.where("to_user_id = #{self.current_user.id}").all.map {|invitation_to_user| invitation_to_user.invitation}
 
         respond_to do |format|
             format.html # index.html.erb
