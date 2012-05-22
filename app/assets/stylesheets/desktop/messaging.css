@@ -38,14 +38,14 @@
 
 
 .text-left {
-    margin: 1em 36% 1em 1em;
+    margin: 1em 237px 1em 1em;
     padding: 0 4px;
     position: relative;
     display: inline-block;
 }
 
 .text-right {
-    margin: 1em 1em 1em 36%;
+    margin: 1em 1em 1em 237px;
     padding: 0 4px;
     position: relative;
     display: inline-block;

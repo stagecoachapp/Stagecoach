@@ -39,6 +39,7 @@
 		<%= f.text_field :text, :id => "invitations-show-new-message" %>
 		<%= f.hidden_field :conversation_id, :value => @invitation.conversation.id %>
 		<%= f.hidden_field :user_id, :value => @message.user.id %>
+		<br>
 		<%= f.submit "Send Message", :class => "btn", :id => "invitations-show-send-message-button" %>
 	<% end %>
 </div>
