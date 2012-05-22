@@ -1,5 +1,5 @@
 class Invitation < ActiveRecord::Base
- 	attr_accessible :to_user, :to_user_ids, :from_user, :from_user_id, :subject, :start_date, :end_date, :body, :conversation, :conversation_id, :project, :project_id
+ 	attr_accessible :to_user, :to_user_ids, :from_user, :from_user_id, :subject, :start_date, :end_date, :body, :conversation, :conversation_id, :project, :project_id, :budget
  	has_many :invitation_to_users
  	has_many :to_users, :through => :invitation_to_users
  	belongs_to :from_user, :class_name => "User"

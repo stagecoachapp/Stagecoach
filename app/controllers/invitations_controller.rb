@@ -15,7 +15,6 @@ class InvitationsController < ApplicationController
         @outgoing_invitations = Invitation.where("from_user_id = #{self.current_user.id}")
         @incoming_invitations = InvitationToUser.where("to_user_id = #{self.current_user.id}").all.map {|invitation_to_user| invitation_to_user.invitation}
 
-
         respond_to do |format|
             format.html # index.html.erb
             format.json { render json: @invitations }
@@ -49,6 +48,8 @@ class InvitationsController < ApplicationController
         @invitation = Invitation.new
         @invitation.from_user = self.current_user
         @invitation.project = self.current_project
+        @start_date = Time.now.in_time_zone + 30 * 24 * 60 * 60
+        @end_date = Time.now.in_time_zone + 2 * 30 * 24 * 60 * 60
         unless params[:user].nil?
             @invitation.to_users = [User.find_by_id(params[:user])]
         end
@@ -67,6 +68,10 @@ class InvitationsController < ApplicationController
     # POST /invitations.json
     def create
         #to_users = params[:invitation][:to_user_ids].map {|user_id| User.find(user_id)}
+        start_date = Date.strptime(params[:start_date],"%m-%d-%Y").to_time
+        end_date = Date.strptime(params[:end_date],"%m-%d-%Y").to_time
+        params[:invitation][:start_date] = start_date
+        params[:invitation][:end_date] = end_date
         params[:invitation][:from_user] = User.find(params[:invitation][:from_user])
         @invitation = Invitation.new(params[:invitation])
         conversation = Conversation.create
