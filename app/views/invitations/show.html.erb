@@ -12,33 +12,17 @@
 			</div>
 		<% end %>
 		<div class="field">
+			<%= f.label :budget, "Budget" %>
+			<%= f.text_field :budget, :id => "invitations-new-budget",:disabled => true %>
+		</div>
+		<div class="field">
+			<%= label_tag :timespan, "Timespan" %>
+			<%= text_field_tag :timespan, @invitation.start_date.strftime("%m-%d-%Y") + " - " + @invitation.end_date.strftime("%m-%d-%Y"), :id => "invitations-new-timespan",:disabled => true %>
+		</div>
+
+		<div class="field">
 			<%= f.label :body, "Message" %>
 			<%= f.text_area :body, :value => @invitation.body, :disabled => true, :id => "invitations-show-body" %>
-		</div>
-
-		<div class="field">
-		    <%= f.label :start_time, "Start Date" %><br />
-		    <div class="input-append date" id="tasks-tasks-new" data-date="<%= @invitation.start_date.strftime("%m-%d-%Y") %>" data-date-format="mm-dd-yyyy">
-		        <%= text_field_tag(:start_date, @invitation.start_date.strftime("%m-%d-%Y"), :class => "span2", :size => "16", :readonly => true) %>
-		        <span class="add-on">
-		            <i class="icon-th"></i>
-		        </span>
-		    </div>
-		</div>
-
-		<div class="field">
-		    <%= f.label :end_time, "End Date" %><br />
-		    <div class="input-append date" id="tasks-tasks-new" data-date="<%= @invitation.end_date.strftime("%m-%d-%Y") %>" data-date-format="mm-dd-yyyy">
-		        <%= text_field_tag(:end_date, @invitation.end_date .strftime("%m-%d-%Y"), :class => "span2", :size => "16", :readonly => true) %>
-		        <span class="add-on">
-		            <i class="icon-th"></i>
-		        </span>
-		    </div>
-		</div>
-
-		<div class="field">
-			<%= f.label :budget, "Budget" %>
-			<%= f.text_field :budget, :id => "invitations-new-budget" %>
 		</div>
 	<% end %>
 </div>
