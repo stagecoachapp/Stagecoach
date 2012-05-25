@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+	//Add user modal related functions
 	$("#invitations-new-add-user-button").click(function() {
 		$("#invitations-new-add-user-modal").modal('show');
 	});
@@ -31,4 +33,5 @@ $(document).ready(function() {
 	$("#invitations-new-form").submit(function() {
 		$.param("to-user-id", $("#invitations-new-to-user").data('user-id'));
 	});
+	//end add user modal related functions
 });

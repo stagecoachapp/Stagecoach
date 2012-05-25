@@ -1,15 +1,30 @@
 #invitation-show-content
 {
 	display: inline-block;
-	width: 37%
+}
+
+@media screen and (min-width: 1025px)
+{
+	#invitation-show-content
+	{
+		width: 37%;
+	}
 }
 
 
 #invitation-show-conversation
 {
-	float: right;
+
 	margin-right: 24px;
-	width: 52%
+}
+
+@media screen and (min-width: 1025px)
+{
+	#invitation-show-conversation
+	{
+		float: right;
+		width: 52%
+	}
 }
 
 #invitations-show-new-message
