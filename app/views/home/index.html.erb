@@ -1,40 +1,41 @@
 <!-- Main hero unit for a primary marketing message or call to action -->
-<div class="hero-unit">
-  <h1>Say goodbye to wasted production time.</h1>
-  <br>
+<div class="hero-unit" id="home">
   <div class="row">
-    <div class="span6">
-      <p>Stagecoach is a multiplatform solution to on- and off-set task management for film productions. Our goal is to provide tools to organize your production efforts: reducing frustration, increasing transparency, and saving time and money.</p>
-      <p><%= link_to "Get Notified When We Launch".html_safe, signup_path, :class => "btn btn-primary btn-large", :id => "home-index-private-alpha-button" %></p>
+    <div class="span3">
+      <%= image_tag "home/hand.png", "id" => "home-index-handjpg" %>
     </div>
-    <div>
-      <%= image_tag "home/landing_page.jpg", :height => 190, :width => 333, :id => "home-index-landingjpg" %>
+    <div class="span5 offset2" id="home-index-list">
+      <ul class="unstyled">
+        <li><h1>Lights.</h1></li>
+        <li><h1>Camera.</h1></li>
+        <li><h1>Stagecoach.</h1></li>
+      </ul>
+      <p id="home-index-paragraph">
+        <h2>Stagecoach makes video production easier, faster, and more cost effective for film, TV, and commercial advertising professionals</h2>
+      </p>
     </div>
-    <br>
+    <div class="row break" id="features">
+      &nbsp;
+    </div>
+    <div class="row">
+     <div class="span11">
+      <p>
+        <h2>
+          Introducing you to the only ubiquitous crew sourcing and team management platform that follows the entire lifecycle of your production.
+        </h2>
+      </p>
+    </div>
+    <div class="row">
+      <div class="offset5" id="home-feature-header">
+       <p>
+         <h3>
+          Crew Sourcing
+        </h3>
+      </p>
+    </div>
   </div>
+  <div>
+   <%= image_tag "home/sourcing.jpg", "class" => "thumbnail span9 offset1" %>
+ </div>
 </div>
-
-<!-- Example row of columns -->
-<div class="row">
-  <div class="span6">
-    <h2>Our Product</h2>
-    <p>
-    With Stagecoach’s modular mobile app, the “fuel” that drives the set is at the tip of managers’ fingers:
-    <ul>
-      <li>Integrate your task lists</li>
-      <li>Track task progress in real time</li>
-      <li>Sync daily call sheets and contacts across production crew</li>
-      <li>Quickly communicate changes and issues with appropriate team members</li>
-      <li>Built on a secure, open-source platform to enable ongoing customization</li>
-    </ul>
-    </p>
-    <%= ab_test("sign_up_test", [ 'Sign Up For Our Private Alpha &raquo;', 'Sign Up To Be An Alpha Tester &raquo;' ]) do |click| %>
-      <p><%= link_to click.html_safe, signup_path, :class => "btn" %></p>
-    <% end %>
-  </div>
-  <div class="span6">
-    <h2>Our Plan</h2>
-    <p>Our team aims to create the most useful tools for production managers and film crews possible to streamline their work. We will be working hard in the next few months and we are super excited for our alpha launch. We highly value any user feedback, criticisms and support as we put our heads down and intend to rock the foundation of the media production process.</p>
-    <p><%= link_to "Learn about the Stagecoach Team &raquo;".html_safe, about_path, :class => "btn" %> </p>
-  </div>
 </div>

@@ -6,26 +6,43 @@
 ///
 ////
 //this is for the home page
-#home-index-private-alpha-button{
-  margin-top: 62px;
+
+#home-index-handjpg{
+height: 600px;
+
 }
 
+#home-index-list{
+margin-top: 190px;
+}
+#home-index-paragraph {
+margin-top: 99px;
+}
+#home-feature-header{
+margin-top: 170px;
+}
+.break {
+background-image:url('/assets/sidebar/bg.png');
+background-repeat:repeat;
+height: 70px;
+margin-top: 670px;
+margin-bottom: 53px;
+width: 108.4%;
 
-
-
+}
 //
 ///
 ////
 //this is for the about page
 .home-about-rowclass {
-  padding-top: 25px;
-  padding-bottom: 20px;
+padding-top: 25px;
+padding-bottom: 20px;
 }
 
 .home-about-blockquote {
 
 }
 
-#home-index-landingjpg { 
-	padding-left: 25px;
+#home-index-landingjpg {
+padding-left: 25px;
 }

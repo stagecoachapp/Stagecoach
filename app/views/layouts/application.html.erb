@@ -8,7 +8,7 @@
   <%= javascript_include_tag 'shared/shared' %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body data-spy="scroll">
     <% if(flash[:success]) %>
         <div class="alert alert-success" data-dismiss="alert" href="#">
             <a class="close">x</a>
