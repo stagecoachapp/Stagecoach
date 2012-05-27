@@ -32,9 +32,7 @@
     <b>Participants:</b>
     <ul>
       <% @task.users.all.each do |user| %>
-      <% if @task.owner != user %>
-      <li> <%= user.name %> </li>
-      <% end %>
+        <li> <%= user.name %> </li>
       <% end %>
     </ul>
   </p>

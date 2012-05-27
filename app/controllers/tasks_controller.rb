@@ -32,14 +32,12 @@ class TasksController < ApplicationController
         setDefaults! @task
         @task.save
 
-        notification_type = NotificationType.find_by_name("NewTask")
-        #shouldnt happen
-        if notification_type.nil?
-            notification_type = NotificationType.first
-        end
+        notification_type = NotificationType.find_or_create_by_name("NewTask")
         notification = nil
         @task.users.each do |user|
-            notification = Notification.create(:notification_type => notification_type, :user => user, :notification_object => @task)
+            if user != self.current_user
+                notification = Notification.create(:notification_type => notification_type, :user => user, :notification_object => @task)
+            end
         end
 
 
@@ -66,6 +64,18 @@ class TasksController < ApplicationController
         @task = Task.find(params[:id])
         @task.update_attributes(params[:task])
 
+        #send a notification to the task owner
+        if self.current_user != @task.owner
+            Notification.create(:notification_type => NotificationType.find_or_create_by_name("UpdatedTask"), :user => @task.owner, :notification_object => @task)
+        end
+        #send a notification to all other users on the task
+        @task.users.each do |user|
+            if user != self.current_user and user != @task.owner
+                Notification.create(:notification_type => NotificationType.find_or_create_by_name("UpdatedTask"), :user => user, :notification_object => @task)
+            end
+        end
+
+
         respond_to do |format|
             format.html { redirect_to tasks_url }
             format.mobile { redirect_to @task }
@@ -76,12 +86,17 @@ class TasksController < ApplicationController
         task = Task.find(params[:id])
         if task.mark_complete
             flash[:success] = 'Task marked complete.'
-            Notification.create(user: task.owner, notification_type: NotificationType.find_by_name("TaskComplete"))
+            #send a notification to the task owner
+            if self.current_user != task.owner
+                Notification.create(:notification_type => NotificationType.find_or_create_by_name("CompletedTask"), :user => task.owner, :notification_object => task)
+            end
+            #send a notification to all other users on the task
             task.users.each do |user|
-                if user != self.current_user
-                    Notification.create(user: user, notification_type: NotificationType.find_by_name("TaskComplete"))
+                if user != self.current_user and user != task.owner
+                    Notification.create(:notification_type => NotificationType.find_or_create_by_name("CompletedTask"), :user => user, :notification_object => task)
                 end
             end
+            debugger
         else
             flash[:notice] = 'Task is already marked complete.'
         end
