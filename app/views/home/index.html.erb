@@ -1,7 +1,7 @@
 <!-- Main hero unit for a primary marketing message or call to action -->
 <div class="hero-unit" id="home-index-hero">
-  <div class="row" id="home">
-    <div class="span3">
+  <div class="row">
+    <div class="span3" id="home">
       <%= image_tag "home/hand.png", "id" => "home-index-handjpg" %>
     </div>
     <div class="span5 offset2" id="home-index-list">
@@ -174,4 +174,16 @@
         </div>
       </div>
     </div>
+    <div class="row" id="break3">
+      &nbsp;
+    </div>
+    <div class="row span8">
+       <h2>Like what you see? Sign up to be an alpha tester!</h2>
+      <br><br>
+      <div class="row well span8 offset1" id="signup">
+        <h3 class="offset2">We will email you when we're ready!</h3>
+        <%= render 'signups/signup-form' %>
+      </div >
+    </div>
+
   </div>

@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
         url = request.path
         session[:after_login_redirect_url] = request.url
         unless current_user?
-            if url != '/blog' && url != '/about' && url != '/' && url != '/signup'
+            if url != '/blog' && url != '/about' && url != '/' && url != '/signups'
                 redirect_to '/signin'
             end
         end
