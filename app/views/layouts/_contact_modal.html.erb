@@ -1,13 +1,16 @@
 <div class="modal" id="contact-modal">
 	<button id="contact-modal-close"class="close" data-dismiss="modal">×</button>
 	<div class="modal-body">
-
 		<div class="contact-body">
-			<%= image_tag profile_picture_url(@user), :class => "thumbnail span2", :id => "contact-modal-prof-pic" %>
+			<%= image_tag profile_picture_url, :class => "thumbnail span2", :id => "contact-modal-prof-pic" %>
 			<div class="main-info">
 				<h2 id="name"><%= @user.name.split.each { |x| print x.capitalize!, " "}.join(" ") %></h2>
 				<h3>Email:<a href="mailto:<%= @user.email %>"><%= @user.email %></a></h3>
 				<h3>Phone: <%= @user.phonenumber %></h3>
+				<button class="btn btn-success" id="modal-invite">
+					<i class="icon-plus icon-white"></i>
+					<%= link_to "Invite to #{self.current_project}", h(new_invitation_path + "?" + {:user => @user.id}.to_query) %>
+				</button>
 			</div>
 		</div>
 		<div class="profile-information">
