@@ -28,7 +28,7 @@
         <% end %>
     <% else %>
         <%= f.hidden_field :users, :class => "tasks-new-user-id", :name => "task[users][]" %>
-        <%= text_field_tag :user_name, nil, :class => "tasks-new-user-name", :disabled => true %>
+        <%= text_field_tag :user_name, nil, :class => "tasks-new-user-name", :disabled => true, :style => "display: inline;" %>
     <% end %>
     <button class="btn" id="tasks-new-add-user-button" type="button">
         <i class="icon-plus icon-white"></i>

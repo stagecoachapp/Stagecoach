@@ -22,7 +22,7 @@ $(document).ready(function() {
 			$(".tasks-new-user-name").first().val($(checkedUsers[0]).next().text());
 			$("#tasks-new-add-user-button i").removeClass().addClass("icon-refresh");
 		}
-		var lastUserElement = $("#tasks-new-add-user-button");
+		var lastUserElement = $(".tasks-new-user-name");
 		//the rest of the users should populate new fields
 		for(i = 1; i < checkedUsers.length; i++)
 		{
