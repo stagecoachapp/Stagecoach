@@ -47,6 +47,8 @@ class InvitationsController < ApplicationController
         @invitation = Invitation.new
         @invitation.from_user = self.current_user
         @invitation.project = self.current_project
+        @projects = self.current_user.projects.sort_by &:created_at
+        @current_user = self.current_user
         unless params[:user].nil?
             @invitation.to_user = User.find_by_id(params[:user])
         end

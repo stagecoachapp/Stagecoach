@@ -4,9 +4,16 @@
 		<h3>Choose User</h3>
 	</div>
 	<div id="invitations-new-add-user-modal-radio-buttons">
-		<% User.all.each do |contact| %>
-			<input type="radio" name="contacts-group" value="<%= contact.id %>"><text><%= contact.name %></text><br>
-		<% end %>
+		<% for project in @projects %>
+			<% unless project.users.count == 1 %>
+				<h3><%= project.capitalized_name %></h3>
+				<% for contact in project.users %>
+					<% unless contact == @current_user %>
+						<input type="radio" name="contacts-group" value="<%= contact.id %>"><text> <%= contact.name %></text><br>
+					<% end %>
+				<% end %>
+			<% end %>
+	  	<% end %>
 	</div>
 	<button id="invitations-new-add-user-modal-select-button" class="btn">Select User</button>
 </div>
