@@ -2,7 +2,7 @@
 <p id="notice"><%= notice %></p>
 <div class="offset3">
   <p>
-    <h1><%= @task.name %></h1>
+    <h1><%= @task.name.split(' ').map {|w| w.capitalize }.join(' ') %></h1>
   </p>
   <p>
     <b>Owner:</b>
@@ -32,7 +32,10 @@
     <b>Participants:</b>
     <ul>
       <% @task.users.all.each do |user| %>
-        <li> <%= user.name %> </li>
+      <% if @task.owner != user %>
+      <li> <%= user.name.split(' ').map {|w| w.capitalize }.join(' ') %> </li>
+
+      <% end %>
       <% end %>
     </ul>
   </p>
