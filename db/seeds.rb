@@ -35,9 +35,11 @@ end
 default_notification_types = [
 	"Default",
 	"NewTask",
+	"UpdatedTask",
+	"CompletedTask",
 	"NewInvitation",
 	"NewInvitationMessage",
-	"NewProjectAsset"
+	"NewProjectAsset",
 ]
 
 NotificationType.delete_all

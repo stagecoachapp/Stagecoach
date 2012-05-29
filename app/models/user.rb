@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
     has_one :email_setting
     after_initialize :default_values
     before_save :lowercase_name
+    has_many :invitation_to_users
+    has_many :invitations, :through => :invitation_to_users
+
+    default_scope order('name ASC')
 
     def self.create_from_facebook_hash(hash)
         #new_user is necessary because this is called as an instance method and link_facebook is a class method
@@ -64,9 +68,9 @@ class User < ActiveRecord::Base
         self.name.split(' ').map {|w| w.capitalize }.join(' ')
     end
 
-    #def name
-    #	read_attribute(:name).split(' ').map {|w| w.capitalize }.join(' ')
-    #end
+    def name
+    	read_attribute(:name).split(' ').map {|w| w.capitalize }.join(' ')
+    end
 
     private
 		def default_values

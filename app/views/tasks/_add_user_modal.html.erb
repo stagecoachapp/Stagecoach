@@ -1,0 +1,12 @@
+<div class="modal" id="tasks-new-add-user-modal">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal">×</button>
+		<h3>Choose User</h3>
+	</div>
+	<div id="tasks-new-add-user-modal-radio-buttons">
+		<% self.current_project.users.each do |contact| %>
+			<input type="checkbox" name="contacts-group" value="<%= contact.id %>" <% if @task.users.include?(contact) %> checked = 'checked' <% end %>><text><%= contact.name %></text><br>
+		<% end %>
+	</div>
+	<button id="tasks-new-add-user-modal-select-button" class="btn">Select User</button>
+</div>

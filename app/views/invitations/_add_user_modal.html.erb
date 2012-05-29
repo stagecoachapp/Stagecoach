@@ -4,8 +4,8 @@
 		<h3>Choose User</h3>
 	</div>
 	<div id="invitations-new-add-user-modal-radio-buttons">
-		<% User.all.each do |contact| %>
-			<input type="radio" name="contacts-group" value="<%= contact.id %>"><text><%= contact.name %></text><br>
+		<% User.find(:all, :order => "name").each do |contact| %>
+			<input type="checkbox" name="contacts-group" value="<%= contact.id %>"><text><%= contact.name %></text><br>
 		<% end %>
 	</div>
 	<button id="invitations-new-add-user-modal-select-button" class="btn">Select User</button>
