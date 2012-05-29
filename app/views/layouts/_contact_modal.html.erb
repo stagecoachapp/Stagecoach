@@ -7,10 +7,12 @@
 				<h2 id="name"><%= @user.name.split.each { |x| print x.capitalize!, " "}.join(" ") %></h2>
 				<h3>Email:<a href="mailto:<%= @user.email %>"><%= @user.email %></a></h3>
 				<h3>Phone: <%= @user.phonenumber %></h3>
-				<button class="btn btn-success" id="modal-invite">
-					<i class="icon-plus icon-white"></i>
-					<%= link_to "Invite to #{self.current_project}", h(new_invitation_path + "?" + {:user => @user.id}.to_query) %>
-				</button>
+				<% if !@user.projects.include?(self.current_project) %>
+					<button class="btn btn-success" id="modal-invite">
+						<i class="icon-plus icon-white"></i>
+						<%= link_to "Invite to #{self.current_project}", h(new_invitation_path + "?" + {:user => @user.id}.to_query) %>
+					</button>
+				<% end %>
 			</div>
 		</div>
 		<div class="profile-information">
