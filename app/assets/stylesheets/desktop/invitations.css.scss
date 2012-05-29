@@ -16,6 +16,9 @@
 
 #invitations-new-add-user-modal {
 	display: none;
+	max-height: 500px;
+	overflow-x: hidden;
+	overflow-y: auto;
 	#invitations-new-add-user-modal-radio-buttons {
 		margin: 10px 0px 10px 10px;
 	}
