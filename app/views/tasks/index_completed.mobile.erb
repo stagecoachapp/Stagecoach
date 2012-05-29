@@ -1,0 +1,18 @@
+<h1>Completed Tasks</h1>
+
+<ul data-role="listview" data-inset="true">
+<% @tasks.each do |task| %>
+    <% if task.active %>
+       <li><a href= "<%= "/tasks/#{task.id}" %>">
+
+                    <h3><%= task.name.split(' ').map {|w| w.capitalize }.join(' ') %></h3>
+                    <p>Status: <%= task.task_status.name %></p>
+                    <p>Priority: <%= task.task_priority.name %></p>
+                    <p><%= task.formatted_time %></p>
+
+                </a></li>
+    <% end %>
+<% end %>
+</ul>
+
+

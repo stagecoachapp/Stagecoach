@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
     end
 
     def to_s
-        self.name
+        self.name.split(' ').map {|w| w.capitalize }.join(' ')
     end
 
     #def name
