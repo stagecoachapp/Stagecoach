@@ -1,10 +1,27 @@
 <h1>Invitations</h1>
 
 <%= link_to 'New Invitation', new_invitation_path, :class => "btn" %>
-<br />
-
-<% @invitations.each do |invitation| %>
-    <td><%= link_to invitation.to_s, invitation %></td>
-  <br />
+<br>
+<br>
+<% if @outgoing_invitations.empty? %>
+	<h3>You haven't sent any Invitations</h3>
+<% else %>
+	<br/>
+	<h3>Invitations sent by you</h3>
+	<% @outgoing_invitations.each do |outgoing_invitation| %>
+	    <td><%= link_to outgoing_invitation.outgoing_to_s, outgoing_invitation %></td>
+	  <br />
+	<% end %>
 <% end %>
-
+<br>
+<br>
+<% if @outgoing_invitations_other.empty? %>
+	<h3>Nobody else has sent any Invitations</h3>
+<% else %>
+	<br/>
+	<h3>Invitations sent by other</h3>
+	<% @outgoing_invitations_other.each do |outgoing_invitation| %>
+	    <td><%= link_to outgoing_invitation.outgoing_to_s, outgoing_invitation %></td>
+	  <br />
+	<% end %>
+<% end %>

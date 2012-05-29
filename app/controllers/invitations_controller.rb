@@ -12,7 +12,9 @@ class InvitationsController < ApplicationController
     # GET /invitations
     # GET /invitations.json
     def index
-        @invitations = Invitation.where("to_user_id = #{self.current_user.id} OR from_user_id = #{self.current_user.id}")
+        @outgoing_invitations = Invitation.where("from_user_id = #{self.current_user.id}")
+        @outgoing_invitations_other = Invitation.where("from_user_id != #{self.current_user.id}")
+        #@incoming_invitations = InvitationToUser.where("to_user_id = #{self.current_user.id}").all.map {|invitation_to_user| invitation_to_user.invitation}
 
         respond_to do |format|
             format.html # index.html.erb
@@ -29,7 +31,7 @@ class InvitationsController < ApplicationController
             redirect_to root_url
             return
         end
-        if self.current_user != @invitation.to_user && self.current_user != @invitation.from_user
+        if (not @invitation.to_users.include?(self.current_user)) and  not (@invitation.from_user == self.current_user)
             flash[:error] = "You are not authorized to see that invitation"
             redirect_to root_url
             return
@@ -47,8 +49,10 @@ class InvitationsController < ApplicationController
         @invitation = Invitation.new
         @invitation.from_user = self.current_user
         @invitation.project = self.current_project
+        @start_date = Time.now.in_time_zone + 30 * 24 * 60 * 60
+        @end_date = Time.now.in_time_zone + 2 * 30 * 24 * 60 * 60
         unless params[:user].nil?
-            @invitation.to_user = User.find_by_id(params[:user])
+            @invitation.to_users = [User.find_by_id(params[:user])]
         end
         respond_to do |format|
             format.html # new.html.erb
@@ -64,19 +68,23 @@ class InvitationsController < ApplicationController
     # POST /invitations
     # POST /invitations.json
     def create
-        #unfortunately you have to use a case insensitive find users function because postgres is stupid
-        params[:invitation][:to_user] = User.find(params[:invitation][:to_user])
+        #to_users = params[:invitation][:to_user_ids].map {|user_id| User.find(user_id)}
+        start_date = Date.strptime(params[:start_date],"%m-%d-%Y").to_time
+        end_date = Date.strptime(params[:end_date],"%m-%d-%Y").to_time
+        params[:invitation][:start_date] = start_date
+        params[:invitation][:end_date] = end_date
         params[:invitation][:from_user] = User.find(params[:invitation][:from_user])
         @invitation = Invitation.new(params[:invitation])
         conversation = Conversation.create
-        conversation.users = [@invitation.to_user, @invitation.from_user]
+        conversation.users << [@invitation.to_users, @invitation.from_user]
         @invitation.update_attribute(:conversation, conversation)
-        notification = Notification.create!(:user => @invitation.to_user, :notification_type => NotificationType.find_by_name("NewInvitation"), :notification_object => @invitation)
+        @invitation.to_users.each do |user|
+            notification = Notification.create!(:user => user, :notification_type => NotificationType.find_by_name("NewInvitation"), :notification_object => @invitation)
+        end
 
         respond_to do |format|
             if @invitation.save
-                format.html { redirect_to @invitation, success: 'Invitation was successfully created.' }
-                format.json { render json: @invitation, status: :created, location: @invitation }
+                format.html { redirect_to invitations_path, success: 'Invitation was successfully created.' }
             else
                 format.html { render action: "new" }
                 format.json { render json: @invitation.errors, status: :unprocessable_entity }

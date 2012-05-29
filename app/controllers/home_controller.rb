@@ -1,13 +1,14 @@
 class HomeController < ApplicationController
 
   def index
-    if self.current_user? && !is_mobile_device?
-      index_signed_in
-      render :action => :index_signed_in
-      return
-    end
-      respond_to do |format|
-        format.html
+   @signup = Signup.new
+   if self.current_user? && !is_mobile_device?
+    index_signed_in
+    render :action => :index_signed_in
+    return
+  end
+  respond_to do |format|
+    format.html
       #format.mobile
     end
   end

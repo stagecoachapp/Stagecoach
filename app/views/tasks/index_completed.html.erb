@@ -9,12 +9,11 @@
     <th>Status</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @tasks.each do |task| %>
   <tr>
-    <td><%= task.name %></td>
+    <td><%= task.name.split(' ').map {|w| w.capitalize }.join(' ') %></td>
     <td><%= task.formatted_time %></td>
     <td><%= task.description %></td>
     <td><%= task.task_priority.name %></td>
@@ -22,7 +21,6 @@
     <td><%= link_to 'Show', task %></td>
     <% if self.current_project.administrators.include?(self.current_user) %>
     <td><%= link_to 'Edit', edit_task_path(task) %></td>
-    <td><%= link_to 'Destroy', task, confirm: 'Are you sure?', method: :delete %></td>
     <% end %>
   </tr>
 <% end %>
