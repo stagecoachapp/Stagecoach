@@ -4,7 +4,7 @@
 		<h3>Choose User</h3>
 	</div>
 	<div id="tasks-new-add-user-modal-radio-buttons">
-		<% User.find(:all, :order => "name").each do |contact| %>
+		<% self.current_project.users.each do |contact| %>
 			<input type="checkbox" name="contacts-group" value="<%= contact.id %>" <% if @task.users.include?(contact) %> checked = 'checked' <% end %>><text><%= contact.name %></text><br>
 		<% end %>
 	</div>
