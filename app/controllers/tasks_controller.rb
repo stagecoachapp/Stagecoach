@@ -34,7 +34,6 @@ class TasksController < ApplicationController
         else
             @task = Task.new(params[:task])
             setDefaults! @task
-            debugger
         end
 
         @task.save
@@ -47,7 +46,6 @@ class TasksController < ApplicationController
         end
         notification = nil
         @task.users.each do |user|
-            debugger
             notification = Notification.create(:notification_type => notification_type, :user => user, :notification_object => @task)
         end
 
