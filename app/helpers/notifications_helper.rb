@@ -1,6 +1,7 @@
 module NotificationsHelper
 	def notification_path(notification)
-		if notification.notification_type.to_s == "NewTask" && notification.notification_object.project != self.current_project
+		if (notification.notification_type.to_s == "NewTask" or notification.notification_type.to_s == "UpdatedTask" or notification.notification_type.to_s == "CompletedTask") and
+		  	notification.notification_object.project != self.current_project
 			return notification.notification_object.project
 		elsif notification.notification_type.to_s == "NewInvitationMessage"
 			return notification.notification_object.conversation.conversation_object

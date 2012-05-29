@@ -1,15 +1,37 @@
 $(document).ready(function() {
+
+	//Add user modal related functions
 	$("#invitations-new-add-user-button").click(function() {
 		$("#invitations-new-add-user-modal").modal('show');
 	});
 	$("#invitations-new-add-user-modal-select-button").click(function() {
-		var checkedUser = $('input[name=contacts-group]:checked');
-		$("#invitations-new-to-user-id").val(checkedUser.val());
-		$("#invitations-new-to-user-name").val(checkedUser.next().text());
-		$("#invitations-new-add-user-button i").removeClass().addClass("icon-refresh")
+		var checkedUsers = $('input[name=contacts-group]:checked');
+		//the first user should populate the field already in the form
+		$(".invitations-new-to-user-id").remove();
+		$(".invitations-new-to-user-name").remove();
+		$("#invitations-new-add-user-button").before('<input type="hidden" class="invitations-new-to-user-id" name="invitation[to_user_ids][]">');
+		$("#invitations-new-add-user-button").before('<input disabled="disabled" class="invitations-new-to-user-name" name="to_user_name", type="text">');
+
+
+		if(checkedUsers.length > 0)
+		{
+			$(".invitations-new-to-user-id").first().val($(checkedUsers[0]).val());
+			$(".invitations-new-to-user-name").first().val($(checkedUsers[0]).next().text());
+			$("#invitations-new-add-user-button i").removeClass().addClass("icon-refresh");
+		}
+		var lastUserElement = $("#invitations-new-add-user-button");
+		//the rest of the users should populate new fields
+		for(i = 1; i < checkedUsers.length; i++)
+		{
+			lastUserElement.after('<input type="hidden" class="invitations-new-to-user-id" name="invitation[to_user_ids][]">');
+			lastUserElement = lastUserElement.after('<input disabled="disabled" class="invitations-new-to-user-name" name="to_user_name", type="text" style="display: block">');
+			$(".invitations-new-to-user-id").last().val($(checkedUsers[i]).val());
+			$(".invitations-new-to-user-name").last().val($(checkedUsers[i]).next().text());
+		}
 		$("#invitations-new-add-user-modal").modal('hide');
 	});
 	$("#invitations-new-form").submit(function() {
 		$.param("to-user-id", $("#invitations-new-to-user").data('user-id'));
 	});
+	//end add user modal related functions
 });

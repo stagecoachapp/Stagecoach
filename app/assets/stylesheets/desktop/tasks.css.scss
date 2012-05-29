@@ -9,3 +9,25 @@
 #tasks-form-description {
 	width: 90%%;
 }
+
+#tasks-new-add-user-button {
+	margin-bottom: 9px;
+}
+
+.tasks-new-user-name
+{
+	display: block;
+}
+
+#tasks-new-add-user-modal {
+	display: none;
+	#tasks-new-add-user-modal-radio-buttons {
+		margin: 10px 0px 10px 10px;
+	}
+
+	#tasks-new-add-user-modal-select-button {
+		margin: 0px 180px 10px 180px;
+		width: 200px
+	}
+}
+

@@ -15,6 +15,10 @@ class Notification < ActiveRecord::Base
 		case self.notification_type.to_s
 		when "NewTask"
 			"You have been assigned to the following task: " + self.notification_object.to_s + " on " + self.notification_object.project.to_s + " by " + self.notification_object.owner.name
+		when "UpdatedTask"
+			"" + self.notification_object.to_s + " has been updated"
+		when "CompletedTask"
+			"" + self.notification_object.to_s + " has been completed"
 		when "NewInvitation"
 			"You have been invited to join " + self.notification_object.project.to_s + " by " + self.notification_object.from_user.to_s
 		when "NewInvitationMessage"
@@ -22,7 +26,7 @@ class Notification < ActiveRecord::Base
 		when "NewProjectAsset"
 			"A new asset has been uploaded for " + self.notification_object.asset_object.to_s
 		else
-			"Notification: " + self.notification_object.to_s + " on " + self.notification_object.project.to_s
+			"Notification: " + self.notification_object.to_s
 		end
 	end
 

@@ -29,7 +29,6 @@ class SignupsController < ApplicationController
   def new
     @signup = Signup.new
 
-    bingo!("sign_up_test")
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @signup }
@@ -45,7 +44,6 @@ class SignupsController < ApplicationController
   # POST /signups.json
   def create
     @signup = Signup.new(params[:signup])
-
 
     if @signup.save
       respond_to do |format|
