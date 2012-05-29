@@ -49,6 +49,8 @@ class InvitationsController < ApplicationController
         @invitation = Invitation.new
         @invitation.from_user = self.current_user
         @invitation.project = self.current_project
+        @projects = self.current_user.projects.sort_by &:created_at
+        @current_user = self.current_user
         @start_date = Time.now.in_time_zone + 30 * 24 * 60 * 60
         @end_date = Time.now.in_time_zone + 2 * 30 * 24 * 60 * 60
         unless params[:user].nil?
