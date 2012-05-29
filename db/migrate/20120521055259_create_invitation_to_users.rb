@@ -6,6 +6,6 @@ class CreateInvitationToUsers < ActiveRecord::Migration
 
       t.timestamps
     end
-    remove_column :invitations, :to_user
+    remove_column :invitations, :to_user_id
   end
 end
