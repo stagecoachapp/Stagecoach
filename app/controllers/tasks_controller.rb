@@ -134,6 +134,7 @@ class TasksController < ApplicationController
                     end
                 end
             end
+            @tasks = @tasks.sort_by &:time
             @header = "My Tasks"
         end
 
