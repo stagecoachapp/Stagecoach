@@ -6,7 +6,7 @@
 				<ul>
 					<% for contact in project.users %>
 						<% unless contact == @current_user %>
-							<%= link_to contact.name, contact %>
+							<%= link_to contact.name.split.each { |x| print x.capitalize!, " "}.join(" "), contact %>
 						<% end %>
 					<% end %>
 				</ul>

@@ -1,1 +1,6 @@
-$('<%= escape_javascript(render "layouts/contact_modal") %>').insertAfter("invite-modal");
+$(document).ready(function() {
+    $('<%=  escape_javascript(h(render "layouts/contact_modal")) %>').insertAfter("#invite-modal");
+    $("#contact-modal-close").click(function() {
+        $('#contact-modal').modal('hide');
+    });
+});

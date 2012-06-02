@@ -14,7 +14,7 @@
 
 <% @users.each do |user| %>
   <tr>
-    <td><%= user.name %></td>
+    <td><%= user.name.split.each { |x| print x.capitalize!, " "}.join(" ") %></td>
     <td><%= user.email %></td>
     <td><%= user.phonenumber %></td>
     <td><%= user.smartphone %></td>
