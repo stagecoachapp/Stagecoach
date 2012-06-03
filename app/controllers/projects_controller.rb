@@ -27,6 +27,7 @@ class ProjectsController < ApplicationController
     end
 
     def join
+        @title = "Join Project"
         respond_to do |format|
             format.html
             format.mobile
@@ -96,7 +97,7 @@ end
     # GET /projects/new.json
     def new
         @project = Project.new
-
+        @title = "Create Project"
         respond_to do |format|
             format.html # new.html.erb
             format.json { render json: @project }
@@ -106,6 +107,7 @@ end
     # GET /projects/1/edit
     def edit
         @project = Project.find(params[:id])
+        @title = "Edit " + @project.name
     end
 
     # PUT /projects/1
@@ -113,6 +115,7 @@ end
     def update
         params[:project][:administrator_ids] ||= []
         @project = Project.find(params[:id])
+        @title = "Update " + @project.name
         if params[:project][:password] == ""
             params[:project].delete :password
         end
@@ -177,6 +180,7 @@ end
     # DELETE /projects/1.json
     def destroy
         @project = Project.find(params[:id])
+        @title = "Delete " + project.name
         if self.current_project == @project
             @project.destroy
             self.current_project = self.current_user.projects.last

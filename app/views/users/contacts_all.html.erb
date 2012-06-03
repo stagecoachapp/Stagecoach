@@ -1,11 +1,15 @@
 <div>
 	<%= render 'contacts_page_controls' %>
 </div>
-<h4>All Contacts</h4>
+<h3><%= @project.capitalized_name %></h3>
 <div>
 	<ul>
-		<% @contacts.each do |contact|%>
-			<li class="stagecoach-list-item"><%= link_to contact.name.split.each { |x| print x.capitalize!, " "}.join(" "), contact, :remote => true %></li>
+		<% for project in @projects %>
+			<% unless (project.users.count == 1) && (project != @project) %>
+				<% @contacts.each do |contact|%>
+					<li class="stagecoach-list-item"><%= link_to contact.name.split.each { |x| print x.capitalize!, " "}.join(" "), contact, :remote => true %></li>
+				<% end %>
+			<% end %>
 		<% end %>
 	</ul>
 </div>

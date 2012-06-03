@@ -17,6 +17,7 @@ class TasksController < ApplicationController
         @task_categories = self.current_project.task_categories.find(:all)
         @users = self.current_project.users.all
         @time = Time.now.in_time_zone + 2000
+        @title = "Create Task"
         respond_to do |format|
             format.mobile
         end
@@ -29,6 +30,12 @@ class TasksController < ApplicationController
             params[:task][:time] = date
             params[:task][:task_priority] = TaskPriority.find_by_name("Low")
             params[:task][:task_status] = TaskPriority.find_by_name("Pending")
+            #make sure they tried to assign it to somebody
+            #make sure the task isn't assigned to vagina monsters
+            if params[:task][:users] == ["[]"]
+                redirect_to tasks_path, :flash => { :notice => "Make sure you assign the task to somebody next time!" }
+                return
+            end
             @task = Task.new(params[:task])
             setDefaults! @task
         else
@@ -45,7 +52,7 @@ class TasksController < ApplicationController
                 notification = Notification.create(:notification_type => notification_type, :user => user, :notification_object => @task)
             end
         end
-
+        @title = "Create Task"
 
 
         respond_to do |format|
@@ -58,6 +65,7 @@ class TasksController < ApplicationController
         @task = Task.find(params[:id])
         @users = current_project.users.all
         @time = @task.time
+        @title = "Edit Task"
         respond_to do |format|
             format.html
             format.mobile
@@ -123,7 +131,8 @@ class TasksController < ApplicationController
                     end
                 end
             end
-
+            @tasks = @tasks.sort_by &:time
+            @title = "Tasks"
             @header = "All Tasks"
         else
             @tasks = []
@@ -135,6 +144,7 @@ class TasksController < ApplicationController
                 end
             end
             @tasks = @tasks.sort_by &:time
+            @title = "My Tasks"
             @header = "My Tasks"
         end
 
@@ -158,7 +168,7 @@ class TasksController < ApplicationController
                     end
                 end
             end
-
+            @title = "Completed Tasks"
             @header = "All Tasks"
         else
             @tasks = []
@@ -169,6 +179,7 @@ class TasksController < ApplicationController
                     end
                 end
             end
+            @title = "Completed Tasks"
             @header = "My Tasks"
         end
 
@@ -192,6 +203,7 @@ class TasksController < ApplicationController
 
     def show
         @task = self.current_project.tasks.find_by_id(params[:id])
+        @title = "Task"
         if @task.nil?
             flash[:success] =  'Task not found. Maybe it is on a different project'
             respond_to do |format|
