@@ -15,7 +15,7 @@ class InvitationsController < ApplicationController
         @outgoing_invitations = Invitation.where("from_user_id = #{self.current_user.id}")
         @outgoing_invitations_other = Invitation.where("from_user_id != #{self.current_user.id}")
         #@incoming_invitations = InvitationToUser.where("to_user_id = #{self.current_user.id}").all.map {|invitation_to_user| invitation_to_user.invitation}
-
+        @title = "Invitations"
         respond_to do |format|
             format.html # index.html.erb
             format.json { render json: @invitations }
@@ -37,6 +37,7 @@ class InvitationsController < ApplicationController
             return
         end
         @message = Message.new(:conversation => @invitation.conversation, :user => self.current_user)
+        @title = "Invitation"
         respond_to do |format|
             format.html # show.html.erb
             format.json { render json: @invitation }
@@ -53,6 +54,7 @@ class InvitationsController < ApplicationController
         @current_user = self.current_user
         @start_date = Time.now.in_time_zone + 30 * 24 * 60 * 60
         @end_date = Time.now.in_time_zone + 2 * 30 * 24 * 60 * 60
+        @title = "Invite to " + @invitation.project.capitalized_name
         unless params[:user].nil?
             @invitation.to_users = [User.find_by_id(params[:user])]
         end

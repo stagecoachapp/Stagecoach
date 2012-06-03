@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    @title = @user.name
     respond_to do |format|
       format.mobile # show.html.erb
       format.json { render json: @user }
@@ -30,7 +31,7 @@ class UsersController < ApplicationController
 
   def contacts_all
     @contacts = self.current_user.contacts
-
+    @title = "Contacts"
     respond_to do |format|
       format.mobile # index.html.erb
       format.js
@@ -84,6 +85,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    @title = @user.name + " - Edit Profile"
     if self.current_project.nil?
       @user_roles = UserRole.all
     else

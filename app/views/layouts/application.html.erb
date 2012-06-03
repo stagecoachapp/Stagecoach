@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Stagecoach</title>
+  <title><%= @title.nil? ? "Stagecoach" : "" + @title %></title>
   <%= stylesheet_link_tag    'desktop/desktop' %>
   <%= stylesheet_link_tag    'shared/shared' %>
   <%= javascript_include_tag 'desktop/desktop' %>
