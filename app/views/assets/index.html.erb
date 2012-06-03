@@ -1,8 +1,11 @@
+<h2>Assets</h2>
+<br>
 <ul>
 	<% self.current_project.assets.each do |asset| %>
 		<li>
 			<%= link_to asset.file_file_name, assets_path(asset), :target => '_blank' %>
 		</li>
 	<% end %>
-	<%= link_to "Upload Assets", upload_assets_path, :class => "btn" %>
+    <br>
+	<%= link_to "Upload a File", upload_assets_path, :class => "btn" %>
 </ul>

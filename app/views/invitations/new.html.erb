@@ -1,5 +1,5 @@
 <%= render "add_user_modal" %>
-<h1>New invitation</h1>
+<h1>Invite Someone to Your Project</h1>
 
 <%= form_for(@invitation, :html => { :id => "invitations-new-form" }) do |f| %>
 	<%= f.hidden_field :from_user, :value => @invitation.from_user.id %>
