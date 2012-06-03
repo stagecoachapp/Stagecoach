@@ -31,6 +31,8 @@ class UsersController < ApplicationController
 
   def contacts_all
     @contacts = self.current_user.contacts
+    @projects = self.current_user.projects
+    @project = self.current_project
     @title = "Contacts"
     respond_to do |format|
       format.mobile # index.html.erb
