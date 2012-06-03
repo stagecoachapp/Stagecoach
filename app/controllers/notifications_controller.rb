@@ -9,7 +9,7 @@ class NotificationsController < ApplicationController
 		@unread_notifications.each do |unread_notification|
 			unread_notification.mark_read()
 		end
-
+		@title = "Notifications"
 		@header = "Notifications"
 		respond_to do |format|
 			format.html

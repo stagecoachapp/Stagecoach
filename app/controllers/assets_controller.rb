@@ -4,7 +4,7 @@ class AssetsController < ApplicationController
 	def index
 
 		@assets = Asset.all()
-
+		@title = "Assets"
 		# Fix This
 		#@assets = self.current_project.assets
 
@@ -17,7 +17,7 @@ class AssetsController < ApplicationController
 	#GET /assets/upload
 	def new
 		@asset = Asset.new
-
+		@title = "Upload Asset"
 		respond_to do |format|
 			format.html
 		end
@@ -44,6 +44,7 @@ class AssetsController < ApplicationController
 	#GET /asset/:id
 	def show
 		@asset = Asset.find_by_id(params[:id])
+		@title = "Assets"
 		if @asset.asset_object_type == "Project"
 			if  @asset.asset_object_id == self.current_project.id
 				object_key = @asset.file.to_s.split('/',5).last
