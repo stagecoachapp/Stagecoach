@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-	attr_accessible :name, :time, :description, :created_at, :updated_at, :project_id, :project, :task_status, :task_status_id, :task_priority_id, :task_priority, :task_category_ids, :user_ids
+	attr_accessible :name, :time, :description, :created_at, :updated_at, :project_id, :project, :task_status, :task_status_id, :task_priority_id, :task_priority, :task_category_ids, :user_ids, :users
 
 	has_and_belongs_to_many :users
 	has_and_belongs_to_many :task_categories
@@ -28,7 +28,7 @@ class Task < ActiveRecord::Base
 	end
 
 	def mark_complete
-		
+
 		if self.task_status != TaskStatus.find_by_name("Complete")
 			self.task_status = TaskStatus.find_by_name("Complete")
 			self.save

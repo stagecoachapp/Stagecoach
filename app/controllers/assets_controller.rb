@@ -5,12 +5,22 @@ class AssetsController < ApplicationController
 
 		@assets = Asset.all()
 		@title = "Assets"
+		if  @assets.empty?
+			respond_to do |format|
+				format.html { redirect_to "/assets/upload" }
+				format.mobile { redirect_to "/assets/upload" }
+			end
+		else
+			respond_to do |format|
+				format.html
+				format.mobile
+			end
+		end
+
 		# Fix This
 		#@assets = self.current_project.assets
 
-		respond_to do |format|
-			format.html
-		end
+
 
 	end
 

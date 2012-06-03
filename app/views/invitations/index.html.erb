@@ -1,10 +1,10 @@
 <h1>Invitations</h1>
-
-<%= link_to 'New Invitation', new_invitation_path, :class => "btn" %>
+<br>
+<%= link_to 'Invite Someone To This Project', new_invitation_path, :class => "btn" %>
 <br>
 <br>
 <% if @outgoing_invitations.empty? %>
-	<h3>You haven't sent any Invitations</h3>
+	<h3>You haven't sent any invitations</h3>
 <% else %>
 	<br/>
 	<h3>Invitations sent by you</h3>
@@ -16,7 +16,7 @@
 <br>
 <br>
 <% if @outgoing_invitations_other.empty? %>
-	<h3>Nobody else has sent any Invitations</h3>
+	<h3>Nobody else has sent any invitations to this project</h3>
 <% else %>
 	<br/>
 	<h3>Invitations sent by other</h3>

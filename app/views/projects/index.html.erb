@@ -1,8 +1,9 @@
 <!--<h1>Listing projects</h1>-->
-
+<br>
 <table class="table table-striped">
   <tr>
     <th>Name</th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -10,8 +11,11 @@
 
 <% @projects.each do |project| %>
   <tr>
-    <td><%= project.name %>
-    <% if project == self.current_project %> (current project) <% end %>
+    <td>
+      <b>
+        <% if project == self.current_project %> <%= project.name.capitalize %> (current project) <% end %>
+      </b>
+        <% if project != self.current_project %> <%= project.name.capitalize %> <% end %>
     </td>
     <td><%= link_to 'Show', project %></td>
     <td><%= link_to 'Edit', edit_project_path(project) %></td>
@@ -23,6 +27,5 @@
 
 <br />
 
-<%= link_to 'New Project', new_project_path %>
-<br>
-<%= link_to 'Join a Project', join_project_path %>
+<%= link_to 'New Project', new_project_path , :class => "btn" %>
+<%= link_to 'Join a Project', join_project_path  , :class => "btn" %>
