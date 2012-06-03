@@ -27,6 +27,7 @@ class ProjectsController < ApplicationController
     end
 
     def join
+        @title = "Join Project"
         respond_to do |format|
             format.html
             format.mobile
