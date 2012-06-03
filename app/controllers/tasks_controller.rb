@@ -185,6 +185,16 @@ class TasksController < ApplicationController
 
     end
 
+    def show_all_tasks_in_project
+        @tasks = self.current_project.tasks.all
+
+        respond_to do |format|
+            format.html
+            format.mobile
+            format.js
+        end
+    end
+
     def show
         @task = self.current_project.tasks.find_by_id(params[:id])
         @title = "Task"
