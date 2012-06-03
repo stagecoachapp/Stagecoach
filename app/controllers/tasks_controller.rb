@@ -30,6 +30,12 @@ class TasksController < ApplicationController
             params[:task][:time] = date
             params[:task][:task_priority] = TaskPriority.find_by_name("Low")
             params[:task][:task_status] = TaskPriority.find_by_name("Pending")
+            #make sure they tried to assign it to somebody
+            #make sure the task isn't assigned to vagina monsters
+            if params[:task][:users] == ["[]"]
+                redirect_to tasks_path, :flash => { :notice => "Make sure you assign the task to somebody next time!" }
+                return
+            end
             @task = Task.new(params[:task])
             setDefaults! @task
         else
