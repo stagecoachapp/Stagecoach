@@ -1,22 +1,33 @@
-<%= form_for(@project) do |f| %>
-    <% if @project.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+  <%= form_for(@project) do |f| %>
+  <% if @project.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
 
-          <ul>
-              <% @project.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-              <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <ul>
+      <% @project.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
 
-    <div class="field">
-        <%= f.text_field :name, :placeholder => "Project Name" %>
-        <br>
-        <%= f.password_field :password, :placeholder => "Project Password" %>
+  <div class="row">
+    <div class="offset2">
+      <%= f.text_field :name, :placeholder => "Project Name" %>
     </div>
-    <div class="actions">
-        <%= f.submit %>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="offset2">
+      <%= f.password_field :password, :placeholder => "Project Password" %>
     </div>
-<% end %>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="offset2">
+      <%= f.submit 'Create Project', :class => 'btn btn-large' %>
+    </div>
+  </div>
+  <% end %>

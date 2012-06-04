@@ -5,9 +5,11 @@
 <div>
 	<ul>
 		<% for project in @projects %>
-			<% unless (project.users.count == 1) && (project != @project) %>
-				<% @contacts.each do |contact|%>
-					<li class="stagecoach-list-item"><%= link_to contact.name.split.each { |x| print x.capitalize!, " "}.join(" "), contact, :remote => true %></li>
+			<% if project == @project %>
+				<% unless (project.users.count == 1) %>
+					<% @contacts.each do |contact|%>
+						<li class="stagecoach-list-item"><%= link_to contact.name.split.each { |x| print x.capitalize!, " "}.join(" "), contact, :remote => true %></li>
+					<% end %>
 				<% end %>
 			<% end %>
 		<% end %>
