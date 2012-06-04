@@ -27,6 +27,7 @@ class ProjectsController < ApplicationController
     end
 
     def join
+        @title = "Join Project"
         respond_to do |format|
             format.html
             format.mobile
@@ -42,31 +43,31 @@ class ProjectsController < ApplicationController
             # 'Already in project' check
             if !(current_user.projects.include?(@project))
                  # 'Password' check
-                if @project.password == params[:projectpassword]
+                 if @project.password == params[:projectpassword]
                     self.current_user.projects.push(@project)
                     self.current_user.save
                     self.current_project=(@project.id)
                     go_to = root_path
                     flash[:success] = 'Joined Project Successfully.'
                 # Incorrect Password page
-                else
-                    go_to = projects_path
-                    flash[:success] = 'Incorrect Password.'
-                end
-            # Already in project page
             else
                 go_to = projects_path
-                flash[:success] = 'Already in Project.'
+                flash[:success] = 'Incorrect Password.'
             end
+            # Already in project page
         else
             go_to = projects_path
-            flash[:success] = 'Project does not exist.'
+            flash[:success] = 'Already in Project.'
         end
-        respond_to do |format|
-            format.html { redirect_to go_to}
-            format.mobile { redirect_to go_to}
-        end
+    else
+        go_to = projects_path
+        flash[:success] = 'Project does not exist.'
     end
+    respond_to do |format|
+        format.html { redirect_to go_to}
+        format.mobile { redirect_to go_to}
+    end
+end
 
     # GET /projects/1
     # GET /projects/1.json
@@ -96,7 +97,7 @@ class ProjectsController < ApplicationController
     # GET /projects/new.json
     def new
         @project = Project.new
-
+        @title = "Create Project"
         respond_to do |format|
             format.html # new.html.erb
             format.json { render json: @project }
@@ -106,6 +107,7 @@ class ProjectsController < ApplicationController
     # GET /projects/1/edit
     def edit
         @project = Project.find(params[:id])
+        @title = "Edit " + @project.name
     end
 
     # PUT /projects/1
@@ -113,15 +115,16 @@ class ProjectsController < ApplicationController
     def update
         params[:project][:administrator_ids] ||= []
         @project = Project.find(params[:id])
+        @title = "Update " + @project.name
         if params[:project][:password] == ""
             params[:project].delete :password
-            end
-            respond_to do |format|
-                project_name = params[:project][:name]
-                project_name.downcase!
-                project_password = params[:project][:password]
-                @project.name = project_name
-                @project.password = project_password
+        end
+        respond_to do |format|
+            project_name = params[:project][:name]
+            project_name.downcase!
+            project_password = params[:project][:password]
+            @project.name = project_name
+            @project.password = project_password
             if @project.save()
                 if current_project == @project
                     self.current_project=(@project.id)
@@ -140,21 +143,28 @@ class ProjectsController < ApplicationController
     def create
         project_name = params[:project][:name]
         project_name.downcase!
+        go_to = new_project_path
         if not Project.all.map{|p| p.name}.include?(project_name)
-            project_password = params[:project][:password]
-            @new_project= Project.new()
-            @new_project.name = project_name
-            @new_project.password = project_password
-            @new_project.owner = self.current_user
-            @new_project.administrators << self.current_user
-            @new_project.users << current_user
-            if @new_project.save
-                flash[:success] = "Project successfully created"
+            if project_name != ""
+                project_password = params[:project][:password]
+                @new_project= Project.new()
+                @new_project.name = project_name
+                @new_project.password = project_password
+                @new_project.owner = self.current_user
+                @new_project.administrators << self.current_user
+                @new_project.users << current_user
+                if @new_project.save
+                    flash[:success] = "Project successfully created"
+                else
+                    flash[:error] = "Error creating project"
+                end
             else
-                flash[:error] = "Error creating project"
+                flash[:error] = "You need a name silly!"
             end
-            self.current_project = @new_project
-            go_to = root_path
+            if project_name != ""
+                self.current_project = @new_project
+                go_to = root_path
+            end
         else
             flash[:error] = "Sorry, there is already a project with that name"
             go_to = projects_path
@@ -170,6 +180,7 @@ class ProjectsController < ApplicationController
     # DELETE /projects/1.json
     def destroy
         @project = Project.find(params[:id])
+        @title = "Delete " + project.name
         if self.current_project == @project
             @project.destroy
             self.current_project = self.current_user.projects.last

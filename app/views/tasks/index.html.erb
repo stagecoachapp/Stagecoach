@@ -1,4 +1,4 @@
-<h1>Tasks</h1>
+<h1>Your Tasks</h1>
 
 <table class="table table-striped">
   <tr>
@@ -7,7 +7,6 @@
     <th>Description</th>
     <th>Priority</th>
     <th>Status</th>
-    <th></th>
     <th></th>
   </tr>
 
@@ -20,7 +19,6 @@
     <td><%= task.task_status.name %></td>
     <% if self.current_project.administrators.include?(self.current_user) %>
     <td><%= link_to 'Edit', edit_task_path(task) %></td>
-    <td><%= link_to 'Delete', task, confirm: 'Are you sure?', method: :delete %></td>
     <% end %>
   </tr>
 <% end %>
@@ -29,3 +27,5 @@
 <br />
 
 <%= link_to 'New Task', new_task_path, :class => "btn" %>
+<%= link_to 'View Completed Tasks', '/tasks/index_completed', :class => "btn" %>
+<%= link_to "View Entire Project\'s Tasks", '/tasks/all', :class => "btn" %>

@@ -17,31 +17,42 @@ class TasksController < ApplicationController
         @task_categories = self.current_project.task_categories.find(:all)
         @users = self.current_project.users.all
         @time = Time.now.in_time_zone + 2000
+        @title = "Create Task"
         respond_to do |format|
             format.mobile
         end
     end
 
     def create
-        date = Date.strptime(params[:date],"%m-%d-%Y").to_time
-        date = date.change(:hour => Time.parse(params[:time2]).hour, :min => Time.parse(params[:time2]).min)
-        params[:task][:time] = date
-        params[:task][:task_priority] = TaskPriority.find_by_name("Low")
-        params[:task][:task_status] = TaskPriority.find_by_name("Pending")
-        @task = Task.new(params[:task])
-        setDefaults! @task
+        if not is_mobile_device?
+            date = Date.strptime(params[:date],"%m-%d-%Y").to_time
+            date = date.change(:hour => Time.parse(params[:time2]).hour, :min => Time.parse(params[:time2]).min)
+            params[:task][:time] = date
+            params[:task][:task_priority] = TaskPriority.find_by_name("Low")
+            params[:task][:task_status] = TaskPriority.find_by_name("Pending")
+            #make sure they tried to assign it to somebody
+            #make sure the task isn't assigned to vagina monsters
+            if params[:task][:users] == ["[]"]
+                redirect_to tasks_path, :flash => { :notice => "Make sure you assign the task to somebody next time!" }
+                return
+            end
+            @task = Task.new(params[:task])
+            setDefaults! @task
+        else
+            @task = Task.new(params[:task])
+            setDefaults! @task
+        end
+
         @task.save
 
-        notification_type = NotificationType.find_by_name("NewTask")
-        #shouldnt happen
-        if notification_type.nil?
-            notification_type = NotificationType.first
-        end
+        notification_type = NotificationType.find_or_create_by_name("NewTask")
         notification = nil
         @task.users.each do |user|
-            notification = Notification.create(:notification_type => notification_type, :user => user, :notification_object => @task)
+            if user != self.current_user
+                notification = Notification.create(:notification_type => notification_type, :user => user, :notification_object => @task)
+            end
         end
-
+        @title = "Create Task"
 
 
         respond_to do |format|
@@ -54,6 +65,7 @@ class TasksController < ApplicationController
         @task = Task.find(params[:id])
         @users = current_project.users.all
         @time = @task.time
+        @title = "Edit Task"
         respond_to do |format|
             format.html
             format.mobile
@@ -66,6 +78,18 @@ class TasksController < ApplicationController
         @task = Task.find(params[:id])
         @task.update_attributes(params[:task])
 
+        #send a notification to the task owner
+        if self.current_user != @task.owner
+            Notification.create(:notification_type => NotificationType.find_or_create_by_name("UpdatedTask"), :user => @task.owner, :notification_object => @task)
+        end
+        #send a notification to all other users on the task
+        @task.users.each do |user|
+            if user != self.current_user and user != @task.owner
+                Notification.create(:notification_type => NotificationType.find_or_create_by_name("UpdatedTask"), :user => user, :notification_object => @task)
+            end
+        end
+
+
         respond_to do |format|
             format.html { redirect_to tasks_url }
             format.mobile { redirect_to @task }
@@ -76,10 +100,14 @@ class TasksController < ApplicationController
         task = Task.find(params[:id])
         if task.mark_complete
             flash[:success] = 'Task marked complete.'
-            Notification.create(user: task.owner, notification_type: NotificationType.find_by_name("TaskComplete"))
+            #send a notification to the task owner
+            if self.current_user != task.owner
+                Notification.create(:notification_type => NotificationType.find_or_create_by_name("CompletedTask"), :user => task.owner, :notification_object => task)
+            end
+            #send a notification to all other users on the task
             task.users.each do |user|
-                if user != self.current_user
-                    Notification.create(user: user, notification_type: NotificationType.find_by_name("TaskComplete"))
+                if user != self.current_user and user != task.owner
+                    Notification.create(:notification_type => NotificationType.find_or_create_by_name("CompletedTask"), :user => user, :notification_object => task)
                 end
             end
         else
@@ -103,7 +131,8 @@ class TasksController < ApplicationController
                     end
                 end
             end
-
+            @tasks = @tasks.sort_by &:time
+            @title = "Tasks"
             @header = "All Tasks"
         else
             @tasks = []
@@ -114,6 +143,8 @@ class TasksController < ApplicationController
                     end
                 end
             end
+            @tasks = @tasks.sort_by &:time
+            @title = "My Tasks"
             @header = "My Tasks"
         end
 
@@ -137,7 +168,7 @@ class TasksController < ApplicationController
                     end
                 end
             end
-
+            @title = "Completed Tasks"
             @header = "All Tasks"
         else
             @tasks = []
@@ -148,6 +179,7 @@ class TasksController < ApplicationController
                     end
                 end
             end
+            @title = "Completed Tasks"
             @header = "My Tasks"
         end
 
@@ -159,8 +191,19 @@ class TasksController < ApplicationController
 
     end
 
+    def show_all_tasks_in_project
+        @tasks = self.current_project.tasks.all
+
+        respond_to do |format|
+            format.html
+            format.mobile
+            format.js
+        end
+    end
+
     def show
         @task = self.current_project.tasks.find_by_id(params[:id])
+        @title = "Task"
         if @task.nil?
             flash[:success] =  'Task not found. Maybe it is on a different project'
             respond_to do |format|

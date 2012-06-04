@@ -1,3 +1,4 @@
+<%= render "add_user_modal" %>
 <%= form_for(@task) do |f| %>
     <% if @task.errors.any? %>
         <div id="error_explanation">
@@ -15,9 +16,27 @@
         <%= f.label :name %><br />
         <%= f.text_field :name %>
     </div>
+    <%= label_tag :user_name, "Assign To" %>
+    <% if @task.users.count != 0%>
+        <% @task.users.each do |user| %>
+                <%= f.hidden_field :user, :class => "tasks-new-user-id", :value => "#{user.id}", :name => "task[users][]" %>
+                <% if user == @task.users.last %>
+                    <%= text_field_tag :users_name, nil, :class => "tasks-new-user-name", :disabled => true, :value => "#{user.name}", :style => "display: inline;"  %>
+                <% else %>
+                    <%= text_field_tag :users_name, nil, :class => "tasks-new-user-name", :disabled => true, :value => "#{user.name}" %>
+                <% end %>
+        <% end %>
+    <% else %>
+        <%= f.hidden_field :users, :class => "tasks-new-user-id", :name => "task[users][]" %>
+        <%= text_field_tag :user_name, nil, :class => "tasks-new-user-name", :disabled => true, :style => "display: inline;" %>
+    <% end %>
+    <button class="btn" id="tasks-new-add-user-button" type="button">
+        <i class="icon-plus icon-white"></i>
+    </button>
+
 
     <div class="field">
-        <%= f.label :date, "Time" %><br />
+        <%= f.label :date, "Date" %><br />
         <div class="input-append date" id="tasks-tasks-new" data-date="<%= @time.strftime("%m-%d-%Y") %>" data-date-format="mm-dd-yyyy">
             <%= text_field_tag(:date, @time.strftime("%m-%d-%Y"), :class => "span2", :size => "16", :readonly => true) %>
             <span class="add-on">
@@ -25,18 +44,13 @@
             </span>
         </div>
         <br>
-        <%= label_tag :time2, "Date" %>
+        <%= label_tag :time2, "Time" %>
         <%= text_field_tag :time2, nil, :type => "time", :id => "tasks-tasks-time", :text => "test" %>
     </div>
     <div class="field">
         <%= f.label :description %><br />
         <%= f.text_area :description, :id => "tasks-form-description" %>
     </div>
-    <label>Users</label>
-    <% for user in @users %>
-        <%= check_box_tag "task[user_ids][]", user.id, false, :id => "task-new-assignee-#{user.id}" %>
-        <label for=<%= "task-new-assignee-#{user.id}" %>><%= user.name %></label>
-    <% end %>
     <div class="actions">
         <%= f.submit :class => "btn" %>
     </div>

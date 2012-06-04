@@ -23,7 +23,14 @@ $(".alert-message").alert('close');
 $(document).ready(function() {
 
 	$("#invite-modal").ajaxSuccess(function(e, xhr, settings) {
-		$("#invite-button").text('Invite Sent');
-		$("#invite-button > i").removeClass('icon-plus');
-	});
+		if (settings.url == "/invite"){
+            $("#invite-button").text('Invite Sent');
+            $("#invite-button > i").removeClass('icon-plus');
+        }
+
+        $("#contact-modal-close").click(function() {
+            $('#contact-modal').hide();
+        });
+    });
+    $('#navbar').scrollspy();
 });

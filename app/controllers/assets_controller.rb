@@ -4,20 +4,30 @@ class AssetsController < ApplicationController
 	def index
 
 		@assets = Asset.all()
+		@title = "Assets"
+		if  @assets.empty?
+			respond_to do |format|
+				format.html { redirect_to "/assets/upload" }
+				format.mobile { redirect_to "/assets/upload" }
+			end
+		else
+			respond_to do |format|
+				format.html
+				format.mobile
+			end
+		end
 
 		# Fix This
 		#@assets = self.current_project.assets
 
-		respond_to do |format|
-			format.html
-		end
+
 
 	end
 
 	#GET /assets/upload
 	def new
 		@asset = Asset.new
-
+		@title = "Upload Asset"
 		respond_to do |format|
 			format.html
 		end
@@ -44,6 +54,7 @@ class AssetsController < ApplicationController
 	#GET /asset/:id
 	def show
 		@asset = Asset.find_by_id(params[:id])
+		@title = "Assets"
 		if @asset.asset_object_type == "Project"
 			if  @asset.asset_object_id == self.current_project.id
 				object_key = @asset.file.to_s.split('/',5).last

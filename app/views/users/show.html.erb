@@ -1,20 +1,36 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <h1><%= @user.name %> </h1>
-  <% unless @user.google_user_information.profile_picture.nil? %>
-  <%= image_tag @user.google_user_information.profile_picture %>
-  <% end %>
-</p>
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
-
-<p>
-  <b>Phone:</b>
-  <%= @user.phonenumber %>
-</p>
-
-
-<%= link_to "Invite to #{self.current_project}", h(new_invitation_path + "?" + {:user => @user.id}.to_query) %>
+<div class="profile" id="profile-main">
+	<div class="contact-body">
+		<%= image_tag profile_picture_url, :class => "thumbnail span2", :id => "contact-modal-prof-pic" %>
+		<div class="main-info">
+			<h2 id="name"><%= @user.name.split.each { |x| print x.capitalize!, " "}.join(" ") %></h2>
+			<h3>Email:<a href="mailto:<%= @user.email %>"><%= @user.email %></a></h3>
+			<h3>Phone: <%= @user.phonenumber %></h3>
+			<% if !@user.projects.include?(self.current_project) %>
+					<button class="btn btn-success" id="modal-invite">
+						<i class="icon-plus icon-white"></i>
+						<%= link_to "Invite to #{self.current_project}", h(new_invitation_path + "?" + {:user => @user.id}.to_query) %>
+					</button>
+				<% end %>
+		</div>
+	</div>
+	<div class="profile-information">
+		<!-- eventually display this like IMDB does, temporary fix since we don't have a good way of addressing user roles as related to projects -->
+		<h2>Positions:</h2>
+		<ul>
+			<% for user_role in @user.user_roles %>
+			<li><b><%= user_role.name %></b></li>
+			<% end %>
+		</ul>
+		<h2>Films:</h2>
+		<ul>
+			<% for project in @user.projects %>
+			<li><b><%= project.name %></b></li>
+			<% end %>
+		</ul>
+		<% if @user == self.current_user %>
+			<button class="btn btn-warning invite">
+				<%= link_to "Edit Profile", edit_user_path(self.current_user), :"data-role" => "button" %>
+			</button>
+		<% end %>
+	</div>
+</div>

@@ -1,0 +1,33 @@
+<h1>All Tasks</h1>
+
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Due</th>
+    <th>Description</th>
+    <th>Priority</th>
+    <th>Status</th>
+    <th>Owner</th>
+    <th></th>
+  </tr>
+
+<% @tasks.each do |task| %>
+  <tr>
+    <td><%= link_to task.name, task_path(task) %></td>
+    <td><%= task.formatted_time %></td>
+    <td><%= task.description %></td>
+    <td><%= task.task_priority.name %></td>
+    <td><%= task.task_status.name %></td>
+    <td><%= task.owner %></td>
+    <% if self.current_project.administrators.include?(self.current_user) %>
+    <td><%= link_to 'Edit', edit_task_path(task) %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Task', new_task_path, :class => "btn" %>
+<%= link_to 'View Completed Tasks', '/tasks/index_completed', :class => "btn" %>
+<%= link_to "View Entire Project\'s Tasks", '/tasks/all', :class => "btn" %>

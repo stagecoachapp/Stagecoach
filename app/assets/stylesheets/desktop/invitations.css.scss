@@ -1,3 +1,42 @@
+#invitation-show-content
+{
+	display: inline-block;
+}
+
+@media screen and (min-width: 1025px)
+{
+	#invitation-show-content
+	{
+		width: 37%;
+	}
+}
+
+
+#invitation-show-conversation
+{
+
+	margin-right: 24px;
+}
+
+@media screen and (min-width: 1025px)
+{
+	#invitation-show-conversation
+	{
+		float: right;
+		width: 52%
+	}
+}
+
+#invitations-show-new-message
+{
+	width: 505px;
+}
+
+#invitations-show-send-message-button
+{
+	margin-left: 407px;
+}
+
 #invitations-new-add-user-button {
 	margin-bottom: 9px;
 }
@@ -7,7 +46,11 @@
 }
 
 #invitations-show-body {
-	width: 90%
+	width: 100%
+}
+
+#invitation-conversation {
+	width: 45%;
 }
 
 #invitations-show-send-message-button {
@@ -16,6 +59,9 @@
 
 #invitations-new-add-user-modal {
 	display: none;
+	max-height: 500px;
+	overflow-x: hidden;
+	overflow-y: auto;
 	#invitations-new-add-user-modal-radio-buttons {
 		margin: 10px 0px 10px 10px;
 	}

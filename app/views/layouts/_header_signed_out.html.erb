@@ -1,22 +1,23 @@
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "Stagecoach", root_path, :class => "brand" %>
-      <ul class="nav">
-        <% url = request.path%>
-        <% if url == root_path %>
-          <li class="active"> <%= link_to "Home", root_path %></li>
-        <% else %>
-          <li> <%= link_to "Home", root_path %></li>
-        <% end %>
-        <% if url == signup_path %>
-          <li class = "active"><%= link_to "Sign Up", signup_path %></li>
-        <% else %>
-          <li><%= link_to "Sign Up", signup_path %></li>
-        <% end %>
-        <li><%= link_to "Sign in with Facebook", signin_path(:facebook) %></li>
-        <li><%= link_to "Sign in with Gmail", signin_path(:google) %></li>
-      </ul>
-    </div>
+     <%= link_to image_tag("global/logo.png"), root_path, :class => "brand", "style" => "margin-top: 0px; padding-top: 8px;padding-bottom: 2px;"%>
+
+     <ul class="nav">
+      <% url = request.path%>
+      <li> <%= link_to "Home", "/#home" %></li>
+      <li> <%= link_to "Features", "/#features" %></li>
+      <li> <%= link_to "Learn More", "/#signup" %></li>
+      <li> <%= link_to "About Us", "/#about" %></li>
+
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sign In<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><%= link_to "Sign in with Facebook", signin_path(:facebook) %></li>
+          <li><%= link_to "Sign in with Gmail", signin_path(:google) %></li>
+        </ul>
+      </li>
+    </ul>
   </div>
+</div>
 </header>

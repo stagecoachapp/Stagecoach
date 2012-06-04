@@ -1,17 +1,19 @@
 <%= link_to "New Task", new_task_path, :"data-role" => "button" %>
+<%= link_to 'View Completed Tasks', '/tasks/index_completed', :"data-role" => "button"  %>
+<%= link_to "View Entire Project\'s Tasks", '/tasks/all', :"data-role" => "button" %>
 <br>
 
 <ul data-role="listview" data-inset="true">
-<% @tasks.each do |task| %>
-	<% if task.active %>
-	   <li><a href= "<%= "/tasks/#{task.id}" %>">
+    <% @tasks.each do |task| %>
+    <% if task.active %>
+    <li><a href= "<%= "/tasks/#{task.id}" %>">
 
-	                <h3><%= task.name %></h3>
-	                <p>Status: <%= task.task_status.name %></p>
-	                <p>Priority: <%= task.task_priority.name %></p>
-	                <p><%= task.formatted_time %></p>
+       <h3><%= task.name %></h3>
+       <p>Status: <%= task.task_status.name %></p>
+       <p>Priority: <%= task.task_priority.name %></p>
+       <p><%= task.formatted_time %></p>
 
-	            </a></li>
-    <% end %>
-<% end %>
+   </a></li>
+   <% end %>
+   <% end %>
 </ul>

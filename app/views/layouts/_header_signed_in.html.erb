@@ -1,7 +1,7 @@
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container" id="navbar-container">
-			<ul class="nav">
+			<ul class="nav" id="signed-in-nav">
 				<li>
 					<%= link_to root_url, :id => "header-logo" do %>
 						<%= image_tag "global/logo.png" %>
@@ -46,7 +46,7 @@
 				<li id="profile-picture">
 						<img src="<%= profile_picture_url %>"></img>
 				</li>
-				<li class="dropdown">
+				<li class="dropdown" id="header-profile-dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<%= self.current_user.to_s %>
 						<b class="caret"></b>

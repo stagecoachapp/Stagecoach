@@ -2,6 +2,33 @@
 <div id="sidebar-and-content">
 	<%= render "layouts/sidebar" %>
 	<div id="content">
+		<div class="alert-wrapper">
+			<% if( flash[:success] ) %>
+			    <div class="alert alert-success" data-dismiss="alert" >
+			    	<a class="close">x</a>
+			        <%= flash[:success] %>
+			    </div>
+		    <% end %>
+
+			<% if( flash[:error] ) %>
+			    <div class="alert alert-error" data-dismiss="alert" href="#">
+			        <a class="close">x</a>
+			        <%= flash[:error] %>
+			    </div>
+			<% end %>
+			<% if( flash[:notice] ) %>
+			    <div class="alert alert-notice" data-dismiss="alert" href="#">
+			        <a class="close">x</a>
+			        <%= flash[:notice] %>
+			    </div>
+			<% end %>
+			<% if( flash[:info] ) %>
+			    <div class="alert alert-info" data-dismiss="alert" href="#">
+			        <a class="close">x</a>
+			        <%= flash[:info] %>
+			    </div>
+			<% end %>
+		</div>
 		<%= yield %>
 	</div>
 </div>

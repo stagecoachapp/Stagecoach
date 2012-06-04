@@ -44,7 +44,7 @@ FilmProjectRails::Application.routes.draw do
   # Viewing your contacts
   match '/contacts/all', :to => 'users#contacts_all'
   match '/contacts/projects', :to => 'users#contacts_by_project'
-  match '/contacts/roles', :to => 'users#contacts_by_user_role'
+  match '/crew', :to => 'users#contacts_by_user_role'
 
   resources :user_roles
 
@@ -54,6 +54,7 @@ FilmProjectRails::Application.routes.draw do
   match '/tasks/:id/mark_complete', :to => 'tasks#mark_complete'
   match '/tasks/:id/mark_pending', :to => 'tasks#mark_pending'
   match '/tasks/index_completed', :to => 'tasks#index_completed'
+  match '/tasks/all', :to => 'tasks#show_all_tasks_in_project'
   resources :tasks
 
 

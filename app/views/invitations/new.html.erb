@@ -1,16 +1,48 @@
 <%= render "add_user_modal" %>
-<h1>New invitation</h1>
+<h1>Invite Someone to Your Project</h1>
 
 <%= form_for(@invitation, :html => { :id => "invitations-new-form" }) do |f| %>
 	<%= f.hidden_field :from_user, :value => @invitation.from_user.id %>
-	<div class="field">
-		<%= f.hidden_field :to_user, :id => "invitations-new-to-user-id" %>
+	<% if @invitation.to_users.count != 0%>
+		<% @invitation.to_users.each do |user| %>
+				<%= f.hidden_field :to_users, :class => "invitations-new-to-user-id", :value => "#{user.id}", :name => "invitation[to_user_ids][]" %>
+				<%= label_tag :to_user_name, "To" %>
+				<%= text_field_tag :to_users_name, nil, :class => "invitations-new-to-user-name", :disabled => true, :value => "#{user.name}" %>
+		<% end %>
+	<% else %>
+		<%= f.hidden_field :to_users, :class => "invitations-new-to-user-id", :name => "invitation[to_user_ids][]" %>
 		<%= label_tag :to_user_name, "To" %>
-		<%= text_field_tag :to_user_name, nil, :id => "invitations-new-to-user-name", :disabled => true %>
-		<button class="btn" id="invitations-new-add-user-button" type="button">
-			<i class="icon-plus icon-white"></i>
-		</button>
+		<%= text_field_tag :to_users_name, nil, :class => "invitations-new-to-user-name", :disabled => true %>
+	<% end %>
+	<button class="btn" id="invitations-new-add-user-button" type="button">
+		<i class="icon-plus icon-white"></i>
+	</button>
+
+	<div class="field">
+        <%= f.label :start_time, "Start Date" %><br />
+        <div class="input-append date" id="tasks-tasks-new" data-date="<%= @start_date.strftime("%m-%d-%Y") %>" data-date-format="mm-dd-yyyy">
+            <%= text_field_tag(:start_date, @start_date.strftime("%m-%d-%Y"), :class => "span2", :size => "16", :readonly => true) %>
+            <span class="add-on">
+                <i class="icon-th"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="field">
+        <%= f.label :end_time, "End Date" %><br />
+        <div class="input-append date" id="tasks-tasks-new" data-date="<%= @end_date.strftime("%m-%d-%Y") %>" data-date-format="mm-dd-yyyy">
+            <%= text_field_tag(:end_date, @end_date.strftime("%m-%d-%Y"), :class => "span2", :size => "16", :readonly => true) %>
+            <span class="add-on">
+                <i class="icon-th"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="field">
+		<%= f.label :budget, "Budget" %>
+		<%= f.text_field :budget, :id => "invitations-new-budget" %>
 	</div>
+
 	<div class="field">
 		<%= f.label :body, "Message" %>
 		<%= f.text_area :body, :id => "invitations-new-body" %>
