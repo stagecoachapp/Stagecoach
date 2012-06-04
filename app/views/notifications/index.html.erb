@@ -15,7 +15,7 @@
 
 		<li>
 			<!-- self.current_project is used so selecting a notification for a task on a different project will switch projects !-->
-			<p class="read_notification"><%= link_to  notification.to_s, notification_path(notification), :method => notification_path_method(notification) %></p>
+			<p><%= link_to  notification.to_s, notification_path(notification), :method => notification_path_method(notification) %></p>
 		</li>
 
 	<% end %>

@@ -11,11 +11,11 @@ class Invitation < ActiveRecord::Base
 
  	def to_s(user=nil)
  		if(self.to_users.include?(user))
- 			self.from_user.from_user +"invited you to join "+self.project.to_s
+ 			self.from_user.from_user +" invited you to join "+self.project.to_s
  		elsif(self.from_user == user)
  			"Invited " + join(self.to_users.map {|to_user| to_user.name}) + " to join " + self.project.to_s
  		else
- 			self.from_user.to_s + " invited " + join(self.to_users.map {|to_user| to_user.name}) + " to join" + self.project.to_s
+ 			self.from_user.to_s + " invited " + join(self.to_users.map {|to_user| to_user.name}) + " to join " + self.project.to_s
  		end
  	end
 
