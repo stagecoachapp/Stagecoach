@@ -1,15 +1,15 @@
 <div class="modal" id="invitations-new-add-user-modal">
 	<div class="modal-header">
 		<button class="close" data-dismiss="modal">×</button>
-		<h3>Choose User</h3>
+		<h3>Choose Contact</h3>
 	</div>
 	<div id="invitations-new-add-user-modal-radio-buttons">
 		<% for project in @projects %>
-			<% unless project.users.count == 1 %>
+			<% unless project.users.count == 1 || project == self.current_project %>
 				<h3><%= project.capitalized_name %></h3>
 				<% for contact in project.users %>
 					<% unless contact == @current_user %>
-						<input type="radio" name="contacts-group" value="<%= contact.id %>"><text> <%= contact.name %></text><br>
+						<input type="checkbox" name="contacts-group" value="<%= contact.id %>"><text><%= contact.name %></text><br>
 					<% end %>
 				<% end %>
 			<% end %>
