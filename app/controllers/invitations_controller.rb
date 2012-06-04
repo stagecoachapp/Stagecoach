@@ -12,7 +12,7 @@ class InvitationsController < ApplicationController
     # GET /invitations
     # GET /invitations.json
     def index
-        @outgoing_invitations = Invitation.where("from_user_id = #{self.current_user.id}")
+        @outgoing_invitations = Invitation.where("from_user_id = #{self.current_user.id} and project_id = #{self.current_project.id}")
         @outgoing_invitations_other = Invitation.where("from_user_id != #{self.current_user.id}")
         #@incoming_invitations = InvitationToUser.where("to_user_id = #{self.current_user.id}").all.map {|invitation_to_user| invitation_to_user.invitation}
         @title = "Invitations"

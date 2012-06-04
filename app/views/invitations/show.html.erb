@@ -40,7 +40,7 @@
 			<div class="text-right">
 				<p class="bubble-tail-right bubble"><%= message.text %></p>
 			</div>
-			<%= image_tag profile_picture_url, :size => "50x50" %>
+			<%= image_tag profile_picture_url(message.user), :size => "50x50" %>
 			<br />
 		<% end %>
 	<% end %>

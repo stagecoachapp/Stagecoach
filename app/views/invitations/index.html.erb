@@ -13,15 +13,3 @@
 	  <br />
 	<% end %>
 <% end %>
-<br>
-<br>
-<% if @outgoing_invitations_other.empty? %>
-	<h3>Nobody else has sent any invitations to this project</h3>
-<% else %>
-	<br/>
-	<h3>Invitations sent by other</h3>
-	<% @outgoing_invitations_other.each do |outgoing_invitation| %>
-	    <td><%= link_to outgoing_invitation.outgoing_to_s, outgoing_invitation %></td>
-	  <br />
-	<% end %>
-<% end %>
