@@ -5,6 +5,8 @@ module NotificationsHelper
 			return notification.notification_object.project
 		elsif notification.notification_type.to_s == "NewInvitationMessage"
 			return notification.notification_object.conversation.conversation_object
+		elsif notification.notification_type.to_s == "NewProjectAsset"
+			return assets_path
 		else
 			return notification.notification_object
 		end
