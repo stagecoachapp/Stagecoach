@@ -25,21 +25,21 @@ module ApplicationHelper
        "/projects/join"
    end
 
-   def task_menu_path
-    "/tasks/menu"
-end
+    def task_menu_path
+        "/tasks/menu"
+    end
 
-def project_menu_path
-    "/projects/menu"
-end
+    def project_menu_path
+        "/projects/menu"
+    end
 
-def comingsoon_path
-    "/comingsoon"
-end
+    def comingsoon_path
+        "/comingsoon"
+    end
 
-def notifications_path
-    "/notifications"
-end
+    def notifications_path
+        "/notifications"
+    end
 
 def assets_path(asset="")
     "/assets/#{asset.id rescue ''}"
