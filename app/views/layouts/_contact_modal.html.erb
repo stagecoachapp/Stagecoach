@@ -2,7 +2,7 @@
 	<button id="contact-modal-close"class="close" data-dismiss="modal">×</button>
 	<div class="modal-body">
 		<div class="contact-body">
-			<%= image_tag profile_picture_url, :class => "thumbnail span2", :id => "contact-modal-prof-pic" %>
+			<%= image_tag profile_picture_url(@user), :class => "thumbnail span2", :id => "contact-modal-prof-pic" %>
 			<div class="main-info">
 				<h2 id="name"><%= @user.name.split.each { |x| print x.capitalize!, " "}.join(" ") %></h2>
 				<h3>Email:<a href="mailto:<%= @user.email %>"><%= @user.email %></a></h3>
